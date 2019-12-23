@@ -18,6 +18,9 @@ const HomePage: React.FC<RouteComponentProps> = () => (
         <Link className="button button-outline" to="/fetch-data">
           API example
         </Link>
+        <Link className="button button-outline" to="/hex-board">
+          Hex Board Example
+        </Link>
       </p>
     </section>
 
