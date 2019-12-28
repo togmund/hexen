@@ -1,0 +1,12 @@
+section {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  text-align: center;
+  top: 80px;
+  left: 0;
+  background: rgba(87, 151, 255, 0.3);
+  border: 5px solid;
+  overflow-x: hidden;
+}
