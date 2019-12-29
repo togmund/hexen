@@ -38,6 +38,8 @@ defmodule PhoenixReactPlayground.Repo.Migrations.InitialTables do
       timestamps()
     end
 
+    º
+
     create table(:deck_cards) do
       add :deck_id, references("decks")
       add :card_id, references("cards")

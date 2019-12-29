@@ -16,20 +16,40 @@ defmodule PhoenixReactPlayground.DatabaseSeeder do
   alias PhoenixReactPlayground.Example.Language
 
   # Clear the database first before seeding
-  Repo.delete_all Language
+  Repo.delete_all(Bands)
+  Repo.delete_all(Users)
 
-  Repo.insert! %Language{
-    name: "English",
-    proverb: "A penny saved is a penny earned.",
-  }
+  # Band Seeds
+  Repo.insert!(%Bands{
+    name: "White Boulder Warriors",
+    sigil: "https://s.put.re/x6gqMaXu.png"
+  })
 
-  Repo.insert! %Language{
-    name: "Indonesian",
-    proverb: "Dimana ada kemauan, di situ ada jalan.",
-  }
+  Repo.insert!(%Bands{
+    name: "Cruel Feet Clan",
+    sigil: "https://s.put.re/gdm61zL7.png"
+  })
 
-  Repo.insert! %Language{
-    name: "Dutch",
-    proverb: "Die goed doet, goed ontmoet.",
-  }
+  Repo.insert!(%Bands{
+    name: "Blue Mammoth Horde",
+    sigil: "https://s.put.re/MicE3c3j.png"
+  })
+
+  # User Seeds
+  Repo.insert!(%Users{
+    name: "White Boulder Warriors",
+    sigil: "https://s.put.re/x6gqMaXu.png"
+  })
+
+  Repo.insert!(%Users{
+    name: "Cruel Feet Clan",
+    sigil: "https://s.put.re/gdm61zL7.png"
+  })
+
+  Repo.insert!(%Users{
+    name: "Blue Mammoth Horde",
+    sigil: "https://s.put.re/MicE3c3j.png"
+  })
+
+  #
 end
