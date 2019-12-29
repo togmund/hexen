@@ -3,6 +3,13 @@ defmodule PhoenixReactPlayground.Repo.Migrations.InitialTables do
 
   def change do
     # People
+    create table(:bands) do
+      add :name, :string
+      add :sigil, :string
+
+      timestamps()
+    end
+
     create table(:users) do
       add :band_id, references("bands")
 
@@ -13,26 +20,10 @@ defmodule PhoenixReactPlayground.Repo.Migrations.InitialTables do
       timestamps()
     end
 
-    create table(:bands) do
-      add :name, :string
-      add :sigil, :string
-
-      timestamps()
-    end
-
     # Decks
     create table(:decks) do
       add :name, :string
       add :cardback, :string
-
-      timestamps()
-    end
-
-    create table(:deck_cards) do
-      add :deck_id, references("decks")
-      add :card_id, references("cards")
-
-      add :name, :string
 
       timestamps()
     end
@@ -47,7 +38,29 @@ defmodule PhoenixReactPlayground.Repo.Migrations.InitialTables do
       timestamps()
     end
 
+    create table(:deck_cards) do
+      add :deck_id, references("decks")
+      add :card_id, references("cards")
+
+      add :name, :string
+
+      timestamps()
+    end
+
     # Hexes
+    create table(:regions) do
+      add :name, :string
+
+      timestamps()
+    end
+
+    create table(:biomes) do
+      add :name, :string
+      add :resource, :string
+
+      timestamps()
+    end
+
     create table(:hexes) do
       add :region_id, references("regions")
       add :biome_id, references("biomes")
@@ -65,19 +78,6 @@ defmodule PhoenixReactPlayground.Repo.Migrations.InitialTables do
 
       add :name, :string
       add :left_at, :naive_datetime
-
-      timestamps()
-    end
-
-    create table(:regions) do
-      add :name, :string
-
-      timestamps()
-    end
-
-    create table(:biomes) do
-      add :name, :string
-      add :resource, :string
 
       timestamps()
     end
