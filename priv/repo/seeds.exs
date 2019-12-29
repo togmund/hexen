@@ -37,18 +37,23 @@ defmodule PhoenixReactPlayground.DatabaseSeeder do
 
   # User Seeds
   Repo.insert!(%Users{
-    name: "White Boulder Warriors",
-    sigil: "https://s.put.re/x6gqMaXu.png"
+    name: "Descartes",
+    avatar: "https://s.put.re/x6gqMaXu.png",
+    email: "des@cartes.com"
   })
 
   Repo.insert!(%Users{
-    name: "Cruel Feet Clan",
-    sigil: "https://s.put.re/gdm61zL7.png"
+    name: "Rose",
+    avatar: "https://s.put.re/gdm61zL7.png",
+    email: "ro@se.com",
+    band_id: 2
   })
 
   Repo.insert!(%Users{
-    name: "Blue Mammoth Horde",
-    sigil: "https://s.put.re/MicE3c3j.png"
+    name: "Lizard",
+    avatar: "https://s.put.re/MicE3c3j.png",
+    email: "liz@ard.com",
+    band_id: 2
   })
 
   #
