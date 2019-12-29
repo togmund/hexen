@@ -9,6 +9,7 @@ import {
   Hex,
   GridGenerator
 } from 'react-hexgrid';
+import Card from './Card';
 import '../../css/Map.css';
 
 const hexagons = GridGenerator.rectangle(60, 60);
@@ -25,7 +26,7 @@ const Map = () => (
       </HexGrid>
     </div>
     <div className="card-container">
-      <p>Card 1</p>
+      <Card />
       <p>Card 2</p>
       <p>Card 3</p>
     </div>
