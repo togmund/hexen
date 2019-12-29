@@ -13,7 +13,7 @@ import '../../css/Map.css';
 
 const hexagons = GridGenerator.rectangle(60, 60);
 
-const Map: React.FC = () => (
+const Map = () => (
   <main>
     <div className={'hex-map'}>
       <HexGrid width={1500} height={950} viewBox={'50 100 100 100'}>

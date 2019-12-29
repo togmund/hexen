@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const Deck: React.FC = ({ children }) => (
+const Deck = ({ children }: { children: any }) => (
   <main role="main" className="container">
     {children}
   </main>

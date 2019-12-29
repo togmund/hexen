@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const Main: React.FC = ({ children }) => (
+const Main = ({ children }: { children: any }) => (
   <main role="main" className="container">
     {children}
   </main>
