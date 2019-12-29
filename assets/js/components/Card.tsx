@@ -10,7 +10,7 @@ const Card: React.FC = () => (
       Two-handed pole weapon. It hews, it slices, it stabs, it bludgeons, it’s
       got fantastic anti-armor properties, strong parries, creates large wounds,
       has enormous reach, and is still short enough that you can use it like a
-      staff in close. Deals 3 damage to enemies.
+      staff in close. Deals 3 damage to enemies.aaaaaaaaaaaaaaa
     </p>
   </article>
 );
