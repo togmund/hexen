@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :phoenix_react_playground, PhoenixReactPlaygroundWeb.Endpoint,
+config :hexen, HexenWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -16,7 +16,7 @@ config :phoenix_react_playground, PhoenixReactPlaygroundWeb.Endpoint,
       "node_modules/webpack/bin/webpack.js",
       "--mode",
       "development",
-      "--watch-stdin",
+      "--watch-stdin"
     ]
   ]
 
@@ -45,13 +45,13 @@ config :phoenix_react_playground, PhoenixReactPlaygroundWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :phoenix_react_playground, PhoenixReactPlaygroundWeb.Endpoint,
+config :hexen, HexenWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/phoenix_react_playground_web/views/.*(ex)$},
-      ~r{lib/phoenix_react_playground_web/templates/.*(eex)$}
+      ~r{lib/hexen_web/views/.*(ex)$},
+      ~r{lib/hexen_web/templates/.*(eex)$}
     ]
   ]
 
@@ -66,9 +66,9 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
-config :phoenix_react_playground, PhoenixReactPlayground.Repo,
+config :hexen, Hexen.Repo,
   username: "postgres",
   password: "postgres",
-  database: "phoenix_react_playground_dev",
+  database: "hexen_dev",
   hostname: "localhost",
   pool_size: 10

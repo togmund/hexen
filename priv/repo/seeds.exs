@@ -1,4 +1,4 @@
-defmodule PhoenixReactPlayground.DatabaseSeeder do
+defmodule Hexen.DatabaseSeeder do
   @moduledoc """
   Script for populating the database. You can run it as:
 
@@ -7,13 +7,13 @@ defmodule PhoenixReactPlayground.DatabaseSeeder do
   Inside the script, you can read and write to any of your
   repositories directly:
 
-      PhoenixReactPlayground.Repo.insert!(%PhoenixReactPlayground.SomeSchema{})
+      Hexen.Repo.insert!(%Hexen.SomeSchema{})
 
   We recommend using the bang functions (`insert!`, `update!`
   and so on) as they will fail if something goes wrong.
   """
-  alias PhoenixReactPlayground.Repo
-  alias PhoenixReactPlayground.Example.Language
+  alias Hexen.Repo
+  alias Hexen.Example.Language
 
   # Clear the database first before seeding
   Repo.delete_all(Bands)

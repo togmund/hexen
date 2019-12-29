@@ -1,4 +1,4 @@
-defmodule PhoenixReactPlaygroundWeb.ChannelCase do
+defmodule HexenWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule PhoenixReactPlaygroundWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint PhoenixReactPlaygroundWeb.Endpoint
+      @endpoint HexenWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PhoenixReactPlayground.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Hexen.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PhoenixReactPlayground.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Hexen.Repo, {:shared, self()})
     end
 
     :ok
