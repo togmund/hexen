@@ -1,0 +1,31 @@
+main {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
+
+.card-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  z-index: 1;
+  position: absolute;
+  bottom: 100px;
+  left: 40%;
+  border: 3px solid black;
+  width: 30%;
+  height: 200px;
+}
+
+.hex-map {
+  height: 100%;
+  position: absolute;
+  bottom: 2.6em;
+}
+
+g.hexagon {
+  fill: lightblue;
+
+  /* background-image: url("../images/water.png") */
+}
