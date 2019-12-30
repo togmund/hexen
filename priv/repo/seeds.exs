@@ -53,31 +53,113 @@ defmodule Hexen.DatabaseSeeder do
   })
 
   # User Seeds
-  Repo.insert!(%Users{
+  Repo.insert!(%User{
     name: "Descartes",
-    avatar: "https://s.put.re/x6gqMaXu.png",
+    avatar: "https://s.put.re/webPTZy3.png",
     email: "des@cartes.com"
   })
 
-  Repo.insert!(%Users{
+  Repo.insert!(%User{
     name: "Rose",
-    avatar: "https://s.put.re/gdm61zL7.png",
+    avatar: "https://s.put.re/1hke8Go7.png",
     email: "ro@se.com",
     band_id: 2
   })
 
-  Repo.insert!(%Users{
+  Repo.insert!(%User{
     name: "Lizard",
-    avatar: "https://s.put.re/MicE3c3j.png",
+    avatar: "https://s.put.re/rodszvu3.png",
     email: "liz@ard.com",
     band_id: 2
   })
 
   # Region Seeds
-  Repo.insert!(%Users{
-    name: "Lizard",
-    avatar: "https://s.put.re/MicE3c3j.png",
-    email: "liz@ard.com",
-    band_id: 2
+  Repo.insert!(%Region{
+    name: "Agrington"
+  })
+
+  Repo.insert!(%Region{
+    name: "Ustrait"
+  })
+
+  Repo.insert!(%Region{
+    name: "Tosnos"
+  })
+
+  # Biome Seeds
+  Repo.insert!(%Biome{
+    name: "Tundra",
+    resource: "Silver"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Taiga",
+    resource: "Softwood"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Mountain",
+    resource: "Iron"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Woodland",
+    resource: "Hardwood"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Grassland",
+    resource: "Wheat"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Chaparral",
+    resource: "Gold"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Savanna",
+    resource: "Leather"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Fen",
+    resource: "Fur"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Desert",
+    resource: "Glass"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Tropic",
+    resource: "Fruit"
+  })
+
+  # Hex Seeds
+  Repo.insert!(%Hex{
+    name: "FezJab"
+    resource: "Silver"
+    region_id: 1
+    biome_id: 1
+    controlled_by: 1
+  })
+
+  Repo.insert!(%Hex{
+    name: "VoxJay"
+    resource: "Softwood"
+    region_id: 2
+    biome_id: 2
+    controlled_by: 2
+  })
+
+  Repo.insert!(%Hex{
+    name: "MixZen"
+    resource: "Iron"
+    structure: "Mine"
+    region_id: 3
+    biome_id: 3
+    controlled_by: 3
   })
 end
