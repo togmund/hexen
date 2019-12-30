@@ -69,6 +69,6 @@ config :phoenix, :plug_init_mode, :runtime
 config :phoenix_react_playground, PhoenixReactPlayground.Repo,
   username: "postgres",
   password: "postgres",
-  database: "phoenix_react_playground_dev",
+  database: "postgres",
   hostname: "localhost",
   pool_size: 10

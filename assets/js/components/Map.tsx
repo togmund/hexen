@@ -9,15 +9,21 @@ import {
   Hex,
   GridGenerator
 } from 'react-hexgrid';
+import Card from './Card';
 import '../../css/Map.css';
 
-const hexagons = GridGenerator.rectangle(60, 60);
+const hexagons = GridGenerator.orientedRectangle(50, 50);
 
-const Map: React.FC = () => (
+const Map = () => (
   <main>
     <div className={'hex-map'}>
-      <HexGrid width={1500} height={950} viewBox={'50 100 100 100'}>
-        <Layout size={{ x: 6, y: 6 }}>
+      <HexGrid width={2000} height={950} viewBox={'49 -8 100 100'}>
+        <Layout
+          size={{ x: 6, y: 6 }}
+          flat={true}
+          spacing="1.005"
+          origin={{ x: 0, y: 0 }}
+        >
           {hexagons.map((hex: any, i: number) => (
             <Hexagon key={i} q={hex.q} r={hex.r} s={hex.s} />
           ))}
@@ -25,7 +31,7 @@ const Map: React.FC = () => (
       </HexGrid>
     </div>
     <div className="card-container">
-      <p>Card 1</p>
+      <Card />
       <p>Card 2</p>
       <p>Card 3</p>
     </div>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../css/Navbar.css';
 
-const Navbar: React.FC = () => (
+const Navbar = () => (
   <div>
     <h1>Game info goes here</h1>
   </div>

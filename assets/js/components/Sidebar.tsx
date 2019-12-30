@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../css/Sidebar.css';
 
-const Sidebar: React.FC = () => (
+const Sidebar = () => (
   <section>
     <h3>Hex Title</h3>
     {/* <img src={require('../../images/hexagon.png')} alt="hex-img"></img> */}
