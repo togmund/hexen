@@ -13,24 +13,24 @@ defmodule Hexen.DatabaseSeeder do
   and so on) as they will fail if something goes wrong.
   """
   alias Hexen.Repo
-  alias Hexen.Example.Language
+  alias Hexen.People.Band
 
   # Clear the database first before seeding
-  Repo.delete_all(Bands)
+  Repo.delete_all(Band)
   Repo.delete_all(Users)
 
   # Band Seeds
-  Repo.insert!(%Bands{
+  Repo.insert!(%Band{
     name: "White Boulder Warriors",
     sigil: "https://s.put.re/x6gqMaXu.png"
   })
 
-  Repo.insert!(%Bands{
+  Repo.insert!(%Band{
     name: "Cruel Feet Clan",
     sigil: "https://s.put.re/gdm61zL7.png"
   })
 
-  Repo.insert!(%Bands{
+  Repo.insert!(%Band{
     name: "Blue Mammoth Horde",
     sigil: "https://s.put.re/MicE3c3j.png"
   })
