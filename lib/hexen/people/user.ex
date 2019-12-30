@@ -15,8 +15,8 @@ defmodule Hexen.People.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :avatar, :email])
-    |> validate_required([:name, :avatar, :email])
+    |> cast(attrs, [:name, :email, :avatar])
+    |> validate_required([:name, :email, :avatar])
     |> unique_constraint(:name)
     |> unique_constraint(:email)
   end

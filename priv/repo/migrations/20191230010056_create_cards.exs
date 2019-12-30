@@ -12,5 +12,6 @@ defmodule Hexen.Repo.Migrations.CreateCards do
       timestamps()
     end
 
+    create unique_index(:cards, [:name])
   end
 end

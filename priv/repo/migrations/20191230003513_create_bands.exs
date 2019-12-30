@@ -9,5 +9,6 @@ defmodule Hexen.Repo.Migrations.CreateBands do
       timestamps()
     end
 
+    create unique_index(:bands, [:name])
   end
 end

@@ -15,5 +15,6 @@ defmodule Hexen.People.Band do
     band
     |> cast(attrs, [:name, :sigil])
     |> validate_required([:name, :sigil])
+    |> unique_constraint(:name)
   end
 end

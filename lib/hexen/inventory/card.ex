@@ -1,4 +1,4 @@
-defmodule Hexen.Decks.Card do
+defmodule Hexen.Inventory.Card do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -18,5 +18,6 @@ defmodule Hexen.Decks.Card do
     card
     |> cast(attrs, [:name, :description, :suit, :modifier, :image])
     |> validate_required([:name, :description, :suit, :modifier, :image])
+    |> unique_constraint(:name)
   end
 end

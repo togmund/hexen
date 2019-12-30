@@ -4,8 +4,8 @@ defmodule Hexen.Repo.Migrations.CreateUsers do
   def change do
     create table(:users) do
       add :name, :string
-      add :avatar, :string
       add :email, :string
+      add :avatar, :string
       add :band_id, references(:bands, on_delete: :nothing)
 
       timestamps()

@@ -1,4 +1,4 @@
-defmodule Hexen.Decks.Deck do
+defmodule Hexen.Inventory.Deck do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -6,6 +6,7 @@ defmodule Hexen.Decks.Deck do
   schema "decks" do
     field :cardback, :string
     field :name, :string
+    field :user_id, :id
 
     timestamps()
   end

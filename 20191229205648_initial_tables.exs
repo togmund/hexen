@@ -42,8 +42,6 @@ defmodule HexenInitialTables do
       add(:deck_id, references("decks"))
       add(:card_id, references("cards"))
 
-      add(:name, :string)
-
       timestamps()
     end
 
