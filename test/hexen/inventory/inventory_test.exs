@@ -130,4 +130,61 @@ defmodule Hexen.InventoryTest do
       assert %Ecto.Changeset{} = Inventory.change_card(card)
     end
   end
+
+  describe "deck_cards" do
+    alias Hexen.Inventory.DeckCard
+
+    @valid_attrs %{}
+    @update_attrs %{}
+    @invalid_attrs %{}
+
+    def deck_card_fixture(attrs \\ %{}) do
+      {:ok, deck_card} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Inventory.create_deck_card()
+
+      deck_card
+    end
+
+    test "list_deck_cards/0 returns all deck_cards" do
+      deck_card = deck_card_fixture()
+      assert Inventory.list_deck_cards() == [deck_card]
+    end
+
+    test "get_deck_card!/1 returns the deck_card with given id" do
+      deck_card = deck_card_fixture()
+      assert Inventory.get_deck_card!(deck_card.id) == deck_card
+    end
+
+    test "create_deck_card/1 with valid data creates a deck_card" do
+      assert {:ok, %DeckCard{} = deck_card} = Inventory.create_deck_card(@valid_attrs)
+    end
+
+    test "create_deck_card/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Inventory.create_deck_card(@invalid_attrs)
+    end
+
+    test "update_deck_card/2 with valid data updates the deck_card" do
+      deck_card = deck_card_fixture()
+      assert {:ok, %DeckCard{} = deck_card} = Inventory.update_deck_card(deck_card, @update_attrs)
+    end
+
+    test "update_deck_card/2 with invalid data returns error changeset" do
+      deck_card = deck_card_fixture()
+      assert {:error, %Ecto.Changeset{}} = Inventory.update_deck_card(deck_card, @invalid_attrs)
+      assert deck_card == Inventory.get_deck_card!(deck_card.id)
+    end
+
+    test "delete_deck_card/1 deletes the deck_card" do
+      deck_card = deck_card_fixture()
+      assert {:ok, %DeckCard{}} = Inventory.delete_deck_card(deck_card)
+      assert_raise Ecto.NoResultsError, fn -> Inventory.get_deck_card!(deck_card.id) end
+    end
+
+    test "change_deck_card/1 returns a deck_card changeset" do
+      deck_card = deck_card_fixture()
+      assert %Ecto.Changeset{} = Inventory.change_deck_card(deck_card)
+    end
+  end
 end

@@ -74,7 +74,6 @@ defmodule HexenInitialTables do
       add(:hex_id, references("hexes"))
       add(:user_id, references("users"))
 
-      add(:name, :string)
       add(:left_at, :naive_datetime)
 
       timestamps()
@@ -94,8 +93,6 @@ defmodule HexenInitialTables do
       add(:quest_id, references("quests"))
       add(:progress, :integer)
 
-      add(:name, :string)
-
       timestamps()
     end
 
@@ -103,9 +100,6 @@ defmodule HexenInitialTables do
       add(:card_id, references("cards"))
       add(:quest_id, references("quests"))
       add(:progress, :integer)
-
-      add(:name, :string)
-
       timestamps()
     end
 
@@ -114,8 +108,6 @@ defmodule HexenInitialTables do
       add(:quest_id, references("quests"))
       add(:progress, :integer)
 
-      add(:name, :string)
-
       timestamps()
     end
 
@@ -123,8 +115,6 @@ defmodule HexenInitialTables do
       add(:hex_id, references("hexes"))
       add(:quest_id, references("quests"))
       add(:progress, :integer)
-
-      add(:name, :string)
 
       timestamps()
     end
