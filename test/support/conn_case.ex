@@ -1,4 +1,4 @@
-defmodule PhoenixReactPlaygroundWeb.ConnCase do
+defmodule HexenWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,18 +19,18 @@ defmodule PhoenixReactPlaygroundWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias PhoenixReactPlaygroundWeb.Router.Helpers, as: Routes
+      alias HexenWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint PhoenixReactPlaygroundWeb.Endpoint
+      @endpoint HexenWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PhoenixReactPlayground.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Hexen.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PhoenixReactPlayground.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Hexen.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

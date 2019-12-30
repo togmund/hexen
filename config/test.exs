@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :phoenix_react_playground, PhoenixReactPlaygroundWeb.Endpoint,
+config :hexen, HexenWeb.Endpoint,
   http: [port: 4002],
   server: false
 
@@ -10,9 +10,9 @@ config :phoenix_react_playground, PhoenixReactPlaygroundWeb.Endpoint,
 config :logger, level: :warn
 
 # Configure your database
-config :phoenix_react_playground, PhoenixReactPlayground.Repo,
+config :hexen, Hexen.Repo,
   username: "postgres",
   password: "postgres",
-  database: "phoenix_react_playground_test",
+  database: "hexen_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
