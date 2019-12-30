@@ -13,7 +13,24 @@ defmodule Hexen.DatabaseSeeder do
   and so on) as they will fail if something goes wrong.
   """
   alias Hexen.Repo
+
   alias Hexen.People.Band
+  alias Hexen.People.User
+
+  alias Hexen.Map.Region
+  alias Hexen.Map.Biome
+  alias Hexen.Map.Hex
+  alias Hexen.Map.HexUser
+
+  alias Hexen.Inventory.Deck
+  alias Hexen.Inventory.Card
+  alias Hexen.Inventory.DeckCard
+
+  alias Hexen.Events.Quest
+  alias Hexen.Events.UserQuest
+  alias Hexen.Events.BandQuest
+  alias Hexen.Events.CardQuest
+  alias Hexen.Events.HexQuest
 
   # Clear the database first before seeding
   Repo.delete_all(Band)
@@ -56,5 +73,11 @@ defmodule Hexen.DatabaseSeeder do
     band_id: 2
   })
 
-  #
+  # Region Seeds
+  Repo.insert!(%Users{
+    name: "Lizard",
+    avatar: "https://s.put.re/MicE3c3j.png",
+    email: "liz@ard.com",
+    band_id: 2
+  })
 end
