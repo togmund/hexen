@@ -11,9 +11,10 @@ defmodule Hexen.Application do
       # Start the Ecto repository
       Hexen.Repo,
       # Start the endpoint when the application starts
-      HexenWeb.Endpoint
+      HexenWeb.Endpoint,
       # Starts a worker by calling: Hexen.Worker.start_link(arg)
       # {Hexen.Worker, arg},
+      {Hexen.BandWorker, %{}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
