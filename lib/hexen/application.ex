@@ -11,16 +11,17 @@ defmodule Hexen.Application do
       # Start the Ecto repository
       Hexen.Repo,
       # Start the endpoint when the application starts
-      HexenWeb.Endpoint,
+      HexenWeb.Endpoint
       # Starts a worker by calling: Hexen.Worker.start_link(arg)
       # {Hexen.Worker, arg},
-      {Hexen.HexWorker, %{id: 3, name: nil}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Hexen.Supervisor]
-    Supervisor.start_link(children, opts)
+    hexen_opts = [strategy: :one_for_one, name: Hexen.Supervisor]
+    Supervisor.start_link(children, hexen_opts)
+    hex_board_opts = [strategy: :one_for_one, name: Hexen.BoardSupervisor]
+    Supervisor.start_link(get_hexes(), hex_board_opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
@@ -28,5 +29,11 @@ defmodule Hexen.Application do
   def config_change(changed, _new, removed) do
     HexenWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp get_hexes do
+    Enum.map(Hexen.Map.list_hex_ids(), fn id ->
+      Supervisor.child_spec({Hexen.HexWorker, %{id: id}}, id: id)
+    end)
   end
 end

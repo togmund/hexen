@@ -15,12 +15,17 @@ defmodule Hexen.HexWorker do
       state
       |> Map.get(:id)
       |> tile_data()
-      |> Map.take([:id, :name, :region_id, :resource, :structure])
-      |> IO.inspect()
       |> update_state(state)
 
     if updated_state != state do
-      IO.inspect(updated_state)
+      IO.puts("""
+
+      Hex Data for ID:#{updated_state[:id]}
+      Name:#{updated_state[:name]}
+      Region:#{updated_state[:region_id]}
+      Resource:#{updated_state[:resource]}
+      Structure:#{updated_state[:structure]}
+      """)
     end
 
     schedule_hex_fetch()
@@ -31,14 +36,17 @@ defmodule Hexen.HexWorker do
   defp tile_data(id) do
     id
     |> Hexen.Map.get_hex!()
+    |> Map.take([:id, :name, :region_id, :resource, :structure])
   end
 
-  defp update_state(_state_state, existing_state) do
-    # Map.merge(existing_state, %{
-    #   id: id,
-    #   name: name
-    # })
-    existing_state
+  defp update_state(
+         new_state,
+         existing_state
+       ) do
+    Map.merge(
+      existing_state,
+      new_state
+    )
   end
 
   defp schedule_hex_fetch do
