@@ -11,6 +11,8 @@ import {
 } from 'react-hexgrid';
 import Card from './Card';
 import '../../css/Map.css';
+import socket from '../socket';
+import HexChannel from '../hex_channel';
 
 const hexagons = GridGenerator.orientedRectangle(50, 50);
 
@@ -25,7 +27,16 @@ const Map = () => (
           origin={{ x: 0, y: 0 }}
         >
           {hexagons.map((hex: any, i: number) => (
-            <Hexagon key={i} q={hex.q} r={hex.r} s={hex.s} />
+            <Hexagon
+              key={i}
+              q={hex.q}
+              r={hex.r}
+              s={hex.s}
+              onClick={(event: any) => {
+                console.log(event);
+                HexChannel.init(socket);
+              }}
+            />
           ))}
         </Layout>
       </HexGrid>

@@ -25,6 +25,7 @@
                         'Elixir.HexenWeb.ErrorView',
                         'Elixir.HexenWeb.FallbackController',
                         'Elixir.HexenWeb.Gettext',
+                        'Elixir.HexenWeb.HexChannel',
                         'Elixir.HexenWeb.LanguageView',
                         'Elixir.HexenWeb.LayoutView',
                         'Elixir.HexenWeb.PageController',
