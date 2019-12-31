@@ -33,8 +33,24 @@ defmodule Hexen.DatabaseSeeder do
   alias Hexen.Events.HexQuest
 
   # Clear the database first before seeding
+
+  Repo.delete_all(UserQuest)
+  Repo.delete_all(BandQuest)
+  Repo.delete_all(CardQuest)
+  Repo.delete_all(HexQuest)
+  Repo.delete_all(Quest)
+
+  Repo.delete_all(DeckCard)
+  Repo.delete_all(Card)
+  Repo.delete_all(Deck)
+
+  Repo.delete_all(HexUser)
+  Repo.delete_all(Hex)
+  Repo.delete_all(Biome)
+  Repo.delete_all(Region)
+
+  Repo.delete_all(User)
   Repo.delete_all(Band)
-  Repo.delete_all(Users)
 
   # Band Seeds
   Repo.insert!(%Band{
@@ -143,7 +159,7 @@ defmodule Hexen.DatabaseSeeder do
     resource: "Silver",
     region_id: 1,
     biome_id: 1,
-    controlled_by: 1
+    band_id: 1
   })
 
   Repo.insert!(%Hex{
@@ -151,7 +167,7 @@ defmodule Hexen.DatabaseSeeder do
     resource: "Softwood",
     region_id: 2,
     biome_id: 2,
-    controlled_by: 2
+    band_id: 2
   })
 
   Repo.insert!(%Hex{
@@ -160,7 +176,7 @@ defmodule Hexen.DatabaseSeeder do
     structure: "Mine",
     region_id: 3,
     biome_id: 3,
-    controlled_by: 3
+    band_id: 3
   })
 
   # Hex_User Seeds
@@ -231,22 +247,20 @@ defmodule Hexen.DatabaseSeeder do
   # Deck
   Repo.insert!(%Deck{
     name: "Warrior",
-    cardback:
-      "https://images.squarespace-cdn.com/content/v1/55412d53e4b0528e612ddc1c/1523280516666-W4RT9AXL3K3S72OIT1H7/ke17ZwdGBToddI8pDm48kK8JYRz-fDku-1kxOzVBow1Zw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7dso8WS9HrXe-DDzLfr_qHkfLXs0Ydz0Nw06aYWpDc0BK7RUaNg3Kw5cjOyG5RYcYQ/Card+-+Imago+v2s.png?format=300w",
+    cardback: "https://opengameart.org/sites/default/files/card%20back%20orange.png",
     user_id: 1
   })
 
   Repo.insert!(%Deck{
     name: "Hustler",
-    cardback:
-      "https://images.squarespace-cdn.com/content/v1/55412d53e4b0528e612ddc1c/1501377253824-RNGJD3KBQIBVBGVFVYF6/ke17ZwdGBToddI8pDm48kK8JYRz-fDku-1kxOzVBow1Zw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7dso8WS9HrXe-DDzLfr_qHkfLXs0Ydz0Nw06aYWpDc0BK7RUaNg3Kw5cjOyG5RYcYQ/image-asset.png?format=300w",
+    cardback: "http://www.jimknapp.com/Cards/Non-Bicycle_files/image002.jpg",
     user_id: 2
   })
 
   Repo.insert!(%Deck{
     name: "Farmer",
     cardback:
-      "https://images.squarespace-cdn.com/content/v1/55412d53e4b0528e612ddc1c/1548813989423-ZMQXHTQAHLWXL8WTVPAB/ke17ZwdGBToddI8pDm48kHH_Ry-AleYJxFEQnPBTZXlZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVGbz8tGYbwDesJWqE1_XARn6Mnfqr_41RxQUYxW4tXmCGbSd6kfRtgWHgNMDgGnmDY/image-asset.png?format=300w",
+      "https://ksr-ugc.imgix.net/assets/003/133/506/167773c063e187216c54c756957a36bd_original.jpg?ixlib=rb-2.1.0&w=680&fit=max&v=1421106062&auto=format&gif-q=50&q=92&s=4039ac3a0fe3ff112908b9b978e33d56",
     user_id: 3
   })
 
@@ -271,21 +285,21 @@ defmodule Hexen.DatabaseSeeder do
     name: "Visit",
     description: "",
     requirement: 4,
-    reward: 1
+    card_id: 1
   })
 
   Repo.insert!(%Quest{
     name: "Visit",
     description: "",
     requirement: 5,
-    reward: 2
+    card_id: 2
   })
 
   Repo.insert!(%Quest{
     name: "Visit",
     description: "",
     requirement: 6,
-    reward: 3
+    card_id: 3
   })
 
   # User_Quest Seeds
@@ -310,57 +324,57 @@ defmodule Hexen.DatabaseSeeder do
   # Hex_Quest Seeds
   Repo.insert!(%HexQuest{
     progress: 1,
-    user_id: 1,
+    hex_id: 1,
     quest_id: 1
   })
 
   Repo.insert!(%HexQuest{
     progress: 2,
-    user_id: 2,
+    hex_id: 2,
     quest_id: 2
   })
 
   Repo.insert!(%HexQuest{
     progress: 3,
-    user_id: 3,
+    hex_id: 3,
     quest_id: 3
   })
 
   # Card_Quest Seeds
   Repo.insert!(%CardQuest{
     progress: 1,
-    user_id: 1,
+    card_id: 1,
     quest_id: 1
   })
 
   Repo.insert!(%CardQuest{
     progress: 2,
-    user_id: 2,
+    card_id: 2,
     quest_id: 2
   })
 
   Repo.insert!(%CardQuest{
     progress: 3,
-    user_id: 3,
+    card_id: 3,
     quest_id: 3
   })
 
   # Band_Quest Seeds
   Repo.insert!(%BandQuest{
     progress: 1,
-    user_id: 1,
+    band_id: 1,
     quest_id: 1
   })
 
   Repo.insert!(%BandQuest{
     progress: 2,
-    user_id: 2,
+    band_id: 2,
     quest_id: 2
   })
 
   Repo.insert!(%BandQuest{
     progress: 3,
-    user_id: 3,
+    band_id: 3,
     quest_id: 3
   })
 end

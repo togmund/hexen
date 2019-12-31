@@ -2,10 +2,12 @@ defmodule Hexen.People.Band do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "bands" do
     field :name, :string
     field :sigil, :string
+
+    has_many :users, Hexen.People.User
+    has_many :band_quests, Hexen.Events.BandQuest
 
     timestamps()
   end

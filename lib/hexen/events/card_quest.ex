@@ -2,11 +2,10 @@ defmodule Hexen.Events.CardQuest do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "card_quests" do
     field :progress, :integer
-    field :card_id, :id
-    field :quest_id, :id
+    belongs_to :card, Hexen.Inventory.Card
+    belongs_to :quest, Hexen.Events.Quest
 
     timestamps()
   end
