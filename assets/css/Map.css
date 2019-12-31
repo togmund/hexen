@@ -37,3 +37,10 @@ g.hexagon {
 
   /* background-image: url("../images/water.png") */
 }
+
+svg g text {
+  font-size: 0.1em;
+  fill: #000;
+  fill-opacity: 0.9;
+  transition: fill-opacity .2s;
+}

@@ -4,6 +4,7 @@ defmodule HexenWeb.UserSocket do
   ## Channels
   # channel "room:*", HexenWeb.RoomChannel
   channel "hex:*", HexenWeb.HexChannel
+  channel "band:*", HexenWeb.BandChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
