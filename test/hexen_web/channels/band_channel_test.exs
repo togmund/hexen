@@ -1,10 +1,10 @@
-defmodule HexenWeb.GameChannelTest do
+defmodule HexenWeb.BandChannelTest do
   use HexenWeb.ChannelCase
 
   setup do
     {:ok, _, socket} =
       socket(HexenWeb.UserSocket, "user_id", %{some: :assign})
-      |> subscribe_and_join(HexenWeb.GameChannel, "game:lobby")
+      |> subscribe_and_join(HexenWeb.BandChannel, "band:lobby")
 
     {:ok, socket: socket}
   end
@@ -14,7 +14,7 @@ defmodule HexenWeb.GameChannelTest do
     assert_reply ref, :ok, %{"hello" => "there"}
   end
 
-  test "shout broadcasts to game:lobby", %{socket: socket} do
+  test "shout broadcasts to band:lobby", %{socket: socket} do
     push socket, "shout", %{"hello" => "all"}
     assert_broadcast "shout", %{"hello" => "all"}
   end

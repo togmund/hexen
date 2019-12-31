@@ -9,10 +9,10 @@ const hexagons = GridGenerator.orientedRectangle(LENGTH, WIDTH);
 const initialState = Array(LENGTH * WIDTH).fill(0);
 
 const Map = () => {
-  const [count, setCount] = useState({ count: initialState });
+  const [count, setCount] = useState(0);
 
-  const increaseCounter = (hexIndex: number) => {
-    setCount(prev => ({})
+  const increaseCounter = () => {
+    setCount(count + 1);
   };
 
   return (
@@ -31,7 +31,7 @@ const Map = () => {
                 q={hex.q}
                 r={hex.r}
                 s={hex.s}
-                onClick={increaseCounter(i)}
+                onClick={increaseCounter}
               >
                 <Text>{count}</Text>
               </Hexagon>
