@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { HexGrid, Layout, Hexagon, Text, GridGenerator } from 'react-hexgrid';
 import Card from './Card';
+import socket from '../socket';
+import BandChannel from '../band';
 import '../../css/Map.css';
 
 const LENGTH = 50;
@@ -9,10 +11,12 @@ const hexagons = GridGenerator.orientedRectangle(LENGTH, WIDTH);
 const initialState = Array(LENGTH * WIDTH).fill(0);
 
 const Map = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(initialState);
 
-  const increaseCounter = () => {
-    setCount(count + 1);
+  const increaseCounter = (hexIndex: number) => {
+    setCount(count[hexIndex] + 1);
+    console.log('INDEX: ', hexIndex);
+    console.log(count[hexIndex]);
   };
 
   return (
@@ -31,9 +35,9 @@ const Map = () => {
                 q={hex.q}
                 r={hex.r}
                 s={hex.s}
-                onClick={increaseCounter}
+                onClick={() => increaseCounter(i)}
               >
-                <Text>{count}</Text>
+                <Text>{count[i]}</Text>
               </Hexagon>
             ))}
           </Layout>
