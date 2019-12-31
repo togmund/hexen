@@ -7,14 +7,15 @@ import {
   Pattern,
   Path,
   Hex,
-  GridGenerator
+  GridGenerator,
+  HexUtils
 } from 'react-hexgrid';
 import Card from './Card';
 import '../../css/Map.css';
 import socket from '../socket';
 import HexChannel from '../hex_channel';
 
-const hexagons = GridGenerator.orientedRectangle(50, 50);
+const hexagons = GridGenerator.orientedRectangle(15, 8);
 
 const Map = () => (
   <main>
@@ -36,7 +37,9 @@ const Map = () => (
                 console.log(event);
                 HexChannel.init(socket);
               }}
-            />
+            >
+              <Text>{i}</Text>
+            </Hexagon>
           ))}
         </Layout>
       </HexGrid>
