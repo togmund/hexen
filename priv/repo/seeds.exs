@@ -2,6 +2,9 @@ defmodule Hexen.DatabaseSeeder do
   @moduledoc """
   Script for populating the database. You can run it as:
 
+      mix ecto.drop
+      mix ecto.create
+      mix ecto.migrate
       mix run priv/repo/seeds.exs
 
   Inside the script, you can read and write to any of your
