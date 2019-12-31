@@ -4,6 +4,8 @@ import Card from './Card';
 import socket from '../socket';
 import BandChannel from '../band';
 import '../../css/Map.css';
+import socket from '../socket';
+import HexChannel from '../hex_channel';
 
 const LENGTH = 50;
 const WIDTH = 50;
@@ -35,9 +37,12 @@ const Map = () => {
                 q={hex.q}
                 r={hex.r}
                 s={hex.s}
-                onClick={() => increaseCounter(i)}
+                onClick={(event: any) => {
+                  console.log(event);
+                  HexChannel.init(socket);
+                }}
               >
-                <Text>{count[i]}</Text>
+                <Text>{i}</Text>
               </Hexagon>
             ))}
           </Layout>

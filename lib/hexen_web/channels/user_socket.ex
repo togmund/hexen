@@ -2,6 +2,8 @@ defmodule HexenWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
+  # channel "room:*", HexenWeb.RoomChannel
+  channel "hex:*", HexenWeb.HexChannel
   channel "band:*", HexenWeb.BandChannel
 
   # Socket params are passed from the client and can
