@@ -10,7 +10,7 @@
                         'Elixir.Hexen.Events.HexQuest',
                         'Elixir.Hexen.Events.Quest',
                         'Elixir.Hexen.Events.UserQuest',
-                        'Elixir.Hexen.Inventory',
+                        'Elixir.Hexen.HexWorker','Elixir.Hexen.Inventory',
                         'Elixir.Hexen.Inventory.Card',
                         'Elixir.Hexen.Inventory.Deck',
                         'Elixir.Hexen.Inventory.DeckCard','Elixir.Hexen.Map',
