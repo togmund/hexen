@@ -43,3 +43,4 @@ node_modules/
 
 #Yarn.lock
 yarn.lock
+pip.py

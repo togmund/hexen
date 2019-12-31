@@ -2,11 +2,10 @@ defmodule Hexen.Events.UserQuest do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "user_quests" do
     field :progress, :integer
-    field :user_id, :id
-    field :quest_id, :id
+    belongs_to :user, Hexen.People.User
+    belongs_to :quest, Hexen.Events.Quest
 
     timestamps()
   end

@@ -10,7 +10,18 @@ defmodule Hexen.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "hexen",
+      source_url: "https://github.com/togmund/hexen",
+      # homepage_url: "http://YOUR_PROJECT_HOMEPAGE",
+      docs: [
+        # The main page in the docs
+        main: "hexen",
+        # logo: "path/to/logo.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -42,7 +53,8 @@ defmodule Hexen.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 

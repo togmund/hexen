@@ -2,10 +2,11 @@ defmodule Hexen.Map.Biome do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "biomes" do
     field :name, :string
     field :resource, :string
+
+    has_many :hexes, Hexen.Map.Hex
 
     timestamps()
   end

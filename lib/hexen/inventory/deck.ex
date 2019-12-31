@@ -2,11 +2,13 @@ defmodule Hexen.Inventory.Deck do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "decks" do
     field :cardback, :string
     field :name, :string
-    field :user_id, :id
+
+    belongs_to :user, Hexen.People.User
+
+    has_many :deck_cards, Hexen.Inventory.DeckCard
 
     timestamps()
   end

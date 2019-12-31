@@ -2,10 +2,9 @@ defmodule Hexen.Inventory.DeckCard do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "deck_cards" do
-    field :deck_id, :id
-    field :card_id, :id
+    belongs_to :card, Hexen.Inventory.Card
+    belongs_to :deck, Hexen.Inventory.Deck
 
     timestamps()
   end

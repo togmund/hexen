@@ -2,9 +2,10 @@ defmodule Hexen.Map.Region do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "regions" do
     field :name, :string
+
+    has_many :hexes, Hexen.Map.Hex
 
     timestamps()
   end

@@ -6,11 +6,11 @@ defmodule Hexen.Repo.Migrations.CreateQuests do
       add :name, :string
       add :description, :string
       add :requirement, :integer
-      add :reward, references(:cards, on_delete: :nothing)
+      add :card_id, references(:cards, on_delete: :nothing)
 
       timestamps()
     end
 
-    create index(:quests, [:reward])
+    create index(:quests, [:card_id])
   end
 end
