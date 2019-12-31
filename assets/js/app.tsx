@@ -1,7 +1,8 @@
 import '../css/app.css';
-// import '../css/Sidebar.css';
 
 import 'phoenix_html';
+
+import socket from './socket';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';

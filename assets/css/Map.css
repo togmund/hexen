@@ -24,8 +24,23 @@ main {
   position: absolute;
 }
 
+svg g text {
+  font-size: 0.17em;
+  fill: white;
+  fill-opacity: 0.7;
+  transition: fill-opacity .5s;
+}
+
 g.hexagon {
   fill: lightblue;
+  color:black;
 
   /* background-image: url("../images/water.png") */
+}
+
+svg g text {
+  font-size: 0.1em;
+  fill: #000;
+  fill-opacity: 0.9;
+  transition: fill-opacity .2s;
 }

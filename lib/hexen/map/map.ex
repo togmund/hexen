@@ -214,6 +214,22 @@ defmodule Hexen.Map do
   end
 
   @doc """
+  Returns the list of hexes.
+
+  ## Examples
+
+      iex> list_hexes()
+      [%Hex{}, ...]
+
+  """
+  def list_hex_ids do
+    Repo.all(
+      from h in Hex,
+        select: h.id
+    )
+  end
+
+  @doc """
   Gets a single hex.
 
   Raises `Ecto.NoResultsError` if the Hex does not exist.
