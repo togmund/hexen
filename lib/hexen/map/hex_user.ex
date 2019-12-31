@@ -2,11 +2,11 @@ defmodule Hexen.Map.HexUser do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "hex_users" do
     field :departed, :naive_datetime
-    field :hex_id, :id
-    field :user_id, :id
+
+    belongs_to :hex, Hexen.Map.Hex
+    belongs_to :user, Hexen.People.User
 
     timestamps()
   end

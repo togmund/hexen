@@ -2,12 +2,16 @@ defmodule Hexen.People.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "users" do
     field :avatar, :string
     field :email, :string
     field :name, :string
-    field :band_id, :id
+
+    belongs_to :band, Hexen.People.Band
+
+    has_many :user_quests, Hexen.Events.UserQuest
+    has_many :decks, Hexen.Inventory.Deck
+    has_many :hex_users, Hexen.Map.HexUser
 
     timestamps()
   end
