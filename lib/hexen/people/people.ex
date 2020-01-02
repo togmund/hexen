@@ -21,6 +21,22 @@ defmodule Hexen.People do
     Repo.all(Band)
   end
 
+    @doc """
+  Returns the list of band IDs.
+
+  ## Examples
+
+      iex> list_band_ids()
+      [%Band{}, ...]
+
+  """
+  def list_band_ids do
+    Repo.all(
+      from b in Band,
+        select: b.id
+    )
+  end
+
   @doc """
   Gets a single band.
 
