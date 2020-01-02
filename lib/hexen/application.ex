@@ -14,7 +14,6 @@ defmodule Hexen.Application do
       HexenWeb.Endpoint,
       # Starts a worker by calling: Hexen.Worker.start_link(arg)
       # {Hexen.Worker, arg},
-      {Hexen.BandWorker, %{}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -23,6 +22,8 @@ defmodule Hexen.Application do
     Supervisor.start_link(children, hexen_opts)
     hex_board_opts = [strategy: :one_for_one, name: Hexen.BoardSupervisor]
     Supervisor.start_link(get_hexes(), hex_board_opts)
+    band_opts = [strategy: :one_for_one, name: Hexen.BandSupervisor]
+    Supervisor.start_link(get_bands(), band_opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
@@ -35,6 +36,12 @@ defmodule Hexen.Application do
   defp get_hexes do
     Enum.map(Hexen.Map.list_hex_ids(), fn id ->
       Supervisor.child_spec({Hexen.HexWorker, %{id: id}}, id: id)
+    end)
+  end
+
+  defp get_bands do
+    Enum.map(Hexen.People.list_band_ids(), fn id ->
+      Supervisor.child_spec({Hexen.BandWorker, %{id: id}}, id: id)
     end)
   end
 end

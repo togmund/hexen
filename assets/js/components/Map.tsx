@@ -4,7 +4,6 @@ import Card from './Card';
 import socket from '../socket';
 import BandChannel from '../band';
 import '../../css/Map.css';
-import socket from '../socket';
 import HexChannel from '../hex_channel';
 
 const LENGTH = 50;
