@@ -1,6 +1,6 @@
 const HexChannel = {
   init(socket) {
-    const room = 'tile'; // Hex ID or Name
+    const room = 1; // Hex ID or Name
     const channel = socket.channel('hex:' + room, {});
     channel
       .join()
@@ -10,6 +10,10 @@ const HexChannel = {
       .receive('error', resp => {
         console.log('Unable to join', resp);
       });
+
+    channel.on('hex_state', msg => {
+      console.log('The hex state is: ', msg);
+    });
   }
 };
 

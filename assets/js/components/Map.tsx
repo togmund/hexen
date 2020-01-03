@@ -6,8 +6,8 @@ import BandChannel from '../band';
 import '../../css/Map.css';
 import HexChannel from '../hex_channel';
 
-const LENGTH = 50;
-const WIDTH = 50;
+const LENGTH = 8;
+const WIDTH = 8;
 const hexagons = GridGenerator.orientedRectangle(LENGTH, WIDTH);
 const initialState = Array(LENGTH * WIDTH).fill(0);
 
@@ -23,7 +23,7 @@ const Map = () => {
   return (
     <main>
       <div className={'hex-map'}>
-        <HexGrid width={2000} height={950} viewBox={'49 -8 100 100'}>
+        <HexGrid width={2000} height={950} viewBox={'0 0 100 100'}>
           <Layout
             size={{ x: 6, y: 6 }}
             flat={true}
