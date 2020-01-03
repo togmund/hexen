@@ -52,4 +52,11 @@ defmodule Hexen.HexWorker do
   defp schedule_hex_fetch do
     Process.send_after(self(), :hex_fetch, 5_000)
   end
+
+  defp broadcast(updated_state, response) do
+    HexenWeb.HexChannel.broadcast!("hex:" <> updated_state[:id], "shout", %{
+      response: response,
+      time: time
+    })
+  end
 end
