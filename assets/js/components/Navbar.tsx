@@ -16,6 +16,7 @@ const Navbar = () => {
         alt="deck-icon"
         height="40"
         width="30"
+        className={'deck-icon'}
       ></img>
       <p className={'cards-remaining'}>{CARDS_IN_DECK}</p>
       <p className={'attack-cards-remaining'}>{ATTACK_CARDS}</p>
