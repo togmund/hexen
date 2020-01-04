@@ -21,15 +21,8 @@ main {
 .hex-map {
   height: 100%;
   width: 100%;
-  position: absolute;
 }
 
-svg g text {
-  font-size: 0.17em;
-  fill: white;
-  fill-opacity: 0.7;
-  transition: fill-opacity .5s;
-}
 
 g.hexagon {
   fill: lightblue;
@@ -39,6 +32,7 @@ g.hexagon {
 }
 
 svg g text {
+  flex-direction: column;
   font-size: 0.1em;
   fill: #000;
   fill-opacity: 0.9;
