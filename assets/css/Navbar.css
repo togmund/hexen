@@ -1,7 +1,17 @@
-div {
-  height: 50px;
+body {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-h1 {
-  border-bottom: 5px solid;
+.navbar {
+  height: 50px;
+  background-color: #000000;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar > p {
+  color: white;
 }
