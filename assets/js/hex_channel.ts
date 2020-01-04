@@ -1,6 +1,6 @@
 const HexChannel = {
-  init(socket) {
-    const room = 1; // Hex ID or Name
+  init(socket, hexID) {
+    const room = hexID; // Hex ID or Name
     const channel = socket.channel('hex:' + room, {});
     channel
       .join()

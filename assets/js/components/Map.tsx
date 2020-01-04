@@ -6,8 +6,8 @@ import BandChannel from '../band';
 import '../../css/Map.css';
 import HexChannel from '../hex_channel';
 
-const LENGTH = 8;
-const WIDTH = 8;
+const LENGTH = 2;
+const WIDTH = 2;
 const hexagons = GridGenerator.orientedRectangle(LENGTH, WIDTH);
 const initialState = Array(LENGTH * WIDTH).fill(0);
 
@@ -23,9 +23,9 @@ const Map = () => {
   return (
     <main>
       <div className={'hex-map'}>
-        <HexGrid width={2000} height={950} viewBox={'0 0 100 100'}>
+        <HexGrid width={2000} height={950} viewBox={'0 -30 100 100'}>
           <Layout
-            size={{ x: 6, y: 6 }}
+            size={{ x: 20, y: 15 }}
             flat={true}
             spacing="1.005"
             origin={{ x: 0, y: 0 }}
@@ -38,10 +38,12 @@ const Map = () => {
                 s={hex.s}
                 onClick={(event: any) => {
                   console.log(event);
-                  HexChannel.init(socket);
+                  HexChannel.init(socket, i);
                 }}
               >
-                <Text>{i}</Text>
+                <Text>
+                  ID {i} C {hex.q},{hex.r},{hex.s}
+                </Text>
               </Hexagon>
             ))}
           </Layout>
