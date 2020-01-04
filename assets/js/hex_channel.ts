@@ -1,18 +1,21 @@
 const HexChannel = {
-  init(socket, hexID) {
+  state: {},
+
+  init(socket: { channel: (arg0: string, arg1: {}) => any }, hexID: any) {
     const room = hexID; // Hex ID or Name
     const channel = socket.channel('hex:' + room, {});
     channel
       .join()
-      .receive('ok', resp => {
+      .receive('ok', (resp: any) => {
         console.log('Joined successfully', resp);
       })
-      .receive('error', resp => {
+      .receive('error', (resp: any) => {
         console.log('Unable to join', resp);
       });
 
-    channel.on('hex_state', msg => {
-      console.log('The hex state is: ', msg);
+    channel.on('hex_state', (msg: {}) => {
+      this.state = msg;
+      console.log(this.state);
     });
   }
 };
