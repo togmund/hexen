@@ -4,9 +4,11 @@ section {
   position: fixed;
   z-index: 1;
   text-align: center;
-  top: 80px;
+  top: 3.1em;
   left: 0;
-  background: rgba(87, 151, 255, 0.3);
-  border: 5px solid;
   overflow-x: hidden;
+  background-color: #966F33;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-wood.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  color: white;
 }
