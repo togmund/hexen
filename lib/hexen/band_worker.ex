@@ -40,6 +40,6 @@ defmodule Hexen.BandWorker do
   end
 
   defp schedule_band_fetch do
-    Process.send_after(self(), :band_fetch, 5_000)
+    Process.send_after(self(), :band_fetch, 30_000)
   end
 end
