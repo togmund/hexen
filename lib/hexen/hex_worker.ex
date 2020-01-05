@@ -20,14 +20,14 @@ defmodule Hexen.HexWorker do
     # if updated_state != state do
     broadcast(updated_state, :ok)
 
-    IO.puts("""
+    # IO.puts("""
 
-    Hex Data for ID:#{updated_state[:id]}
-    Name:#{updated_state[:name]}
-    Region:#{updated_state[:region_id]}
-    Resource:#{updated_state[:resource]}
-    Structure:#{updated_state[:structure]}
-    """)
+    # Hex Data for ID:#{updated_state[:id]}
+    # Name:#{updated_state[:name]}
+    # Region:#{updated_state[:region_id]}
+    # Resource:#{updated_state[:resource]}
+    # Structure:#{updated_state[:structure]}
+    # """)
 
     # end
 

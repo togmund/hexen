@@ -7,11 +7,11 @@ import {
   GridGenerator,
   Hex
 } from 'react-hexgrid';
-import Card from './Card';
 import socket from '../socket';
 import BandChannel from '../band';
 import '../../css/Map.css';
 import HexChannel from '../hex_channel';
+import Hand from '../../js/components/Hand';
 
 const newHexagons = [
   {
@@ -62,6 +62,33 @@ const newHexagons = [
   }
 ];
 
+const handCards = [
+  {
+    id: 1,
+    name: 'Long Haul Boots',
+    suit: 'Move',
+    description: 'Travel two hexes instead of one.',
+    image: 'http://pixelartmaker.com/art/920bb2ea34df485.png',
+    modifier: 2
+  },
+  {
+    id: 2,
+    name: 'Pickaxe',
+    suit: 'Gather',
+    description: 'Triple haul on ore resources.',
+    image: 'http://pixelartmaker.com/art/16c8f43e143cb6d.png',
+    modifier: 3
+  },
+  {
+    id: 3,
+    name: 'Anvil',
+    suit: 'Craft',
+    description: 'Extra bonus on crafted weapons.',
+    image: 'http://pixelartmaker.com/art/9cf72f5b79c4946.png',
+    modifier: 3
+  }
+];
+
 const Map = () => {
   const [hexState, setHexState] = useState('');
 
@@ -102,11 +129,7 @@ const Map = () => {
           </Layout>
         </HexGrid>
       </div>
-      <div className="card-container">
-        <Card />
-        <p>Card 2</p>
-        <p>Card 3</p>
-      </div>
+      <Hand handCards={handCards} />
     </main>
   );
 };
