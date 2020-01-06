@@ -1,6 +1,7 @@
+import { value } from './components/Hand';
+
 const HexChannel = {
   state: {},
-
   init(socket: { channel: (arg0: string, arg1: {}) => any }, hexID: any) {
     const room = hexID; // Hex ID or Name
     const channel = socket.channel('hex:' + room, {});
@@ -15,6 +16,7 @@ const HexChannel = {
 
     channel.on('hex_state', (msg: {}) => {
       this.state = msg;
+      channel.push('selected_card', value);
       console.log(this.state);
     });
   }
