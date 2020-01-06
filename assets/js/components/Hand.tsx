@@ -31,10 +31,9 @@ const Hand = () => {
     }
   ];
 
-  let value: number | null = null;
-
   const onChange = (id: number | null) => {
     value = id;
+    console.log(value);
   };
 
   return (
@@ -54,5 +53,5 @@ const Hand = () => {
     </Tiles>
   );
 };
-
+export let value: number | null = null;
 export default Hand;
