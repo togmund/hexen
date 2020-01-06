@@ -11,7 +11,6 @@ import socket from '../socket';
 import BandChannel from '../band';
 import '../../css/Map.css';
 import HexChannel from '../hex_channel';
-import Hand from '../../js/components/Hand';
 
 const newHexagons = [
   {
@@ -62,33 +61,6 @@ const newHexagons = [
   }
 ];
 
-const handCards = [
-  {
-    id: 1,
-    name: 'Long Haul Boots',
-    suit: 'Move',
-    description: 'Travel two hexes instead of one.',
-    image: 'http://pixelartmaker.com/art/920bb2ea34df485.png',
-    modifier: 2
-  },
-  {
-    id: 2,
-    name: 'Pickaxe',
-    suit: 'Gather',
-    description: 'Triple haul on ore resources.',
-    image: 'http://pixelartmaker.com/art/16c8f43e143cb6d.png',
-    modifier: 3
-  },
-  {
-    id: 3,
-    name: 'Anvil',
-    suit: 'Craft',
-    description: 'Extra bonus on crafted weapons.',
-    image: 'http://pixelartmaker.com/art/9cf72f5b79c4946.png',
-    modifier: 3
-  }
-];
-
 const Map = () => {
   const [hexState, setHexState] = useState('');
 
@@ -97,40 +69,37 @@ const Map = () => {
   });
 
   return (
-    <main>
-      <div className={'hex-map'}>
-        <HexGrid width={2000} height={950} viewBox={'0 -30 100 100'}>
-          <Layout
-            size={{ x: 15, y: 15 }}
-            flat={true}
-            spacing="1.005"
-            origin={{ x: 0, y: 0 }}
-          >
-            {newHexagons.map((hex: any) => (
-              <Hexagon
-                key={hex.id}
-                q={hex.hex.q}
-                r={hex.hex.r}
-                s={hex.hex.s}
-                onClick={(event: any) => {
-                  console.log(event);
-                  HexChannel.init(socket, hex.id);
-                }}
-              >
-                <Text>
-                  ID{hex.id} C{hex.hex.q},{hex.hex.r},{hex.hex.s}{' '}
-                  {HexChannel.state.name} {HexChannel.state.resource}{' '}
-                  {HexChannel.state.region_id} {HexChannel.state.biome_id}{' '}
-                  {HexChannel.state.band_id}
-                </Text>
-                <Text></Text>
-              </Hexagon>
-            ))}
-          </Layout>
-        </HexGrid>
-      </div>
-      <Hand handCards={handCards} />
-    </main>
+    <div className={'hex-map'}>
+      <HexGrid width={2000} height={950} viewBox={'0 -30 100 100'}>
+        <Layout
+          size={{ x: 15, y: 15 }}
+          flat={true}
+          spacing="1.005"
+          origin={{ x: 0, y: 0 }}
+        >
+          {newHexagons.map((hex: any) => (
+            <Hexagon
+              key={hex.id}
+              q={hex.hex.q}
+              r={hex.hex.r}
+              s={hex.hex.s}
+              onClick={(event: any) => {
+                console.log(event);
+                HexChannel.init(socket, hex.id);
+              }}
+            >
+              <Text>
+                ID{hex.id} C{hex.hex.q},{hex.hex.r},{hex.hex.s}{' '}
+                {HexChannel.state.name} {HexChannel.state.resource}{' '}
+                {HexChannel.state.region_id} {HexChannel.state.biome_id}{' '}
+                {HexChannel.state.band_id}
+              </Text>
+              <Text></Text>
+            </Hexagon>
+          ))}
+        </Layout>
+      </HexGrid>
+    </div>
   );
 };
 

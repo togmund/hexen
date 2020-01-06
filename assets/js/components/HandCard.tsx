@@ -7,24 +7,21 @@ const HandCard = ({ image, suit, name, description, modifier }) => {
   }
 
   return (
-    <Box width={1 / 3}>
-      <Card
-        sx={{
-          p: 1,
-          borderRadius: 2,
-          boxShadow: '0 0 16px rgba(0, 0, 0, .25)'
-        }}
-      >
-        <Image src={image} />
-        <Box px={2}>
-          <Heading as="h3">{name}</Heading>
-          <Heading as="h3">{suit}</Heading>
-          <Text fontSize={0}>{description}</Text>
-          <Text fontSize={0}>{modifier}</Text>
-        </Box>
-      </Card>
-    </Box>
+    <Card
+      sx={{
+        borderRadius: 2,
+        boxShadow: '0 0 16px rgba(0, 0, 0, .25)'
+      }}
+    >
+      <Image src={image} />
+      <Box>
+        <Heading as="h3">{name}</Heading>
+        <Heading as="h3">{suit}</Heading>
+        <Text>{description}</Text>
+        <Text>{modifier}</Text>
+      </Box>
+    </Card>
   );
 };
 
-export default Card;
+export default HandCard;
