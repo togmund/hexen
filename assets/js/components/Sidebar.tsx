@@ -6,8 +6,12 @@ import socket from '../socket';
 const Sidebar = () => (
   <section>
     <h3>Hex Title</h3>
-    {/* <img src={require('../../images/hexagon.png')} alt="hex-img"></img> */}
-    <img src="../../images/hexagon.png" alt="hex-img"></img>
+    <img
+      src="https://s.put.re/DPdo2W3p.png"
+      alt="hex-img"
+      height="130"
+      width="150"
+    ></img>
     <p>Hex details</p>
     <p>Bands present on this hex:</p>
     <p
