@@ -31,6 +31,12 @@ const Hand = () => {
     }
   ];
 
+  let value: number | null = null;
+
+  const onChange = (id: number | null) => {
+    value = id;
+  };
+
   return (
     <Tiles width={[96, null, 128]} className="card-container">
       {handCards.map(card => (
@@ -41,6 +47,8 @@ const Hand = () => {
           name={card.name}
           description={card.description}
           modifier={card.modifier}
+          selected={card.id === value}
+          selectCard={() => onChange(card.id)}
         />
       ))}
     </Tiles>

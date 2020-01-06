@@ -28,7 +28,7 @@ defmodule HexenWeb.HexChannel do
   end
 
   def handle_in("selected_card", msg, socket) do
-    IO.puts("Card Selected Is: #{Map.fetch!(msg, "card")}")
+    IO.puts("Card Selected Is: #{msg}")
     {:noreply, socket}
   end
 

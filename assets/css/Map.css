@@ -1,5 +1,22 @@
+main {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}
 
-
+.card-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  z-index: 1;
+  position: absolute;
+  bottom: 100px;
+  left: 20%;
+  border: 3px solid black;
+  width: 60%;
+  height: 200px;
+}
 
 .hex-map {
   height: 100%;
