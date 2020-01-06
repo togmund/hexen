@@ -12,9 +12,9 @@ main {
   z-index: 1;
   position: absolute;
   bottom: 100px;
-  left: 40%;
+  left: 20%;
   border: 3px solid black;
-  width: 30%;
+  width: 60%;
   height: 200px;
 }
 

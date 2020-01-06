@@ -20,14 +20,14 @@ defmodule Hexen.HexWorker do
     # if updated_state != state do
     broadcast(updated_state, :ok)
 
-    IO.puts("""
+    # IO.puts("""
 
-    Hex Data for ID:#{updated_state[:id]}
-    Name:#{updated_state[:name]}
-    Region:#{updated_state[:region_id]}
-    Resource:#{updated_state[:resource]}
-    Structure:#{updated_state[:structure]}
-    """)
+    # Hex Data for ID:#{updated_state[:id]}
+    # Name:#{updated_state[:name]}
+    # Region:#{updated_state[:region_id]}
+    # Resource:#{updated_state[:resource]}
+    # Structure:#{updated_state[:structure]}
+    # """)
 
     # end
 
@@ -54,6 +54,21 @@ defmodule Hexen.HexWorker do
 
   defp schedule_hex_fetch do
     Process.send_after(self(), :hex_fetch, 30_000)
+  end
+
+  defp broadcast(updated_state, response) do
+    HexenWeb.Endpoint.broadcast(
+      "hex:#{updated_state[:id]}",
+      "hex_state",
+      %{
+        response: response,
+        id: updated_state[:id],
+        name: updated_state[:name],
+        region: updated_state[:region_id],
+        resource: updated_state[:resource],
+        structure: updated_state[:structure]
+      }
+    )
   end
 
   defp broadcast(updated_state, response) do
