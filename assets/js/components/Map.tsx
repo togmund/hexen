@@ -7,6 +7,10 @@ import {
   GridGenerator,
   Hex
 } from 'react-hexgrid';
+<<<<<<< HEAD
+=======
+import Card from './Card';
+>>>>>>> 2691af9b777a2f2a81d10f7db4ed224e27126122
 import socket from '../socket';
 import BandChannel from '../band';
 import '../../css/Map.css';
@@ -69,6 +73,7 @@ const Map = () => {
   });
 
   return (
+<<<<<<< HEAD
     <div className={'hex-map'}>
       <HexGrid width={2000} height={950} viewBox={'0 -30 100 100'}>
         <Layout
@@ -100,6 +105,46 @@ const Map = () => {
         </Layout>
       </HexGrid>
     </div>
+=======
+    <main>
+      <div className={'hex-map'}>
+        <HexGrid width={2000} height={950} viewBox={'0 -30 100 100'}>
+          <Layout
+            size={{ x: 15, y: 15 }}
+            flat={true}
+            spacing="1.005"
+            origin={{ x: 0, y: 0 }}
+          >
+            {newHexagons.map((hex: any) => (
+              <Hexagon
+                key={hex.id}
+                q={hex.hex.q}
+                r={hex.hex.r}
+                s={hex.hex.s}
+                onClick={(event: any) => {
+                  console.log(event);
+                  HexChannel.init(socket, hex.id);
+                }}
+              >
+                <Text>
+                  ID{hex.id} C{hex.hex.q},{hex.hex.r},{hex.hex.s}{' '}
+                  {HexChannel.state.name} {HexChannel.state.resource}{' '}
+                  {HexChannel.state.region_id} {HexChannel.state.biome_id}{' '}
+                  {HexChannel.state.band_id}
+                </Text>
+                <Text></Text>
+              </Hexagon>
+            ))}
+          </Layout>
+        </HexGrid>
+      </div>
+      <div className="card-container">
+        <Card />
+        <p>Card 2</p>
+        <p>Card 3</p>
+      </div>
+    </main>
+>>>>>>> 2691af9b777a2f2a81d10f7db4ed224e27126122
   );
 };
 

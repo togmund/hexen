@@ -32,6 +32,11 @@ defmodule HexenWeb.HexChannel do
     {:noreply, socket}
   end
 
+  def handle_in("hex_state", msg, socket) do
+    push(socket, "hex_state", msg)
+    {:noreply, socket}
+  end
+
   # Add authorization logic here as required.
   # defp authorized?(_payload) do
   #   true
