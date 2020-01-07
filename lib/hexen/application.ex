@@ -12,6 +12,8 @@ defmodule Hexen.Application do
       Hexen.Repo,
       # Start the endpoint when the application starts
       HexenWeb.Endpoint,
+      # Start the HexPresence tracking
+      HexenWeb.HexPresence
       # Starts a worker by calling: Hexen.Worker.start_link(arg)
       # {Hexen.Worker, arg},
     ]

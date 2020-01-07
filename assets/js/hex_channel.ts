@@ -5,6 +5,7 @@ const HexChannel = {
   init(socket: { channel: (arg0: string, arg1: {}) => any }, hexID: any) {
     const room = hexID; // Hex ID or Name
     const channel = socket.channel('hex:' + room, {});
+    const presence = new Presence(channel);
     channel
       .join()
       .receive('ok', (resp: any) => {
