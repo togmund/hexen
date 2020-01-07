@@ -19,6 +19,13 @@ const HexChannel = {
       channel.push('selected_card', value);
       console.log(this.state);
     });
+  },
+  leave(socket: { channel: (arg0: string, arg1: {}) => any }, hexID: any) {
+    const room = hexID;
+    const channel = socket.channel('hex:' + room, {});
+    channel.leave().receive('ok', (resp: any) => {
+      console.log('Success', resp);
+    });
   }
 };
 

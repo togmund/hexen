@@ -1,6 +1,7 @@
 import * as React from 'react';
 import '../../css/Sidebar.css';
 import BandChannel from '../band';
+import HexChannel from '../hex_channel';
 import socket from '../socket';
 
 const Sidebar = () => (
@@ -22,6 +23,22 @@ const Sidebar = () => (
     >
       The Bloods
     </p>
+    <button
+      onClick={(event: any) => {
+        console.log(event);
+        HexChannel.init(socket, 1);
+      }}
+    >
+      Subscribe
+    </button>
+    <button
+      onClick={(event: any) => {
+        console.log(event);
+        HexChannel.leave(socket, 1);
+      }}
+    >
+      Unsubscribe
+    </button>
   </section>
 );
 

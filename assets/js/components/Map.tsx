@@ -7,6 +7,7 @@ import {
   GridGenerator,
   Hex
 } from 'react-hexgrid';
+import Button from './Button';
 import socket from '../socket';
 import BandChannel from '../band';
 import '../../css/Map.css';
@@ -88,13 +89,7 @@ const Map = () => {
                 HexChannel.init(socket, hex.id);
               }}
             >
-              <Text>
-                ID{hex.id} C{hex.hex.q},{hex.hex.r},{hex.hex.s}{' '}
-                {HexChannel.state.name} {HexChannel.state.resource}{' '}
-                {HexChannel.state.region_id} {HexChannel.state.biome_id}{' '}
-                {HexChannel.state.band_id}
-              </Text>
-              <Text></Text>
+              <Text>ID{hex.id}</Text>
             </Hexagon>
           ))}
         </Layout>
