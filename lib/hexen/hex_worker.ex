@@ -38,16 +38,25 @@ defmodule Hexen.HexWorker do
     {:noreply, updated_state}
   end
 
-  def add_card(room_name, message) do
-    # And the `GenServer` callbacks will accept this tuple the same way it
-    # accepts a `pid` or an atom.
-    GenServer.cast(via_tuple(room_name), {:add_card, message})
-    Hexen.Inventory.get_deck_card!(3)
-    |> Hexen.Inventory.update_drawn_status(true)
+  # def add_card(room_name, message) do
+  #   # And the `GenServer` callbacks will accept this tuple the same way it
+  #   # accepts a `pid` or an atom.
+  #   GenServer.cast(via_tuple(room_name), {:add_card, message})
 
-    IO.puts("############################################")
-    IO.inspect(message)
-    IO.puts("############################################")
+  # end
+
+  def perform_action(room_name, message) do
+    # Execute card action
+    Hexen.Inventory.get_deck_card!(elem(message, 1))
+  end
+
+  def draw_card() do
+    # Randomly select a valid deck_card
+    # TO DO
+
+    # Set its drawn value to true
+    Hexen.Inventory.get_deck_card!()
+    |> Hexen.Inventory.update_drawn_status(true)
   end
 
   # def handle_info(:add_card, message) do

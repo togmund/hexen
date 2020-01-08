@@ -265,7 +265,7 @@ defmodule Hexen.Inventory do
     |> Repo.update()
   end
 
-    @doc """
+  @doc """
   Updates a deck_card's drawn status.
 
   ## Examples
