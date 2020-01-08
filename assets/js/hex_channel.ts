@@ -1,3 +1,4 @@
+import { Presence } from 'phoenix';
 import { value } from './components/Hand';
 
 const HexChannel = {

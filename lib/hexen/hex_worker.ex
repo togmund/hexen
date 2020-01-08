@@ -53,7 +53,7 @@ defmodule Hexen.HexWorker do
   end
 
   defp schedule_hex_fetch do
-    Process.send_after(self(), :hex_fetch, 5_000)
+    Process.send_after(self(), :hex_fetch, 30_000)
   end
 
   defp broadcast(updated_state, response) do

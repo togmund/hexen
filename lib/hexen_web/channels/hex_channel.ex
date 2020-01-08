@@ -3,17 +3,8 @@ defmodule HexenWeb.HexChannel do
   alias HexenWeb.HexPresence
 
   def join("hex:" <> hex_id, _payload, socket) do
-    # send(self(), :after_join)
-
-    # {:ok, %{channel: "hex:#{hex_id}"}, assign(socket, :hex_id, hex_id),
-    #  assign(socket, :user_id, verified_user_id)}
-
-    {:ok, socket}
-
-    # if authorized?(payload) do
-    # else
-    #   {:error, %{reason: "unauthorized"}}
-    # end
+    send(self(), :after_join)
+    {:ok, assign(socket, :user_id, user_id)}
   end
 
   def handle_info(:after_join, socket) do
