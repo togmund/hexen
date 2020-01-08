@@ -18,7 +18,7 @@ defmodule Hexen.DatabaseSeeder do
   alias Hexen.Repo
 
   alias Hexen.People.Band
-  alias Hexen.People.User
+  alias Hexen.Users.User
 
   alias Hexen.Map.Region
   alias Hexen.Map.Biome

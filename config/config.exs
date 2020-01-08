@@ -17,6 +17,10 @@ config :hexen, HexenWeb.Endpoint,
   render_errors: [view: HexenWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Hexen.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :hexen, :pow,
+  user: Hexen.Users.User,
+  repo: Hexen.Repo
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

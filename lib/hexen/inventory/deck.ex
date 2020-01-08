@@ -6,7 +6,7 @@ defmodule Hexen.Inventory.Deck do
     field :cardback, :string
     field :name, :string
 
-    belongs_to :user, Hexen.People.User
+    belongs_to :user, Hexen.Users.User
 
     has_many :deck_cards, Hexen.Inventory.DeckCard
 

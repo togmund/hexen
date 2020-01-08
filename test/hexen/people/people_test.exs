@@ -65,10 +65,14 @@ defmodule Hexen.PeopleTest do
   end
 
   describe "users" do
-    alias Hexen.People.User
+    alias Hexen.Users.User
 
     @valid_attrs %{avatar: "some avatar", email: "some email", name: "some name"}
-    @update_attrs %{avatar: "some updated avatar", email: "some updated email", name: "some updated name"}
+    @update_attrs %{
+      avatar: "some updated avatar",
+      email: "some updated email",
+      name: "some updated name"
+    }
     @invalid_attrs %{avatar: nil, email: nil, name: nil}
 
     def user_fixture(attrs \\ %{}) do

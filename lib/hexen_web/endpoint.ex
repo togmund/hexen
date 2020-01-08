@@ -40,7 +40,9 @@ defmodule HexenWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_hexen_key",
-    signing_salt: "rgGfuEiO"
+    signing_salt: "secret"
+
+  plug Pow.Plug.Session, otp_app: :hexen
 
   plug HexenWeb.Router
 end

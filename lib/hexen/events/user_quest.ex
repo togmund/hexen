@@ -4,7 +4,7 @@ defmodule Hexen.Events.UserQuest do
 
   schema "user_quests" do
     field :progress, :integer
-    belongs_to :user, Hexen.People.User
+    belongs_to :user, Hexen.Users.User
     belongs_to :quest, Hexen.Events.Quest
 
     timestamps()

@@ -21,7 +21,7 @@ defmodule Hexen.People do
     Repo.all(Band)
   end
 
-    @doc """
+  @doc """
   Returns the list of band IDs.
 
   ## Examples
@@ -118,7 +118,7 @@ defmodule Hexen.People do
     Band.changeset(band, %{})
   end
 
-  alias Hexen.People.User
+  alias Hexen.Users.User
 
   @doc """
   Returns the list of users.

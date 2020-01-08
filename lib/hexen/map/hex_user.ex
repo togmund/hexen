@@ -6,7 +6,7 @@ defmodule Hexen.Map.HexUser do
     field :departed, :naive_datetime
 
     belongs_to :hex, Hexen.Map.Hex
-    belongs_to :user, Hexen.People.User
+    belongs_to :user, Hexen.Users.User
 
     timestamps()
   end

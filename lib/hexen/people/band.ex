@@ -6,7 +6,7 @@ defmodule Hexen.People.Band do
     field :name, :string
     field :sigil, :string
 
-    has_many :users, Hexen.People.User
+    has_many :users, Hexen.Users.User
     has_many :band_quests, Hexen.Events.BandQuest
 
     timestamps()
