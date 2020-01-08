@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../../css/Sidebar.css';
-import BandChannel from '../band';
+import BandChannel from '../band_channel';
 import socket from '../socket';
 
 const Sidebar = () => (

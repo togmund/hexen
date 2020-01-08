@@ -31,7 +31,7 @@ defmodule Hexen.MixProject do
   def application do
     [
       mod: {Hexen.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :gproc]
     ]
   end
 
@@ -55,7 +55,8 @@ defmodule Hexen.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
-      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:gproc, "~> 0.5.0"}
     ]
   end
 

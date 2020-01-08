@@ -8,7 +8,7 @@ import {
   Hex
 } from 'react-hexgrid';
 import socket from '../socket';
-import BandChannel from '../band';
+import BandChannel from '../band_channel';
 import '../../css/Map.css';
 import HexChannel from '../hex_channel';
 import createMap from '../helpers/create_map';
