@@ -19,7 +19,8 @@ config :hexen, HexenWeb.Endpoint,
 
 config :hexen, :pow,
   user: Hexen.Users.User,
-  repo: Hexen.Repo
+  repo: Hexen.Repo,
+  web_module: HexenWeb
 
 # Configures Elixir's Logger
 config :logger, :console,

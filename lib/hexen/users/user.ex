@@ -10,7 +10,6 @@ defmodule Hexen.Users.User do
 
   schema "users" do
     field :avatar, :string
-    field :name, :string
 
     belongs_to :band, Hexen.People.Band
 
@@ -21,5 +20,10 @@ defmodule Hexen.Users.User do
     pow_user_fields()
 
     timestamps()
+  end
+
+  def changeset(user_or_changeset, attrs) do
+    user_or_changeset
+    |> pow_changeset(attrs)
   end
 end

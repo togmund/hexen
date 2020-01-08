@@ -73,20 +73,17 @@ defmodule Hexen.DatabaseSeeder do
 
   # User Seeds
   Repo.insert!(%User{
-    name: "Descartes",
     avatar: "https://s.put.re/webPTZy3.png",
     email: "des@cartes.com"
   })
 
   Repo.insert!(%User{
-    name: "Rose",
     avatar: "https://s.put.re/1hke8Go7.png",
     email: "ro@se.com",
     band_id: 2
   })
 
   Repo.insert!(%User{
-    name: "Lizard",
     avatar: "https://s.put.re/rodszvu3.png",
     email: "liz@ard.com",
     band_id: 2
