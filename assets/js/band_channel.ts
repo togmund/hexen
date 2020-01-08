@@ -4,10 +4,10 @@ const BandChannel = {
     const channel = socket.channel('band:' + room, {});
     channel
       .join()
-      .receive('ok', resp => {
+      .receive('ok', (resp: any) => {
         console.log('Joined successfully', resp);
       })
-      .receive('error', resp => {
+      .receive('error', (resp: any) => {
         console.log('Unable to join', resp);
       });
   }
