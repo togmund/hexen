@@ -21,7 +21,10 @@ const HexChannel = {
 
     channel.on('select_card', (msg: {}) => {
       channel
-        .push('selected_card', { card_id: value, room_name: `hex:${room}` })
+        .push('selected_card', {
+          deck_card_id: value,
+          room_name: `hex:${room}`
+        })
         .receive('ok', (resp: any) => {
           console.log('Card selected successfully', resp);
         })
