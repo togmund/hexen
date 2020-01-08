@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../../css/Sidebar.css';
-import BandChannel from '../band';
+import BandChannel from '../band_channel';
 import HexChannel from '../hex_channel';
 import socket from '../socket';
 

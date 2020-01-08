@@ -37,7 +37,7 @@ defmodule Hexen.Application do
 
   defp get_hexes do
     Enum.map(Hexen.Map.list_hex_ids(), fn id ->
-      Supervisor.child_spec({Hexen.HexWorker, %{id: id}}, id: id)
+      Supervisor.child_spec({Hexen.HexWorker, %{id: id, name: "hex:#{id}"}}, id: id)
     end)
   end
 

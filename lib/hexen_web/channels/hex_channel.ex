@@ -36,8 +36,19 @@ defmodule HexenWeb.HexChannel do
     {:noreply, socket}
   end
 
+  def handle_in("select_card", msg, socket) do
+    push(socket, "select_card", msg)
+    {:noreply, socket}
+  end
+
   def handle_in("selected_card", msg, socket) do
-    IO.puts("Card Selected Is: #{msg}")
+    HexWorker.add_card(Map.fetch(msg, "room_name"), Map.fetch(msg, "card_id"))
+
+    {:noreply, socket}
+  end
+
+  def handle_in("clear_selection", msg, socket) do
+    push(socket, "clear_selection", msg)
     {:noreply, socket}
   end
 

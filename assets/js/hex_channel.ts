@@ -18,15 +18,18 @@ const HexChannel = {
 
     channel.on('hex_state', (msg: {}) => {
       this.state = msg;
-      channel.push('selected_card', value);
       console.log(this.state);
     });
-  },
-  leave(socket: { channel: (arg0: string, arg1: {}) => any }, hexID: any) {
-    const room = hexID;
-    const channel = socket.channel('hex:' + room, {});
-    channel.leave().receive('ok', (resp: any) => {
-      console.log('Success', resp);
+
+    channel.on('select_card', (msg: {}) => {
+      channel
+        .push('selected_card', { card_id: value, room_name: `hex:${room}` })
+        .receive('ok', (resp: any) => {
+          console.log('Card selected successfully', resp);
+        })
+        .receive('error', (resp: any) => {
+          console.log('Card not', resp);
+        });
     });
   }
 };
