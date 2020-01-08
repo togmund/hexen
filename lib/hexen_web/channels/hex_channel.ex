@@ -1,10 +1,12 @@
 defmodule HexenWeb.HexChannel do
   use HexenWeb, :channel
   alias HexenWeb.HexPresence
+  alias Hexen.HexWorker
 
-  def join("hex:" <> hex_id, _payload, socket) do
+  def join("hex:" <> _hex_id, _payload, socket) do
     send(self(), :after_join)
-    {:ok, assign(socket, :user_id, user_id)}
+    # {:ok, assign(socket, :user_id, user_id)}
+    {:ok, socket}
   end
 
   def handle_info(:after_join, socket) do

@@ -10,7 +10,9 @@
   </head>
   <body>
     <%= render @view_module, @view_template, assigns %>
-    <script type="text/javascript">window.username = "<%= Map.get(@conn.assigns, :userToken) %>"</script>
+
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script>window.userToken = "<%= assigns[:token] %>";</script>
+    <script>window.userId = "<%= assigns[:user_id] %>";</script>
   </body>
 </html>

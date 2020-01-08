@@ -1,5 +1,5 @@
 {application,hexen,
-             [{applications,[kernel,stdlib,elixir,logger,runtime_tools,
+             [{applications,[kernel,stdlib,elixir,logger,runtime_tools,gproc,
                              gettext,jason,phoenix_pubsub,postgrex,ecto_sql,
                              phoenix_html,plug_cowboy,phoenix,pow,
                              phoenix_ecto]},

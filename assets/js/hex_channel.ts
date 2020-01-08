@@ -7,6 +7,7 @@ const HexChannel = {
     const room = hexID; // Hex ID or Name
     const channel = socket.channel('hex:' + room, {});
     const presence = new Presence(channel);
+    let presences = {};
     channel
       .join()
       .receive('ok', (resp: any) => {
@@ -19,6 +20,11 @@ const HexChannel = {
     channel.on('hex_state', (msg: {}) => {
       this.state = msg;
       console.log(this.state);
+    });
+
+    channel.on('presence_state', (state: {}) => {
+      presences = Presence.syncState(presences, state);
+      console.log(presences);
     });
 
     channel.on('select_card', (msg: {}) => {

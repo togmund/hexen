@@ -8,6 +8,8 @@ defmodule HexenWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :put_user_id
+    plug :put_token
   end
 
   pipeline :api do
@@ -36,4 +38,18 @@ defmodule HexenWeb.Router do
   # scope "/api", HexenWeb do
   #   pipe_through :api
   # end
+
+  defp put_user_id(conn, _headers) do
+    %{id: id} =
+      conn
+      |> Pow.Plug.current_user()
+
+    assign(conn, :user_id, id)
+  end
+
+  defp put_token(conn, _headers) do
+    id = conn.assigns.user_id
+    first_token = Phoenix.Token.sign(HexenWeb.Endpoint, "salt", id)
+    assign(conn, :token, first_token)
+  end
 end

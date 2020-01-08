@@ -56,11 +56,8 @@ defmodule Hexen.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
-<<<<<<< HEAD
-      {:pow, "~> 1.0.15"}
-=======
+      {:pow, "~> 1.0.15"},
       {:gproc, "~> 0.5.0"}
->>>>>>> d25b7afd62e4eadb92a59a40275866ca5a4d5c11
     ]
   end
 
