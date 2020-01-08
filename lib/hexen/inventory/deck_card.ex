@@ -5,6 +5,7 @@ defmodule Hexen.Inventory.DeckCard do
   schema "deck_cards" do
     belongs_to :card, Hexen.Inventory.Card
     belongs_to :deck, Hexen.Inventory.Deck
+    field :drawn, :boolean, default: false, null: false
 
     timestamps()
   end

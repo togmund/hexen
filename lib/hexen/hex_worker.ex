@@ -42,9 +42,12 @@ defmodule Hexen.HexWorker do
     # And the `GenServer` callbacks will accept this tuple the same way it
     # accepts a `pid` or an atom.
     GenServer.cast(via_tuple(room_name), {:add_card, message})
-    # IO.puts("############################################")
-    # IO.inspect(message)
-    # IO.puts("############################################")
+    Hexen.Inventory.get_deck_card!(3)
+    |> Hexen.Inventory.update_drawn_status(true)
+
+    IO.puts("############################################")
+    IO.inspect(message)
+    IO.puts("############################################")
   end
 
   # def handle_info(:add_card, message) do

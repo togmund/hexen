@@ -265,6 +265,24 @@ defmodule Hexen.Inventory do
     |> Repo.update()
   end
 
+    @doc """
+  Updates a deck_card's drawn status.
+
+  ## Examples
+
+      iex> update_deck_card(deck_card, true)
+      {:ok, %DeckCard{}}
+
+      iex> update_deck_card(deck_card, false)
+      {:ok, %DeckCard{}}
+
+  """
+  def update_drawn_status(%DeckCard{} = deck_card, drawn) do
+    deck_card
+    |> Ecto.Changeset.change(%{drawn: drawn})
+    |> Hexen.Repo.update()
+  end
+
   @doc """
   Deletes a DeckCard.
 
