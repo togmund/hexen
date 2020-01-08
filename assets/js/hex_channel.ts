@@ -16,8 +16,18 @@ const HexChannel = {
 
     channel.on('hex_state', (msg: {}) => {
       this.state = msg;
-      channel.push('selected_card', value);
       console.log(this.state);
+    });
+
+    channel.on('select_card', (msg: {}) => {
+      channel
+        .push('selected_card', { card_id: value, room_name: `hex:${room}` })
+        .receive('ok', (resp: any) => {
+          console.log('Card selected successfully', resp);
+        })
+        .receive('error', (resp: any) => {
+          console.log('Card not', resp);
+        });
     });
   }
 };

@@ -1,6 +1,8 @@
 defmodule HexenWeb.HexChannel do
   use HexenWeb, :channel
 
+  alias Hexen.HexWorker
+
   def join("hex:" <> _room, _payload, socket) do
     # if authorized?(payload) do
     {:ok, socket}
@@ -27,15 +29,23 @@ defmodule HexenWeb.HexChannel do
     {:noreply, socket}
   end
 
-  def handle_in("selected_card", msg, socket) do
-    IO.puts("Card Selected Is: #{msg}")
+  def handle_in("select_card", msg, socket) do
+    push(socket, "select_card", msg)
     {:noreply, socket}
   end
 
-  def handle_in("hex_state", msg, socket) do
-    push(socket, "hex_state", msg)
+  def handle_in("selected_card", msg, socket) do
+    HexWorker.add_card(Map.fetch(msg, "room_name"), Map.fetch(msg, "card_id"))
+
     {:noreply, socket}
   end
+
+  def handle_in("clear_selection", msg, socket) do
+    push(socket, "clear_selection", msg)
+    {:noreply, socket}
+  end
+
+
 
   # Add authorization logic here as required.
   # defp authorized?(_payload) do
