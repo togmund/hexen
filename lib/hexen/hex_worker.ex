@@ -120,7 +120,7 @@ defmodule Hexen.HexWorker do
             %{
               deck_card_id: deck_card_id,
               card_details:
-                Hexen.Inventory.card_details_from_card_deck_id(deck_card_id)
+                Hexen.Inventory.card_details_from_deck_card_id(deck_card_id)
                 |> List.first()
                 |> Map.take([:description, :id, :image, :name, :modifier, :suit])
             }

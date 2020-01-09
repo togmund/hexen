@@ -154,7 +154,7 @@ defmodule Hexen.Inventory do
     )
   end
 
-  def card_details_from_card_deck_id(deck_card_id) do
+  def card_details_from_deck_card_id(deck_card_id) do
     Repo.all(
       from dc in DeckCard,
         join: c in Card,
