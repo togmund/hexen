@@ -19,33 +19,16 @@ defmodule Hexen.HexWorker do
       |> update_state(state)
 
     # if updated_state != state do
-
     broadcast_hex_state(updated_state, :ok)
-
     broadcast_card_request(updated_state, :ok)
-    # IO.puts("""
-
-    # Hex Data for ID:#{updated_state[:id]}
-    # Name:#{updated_state[:name]}
-    # Region:#{updated_state[:region_id]}
-    # Resource:#{updated_state[:resource]}
-    # Structure:#{updated_state[:structure]}
-    # """)
-
     # end
+    deck_id = 1
     # We wana use Deck ID here and map over all users/decks in the server
-    draw_cards(1)
+    draw_cards(deck_id)
     schedule_hex_fetch()
 
     {:noreply, updated_state}
   end
-
-  # def add_card(room_name, message) do
-  #   # And the `GenServer` callbacks will accept this tuple the same way it
-  #   # accepts a `pid` or an atom.
-  #   GenServer.cast(via_tuple(room_name), {:add_card, message})
-
-  # end
 
   def perform_action(room_name, message) do
     # Execute card action
@@ -53,11 +36,6 @@ defmodule Hexen.HexWorker do
   end
 
   def draw_cards(deck_id) do
-    # Randomly select 3 valid deck cards
-    # TO DO
-
-    # Query Undrawn cards
-    # Choose 3
     drawn_cards =
       deck_id
       |> Hexen.Inventory.list_undrawn_deck_cards()
@@ -69,36 +47,27 @@ defmodule Hexen.HexWorker do
         # Some kind of front end shuffle turn
         IO.puts("Not Enough Cards, time to re-shuffle!")
         # Mark all deckcards as undrawn
-        Hexen.Inventory.shuffle_discard_into_deck(1)
+        Hexen.Inventory.shuffle_discard_into_deck(deck_id)
 
       length(drawn_cards) == 3 ->
-        drawn_cards
         # Send those 3 to the front end
-        |> IO.inspect()
+        new_hand =
+          drawn_cards
+          # |> Enum.map(fn deck_card_id ->
+          #   %{
+          #     deck_card_id: deck_card_id,
+          #     card_details: Hexen.Inventory.get_card!()
+          #   }
+          # end)
+          |> IO.inspect()
+
         # Then mark them each as drawn
+        drawn_cards
         |> Enum.each(fn hand_card_id ->
           Hexen.Inventory.update_drawn_status(Hexen.Inventory.get_deck_card!(hand_card_id), true)
         end)
     end
-
-    # |> choose_three()
-
-    # Send those 3 to the front end
-    # drawn_cards
-    # |> broadcast_cards_to_users
-
-    # drawn_cards
-    # |> Hexen.Inventory.update_drawn_status(true)
   end
-
-  # Draw 3 cards
-  #
-
-  # def handle_info(:add_card, message) do
-  #   # IO.puts("############################################")
-  #   IO.inspect(message)
-  #   # IO.puts("############################################")
-  # end
 
   defp tile_data(id) do
     id
@@ -142,6 +111,14 @@ defmodule Hexen.HexWorker do
       %{
         response: response
       }
+    )
+  end
+
+  defp broadcast_new_hand(new_hand, updated_state, response) do
+    HexenWeb.Endpoint.broadcast(
+      "hex:#{updated_state[:id]}",
+      "new_hand",
+      Map.merge(%{response: response}, new_hand)
     )
   end
 
