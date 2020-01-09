@@ -200,11 +200,11 @@ defmodule Hexen.DatabaseSeeder do
 
   # Card
   Repo.insert!(%Card{
-    name: "Halberd",
+    name: "Sword",
     suit: "Combat",
-    description: "Plus one damage.",
-    image: "https://forums.terraria.org/index.php?attachments/halberd-png.184946/",
-    modifier: 1
+    description: "Deals three physical damage",
+    image: "http://pixelartmaker.com/art/2b2ed076ce0f346.png",
+    modifier: 3
   })
 
   Repo.insert!(%Card{
@@ -270,17 +270,68 @@ defmodule Hexen.DatabaseSeeder do
   # Deck
   Repo.insert!(%DeckCard{
     deck_id: 1,
-    card_id: 1
+    card_id: 1,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 1,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 2,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 2,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 3,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 4,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 5,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 6,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 6,
+    drawn: false
   })
 
   Repo.insert!(%DeckCard{
     deck_id: 2,
-    card_id: 2
+    card_id: 2,
+    drawn: false
   })
 
   Repo.insert!(%DeckCard{
     deck_id: 3,
-    card_id: 3
+    card_id: 3,
+    drawn: false
   })
 
   # Quest Seeds
