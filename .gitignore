@@ -44,3 +44,5 @@ node_modules/
 #Yarn.lock
 yarn.lock
 pip.py
+
+.elixir_ls
