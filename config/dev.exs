@@ -71,4 +71,6 @@ config :hexen, Hexen.Repo,
   password: "postgres",
   database: "hexen_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool_size: 40,
+  queue_target: 10000,
+  queue_interval: 5000

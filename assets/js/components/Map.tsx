@@ -11,7 +11,6 @@ import socket from '../socket';
 import BandChannel from '../band_channel';
 import '../../css/Map.css';
 import HexChannel from '../hex_channel';
-import createMap from '../helpers/create_map';
 
 const Map = () => {
   const [hexState, setHexState] = useState('');
@@ -19,8 +18,6 @@ const Map = () => {
   useEffect(() => {
     setHexState(HexChannel.state);
   });
-
-  const board: object[] = createMap(6, 12);
 
   return (
     <div className={'hex-map'}>
@@ -31,7 +28,7 @@ const Map = () => {
           spacing="1.005"
           origin={{ x: -25, y: -15 }}
         >
-          {board.map((hex: any) => (
+          {HexChannel.world_map.map((hex: any) => (
             <Hexagon
               key={hex.id}
               q={hex.hex.q}

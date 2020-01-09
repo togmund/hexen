@@ -19,6 +19,7 @@ defmodule Hexen.HexWorker do
       |> update_state(state)
       |> IO.inspect()
 
+    broadcast_map_render()
     # if updated_state != state do
     broadcast_hex_state(updated_state, :ok)
     broadcast_card_request(updated_state, :ok)
@@ -150,13 +151,17 @@ defmodule Hexen.HexWorker do
         }
       end)
 
-    band_info =
-      raw_hex
-      |> Map.get(:band_id)
-      |> Hexen.People.get_band!()
-      |> Map.take([:id, :name, :sigil])
+    # band_info =
+    #   raw_hex
+    #   |> Map.get(:band_id)
+    #   |> Hexen.People.get_band!()
+    #   |> Map.take([:id, :name, :sigil])
 
-    ugly_state = %{tile: hex_info, players: player_info, band: band_info}
+    ugly_state = %{
+      tile: hex_info,
+      players: player_info
+      # band: band_info
+    }
   end
 
   defp update_state(new_state, existing_state) do
@@ -190,6 +195,19 @@ defmodule Hexen.HexWorker do
       "hex:#{updated_state[:id]}",
       "new_hand",
       Map.merge(%{response: response}, new_hand)
+    )
+  end
+
+  defp broadcast_map_render() do
+    map = Hexen.Map.list_hexes()
+    # IO.puts("############################################")
+    # IO.inspect(map)
+    # IO.puts("############################################")
+
+    HexenWeb.Endpoint.broadcast(
+      "hex:*",
+      "render_map",
+      %{hex_tiles: map}
     )
   end
 

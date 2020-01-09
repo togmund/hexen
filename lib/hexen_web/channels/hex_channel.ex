@@ -44,7 +44,10 @@ defmodule HexenWeb.HexChannel do
     {:noreply, socket}
   end
 
-
+  def handle_in("render_map", msg, socket) do
+    push(socket, "render_map", msg)
+    {:noreply, socket}
+  end
 
   # Add authorization logic here as required.
   # defp authorized?(_payload) do
