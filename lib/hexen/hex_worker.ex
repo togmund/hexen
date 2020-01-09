@@ -20,19 +20,11 @@ defmodule Hexen.HexWorker do
 
     # if updated_state != state do
     broadcast_hex_state(updated_state, :ok)
-
     broadcast_card_request(updated_state, :ok)
-    # IO.puts("""
-
-    # Hex Data for ID:#{updated_state[:id]}
-    # Name:#{updated_state[:name]}
-    # Region:#{updated_state[:region_id]}
-    # Resource:#{updated_state[:resource]}
-    # Structure:#{updated_state[:structure]}
-    # """)
-
     # end
-
+    deck_id = 1
+    # We wana use Deck ID here and map over all users/decks in the server
+    draw_cards(deck_id)
     schedule_hex_fetch()
 
     {:noreply, updated_state}
@@ -45,40 +37,128 @@ defmodule Hexen.HexWorker do
 
   # end
 
+  def get_action(message) do
+    # DeckCard ID for the card selected
+    elem(message, 1)
+    |> Hexen.Inventory.get_card_id_by_deck_card!()
+    |> List.first()
+    |> Hexen.Inventory.get_card!()
+    |> Map.take([:suit, :modifier])
+  end
+
   def perform_action(room_name, message) do
-    # Execute card action
-    Hexen.Inventory.get_deck_card!(elem(message, 1))
+    action = get_action(message)
+    suit = action[:suit]
+    modifier = action[:modifier]
+
+    case suit do
+      "Combat" -> combat(modifier)
+      "Move" -> move(modifier)
+      "Gather" -> gather(modifier)
+      "Explore" -> explore(modifier)
+      "Interact" -> interact(modifier)
+      "Craft" -> craft(modifier)
+    end
   end
 
-  def draw_card() do
-    # Randomly select a valid deck_card
+  def combat(modifier) do
     # TO DO
-
-    # Set its drawn value to true
-    Hexen.Inventory.get_deck_card!()
-    |> Hexen.Inventory.update_drawn_status(true)
+    IO.puts("You selected a combat card!")
   end
 
-  # def handle_info(:add_card, message) do
-  #   # IO.puts("############################################")
-  #   IO.inspect(message)
-  #   # IO.puts("############################################")
-  # end
+  def move(modifier) do
+    # TO DO
+    IO.puts("You selected a movement card!")
+  end
+
+  def gather(modifier) do
+    # TO DO
+    IO.puts("You selected a gather card!")
+  end
+
+  def explore(modifier) do
+    # TO DO
+    IO.puts("You selected an exploration card!")
+  end
+
+  def interact(modifier) do
+    # TO DO
+    IO.puts("You selected a interaction card!")
+  end
+
+  def craft(modifier) do
+    # TO DO
+    IO.puts("You selected a crafting card!")
+  end
+
+  def move(modifier) do
+    # TO DO
+    IO.puts("You selected a movement card!")
+  end
+
+  def gather(modifier) do
+    # TO DO
+    IO.puts("You selected a gather card!")
+  end
+
+  def explore(modifier) do
+    # TO DO
+    IO.puts("You selected an exploration card!")
+  end
+
+  def interact(modifier) do
+    # TO DO
+    IO.puts("You selected a interaction card!")
+  end
+
+  def craft(modifier) do
+    # TO DO
+    IO.puts("You selected a crafting card!")
+  end
+
+  def draw_cards(deck_id) do
+    drawn_cards =
+      deck_id
+      |> Hexen.Inventory.list_undrawn_deck_cards()
+      |> Enum.shuffle()
+      |> Enum.slice(0..2)
+
+    cond do
+      length(drawn_cards) < 3 ->
+        # Some kind of front end shuffle turn
+        IO.puts("Not Enough Cards, time to re-shuffle!")
+        # Mark all deckcards as undrawn
+        Hexen.Inventory.shuffle_discard_into_deck(deck_id)
+
+      length(drawn_cards) == 3 ->
+        # Send those 3 to the front end
+        new_hand =
+          drawn_cards
+          # |> Enum.map(fn deck_card_id ->
+          #   %{
+          #     deck_card_id: deck_card_id,
+          #     card_details: Hexen.Inventory.get_card!()
+          #   }
+          # end)
+          |> IO.inspect()
+
+        # Then mark them each as drawn
+        drawn_cards
+        |> Enum.each(fn hand_card_id ->
+          Hexen.Inventory.update_drawn_status(Hexen.Inventory.get_deck_card!(hand_card_id), true)
+        end)
+    end
+  end
 
   defp tile_data(id) do
     id
     |> Hexen.Map.get_hex!()
     |> Map.take([:id, :name, :region_id, :resource, :structure])
+    |> Map.merge(%{})
   end
 
-  defp update_state(
-         new_state,
-         existing_state
-       ) do
-    Map.merge(
-      existing_state,
-      new_state
-    )
+  defp update_state(new_state, existing_state) do
+    Map.merge(existing_state, new_state)
   end
 
   defp schedule_hex_fetch do
@@ -107,6 +187,14 @@ defmodule Hexen.HexWorker do
       %{
         response: response
       }
+    )
+  end
+
+  defp broadcast_new_hand(new_hand, updated_state, response) do
+    HexenWeb.Endpoint.broadcast(
+      "hex:#{updated_state[:id]}",
+      "new_hand",
+      Map.merge(%{response: response}, new_hand)
     )
   end
 

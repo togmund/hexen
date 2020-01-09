@@ -7,6 +7,8 @@ defmodule Hexen.Inventory do
   alias Hexen.Repo
 
   alias Hexen.Inventory.Deck
+  alias Hexen.Inventory.Card
+  alias Hexen.Inventory.DeckCard
 
   @doc """
   Returns the list of decks.
@@ -102,8 +104,6 @@ defmodule Hexen.Inventory do
     Deck.changeset(deck, %{})
   end
 
-  alias Hexen.Inventory.Card
-
   @doc """
   Returns the list of cards.
 
@@ -132,6 +132,19 @@ defmodule Hexen.Inventory do
 
   """
   def get_card!(id), do: Repo.get!(Card, id)
+
+  @doc """
+  Gets the relevant card for a given DeckCard.
+
+  Raises `Ecto.NoResultsError` if the Card does not exist.
+  """
+  def get_card_id_by_deck_card!(deck_card_id) do
+    Repo.all(
+      from dc in DeckCard,
+        where: dc.id == ^deck_card_id,
+        select: dc.card_id
+    )
+  end
 
   @doc """
   Creates a card.
@@ -198,8 +211,6 @@ defmodule Hexen.Inventory do
     Card.changeset(card, %{})
   end
 
-  alias Hexen.Inventory.DeckCard
-
   @doc """
   Returns the list of deck_cards.
 
@@ -211,6 +222,24 @@ defmodule Hexen.Inventory do
   """
   def list_deck_cards do
     Repo.all(DeckCard)
+  end
+
+  @doc """
+  Returns the list of deck_cards.
+
+  ## Examples
+
+      iex> list_deck_cards()
+      [%DeckCard{}, ...]
+
+  """
+  def list_undrawn_deck_cards(deck_id) do
+    query =
+      from dc in "deck_cards",
+        where: dc.deck_id == ^deck_id and dc.drawn == false,
+        select: dc.id
+
+    Repo.all(query)
   end
 
   @doc """
@@ -281,6 +310,11 @@ defmodule Hexen.Inventory do
     deck_card
     |> Ecto.Changeset.change(%{drawn: drawn})
     |> Hexen.Repo.update()
+  end
+
+  def shuffle_discard_into_deck(deck_id) do
+    from(dc in DeckCard, where: dc.deck_id == ^deck_id, update: [set: [drawn: false]])
+    |> Repo.update_all([])
   end
 
   @doc """
