@@ -59,9 +59,12 @@ defmodule Hexen.HexWorker do
     modifier = action[:modifier]
 
     case suit do
-      "Combat" -> combat(modifier)
-      "Move" -> move(modifier)
-      "Gather" -> gather(modifier)
+      "Combat"   -> combat(modifier)
+      "Move"     -> move(modifier)
+      "Gather"   -> gather(modifier)
+      "Explore"  -> explore(modifier)
+      "Interact" -> interact(modifier)
+      "Craft"    -> craft(modifier)
     end
   end
 
@@ -78,6 +81,21 @@ defmodule Hexen.HexWorker do
   def gather(modifier) do
     # TO DO
     IO.puts("You selected a gather card!")
+  end
+
+  def explore(modifier) do
+    # TO DO
+    IO.puts("You selected an exploration card!")
+  end
+
+  def interact(modifier) do
+    # TO DO
+    IO.puts("You selected a interaction card!")
+  end
+
+  def craft(modifier) do
+    # TO DO
+    IO.puts("You selected a crafting card!")
   end
 
   def draw_card() do
@@ -99,6 +117,7 @@ defmodule Hexen.HexWorker do
     id
     |> Hexen.Map.get_hex!()
     |> Map.take([:id, :name, :region_id, :resource, :structure])
+    |> Map.merge(%{})
   end
 
   defp update_state(new_state, existing_state) do
