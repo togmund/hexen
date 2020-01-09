@@ -214,6 +214,24 @@ defmodule Hexen.Inventory do
   end
 
   @doc """
+  Returns the list of deck_cards.
+
+  ## Examples
+
+      iex> list_deck_cards()
+      [%DeckCard{}, ...]
+
+  """
+  def list_undrawn_deck_cards(deck_id) do
+    query =
+      from dc in "deck_cards",
+        where: dc.deck_id == ^deck_id and dc.drawn == false,
+        select: dc.id
+
+    Repo.all(query)
+  end
+
+  @doc """
   Gets a single deck_card.
 
   Raises `Ecto.NoResultsError` if the Deck card does not exist.
@@ -281,6 +299,11 @@ defmodule Hexen.Inventory do
     deck_card
     |> Ecto.Changeset.change(%{drawn: drawn})
     |> Hexen.Repo.update()
+  end
+
+  def shuffle_discard_into_deck(deck_id) do
+    from(dc in DeckCard, where: dc.deck_id == ^deck_id, update: [set: [drawn: false]])
+    |> Repo.update_all([])
   end
 
   @doc """
