@@ -6,6 +6,9 @@ defmodule Hexen.Map.Hex do
     field :name, :string
     field :resource, :string
     field :structure, :string
+    field :q, :integer
+    field :r, :integer
+    field :s, :integer
 
     belongs_to :region, Hexen.Map.Region
     belongs_to :biome, Hexen.Map.Biome

@@ -431,4 +431,12 @@ defmodule Hexen.DatabaseSeeder do
     band_id: 3,
     quest_id: 3
   })
+
+  Enum.each(1..100, fn x ->
+    Repo.insert!(%Hex{
+      q: x,
+      r: x,
+      s: x
+    })
+  end)
 end
