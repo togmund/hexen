@@ -270,17 +270,68 @@ defmodule Hexen.DatabaseSeeder do
   # Deck
   Repo.insert!(%DeckCard{
     deck_id: 1,
-    card_id: 1
+    card_id: 1,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 1,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 2,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 2,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 3,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 4,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 5,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 6,
+    drawn: false
+  })
+
+  Repo.insert!(%DeckCard{
+    deck_id: 1,
+    card_id: 6,
+    drawn: false
   })
 
   Repo.insert!(%DeckCard{
     deck_id: 2,
-    card_id: 2
+    card_id: 2,
+    drawn: false
   })
 
   Repo.insert!(%DeckCard{
     deck_id: 3,
-    card_id: 3
+    card_id: 3,
+    drawn: false
   })
 
   # Quest Seeds
