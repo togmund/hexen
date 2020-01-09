@@ -45,9 +45,26 @@ defmodule Hexen.HexWorker do
 
   # end
 
+  def get_action(message) do
+    action = elem(message, 1)  # DeckCard ID for the card selected
+             |> Hexen.Inventory.get_card_id_by_deck_card!()
+             |> List.first()
+             |> Hexen.Inventory.get_card!()
+             |> Map.take([:suit, :modifier])
+
+    action
+    end
+
   def perform_action(room_name, message) do
+    action = get_action(message)
+    suit = action[:suit]
+    modifier = action[:modifier]
+
+    IO.puts(suit)
+    IO.puts(modifier)
+
     # Execute card action
-    Hexen.Inventory.get_deck_card!(elem(message, 1))
+    # TO DO
   end
 
   def draw_card() do
