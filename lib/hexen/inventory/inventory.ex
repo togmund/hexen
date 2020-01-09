@@ -39,6 +39,14 @@ defmodule Hexen.Inventory do
   """
   def get_deck!(id), do: Repo.get!(Deck, id)
 
+  def get_users_deck_id(user_id) do
+    Repo.all(
+      from d in Deck,
+        where: d.user_id == ^user_id,
+        select: d.id
+    )
+  end
+
   @doc """
   Creates a deck.
 
@@ -143,6 +151,16 @@ defmodule Hexen.Inventory do
       from dc in DeckCard,
         where: dc.id == ^deck_card_id,
         select: dc.card_id
+    )
+  end
+
+  def card_details_from_card_deck_id(deck_card_id) do
+    Repo.all(
+      from dc in DeckCard,
+        join: c in Card,
+        on: c.id == dc.card_id,
+        where: dc.id == ^deck_card_id,
+        select: c
     )
   end
 
