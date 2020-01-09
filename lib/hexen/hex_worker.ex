@@ -46,25 +46,38 @@ defmodule Hexen.HexWorker do
   # end
 
   def get_action(message) do
-    action = elem(message, 1)  # DeckCard ID for the card selected
-             |> Hexen.Inventory.get_card_id_by_deck_card!()
-             |> List.first()
-             |> Hexen.Inventory.get_card!()
-             |> Map.take([:suit, :modifier])
-
-    action
-    end
+    elem(message, 1)  # DeckCard ID for the card selected
+    |> Hexen.Inventory.get_card_id_by_deck_card!()
+    |> List.first()
+    |> Hexen.Inventory.get_card!()
+    |> Map.take([:suit, :modifier])
+  end
 
   def perform_action(room_name, message) do
     action = get_action(message)
     suit = action[:suit]
     modifier = action[:modifier]
 
-    IO.puts(suit)
-    IO.puts(modifier)
+    case suit do
+      "Combat" -> combat(modifier)
+      "Move" -> move(modifier)
+      "Gather" -> gather(modifier)
+    end
+  end
 
-    # Execute card action
+  def combat(modifier) do
     # TO DO
+    IO.puts("You selected a combat card!")
+  end
+
+  def move(modifier) do
+    # TO DO
+    IO.puts("You selected a movement card!")
+  end
+
+  def gather(modifier) do
+    # TO DO
+    IO.puts("You selected a gather card!")
   end
 
   def draw_card() do
@@ -88,14 +101,8 @@ defmodule Hexen.HexWorker do
     |> Map.take([:id, :name, :region_id, :resource, :structure])
   end
 
-  defp update_state(
-         new_state,
-         existing_state
-       ) do
-    Map.merge(
-      existing_state,
-      new_state
-    )
+  defp update_state(new_state, existing_state) do
+    Map.merge(existing_state, new_state)
   end
 
   defp schedule_hex_fetch do
