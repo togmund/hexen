@@ -7,6 +7,8 @@ defmodule Hexen.Inventory do
   alias Hexen.Repo
 
   alias Hexen.Inventory.Deck
+  alias Hexen.Inventory.Card
+  alias Hexen.Inventory.DeckCard
 
   @doc """
   Returns the list of decks.
@@ -102,8 +104,6 @@ defmodule Hexen.Inventory do
     Deck.changeset(deck, %{})
   end
 
-  alias Hexen.Inventory.Card
-
   @doc """
   Returns the list of cards.
 
@@ -132,6 +132,19 @@ defmodule Hexen.Inventory do
 
   """
   def get_card!(id), do: Repo.get!(Card, id)
+
+  @doc """
+  Gets the relevant card for a given DeckCard.
+
+  Raises `Ecto.NoResultsError` if the Card does not exist.
+  """
+  def get_card_id_by_deck_card!(deck_card_id) do
+    Repo.all(
+      from dc in DeckCard,
+        where: dc.id == ^deck_card_id,
+        select: dc.card_id
+    )
+  end
 
   @doc """
   Creates a card.
@@ -197,8 +210,6 @@ defmodule Hexen.Inventory do
   def change_card(%Card{} = card) do
     Card.changeset(card, %{})
   end
-
-  alias Hexen.Inventory.DeckCard
 
   @doc """
   Returns the list of deck_cards.
