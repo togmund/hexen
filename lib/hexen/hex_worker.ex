@@ -207,7 +207,7 @@ defmodule Hexen.HexWorker do
     HexenWeb.Endpoint.broadcast(
       "hex:*",
       "render_map",
-      %{hextiles: map}
+      %{hex_tiles: map}
     )
   end
 
