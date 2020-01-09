@@ -55,6 +55,30 @@ defmodule Hexen.DatabaseSeeder do
   Repo.delete_all(User)
   Repo.delete_all(Band)
 
+  # Hex seeds
+  rows = 10
+  long_col = 10
+  top = %{q: 0, r: 0, s: 0}
+
+  Enum.each(0..rows, fn x ->
+    Enum.each(0..long_col, fn y ->
+      Repo.insert!(%Hex{
+        structure: "Castle",
+        q: top[:q] + x,
+        r: top[:r] - y,
+        s: top[:s] + y
+      })
+    end)
+
+    if rem(x, 2) == 0 do
+      Map.update(top, :s, top[:s], &(&1 + 1))
+      # top[:s] = top[:s] + 1
+    else
+      Map.update(top, :r, top[:r], &(&1 + 1))
+      # top[:r] = top[:r] + 1
+    end
+  end)
+
   # Band Seeds
   Repo.insert!(%Band{
     name: "White Boulder Warriors",
@@ -154,32 +178,6 @@ defmodule Hexen.DatabaseSeeder do
   Repo.insert!(%Biome{
     name: "Tropic",
     resource: "Fruit"
-  })
-
-  # Hex Seeds
-  Repo.insert!(%Hex{
-    name: "FezJab",
-    resource: "Silver",
-    region_id: 1,
-    biome_id: 1,
-    band_id: 1
-  })
-
-  Repo.insert!(%Hex{
-    name: "VoxJay",
-    resource: "Softwood",
-    region_id: 2,
-    biome_id: 2,
-    band_id: 2
-  })
-
-  Repo.insert!(%Hex{
-    name: "MixZen",
-    resource: "Iron",
-    structure: "Mine",
-    region_id: 3,
-    biome_id: 3,
-    band_id: 3
   })
 
   # Hex_User Seeds
@@ -431,27 +429,4 @@ defmodule Hexen.DatabaseSeeder do
     band_id: 3,
     quest_id: 3
   })
-
-  ROWS = 50
-  LONG_COL = 50
-  SHORT_COL = LONG_COL - 1
-  TOP = %{q: 0, r: 0, s: 0}
-
-  Enum.each(0..(ROWS - 1), fn x ->
-    even_col = rem(x, 2) == 0
-
-    Enum.each(0..SHORT_COL, fn y ->
-      Repo.insert(%Hex{
-        q: TOP[:q] + x,
-        r: TOP[:r] - y,
-        s: TOP[:s] + y
-      })
-    end)
-
-    if even_col do
-      TOP[:s] = TOP[:s] + 1
-    else
-      TOP[:r] = TOP[:r] + 1
-    end
-  end)
 end
