@@ -1,66 +1,47 @@
 import { useReducer, useEffect } from 'react';
 
-import reducer, { SET_HEX, SET_HAND, SET_BAND } from '../reducers/application';
+import reducer, {
+  SET_BOARD
+  // SET_HEX,
+  // SET_HAND,
+  // SET_BAND
+} from '../reducers/application';
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
-    id: 1,
-    name: 'hex:1',
-    tile: {
-      id: 1,
-      name: 'FezJab',
-      region_id: 1,
-      resource: 'Silver',
-      structure: null
-    },
-    players: [
-      {
-        deck: 1,
-        hand: [],
-        player: 1
-      }
-    ],
-    band: {
-      id: null,
-      name: null,
-      sigil: null
-    }
+    hex_tiles: []
+    // hand: [],
+    // band: {}
   });
 
-  const refreshState = () => {
-    dispatch({
-      type: SET_HEX,
-      days: response[0].data,
-      appointments: response[1].data,
-      interviewers: response[2].data
-    });
-  };
+  // const refreshState = () => {
+  //   dispatch({
+  //   });
+  // };
 
-  useEffect(() => {
-    refreshState();
-  }, []);
+  // useEffect(() => {
+  //   refreshState();
+  // }, []);
 
   const stateObject = {
     state: state,
 
-    setDay: function setDay() {
-      dispatch({ type: SET_DAY, day: day });
-    },
-
-    bookInterview: function bookInterview() {
-      dispatch({
-        type: SET_INTERVIEW,
-        appointments: appointments,
-        days: days
-      });
-    },
-    cancelInterview: function cancelInterview() {
-      dispatch({
-        type: SET_INTERVIEW,
-        appointments: appointments,
-        days: days
-      });
+    updateBoard: function updateBoard(msg) {
+      dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
     }
+
+    // updateHand: function updateHand() {
+    //   dispatch({
+    //   });
+    // },
+    // updateHex: function updateHex() {
+    //   dispatch({
+    //   });
+    // }
+    // updateBand: function updateBand() {
+    //   dispatch({
+    //   });
+    // }
   };
   return stateObject;
 }

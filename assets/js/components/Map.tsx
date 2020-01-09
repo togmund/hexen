@@ -11,13 +11,15 @@ import socket from '../socket';
 import BandChannel from '../band_channel';
 import '../../css/Map.css';
 import HexChannel from '../hex_channel';
+import useApplicationData from '../hooks/useApplicationData';
 
 const Map = () => {
-  const [hexState, setHexState] = useState('');
-
-  useEffect(() => {
-    setHexState(HexChannel.state);
-  });
+  const {
+    state
+    // updateHand,
+    // updateHex,
+    // updateBand
+  } = useApplicationData();
 
   return (
     <div className={'hex-map'}>
@@ -28,7 +30,7 @@ const Map = () => {
           spacing="1.005"
           origin={{ x: -25, y: -15 }}
         >
-          {HexChannel.world_map.map((hex: any) => (
+          {state.hex_tiles.map((hex: any) => (
             <Hexagon
               key={hex.id}
               q={hex.hex.q}
