@@ -91,6 +91,31 @@ defmodule Hexen.HexWorker do
     IO.puts("You selected a crafting card!")
   end
 
+  def move(modifier) do
+    # TO DO
+    IO.puts("You selected a movement card!")
+  end
+
+  def gather(modifier) do
+    # TO DO
+    IO.puts("You selected a gather card!")
+  end
+
+  def explore(modifier) do
+    # TO DO
+    IO.puts("You selected an exploration card!")
+  end
+
+  def interact(modifier) do
+    # TO DO
+    IO.puts("You selected a interaction card!")
+  end
+
+  def craft(modifier) do
+    # TO DO
+    IO.puts("You selected a crafting card!")
+  end
+
   def draw_cards(deck_id) do
     drawn_cards =
       deck_id
