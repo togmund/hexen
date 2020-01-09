@@ -91,31 +91,6 @@ defmodule Hexen.HexWorker do
     IO.puts("You selected a crafting card!")
   end
 
-  def move(modifier) do
-    # TO DO
-    IO.puts("You selected a movement card!")
-  end
-
-  def gather(modifier) do
-    # TO DO
-    IO.puts("You selected a gather card!")
-  end
-
-  def explore(modifier) do
-    # TO DO
-    IO.puts("You selected an exploration card!")
-  end
-
-  def interact(modifier) do
-    # TO DO
-    IO.puts("You selected a interaction card!")
-  end
-
-  def craft(modifier) do
-    # TO DO
-    IO.puts("You selected a crafting card!")
-  end
-
   def draw_cards(deck_id) do
     drawn_cards =
       deck_id
@@ -151,10 +126,26 @@ defmodule Hexen.HexWorker do
   end
 
   defp tile_data(id) do
-    id
-    |> Hexen.Map.get_hex!()
-    |> Map.take([:id, :name, :region_id, :resource, :structure])
-    |> Map.merge(%{})
+    raw_hex =
+      id
+      |> Hexen.Map.get_hex!()
+
+    hex_info =
+      raw_hex
+      |> Map.take([:id, :name, :region_id, :resource, :structure])
+
+    player_info =
+      id
+      |> Hexen.Map.list_hex_user_ids_by_hex()
+
+    band_info =
+      raw_hex
+      |> Map.get(:band_id)
+      |> Hexen.People.get_band!()
+
+    ugly_state =
+      %{tile: hex_info, players: player_info, band: band_info}
+      |> IO.inspect()
   end
 
   defp update_state(new_state, existing_state) do
