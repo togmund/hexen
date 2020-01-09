@@ -432,11 +432,26 @@ defmodule Hexen.DatabaseSeeder do
     quest_id: 3
   })
 
-  Enum.each(1..100, fn x ->
-    Repo.insert!(%Hex{
-      q: x,
-      r: x,
-      s: x
-    })
+  ROWS = 50
+  LONG_COL = 50
+  SHORT_COL = LONG_COL - 1
+  TOP = %{q: 0, r: 0, s: 0}
+
+  Enum.each(0..(ROWS - 1), fn x ->
+    even_col = rem(x, 2) == 0
+
+    Enum.each(0..SHORT_COL, fn y ->
+      Repo.insert(%Hex{
+        q: TOP[:q] + x,
+        r: TOP[:r] - y,
+        s: TOP[:s] + y
+      })
+    end)
+
+    if even_col do
+      TOP[:s] = TOP[:s] + 1
+    else
+      TOP[:r] = TOP[:r] + 1
+    end
   end)
 end
