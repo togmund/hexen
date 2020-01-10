@@ -38,7 +38,8 @@ defmodule HexenWeb.HexChannel do
     HexWorker.perform_action(
       msg["room_name"],
       msg["deck_card_id"],
-      msg["user_id"]
+      msg["user_id"],
+      msg["target_hex_id"]
     )
 
     {:noreply, socket}

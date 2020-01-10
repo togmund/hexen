@@ -46,59 +46,48 @@ defmodule Hexen.HexWorker do
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, deck_card_id, user_id) do
+  def perform_action(room_name, deck_card_id, user_id, target_hex_id) do
     action = get_action(deck_card_id)
     suit = action[:suit]
     modifier = action[:modifier]
 
     case suit do
-      "Combat" -> combat(modifier)
-      "Move" -> move(modifier, user_id)
-      "Gather" -> gather(modifier)
-      "Explore" -> explore(modifier)
-      "Interact" -> interact(modifier)
-      "Craft" -> craft(modifier)
+      "Combat" -> combat(modifier, target_hex_id)
+      "Move" -> move(modifier, user_id, target_hex_id)
+      "Gather" -> gather(modifier, target_hex_id)
+      "Explore" -> explore(modifier, target_hex_id)
+      "Interact" -> interact(modifier, target_hex_id)
+      "Craft" -> craft(modifier, target_hex_id)
     end
   end
 
-  def combat(modifier) do
+  def combat(modifier, target_hex_id) do
     # TO DO
     IO.puts("You selected a combat card!")
   end
 
-  def move(modifier, user_id) do
-    # TO DO
-    user_hex =
-      Hexen.Map.get_hex_id_by_user(user_id)
-      |> Hexen.Map.get_hex!()
-
-    # IO.inspect("###########################################")
-    # IO.inspect(user_hex)
-    # IO.inspect("###########################################")
-
-    # user_coords =
-    #   user_hex
-    #   |> %{q: Map.take([:q]), r: Map.take([:r]), s: Map.take([:s])}
-
-    # valid_hexes =
+  def move(modifier, user_id, target_hex_id) do
+    # TO DO: Implement modifier
+    Hexen.Map.get_hex_user_by_user(user_id)
+    |> Hexen.Map.update_hex_user(%{departed: DateTime.utc_now()})
   end
 
-  def gather(modifier) do
+  def gather(modifier, target_hex_id) do
     # TO DO
     IO.puts("You selected a gather card!")
   end
 
-  def explore(modifier) do
+  def explore(modifier, target_hex_id) do
     # TO DO
     IO.puts("You selected an exploration card!")
   end
 
-  def interact(modifier) do
+  def interact(modifier, target_hex_id) do
     # TO DO
     IO.puts("You selected a interaction card!")
   end
 
-  def craft(modifier) do
+  def craft(modifier, target_hex_id) do
     # TO DO
     IO.puts("You selected a crafting card!")
   end

@@ -5,7 +5,6 @@ defmodule Hexen.Map do
 
   import Ecto.Query, warn: false
   alias Hexen.Repo
-
   alias Hexen.Map.Region
   alias Hexen.Map.HexUser
   alias Hexen.Map.Biome
@@ -213,22 +212,6 @@ defmodule Hexen.Map do
   end
 
   @doc """
-  Returns the list of hexes.
-
-  ## Examples
-
-      iex> list_hexes()
-      [%Hex{}, ...]
-
-  """
-  def list_hex_ids do
-    Repo.all(
-      from h in Hex,
-        select: h.id
-    )
-  end
-
-  @doc """
   Gets a single hex.
 
   Raises `Ecto.NoResultsError` if the Hex does not exist.
@@ -243,29 +226,6 @@ defmodule Hexen.Map do
 
   """
   def get_hex!(id), do: Repo.get!(Hex, id)
-
-  @doc """
-  Gets the ID of the hex that a player is currently on.
-
-  """
-  def get_hex_id_by_user(userID) do
-    query =
-      from hu in HexUser,
-        where: hu.user_id == ^userID and is_nil(hu.departed),
-        select: hu.hex_id
-
-    Repo.one(query)
-  end
-
-  @doc """
-  Gets the hexes that a player can move to based off of their current position.
-
-  """
-  # def get_reachable_hexes(%{} = coords) do
-  #   query =
-  #     from h in Hex,
-  #       where:
-  # end
 
   @doc """
   Creates a hex.
@@ -333,17 +293,18 @@ defmodule Hexen.Map do
   end
 
   @doc """
-  Returns the list of hex_users.
-
-  ## Examples
-
-      iex> list_hex_users()
-      [%HexUser{}, ...]
+  Move a player to the target hex.
 
   """
-  def list_hex_users do
-    Repo.all(HexUser)
-  end
+  # def move_player(user_id, target_hex_id) do
+  #   query = Repo
+  # end
+
+  # def create_hex(attrs \\ %{}) do
+  #   %Hex{}
+  #   |> Hex.changeset(attrs)
+  #   |> Repo.insert()
+  # end
 
   @doc """
   Returns the list of hex_users.
@@ -354,12 +315,8 @@ defmodule Hexen.Map do
       [%HexUser{}, ...]
 
   """
-  def list_hex_user_ids_by_hex(hex_id) do
-    Repo.all(
-      from hu in HexUser,
-        where: hu.hex_id == ^hex_id,
-        select: hu.id
-    )
+  def list_hex_users do
+    Repo.all(HexUser)
   end
 
   @doc """
@@ -441,5 +398,51 @@ defmodule Hexen.Map do
   """
   def change_hex_user(%HexUser{} = hex_user) do
     HexUser.changeset(hex_user, %{})
+  end
+
+  ################################################################
+  ######################## Custom queries ########################
+  ################################################################
+
+  @doc """
+  Returns the list of hexes.
+
+  ## Examples
+
+      iex> list_hexes()
+      [%Hex{}, ...]
+
+  """
+  def list_hex_ids do
+    Repo.all(
+      from h in Hex,
+        select: h.id
+    )
+  end
+
+  @doc """
+  Returns the list of hex_users.
+
+  ## Examples
+
+      iex> list_hex_users()
+      [%HexUser{}, ...]
+
+  """
+  def list_hex_user_ids_by_hex(hex_id) do
+    Repo.all(
+      from hu in HexUser,
+        where: hu.hex_id == ^hex_id,
+        select: hu.id
+    )
+  end
+
+  def get_hex_user_by_user(userID) do
+    query =
+      from hu in HexUser,
+        where: hu.user_id == ^userID and is_nil(hu.departed),
+        select: hu.id
+
+    Repo.one(query)
   end
 end

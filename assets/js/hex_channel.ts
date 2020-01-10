@@ -37,7 +37,8 @@ const HexChannel = {
         .push('selected_card', {
           deck_card_id: value,
           room_name: `hex:${room}`,
-          user_id: 1 // TO DO
+          user_id: 1, // TO DO
+          target_hex_id: 2 // TO DO
         })
         .receive('ok', (resp: any) => {
           console.log('Card selected successfully', resp);
