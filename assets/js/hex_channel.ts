@@ -1,12 +1,4 @@
 import { value } from './components/Hand';
-import useApplicationData from './hooks/useApplicationData';
-
-const {
-  updateBoard
-  // updateHand,
-  // updateHex,
-  // updateBand
-} = useApplicationData();
 
 const HexChannel = {
   init(socket: { channel: (arg0: string, arg1: {}) => any }, hexID: any) {
@@ -21,9 +13,7 @@ const HexChannel = {
         console.log('Unable to join', resp);
       });
 
-    channel.on('render_map', (msg: {}) => {
-      updateBoard(msg);
-    });
+    channel.on('render_map', (msg: {}) => {});
 
     channel.on('hex_state', (msg: {}) => {
       this.state = msg;
