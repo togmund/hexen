@@ -24,65 +24,73 @@ defmodule Hexen.HexWorker do
     broadcast(updated_state, :ok, "SET_BOARD")
     broadcast(updated_state, :ok, "SET_HEX")
     broadcast(updated_state, :ok, "SET_HAND")
-    # broadcast(updated_state, :ok, "select_card")
+    broadcast(updated_state, :ok, "GET_CARD")
 
     schedule_hex_fetch()
 
     {:noreply, updated_state}
   end
 
-  def get_action(message) do
-    elem(message, 1)
+  def get_action(deck_card_id) do
+    # DeckCard ID for the card selected
+    deck_card_id
     |> Hexen.Inventory.get_card_id_by_deck_card!()
     |> List.first()
     |> Hexen.Inventory.get_card!()
     |> Map.take([:suit, :modifier])
   end
 
-  # def perform_action(room_name, message) do
-  #   action = get_action(message)
-  #   suit = action[:suit]
-  #   modifier = action[:modifier]
+  def perform_action(room_name, deck_card_id, user_id, target_hex_id) do
+    action = get_action(deck_card_id)
+    suit = action[:suit]
+    modifier = action[:modifier]
 
-  #   case suit do
-  #     "Combat" -> combat(modifier)
-  #     "Move" -> move(modifier)
-  #     "Gather" -> gather(modifier)
-  #     "Explore" -> explore(modifier)
-  #     "Interact" -> interact(modifier)
-  #     "Craft" -> craft(modifier)
-  #   end
-  # end
+    case suit do
+      "Combat" -> combat(modifier, target_hex_id)
+      "Move" -> move(modifier, user_id, target_hex_id)
+      "Gather" -> gather(modifier, target_hex_id)
+      "Explore" -> explore(modifier, target_hex_id)
+      "Interact" -> interact(modifier, target_hex_id)
+      "Craft" -> craft(modifier, target_hex_id)
+    end
+  end
 
-  # def combat(modifier) do
-  #   # TO DO
-  #   IO.puts("You selected a combat card!")
-  # end
+  def combat(modifier, target_hex_id) do
+    # TO DO
+    IO.puts("You selected a combat card!")
+  end
 
-  # def move(modifier) do
-  #   # TO DO
-  #   IO.puts("You selected a movement card!")
-  # end
+  def move(modifier, user_id, target_hex_id) do
+    # IO.puts("#############################################################")
+    # IO.puts("#############################################################")
+    # IO.puts("#############################################################")
 
-  # def gather(modifier) do
-  #   # TO DO
-  #   IO.puts("You selected a gather card!")
-  # end
+    # TO DO: Implement modifier
+    Hexen.Map.get_hex_user_by_user(user_id)
+    |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
-  # def explore(modifier) do
-  #   # TO DO
-  #   IO.puts("You selected an exploration card!")
-  # end
+    Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
+  end
 
-  # def interact(modifier) do
-  #   # TO DO
-  #   IO.puts("You selected a interaction card!")
-  # end
+  def gather(modifier, target_hex_id) do
+    # TO DO
+    IO.puts("You selected a gather card!")
+  end
 
-  # def craft(modifier) do
-  #   # TO DO
-  #   IO.puts("You selected a crafting card!")
-  # end
+  def explore(modifier, target_hex_id) do
+    # TO DO
+    IO.puts("You selected an exploration card!")
+  end
+
+  def interact(modifier, target_hex_id) do
+    # TO DO
+    IO.puts("You selected a interaction card!")
+  end
+
+  def craft(modifier, target_hex_id) do
+    # TO DO
+    IO.puts("You selected a crafting card!")
+  end
 
   def draw_cards(deck_id) do
     drawn_cards =

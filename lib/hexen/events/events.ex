@@ -485,4 +485,8 @@ defmodule Hexen.Events do
   def change_hex_quest(%HexQuest{} = hex_quest) do
     HexQuest.changeset(hex_quest, %{})
   end
+
+  ################################################################
+  ######################## Custom queries ########################
+  ################################################################
 end
