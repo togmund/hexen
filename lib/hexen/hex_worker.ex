@@ -200,7 +200,7 @@ defmodule Hexen.HexWorker do
   end
 
   defp broadcast_map_render(updated_state, response) do
-    map = Hexen.Map.list_hexes()
+    map = Hexen.Map.get_full_board()
 
     HexenWeb.Endpoint.broadcast(
       "hex:#{updated_state[:id]}",

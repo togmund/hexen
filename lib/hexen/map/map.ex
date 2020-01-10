@@ -422,4 +422,35 @@ defmodule Hexen.Map do
   def change_hex_user(%HexUser{} = hex_user) do
     HexUser.changeset(hex_user, %{})
   end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking hex_user changes.
+
+  ## Examples
+
+      iex> change_hex_user(hex_user)
+      %Ecto.Changeset{source: %HexUser{}}
+
+  """
+  def get_full_board() do
+    Repo.all(
+      from h in Hex,
+        join: r in Region,
+        on: r.id == h.region_id,
+        join: b in Biome,
+        on: b.id == h.biome_id,
+        select: {
+          h.id,
+          h.name,
+          h.q,
+          h.r,
+          h.s,
+          h.structure,
+          r.name,
+          b.name,
+          h.resource,
+          b.image
+        }
+    )
+  end
 end

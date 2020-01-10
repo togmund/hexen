@@ -137,47 +137,56 @@ defmodule Hexen.DatabaseSeeder do
 
   Repo.insert!(%Biome{
     name: "Taiga",
-    resource: "Softwood"
+    resource: "Softwood",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Mountain",
-    resource: "Iron"
+    resource: "Iron",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Woodland",
-    resource: "Hardwood"
+    resource: "Hardwood",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Grassland",
-    resource: "Wheat"
+    resource: "Wheat",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Chaparral",
-    resource: "Gold"
+    resource: "Gold",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Savanna",
-    resource: "Leather"
+    resource: "Leather",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Fen",
-    resource: "Fur"
+    resource: "Fur",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Desert",
-    resource: "Glass"
+    resource: "Glass",
+    image:
   })
 
   Repo.insert!(%Biome{
     name: "Tropic",
-    resource: "Fruit"
+    resource: "Fruit",
+    image:
   })
 
   # Hex_User Seeds
