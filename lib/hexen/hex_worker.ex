@@ -24,7 +24,7 @@ defmodule Hexen.HexWorker do
     broadcast(updated_state, :ok, "SET_BOARD")
     broadcast(updated_state, :ok, "SET_HEX")
     broadcast(updated_state, :ok, "SET_HAND")
-    # broadcast(updated_state, :ok, "select_card")
+    broadcast(updated_state, :ok, "GET_CARD")
 
     schedule_hex_fetch()
 
@@ -61,11 +61,15 @@ defmodule Hexen.HexWorker do
   end
 
   def move(modifier, user_id, target_hex_id) do
+    IO.puts("################################################################")
+    IO.puts("################################################################")
+    IO.puts("################################################################")
+
     # TO DO: Implement modifier
     Hexen.Map.get_hex_user_by_user(user_id)
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
-    # TO DO: Move player to new hex
+    Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
   end
 
   def gather(modifier, target_hex_id) do

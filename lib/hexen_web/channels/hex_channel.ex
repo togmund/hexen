@@ -10,11 +10,6 @@ defmodule HexenWeb.HexChannel do
     {:ok, socket}
   end
 
-  def handle_in("select_card", msg, socket) do
-    push(socket, "select_card", msg)
-    {:noreply, socket}
-  end
-
   def handle_in("selected_card", msg, socket) do
     HexWorker.perform_action(
       msg["room_name"],
@@ -31,7 +26,7 @@ defmodule HexenWeb.HexChannel do
     {:noreply, socket}
   end
 
-  # "SET_BOARD", "SET_HEX", "SET_HAND" All handled generically
+  # "SET_BOARD", "SET_HEX", "SET_HAND", "GET_CARD" All handled generically
   def handle_in(push_message, msg, socket) do
     push(socket, push_message, msg)
     {:noreply, socket}
