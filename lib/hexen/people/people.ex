@@ -5,7 +5,6 @@ defmodule Hexen.People do
 
   import Ecto.Query, warn: false
   alias Hexen.Repo
-
   alias Hexen.People.Band
 
   @doc """
@@ -19,22 +18,6 @@ defmodule Hexen.People do
   """
   def list_bands do
     Repo.all(Band)
-  end
-
-    @doc """
-  Returns the list of band IDs.
-
-  ## Examples
-
-      iex> list_band_ids()
-      [%Band{}, ...]
-
-  """
-  def list_band_ids do
-    Repo.all(
-      from b in Band,
-        select: b.id
-    )
   end
 
   @doc """
@@ -212,5 +195,25 @@ defmodule Hexen.People do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  ################################################################
+  ######################## Custom queries ########################
+  ################################################################
+
+  @doc """
+  Returns the list of band IDs.
+
+  ## Examples
+
+      iex> list_band_ids()
+      [%Band{}, ...]
+
+  """
+  def list_band_ids do
+    Repo.all(
+      from b in Band,
+        select: b.id
+    )
   end
 end

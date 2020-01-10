@@ -212,22 +212,6 @@ defmodule Hexen.Map do
   end
 
   @doc """
-  Returns the list of hexes.
-
-  ## Examples
-
-      iex> list_hexes()
-      [%Hex{}, ...]
-
-  """
-  def list_hex_ids do
-    Repo.all(
-      from h in Hex,
-        select: h.id
-    )
-  end
-
-  @doc """
   Gets a single hex.
 
   Raises `Ecto.NoResultsError` if the Hex does not exist.
@@ -322,23 +306,6 @@ defmodule Hexen.Map do
   end
 
   @doc """
-  Returns the list of hex_users.
-
-  ## Examples
-
-      iex> list_hex_users()
-      [%HexUser{}, ...]
-
-  """
-  def list_hex_user_ids_by_hex(hex_id) do
-    Repo.all(
-      from hu in HexUser,
-        where: hu.hex_id == ^hex_id,
-        select: hu.id
-    )
-  end
-
-  @doc """
   Gets a single hex_user.
 
   Raises `Ecto.NoResultsError` if the Hex user does not exist.
@@ -417,6 +384,58 @@ defmodule Hexen.Map do
   """
   def change_hex_user(%HexUser{} = hex_user) do
     HexUser.changeset(hex_user, %{})
+  end
+
+  ################################################################
+  ######################## Custom queries ########################
+  ################################################################
+
+  @doc """
+  Returns the list of hexes.
+
+  ## Examples
+
+      iex> list_hexes()
+      [%Hex{}, ...]
+
+  """
+  def list_hex_ids do
+    Repo.all(
+      from h in Hex,
+        select: h.id
+    )
+  end
+
+  @doc """
+  Returns the list of hex_users.
+
+  ## Examples
+
+      iex> list_hex_users()
+      [%HexUser{}, ...]
+
+  """
+  def list_hex_user_ids_by_hex(hex_id) do
+    Repo.all(
+      from hu in HexUser,
+        where: hu.hex_id == ^hex_id,
+        select: hu.id
+    )
+  end
+
+  def get_hex_user_by_user(userID) do
+    query =
+      from hu in HexUser,
+        where: hu.user_id == ^userID and is_nil(hu.departed),
+        select: hu
+
+    Repo.one(query)
+  end
+
+  def update_player_departure(%HexUser{} = hex_user, departure_time) do
+    hex_user
+    |> Ecto.Changeset.change(%{departed: departure_time})
+    |> Hexen.Repo.update()
   end
 
   @doc """

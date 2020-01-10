@@ -5,7 +5,6 @@ defmodule Hexen.Inventory do
 
   import Ecto.Query, warn: false
   alias Hexen.Repo
-
   alias Hexen.Inventory.Card
   alias Hexen.Inventory.Deck
   alias Hexen.Inventory.DeckCard
@@ -38,14 +37,6 @@ defmodule Hexen.Inventory do
 
   """
   def get_deck!(id), do: Repo.get!(Deck, id)
-
-  def get_users_deck_id(user_id) do
-    Repo.all(
-      from d in Deck,
-        where: d.user_id == ^user_id,
-        select: d.id
-    )
-  end
 
   @doc """
   Creates a deck.
@@ -142,29 +133,6 @@ defmodule Hexen.Inventory do
   def get_card!(id), do: Repo.get!(Card, id)
 
   @doc """
-  Gets the relevant card for a given DeckCard.
-
-  Raises `Ecto.NoResultsError` if the Card does not exist.
-  """
-  def get_card_id_by_deck_card!(deck_card_id) do
-    Repo.all(
-      from dc in DeckCard,
-        where: dc.id == ^deck_card_id,
-        select: dc.card_id
-    )
-  end
-
-  def card_details_from_deck_card_id(deck_card_id) do
-    Repo.all(
-      from dc in DeckCard,
-        join: c in Card,
-        on: c.id == dc.card_id,
-        where: dc.id == ^deck_card_id,
-        select: c
-    )
-  end
-
-  @doc """
   Creates a card.
 
   ## Examples
@@ -243,24 +211,6 @@ defmodule Hexen.Inventory do
   end
 
   @doc """
-  Returns the list of deck_cards.
-
-  ## Examples
-
-      iex> list_deck_cards()
-      [%DeckCard{}, ...]
-
-  """
-  def list_undrawn_deck_cards(deck_id) do
-    query =
-      from dc in "deck_cards",
-        where: dc.deck_id == ^deck_id and dc.drawn == false,
-        select: dc.id
-
-    Repo.all(query)
-  end
-
-  @doc """
   Gets a single deck_card.
 
   Raises `Ecto.NoResultsError` if the Deck card does not exist.
@@ -313,29 +263,6 @@ defmodule Hexen.Inventory do
   end
 
   @doc """
-  Updates a deck_card's drawn status.
-
-  ## Examples
-
-      iex> update_deck_card(deck_card, true)
-      {:ok, %DeckCard{}}
-
-      iex> update_deck_card(deck_card, false)
-      {:ok, %DeckCard{}}
-
-  """
-  def update_drawn_status(%DeckCard{} = deck_card, drawn) do
-    deck_card
-    |> Ecto.Changeset.change(%{drawn: drawn})
-    |> Hexen.Repo.update()
-  end
-
-  def shuffle_discard_into_deck(deck_id) do
-    from(dc in DeckCard, where: dc.deck_id == ^deck_id, update: [set: [drawn: false]])
-    |> Repo.update_all([])
-  end
-
-  @doc """
   Deletes a DeckCard.
 
   ## Examples
@@ -362,5 +289,71 @@ defmodule Hexen.Inventory do
   """
   def change_deck_card(%DeckCard{} = deck_card) do
     DeckCard.changeset(deck_card, %{})
+  end
+
+  ################################################################
+  ######################## Custom queries ########################
+  ################################################################
+  def get_users_deck_id(user_id) do
+    Repo.all(
+      from d in Deck,
+        where: d.user_id == ^user_id,
+        select: d.id
+    )
+  end
+
+  @doc """
+  Gets the relevant card for a given DeckCard.
+
+  Raises `Ecto.NoResultsError` if the Card does not exist.
+  """
+  def get_card_id_by_deck_card!(deck_card_id) do
+    Repo.all(
+      from dc in DeckCard,
+        where: dc.id == ^deck_card_id,
+        select: dc.card_id
+    )
+  end
+
+  @doc """
+  Updates a deck_card's drawn status.
+
+  ## Examples
+
+      iex> update_deck_card(deck_card, true)
+      {:ok, %DeckCard{}}
+
+      iex> update_deck_card(deck_card, false)
+      {:ok, %DeckCard{}}
+
+  """
+  def update_drawn_status(%DeckCard{} = deck_card, drawn) do
+    deck_card
+    |> Ecto.Changeset.change(%{drawn: drawn})
+    |> Hexen.Repo.update()
+  end
+
+  def card_details_from_deck_card_id(deck_card_id) do
+    Repo.all(
+      from dc in DeckCard,
+        join: c in Card,
+        on: c.id == dc.card_id,
+        where: dc.id == ^deck_card_id,
+        select: c
+    )
+  end
+
+  def list_undrawn_deck_cards(deck_id) do
+    query =
+      from dc in "deck_cards",
+        where: dc.deck_id == ^deck_id and dc.drawn == false,
+        select: dc.id
+
+    Repo.all(query)
+  end
+
+  def shuffle_discard_into_deck(deck_id) do
+    from(dc in DeckCard, where: dc.deck_id == ^deck_id, update: [set: [drawn: false]])
+    |> Repo.update_all([])
   end
 end

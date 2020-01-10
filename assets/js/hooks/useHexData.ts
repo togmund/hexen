@@ -8,15 +8,17 @@ import reducer, {
   // SET_BAND
 } from '../reducers/application';
 
+import { value } from '../components/Hand';
+
 export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
     hex_tiles: [],
-    tile: {},
+    tile: { id: 1 },
     hand: []
   });
 
   useEffect(() => {
-    return init(socket, 1);
+    return init(socket, state.tile.id);
   }, []);
 
   const init = (socket, hexID) => {
@@ -49,20 +51,22 @@ export default function useHexData() {
       dispatch({ type: SET_HAND, hand: msg.players[0].hand });
     });
 
-    // Broacast the selected card on the select_card broadcast
-    // channel.on('select_card', (msg: {}) => {
-    //   channel
-    //     .push('selected_card', {
-    //       deck_card_id: value,
-    //       room_name: `hex:${room}`
-    //     })
-    //     .receive('ok', (resp: any) => {
-    //       console.log('Card selected successfully', resp);
-    //     })
-    //     .receive('error', (resp: any) => {
-    //       console.log('Card not', resp);
-    //     });
-    // });
+    // Broadcast the selected card on the select_card broadcast
+    channel.on('GET_CARD', (msg: {}) => {
+      channel
+        .push('selected_card', {
+          deck_card_id: value,
+          room_name: `hex:${state.tile.id}`,
+          user_id: 1, // TO DO
+          target_hex_id: 3 // TO DO
+        })
+        .receive('ok', (resp: any) => {
+          console.log('Card selected successfully', resp);
+        })
+        .receive('error', (resp: any) => {
+          console.log('Card not', resp);
+        });
+    });
 
     return () => {
       channel.leave();
