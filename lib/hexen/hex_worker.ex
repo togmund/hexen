@@ -69,7 +69,9 @@ defmodule Hexen.HexWorker do
   def move(modifier, user_id, target_hex_id) do
     # TO DO: Implement modifier
     Hexen.Map.get_hex_user_by_user(user_id)
-    |> Hexen.Map.update_hex_user(%{departed: DateTime.utc_now()})
+    |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
+
+    # TO DO: Move player to new hex
   end
 
   def gather(modifier, target_hex_id) do

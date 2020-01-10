@@ -441,8 +441,14 @@ defmodule Hexen.Map do
     query =
       from hu in HexUser,
         where: hu.user_id == ^userID and is_nil(hu.departed),
-        select: hu.id
+        select: hu
 
     Repo.one(query)
+  end
+
+  def update_player_departure(%HexUser{} = hex_user, departure_time) do
+    hex_user
+    |> Ecto.Changeset.change(%{departed: departure_time})
+    |> Hexen.Repo.update()
   end
 end
