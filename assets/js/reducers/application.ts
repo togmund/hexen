@@ -5,26 +5,33 @@
 export default function reducer(state: any, action: any) {
   switch (action.type) {
     case SET_BOARD:
+      console.log(action);
       return {
         ...state,
         hex_tiles: action.hex_tiles
       };
-    // case SET_HEX:
-    //   return {
-    //     ...state,
-    //     tile: {
-    //       id: action.tile.id,
-    //       name: action.tile.name,
-    //       region_id: action.tile.region_id,
-    //       resource: action.tile.resource,
-    //       structure: action.tile.structure
-    //     }
-    //   };
-    // case SET_HAND:
-    //   return {
-    //     ...state,
-    //     hand: action.players[0].hand
-    //   };
+    case SET_HEX:
+      return {
+        ...state,
+        tile: {
+          id: action.id,
+          name: action.name,
+          q: action.q,
+          r: action.r,
+          s: action.s,
+          structure: action.structure,
+          region_name: action.name,
+          biome_name: action.name,
+          resource: action.resource,
+          image: action.image
+        }
+      };
+    case SET_HAND:
+      console.log(action);
+      return {
+        ...state,
+        hand: action.hand
+      };
     // case SET_BAND: {
     //   return {
     //     ...state,
@@ -42,6 +49,6 @@ export default function reducer(state: any, action: any) {
   }
 }
 export const SET_BOARD = 'SET_BOARD';
-// export const SET_HEX = 'SET_HEX';
-// export const SET_HAND = 'SET_HAND';
+export const SET_HEX = 'SET_HEX';
+export const SET_HAND = 'SET_HAND';
 // export const SET_BAND = 'SET_BAND';

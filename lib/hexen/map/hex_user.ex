@@ -1,4 +1,7 @@
 defmodule Hexen.Map.HexUser do
+  @moduledoc """
+    Module Documentation
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

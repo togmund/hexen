@@ -1,4 +1,7 @@
 defmodule Hexen.Map.Biome do
+  @moduledoc """
+    Module Documentation
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

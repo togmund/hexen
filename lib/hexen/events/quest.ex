@@ -1,4 +1,7 @@
 defmodule Hexen.Events.Quest do
+  @moduledoc """
+    Module Documentation
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
