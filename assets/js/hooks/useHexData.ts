@@ -45,9 +45,9 @@ export default function useHexData() {
     });
 
     // Update the hand on the new_hand broadcast
-    // channel.on('SET_HAND', (msg: {}) => {
-    //   dispatch({ type: SET_HAND /* hand: msg.hand */ });
-    // });
+    channel.on('SET_HAND', (msg: {}) => {
+      dispatch({ type: SET_HAND, hand: msg.players[0].hand });
+    });
 
     // Broacast the selected card on the select_card broadcast
     // channel.on('select_card', (msg: {}) => {

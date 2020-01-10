@@ -20,7 +20,7 @@ defmodule Hexen.HexWorker do
 
     broadcast(updated_state, :ok, "SET_BOARD")
     broadcast(updated_state, :ok, "SET_HEX")
-    # broadcast(updated_state, :ok, "SET_HAND")
+    broadcast(updated_state, :ok, "SET_HAND")
     # broadcast(updated_state, :ok, "select_card")
 
     schedule_hex_fetch()

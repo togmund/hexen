@@ -25,11 +25,11 @@ export default function reducer(state: any, action: any) {
           image: action.image
         }
       };
-    // case SET_HAND:
-    //   return {
-    //     ...state,
-    //     hand: action.players[0].hand
-    //   };
+    case SET_HAND:
+      return {
+        ...state,
+        hand: action.hand
+      };
     // case SET_BAND: {
     //   return {
     //     ...state,
@@ -48,5 +48,5 @@ export default function reducer(state: any, action: any) {
 }
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
-// export const SET_HAND = 'SET_HAND';
+export const SET_HAND = 'SET_HAND';
 // export const SET_BAND = 'SET_BAND';
