@@ -16,7 +16,7 @@ defmodule HexenWeb.Router do
   scope "/api", HexenWeb do
     pipe_through :api
 
-    resources "/languages", LanguageController, except: [:new, :edit]
+    resources "/map", UserController, only: [:show]
   end
 
   scope "/", HexenWeb do

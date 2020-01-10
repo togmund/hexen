@@ -2,6 +2,7 @@ import { useReducer, useEffect } from 'react';
 import socket from '../socket';
 
 import reducer, {
+  SET_INITIAL,
   SET_BOARD,
   SET_HEX,
   SET_HAND
@@ -10,14 +11,29 @@ import reducer, {
 
 export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
+    player: 1,
     hex_tiles: [],
     tile: {},
     hand: []
   });
 
   useEffect(() => {
-    return init(socket, 1);
+    getUserAndTile();
+
+    init(socket, state.tile.id);
   }, []);
+
+  const getUserAndTile = id => {
+    fetch(`api/map/${id}`)
+      .then(res => {
+        console.log(res);
+        return res.json;
+      })
+      .then(data => {
+        console.log(data);
+        // dispatch({ type: SET_INITIAL, action: data });
+      });
+  };
 
   const init = (socket, hexID) => {
     // Establish the Channel

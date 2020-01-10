@@ -8,6 +8,14 @@ export default function reducer(state: any, action: any) {
       console.log(action);
       return {
         ...state,
+        player: action.player.id,
+        hex_tiles: action.hex_tiles,
+        tile: action.tile
+      };
+    case SET_BOARD:
+      console.log(action);
+      return {
+        ...state,
         hex_tiles: action.hex_tiles
       };
     case SET_HEX:
@@ -48,6 +56,7 @@ export default function reducer(state: any, action: any) {
       );
   }
 }
+export const SET_INITIAL = 'SET_INITIAL';
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
 export const SET_HAND = 'SET_HAND';
