@@ -25,7 +25,18 @@ defmodule HexenWeb.HexChannel do
   #   {:noreply, socket}
   # end
 
+  def handle_in("render_map", msg, socket) do
+    msg
+    |> IO.inspect()
+
+    push(socket, "render_map", msg)
+    {:noreply, socket}
+  end
+
   def handle_in("hex_state", msg, socket) do
+    msg
+    |> IO.inspect()
+
     push(socket, "hex_state", msg)
     {:noreply, socket}
   end
@@ -42,14 +53,6 @@ defmodule HexenWeb.HexChannel do
 
   def handle_in("clear_selection", msg, socket) do
     push(socket, "clear_selection", msg)
-    {:noreply, socket}
-  end
-
-  def handle_in("render_map", msg, socket) do
-    msg
-    |> IO.inspect()
-
-    push(socket, "render_map", msg)
     {:noreply, socket}
   end
 

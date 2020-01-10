@@ -20,8 +20,8 @@ defmodule Hexen.HexWorker do
 
     # |> IO.inspect()
 
-    broadcast_map_render(updated_state, :ok)
     # if updated_state != state do
+    broadcast_map_render(updated_state, :ok)
     broadcast_hex_state(updated_state, :ok)
     broadcast_card_request(updated_state, :ok)
     # end
@@ -173,6 +173,16 @@ defmodule Hexen.HexWorker do
     Process.send_after(self(), :hex_fetch, 10_000)
   end
 
+  defp broadcast_map_render(updated_state, response) do
+    map = Hexen.Map.get_full_board()
+
+    HexenWeb.Endpoint.broadcast(
+      "hex:#{updated_state[:id]}",
+      "render_map",
+      %{response: response, hex_tiles: map}
+    )
+  end
+
   defp broadcast_hex_state(updated_state, response) do
     HexenWeb.Endpoint.broadcast(
       "hex:#{updated_state[:id]}",
@@ -196,16 +206,6 @@ defmodule Hexen.HexWorker do
       "hex:#{updated_state[:id]}",
       "new_hand",
       Map.merge(%{response: response}, new_hand)
-    )
-  end
-
-  defp broadcast_map_render(updated_state, response) do
-    map = Hexen.Map.get_full_board()
-
-    HexenWeb.Endpoint.broadcast(
-      "hex:#{updated_state[:id]}",
-      "render_map",
-      %{response: response, hex_tiles: map}
     )
   end
 

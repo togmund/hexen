@@ -109,61 +109,71 @@ defmodule Hexen.DatabaseSeeder do
   Repo.insert!(%Biome{
     name: "Tundra",
     resource: "Silver",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Taiga",
     resource: "Softwood",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Mountain",
     resource: "Iron",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Woodland",
     resource: "Hardwood",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Grassland",
     resource: "Wheat",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Chaparral",
     resource: "Gold",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Savanna",
     resource: "Leather",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Fen",
     resource: "Fur",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Desert",
     resource: "Glass",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Tropic",
     resource: "Fruit",
-    image: "assets/images/Hex Images/Bog.png"
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   # Hex seeds
