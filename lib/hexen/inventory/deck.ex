@@ -1,4 +1,7 @@
 defmodule Hexen.Inventory.Deck do
+  @moduledoc """
+    Module Documentation
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

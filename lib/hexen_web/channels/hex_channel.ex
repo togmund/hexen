@@ -1,4 +1,7 @@
 defmodule HexenWeb.HexChannel do
+  @moduledoc """
+    Module Documentation
+  """
   use HexenWeb, :channel
 
   alias Hexen.HexWorker

@@ -1,9 +1,12 @@
 defmodule HexenWeb.BandChannel do
+  @moduledoc """
+    Module Documentation
+  """
   use HexenWeb, :channel
 
   def join("band:" <> _room, _payload, socket) do
     # if authorized?(payload) do
-      {:ok, socket}
+    {:ok, socket}
     # else
     #   {:error, %{reason: "unauthorized"}}
     # end
@@ -18,7 +21,7 @@ defmodule HexenWeb.BandChannel do
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (band:lobby).
   def handle_in("shout", payload, socket) do
-    broadcast socket, "shout", payload
+    broadcast(socket, "shout", payload)
     {:noreply, socket}
   end
 

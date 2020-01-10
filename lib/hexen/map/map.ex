@@ -4,11 +4,11 @@ defmodule Hexen.Map do
   """
 
   import Ecto.Query, warn: false
-  alias Hexen.Repo
   alias Hexen.Map.Biome
-  alias Hexen.Map.Region
   alias Hexen.Map.Hex
   alias Hexen.Map.HexUser
+  alias Hexen.Map.Region
+  alias Hexen.Repo
 
   @doc """
   Returns the list of regions.
@@ -421,7 +421,7 @@ defmodule Hexen.Map do
 
   @doc """
   """
-  def get_full_board() do
+  def get_full_board do
     Repo.all(
       from h in Hex,
         join: r in Region,

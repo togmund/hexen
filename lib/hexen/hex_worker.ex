@@ -1,4 +1,7 @@
 defmodule Hexen.HexWorker do
+  @moduledoc """
+    Module Documentation
+  """
   use GenServer
 
   def start_link(args) do
