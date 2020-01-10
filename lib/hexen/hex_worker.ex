@@ -46,14 +46,14 @@ defmodule Hexen.HexWorker do
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, message) do
+  def perform_action(room_name, message, user_id) do
     action = get_action(message)
     suit = action[:suit]
     modifier = action[:modifier]
 
     case suit do
       "Combat" -> combat(modifier)
-      "Move" -> move(modifier)
+      "Move" -> move(modifier, user_id)
       "Gather" -> gather(modifier)
       "Explore" -> explore(modifier)
       "Interact" -> interact(modifier)
@@ -66,9 +66,9 @@ defmodule Hexen.HexWorker do
     IO.puts("You selected a combat card!")
   end
 
-  def move(modifier) do
+  def move(modifier, user_id) do
     # TO DO
-    IO.puts("You selected a movement card!")
+    user_hex =
   end
 
   def gather(modifier) do

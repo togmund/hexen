@@ -35,7 +35,12 @@ defmodule HexenWeb.HexChannel do
   end
 
   def handle_in("selected_card", msg, socket) do
-    HexWorker.perform_action(Map.fetch(msg, "room_name"), Map.fetch(msg, "deck_card_id"))
+    HexWorker.perform_action(
+      Map.fetch(msg, "room_name"),
+      Map.fetch(msg, "deck_card_id"),
+      Map.fetch(msg, "user_id")
+    )
+
     {:noreply, socket}
   end
 

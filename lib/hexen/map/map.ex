@@ -246,6 +246,19 @@ defmodule Hexen.Map do
   def get_hex!(id), do: Repo.get!(Hex, id)
 
   @doc """
+  Gets the ID of the hex that a user is currently on.
+
+  """
+  def get_hex_id_by_user(userID) do
+    query =
+      from hu in HexUser,
+        where: hu.user_id == ^userID and is_nil(hu.departed),
+        select: hu.hex_id
+
+    Repo.one(query)
+  end
+
+  @doc """
   Creates a hex.
 
   ## Examples
