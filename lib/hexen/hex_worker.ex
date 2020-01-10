@@ -2,7 +2,7 @@ defmodule Hexen.HexWorker do
   use GenServer
 
   def start_link(args) do
-    IO.inspect(args)
+    # IO.inspect(args)
     GenServer.start_link(__MODULE__, args, name: via_tuple(args[:name]))
   end
 
@@ -37,17 +37,17 @@ defmodule Hexen.HexWorker do
 
   # end
 
-  def get_action(message) do
+  def get_action(deck_card_id) do
     # DeckCard ID for the card selected
-    elem(message, 1)
+    deck_card_id
     |> Hexen.Inventory.get_card_id_by_deck_card!()
     |> List.first()
     |> Hexen.Inventory.get_card!()
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, message, user_id) do
-    action = get_action(message)
+  def perform_action(room_name, deck_card_id, user_id) do
+    action = get_action(deck_card_id)
     suit = action[:suit]
     modifier = action[:modifier]
 
@@ -69,6 +69,18 @@ defmodule Hexen.HexWorker do
   def move(modifier, user_id) do
     # TO DO
     user_hex =
+      Hexen.Map.get_hex_id_by_user(user_id)
+      |> Hexen.Map.get_hex!()
+
+    # IO.inspect("###########################################")
+    # IO.inspect(user_hex)
+    # IO.inspect("###########################################")
+
+    # user_coords =
+    #   user_hex
+    #   |> %{q: Map.take([:q]), r: Map.take([:r]), s: Map.take([:s])}
+
+    # valid_hexes =
   end
 
   def gather(modifier) do

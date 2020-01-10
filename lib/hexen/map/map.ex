@@ -7,6 +7,9 @@ defmodule Hexen.Map do
   alias Hexen.Repo
 
   alias Hexen.Map.Region
+  alias Hexen.Map.HexUser
+  alias Hexen.Map.Biome
+  alias Hexen.Map.Hex
 
   @doc """
   Returns the list of regions.
@@ -102,8 +105,6 @@ defmodule Hexen.Map do
     Region.changeset(region, %{})
   end
 
-  alias Hexen.Map.Biome
-
   @doc """
   Returns the list of biomes.
 
@@ -198,8 +199,6 @@ defmodule Hexen.Map do
     Biome.changeset(biome, %{})
   end
 
-  alias Hexen.Map.Hex
-
   @doc """
   Returns the list of hexes.
 
@@ -246,7 +245,7 @@ defmodule Hexen.Map do
   def get_hex!(id), do: Repo.get!(Hex, id)
 
   @doc """
-  Gets the ID of the hex that a user is currently on.
+  Gets the ID of the hex that a player is currently on.
 
   """
   def get_hex_id_by_user(userID) do
@@ -257,6 +256,16 @@ defmodule Hexen.Map do
 
     Repo.one(query)
   end
+
+  @doc """
+  Gets the hexes that a player can move to based off of their current position.
+
+  """
+  # def get_reachable_hexes(%{} = coords) do
+  #   query =
+  #     from h in Hex,
+  #       where:
+  # end
 
   @doc """
   Creates a hex.
@@ -322,8 +331,6 @@ defmodule Hexen.Map do
   def change_hex(%Hex{} = hex) do
     Hex.changeset(hex, %{})
   end
-
-  alias Hexen.Map.HexUser
 
   @doc """
   Returns the list of hex_users.
