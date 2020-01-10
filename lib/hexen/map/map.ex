@@ -445,7 +445,7 @@ defmodule Hexen.Map do
           q: h.q,
           r: h.r,
           s: h.s,
-          h: h.structure,
+          structure: h.structure,
           region_name: r.name,
           biome_name: b.name,
           resource: h.resource,

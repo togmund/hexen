@@ -2,23 +2,18 @@ import { useReducer, useEffect } from 'react';
 import socket from '../socket';
 
 import reducer, {
-  SET_BOARD
-  // SET_HEX,
-  // SET_HAND,
+  SET_BOARD,
+  SET_HEX,
+  SET_HAND
   // SET_BAND
 } from '../reducers/application';
 
 export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
-    hex_tiles: []
-    // hand: [],
-    // band: {}
+    hex_tiles: [],
+    tile: {},
+    hand: []
   });
-
-  // const refreshState = () => {
-  //   dispatch({
-  //   });
-  // };
 
   useEffect(() => {
     return init(socket, 1);
@@ -40,35 +35,35 @@ export default function useHexData() {
       });
 
     // Render the map on the render_map broadcast
-    channel.on('render_map', msg => {
+    channel.on('SET_BOARD', msg => {
       console.log(msg);
-      // dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
+      dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
     });
 
-    // // Update the hex on the hex_state broadcast
-    // channel.on('hex_state', (msg: {}) => {
-    //   dispatch({ type: SET_HEX /* hex: msg.hex */ });
-    // });
+    // Update the hex on the hex_state broadcast
+    channel.on('SET_HEX', (msg: {}) => {
+      dispatch({ type: SET_HEX /* hex: msg.hex */ });
+    });
 
-    // // Update the hand on the new_hand broadcast
-    // channel.on('new_hand', (msg: {}) => {
-    //   dispatch({ type: SET_HAND /* hand: msg.hand */ });
-    // });
+    // Update the hand on the new_hand broadcast
+    channel.on('SET_HAND', (msg: {}) => {
+      dispatch({ type: SET_HAND /* hand: msg.hand */ });
+    });
 
     // Broacast the selected card on the select_card broadcast
-    // channel.on('select_card', (msg: {}) => {
-    //   channel
-    //     .push('selected_card', {
-    //       deck_card_id: value,
-    //       room_name: `hex:${room}`
-    //     })
-    //     .receive('ok', (resp: any) => {
-    //       console.log('Card selected successfully', resp);
-    //     })
-    //     .receive('error', (resp: any) => {
-    //       console.log('Card not', resp);
-    //     });
-    // });
+    channel.on('select_card', (msg: {}) => {
+      channel
+        .push('selected_card', {
+          deck_card_id: value,
+          room_name: `hex:${room}`
+        })
+        .receive('ok', (resp: any) => {
+          console.log('Card selected successfully', resp);
+        })
+        .receive('error', (resp: any) => {
+          console.log('Card not', resp);
+        });
+    });
 
     return () => {
       channel.leave();

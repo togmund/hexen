@@ -5,6 +5,7 @@ defmodule HexenWeb.HexChannel do
 
   def join("hex:" <> room, _payload, socket) do
     # if authorized?(payload) do
+    IO.puts("I joined!")
     IO.inspect(room)
     {:ok, socket}
     # else
@@ -25,19 +26,18 @@ defmodule HexenWeb.HexChannel do
   #   {:noreply, socket}
   # end
 
-  def handle_in("render_map", msg, socket) do
-    msg
-    |> IO.inspect()
-
-    push(socket, "render_map", msg)
+  def handle_in("SET_BOARD", msg, socket) do
+    push(socket, "SET_BOARD", msg)
     {:noreply, socket}
   end
 
-  def handle_in("hex_state", msg, socket) do
-    msg
-    |> IO.inspect()
+  def handle_in("SET_HEX", msg, socket) do
+    push(socket, "SET_HEX", msg)
+    {:noreply, socket}
+  end
 
-    push(socket, "hex_state", msg)
+  def handle_in("SET_HAND", msg, socket) do
+    push(socket, "SET_HAND", msg)
     {:noreply, socket}
   end
 
