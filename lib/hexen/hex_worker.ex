@@ -15,13 +15,13 @@ defmodule Hexen.HexWorker do
     updated_state =
       state
       |> Map.get(:id)
-      |> tile_data()
+      |> retrieve_state()
       |> update_state(state)
 
     broadcast(updated_state, :ok, "SET_BOARD")
     broadcast(updated_state, :ok, "SET_HEX")
-    broadcast(updated_state, :ok, "SET_HAND")
-    broadcast(updated_state, :ok, "select_card")
+    # broadcast(updated_state, :ok, "SET_HAND")
+    # broadcast(updated_state, :ok, "select_card")
 
     schedule_hex_fetch()
 
@@ -115,23 +115,19 @@ defmodule Hexen.HexWorker do
     end
   end
 
-  defp tile_data(id) do
-    raw_hex =
-      id
-      |> Hexen.Map.get_hex!()
-
-    hex_info =
-      raw_hex
-      |> Map.take([:id, :name, :region_id, :resource, :structure])
+  defp retrieve_state(id) do
+    tile_info = Hexen.Map.get_single_tile(id)
 
     player_info =
       id
       |> Hexen.Map.list_hex_user_ids_by_hex()
       |> Enum.map(fn user_id ->
+        deck = List.first(Hexen.Inventory.get_users_deck_id(user_id))
+
         %{
           player: user_id,
-          deck: List.first(Hexen.Inventory.get_users_deck_id(user_id)),
-          hand: draw_cards(List.first(Hexen.Inventory.get_users_deck_id(user_id)))
+          deck: deck,
+          hand: draw_cards(deck)
         }
       end)
 
@@ -145,7 +141,7 @@ defmodule Hexen.HexWorker do
 
     %{
       hex_tiles: full_map,
-      tile: hex_info,
+      tile: tile_info,
       players: player_info
       # band: band_info
     }

@@ -13,18 +13,23 @@ export default function reducer(state: any, action: any) {
       return {
         ...state,
         tile: {
-          id: action.tile.id,
-          name: action.tile.name,
-          region_id: action.tile.region_id,
-          resource: action.tile.resource,
-          structure: action.tile.structure
+          id: action.id,
+          name: action.name,
+          q: action.q,
+          r: action.r,
+          s: action.s,
+          structure: action.structure,
+          region_name: action.name,
+          biome_name: action.name,
+          resource: action.resource,
+          image: action.image
         }
       };
-    case SET_HAND:
-      return {
-        ...state,
-        hand: action.players[0].hand
-      };
+    // case SET_HAND:
+    //   return {
+    //     ...state,
+    //     hand: action.players[0].hand
+    //   };
     // case SET_BAND: {
     //   return {
     //     ...state,
@@ -43,5 +48,5 @@ export default function reducer(state: any, action: any) {
 }
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
-export const SET_HAND = 'SET_HAND';
+// export const SET_HAND = 'SET_HAND';
 // export const SET_BAND = 'SET_BAND';
