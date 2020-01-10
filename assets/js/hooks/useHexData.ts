@@ -19,7 +19,7 @@ export default function useHexData() {
     return init(socket, 1);
   }, []);
 
-  const init = (socket, hexID) => {
+  const init = (socket: any, hexID: number) => {
     // Establish the Channel
     const room = hexID;
     const channel = socket.channel('hex:' + room, {});

@@ -5,8 +5,8 @@ import BandChannel from '../band_channel';
 import '../../css/Map.css';
 import useHexData from '../hooks/useHexData';
 
-const Map = () => {
-  const { state } = useHexData();
+const Map = (props: any) => {
+  const { state } = props;
 
   return (
     <div className={'hex-map'}>

@@ -4,8 +4,8 @@ import HandCard from './HandCard';
 import { Tiles } from '@rebass/layout';
 import useHexData from '../hooks/useHexData';
 
-const Hand = () => {
-  const { state } = useHexData();
+const Hand = (props: any) => {
+  const { state } = props;
 
   const onChange = (id: number | null) => {
     value = id;
@@ -14,7 +14,7 @@ const Hand = () => {
 
   return (
     <Tiles width={[96, null, 128]} className="card-container">
-      {state.hand.map(card => (
+      {state.hand.map((card: any) => (
         <HandCard
           key={card.deck_card_id}
           image={card.card_details.image}
