@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  HexGrid,
-  Layout,
-  Hexagon,
-  Text,
-  GridGenerator,
-  Hex
-} from 'react-hexgrid';
+import { HexGrid, Layout, Hexagon, Text } from 'react-hexgrid';
 import socket from '../socket';
 import BandChannel from '../band_channel';
 import '../../css/Map.css';

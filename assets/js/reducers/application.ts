@@ -27,6 +27,7 @@ export default function reducer(state: any, action: any) {
         }
       };
     case SET_HAND:
+      console.log(action);
       return {
         ...state,
         hand: action.hand

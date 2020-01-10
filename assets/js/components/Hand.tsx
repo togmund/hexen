@@ -16,14 +16,14 @@ const Hand = () => {
     <Tiles width={[96, null, 128]} className="card-container">
       {state.hand.map(card => (
         <HandCard
-          key={card.card_details.id}
+          key={card.deck_card_id}
           image={card.card_details.image}
           suit={card.card_details.suit}
           name={card.card_details.name}
           description={card.card_details.description}
           modifier={card.card_details.modifier}
-          selected={card.card_details.id === value}
-          selectCard={() => onChange(card.card_details.id)}
+          selected={card.deck_card_id === value}
+          selectCard={() => onChange(card.deck_card_id)}
         />
       ))}
     </Tiles>

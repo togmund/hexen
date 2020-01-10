@@ -35,17 +35,17 @@ export default function useHexData() {
       });
 
     // Render the map on the render_map broadcast
-    channel.on('SET_BOARD', msg => {
+    channel.on('SET_BOARD', (msg: any) => {
       dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
     });
 
     // Update the hex on the hex_state broadcast
-    channel.on('SET_HEX', (msg: {}) => {
+    channel.on('SET_HEX', (msg: any) => {
       dispatch({ type: SET_HEX, tile: msg.tile[1] });
     });
 
     // Update the hand on the new_hand broadcast
-    channel.on('SET_HAND', (msg: {}) => {
+    channel.on('SET_HAND', (msg: any) => {
       dispatch({ type: SET_HAND, hand: msg.players[0].hand });
     });
 
