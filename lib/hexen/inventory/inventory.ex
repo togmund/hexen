@@ -5,8 +5,8 @@ defmodule Hexen.Inventory do
 
   import Ecto.Query, warn: false
   alias Hexen.Repo
-  alias Hexen.Inventory.Deck
   alias Hexen.Inventory.Card
+  alias Hexen.Inventory.Deck
   alias Hexen.Inventory.DeckCard
 
   @doc """

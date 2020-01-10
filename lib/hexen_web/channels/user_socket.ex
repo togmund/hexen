@@ -1,4 +1,7 @@
 defmodule HexenWeb.UserSocket do
+  @moduledoc """
+    Module Documentation
+  """
   use Phoenix.Socket
 
   ## Channels

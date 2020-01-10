@@ -18,7 +18,6 @@ const Navbar = () => {
         width="30"
         className={'deck-icon'}
       ></img>
-      <img src="https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png" />
       <p className={'cards-remaining'}>{CARDS_IN_DECK}</p>
       <p className={'attack-cards-remaining'}>{ATTACK_CARDS}</p>
       <p className={'gather-cards-remaining'}>{GATHER_CARDS}</p>

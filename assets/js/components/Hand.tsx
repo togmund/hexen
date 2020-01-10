@@ -2,34 +2,10 @@ import * as React from 'react';
 import '../../css/Card.css';
 import HandCard from './HandCard';
 import { Tiles } from '@rebass/layout';
+import useHexData from '../hooks/useHexData';
 
 const Hand = () => {
-  const handCards = [
-    {
-      id: 1,
-      name: 'Sword',
-      suit: 'Combat',
-      description: 'Deals three phsyical damage.',
-      image: 'http://pixelartmaker.com/art/2b2ed076ce0f346.png',
-      modifier: 3
-    },
-    {
-      id: 2,
-      name: 'Long Haul Boots',
-      suit: 'Move',
-      description: 'Travel two hexes instead of one.',
-      image: 'http://pixelartmaker.com/art/920bb2ea34df485.png',
-      modifier: 2
-    },
-    {
-      id: 3,
-      name: 'Pickaxe',
-      suit: 'Gather',
-      description: 'Triple haul on ore resources.',
-      image: 'http://pixelartmaker.com/art/16c8f43e143cb6d.png',
-      modifier: 3
-    }
-  ];
+  const { state } = useHexData();
 
   const onChange = (id: number | null) => {
     value = id;
@@ -38,16 +14,16 @@ const Hand = () => {
 
   return (
     <Tiles width={[96, null, 128]} className="card-container">
-      {handCards.map(card => (
+      {state.hand.map(card => (
         <HandCard
-          key={card.id}
-          image={card.image}
-          suit={card.suit}
-          name={card.name}
-          description={card.description}
-          modifier={card.modifier}
-          selected={card.id === value}
-          selectCard={() => onChange(card.id)}
+          key={card.deck_card_id}
+          image={card.card_details.image}
+          suit={card.card_details.suit}
+          name={card.card_details.name}
+          description={card.card_details.description}
+          modifier={card.card_details.modifier}
+          selected={card.deck_card_id === value}
+          selectCard={() => onChange(card.deck_card_id)}
         />
       ))}
     </Tiles>

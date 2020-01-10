@@ -1,4 +1,7 @@
 defmodule Hexen.HexWorker do
+  @moduledoc """
+    Module Documentation
+  """
   use GenServer
 
   def start_link(args) do
@@ -15,28 +18,18 @@ defmodule Hexen.HexWorker do
     updated_state =
       state
       |> Map.get(:id)
-      |> tile_data()
+      |> retrieve_state()
       |> update_state(state)
 
-    # |> IO.inspect()
+    broadcast(updated_state, :ok, "SET_BOARD")
+    broadcast(updated_state, :ok, "SET_HEX")
+    broadcast(updated_state, :ok, "SET_HAND")
+    # broadcast(updated_state, :ok, "select_card")
 
-    # if updated_state != state do
-    broadcast_map_render(updated_state, :ok)
-    broadcast_hex_state(updated_state, :ok)
-    broadcast_card_request(updated_state, :ok)
-    # end
-    # We wana use Deck ID here and map over all users/decks in the server
     schedule_hex_fetch()
 
     {:noreply, updated_state}
   end
-
-  # def add_card(room_name, message) do
-  #   # And the `GenServer` callbacks will accept this tuple the same way it
-  #   # accepts a `pid` or an atom.
-  #   GenServer.cast(via_tuple(room_name), {:add_card, message})
-
-  # end
 
   def get_action(deck_card_id) do
     # DeckCard ID for the card selected
@@ -104,21 +97,15 @@ defmodule Hexen.HexWorker do
 
     cond do
       length(drawn_cards) < 3 ->
-        # Some kind of front end shuffle turn
-        # IO.puts("Not Enough Cards, time to re-shuffle!")
-        # Mark all deckcards as undrawn
         Hexen.Inventory.shuffle_discard_into_deck(deck_id)
-
-        new_hand = nil
+        nil
 
       length(drawn_cards) == 3 ->
-        # Mark them each as drawn
         drawn_cards
         |> Enum.each(fn hand_card_id ->
           Hexen.Inventory.update_drawn_status(Hexen.Inventory.get_deck_card!(hand_card_id), true)
         end)
 
-        # Send those 3 to the front end
         new_hand =
           drawn_cards
           |> Enum.map(fn deck_card_id ->
@@ -135,25 +122,23 @@ defmodule Hexen.HexWorker do
     end
   end
 
-  defp tile_data(id) do
-    raw_hex =
-      id
-      |> Hexen.Map.get_hex!()
-
-    hex_info =
-      raw_hex
-      |> Map.take([:id, :name, :region_id, :resource, :structure])
+  defp retrieve_state(id) do
+    tile_info = Hexen.Map.get_single_tile(id)
 
     player_info =
       id
       |> Hexen.Map.list_hex_user_ids_by_hex()
       |> Enum.map(fn user_id ->
+        deck = List.first(Hexen.Inventory.get_users_deck_id(user_id))
+
         %{
           player: user_id,
-          deck: List.first(Hexen.Inventory.get_users_deck_id(user_id)),
-          hand: draw_cards(List.first(Hexen.Inventory.get_users_deck_id(user_id)))
+          deck: deck,
+          hand: draw_cards(deck)
         }
       end)
+
+    full_map = Hexen.Map.get_full_board()
 
     # band_info =
     #   raw_hex
@@ -161,8 +146,9 @@ defmodule Hexen.HexWorker do
     #   |> Hexen.People.get_band!()
     #   |> Map.take([:id, :name, :sigil])
 
-    ugly_state = %{
-      tile: hex_info,
+    %{
+      hex_tiles: full_map,
+      tile: tile_info,
       players: player_info
       # band: band_info
     }
@@ -176,39 +162,11 @@ defmodule Hexen.HexWorker do
     Process.send_after(self(), :hex_fetch, 10_000)
   end
 
-  defp broadcast_map_render(updated_state, response) do
-    map = Hexen.Map.get_full_board()
-
+  defp broadcast(updated_state, response, message) do
     HexenWeb.Endpoint.broadcast(
       "hex:#{updated_state[:id]}",
-      "render_map",
-      %{response: response, hex_tiles: map}
-    )
-  end
-
-  defp broadcast_hex_state(updated_state, response) do
-    HexenWeb.Endpoint.broadcast(
-      "hex:#{updated_state[:id]}",
-      "hex_state",
+      message,
       Map.merge(updated_state, %{response: response})
-    )
-  end
-
-  defp broadcast_card_request(updated_state, response) do
-    HexenWeb.Endpoint.broadcast(
-      "hex:#{updated_state[:id]}",
-      "select_card",
-      %{
-        response: response
-      }
-    )
-  end
-
-  defp broadcast_new_hand(new_hand, updated_state, response) do
-    HexenWeb.Endpoint.broadcast(
-      "hex:#{updated_state[:id]}",
-      "new_hand",
-      Map.merge(%{response: response}, new_hand)
     )
   end
 
