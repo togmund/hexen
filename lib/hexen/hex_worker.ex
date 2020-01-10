@@ -2,7 +2,7 @@ defmodule Hexen.HexWorker do
   use GenServer
 
   def start_link(args) do
-    IO.inspect(args)
+    # IO.inspect(args)
     GenServer.start_link(__MODULE__, args, name: via_tuple(args[:name]))
   end
 
@@ -17,10 +17,11 @@ defmodule Hexen.HexWorker do
       |> Map.get(:id)
       |> tile_data()
       |> update_state(state)
-      |> IO.inspect()
 
-    broadcast_map_render()
+    # |> IO.inspect()
+
     # if updated_state != state do
+    broadcast_map_render(updated_state, :ok)
     broadcast_hex_state(updated_state, :ok)
     broadcast_card_request(updated_state, :ok)
     # end
@@ -46,50 +47,50 @@ defmodule Hexen.HexWorker do
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, message) do
-    action = get_action(message)
-    suit = action[:suit]
-    modifier = action[:modifier]
+  # def perform_action(room_name, message) do
+  #   action = get_action(message)
+  #   suit = action[:suit]
+  #   modifier = action[:modifier]
 
-    case suit do
-      "Combat" -> combat(modifier)
-      "Move" -> move(modifier)
-      "Gather" -> gather(modifier)
-      "Explore" -> explore(modifier)
-      "Interact" -> interact(modifier)
-      "Craft" -> craft(modifier)
-    end
-  end
+  #   case suit do
+  #     "Combat" -> combat(modifier)
+  #     "Move" -> move(modifier)
+  #     "Gather" -> gather(modifier)
+  #     "Explore" -> explore(modifier)
+  #     "Interact" -> interact(modifier)
+  #     "Craft" -> craft(modifier)
+  #   end
+  # end
 
-  def combat(modifier) do
-    # TO DO
-    IO.puts("You selected a combat card!")
-  end
+  # def combat(modifier) do
+  #   # TO DO
+  #   IO.puts("You selected a combat card!")
+  # end
 
-  def move(modifier) do
-    # TO DO
-    IO.puts("You selected a movement card!")
-  end
+  # def move(modifier) do
+  #   # TO DO
+  #   IO.puts("You selected a movement card!")
+  # end
 
-  def gather(modifier) do
-    # TO DO
-    IO.puts("You selected a gather card!")
-  end
+  # def gather(modifier) do
+  #   # TO DO
+  #   IO.puts("You selected a gather card!")
+  # end
 
-  def explore(modifier) do
-    # TO DO
-    IO.puts("You selected an exploration card!")
-  end
+  # def explore(modifier) do
+  #   # TO DO
+  #   IO.puts("You selected an exploration card!")
+  # end
 
-  def interact(modifier) do
-    # TO DO
-    IO.puts("You selected a interaction card!")
-  end
+  # def interact(modifier) do
+  #   # TO DO
+  #   IO.puts("You selected a interaction card!")
+  # end
 
-  def craft(modifier) do
-    # TO DO
-    IO.puts("You selected a crafting card!")
-  end
+  # def craft(modifier) do
+  #   # TO DO
+  #   IO.puts("You selected a crafting card!")
+  # end
 
   def draw_cards(deck_id) do
     drawn_cards =
@@ -101,7 +102,7 @@ defmodule Hexen.HexWorker do
     cond do
       length(drawn_cards) < 3 ->
         # Some kind of front end shuffle turn
-        IO.puts("Not Enough Cards, time to re-shuffle!")
+        # IO.puts("Not Enough Cards, time to re-shuffle!")
         # Mark all deckcards as undrawn
         Hexen.Inventory.shuffle_discard_into_deck(deck_id)
 
@@ -172,6 +173,16 @@ defmodule Hexen.HexWorker do
     Process.send_after(self(), :hex_fetch, 10_000)
   end
 
+  defp broadcast_map_render(updated_state, response) do
+    map = Hexen.Map.get_full_board()
+
+    HexenWeb.Endpoint.broadcast(
+      "hex:#{updated_state[:id]}",
+      "render_map",
+      %{response: response, hex_tiles: map}
+    )
+  end
+
   defp broadcast_hex_state(updated_state, response) do
     HexenWeb.Endpoint.broadcast(
       "hex:#{updated_state[:id]}",
@@ -195,19 +206,6 @@ defmodule Hexen.HexWorker do
       "hex:#{updated_state[:id]}",
       "new_hand",
       Map.merge(%{response: response}, new_hand)
-    )
-  end
-
-  defp broadcast_map_render() do
-    map = Hexen.Map.list_hexes()
-    # IO.puts("############################################")
-    # IO.inspect(map)
-    # IO.puts("############################################")
-
-    HexenWeb.Endpoint.broadcast(
-      "hex:*",
-      "render_map",
-      %{hex_tiles: map}
     )
   end
 
