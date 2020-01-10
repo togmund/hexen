@@ -5,6 +5,7 @@ defmodule Hexen.Repo.Migrations.CreateBiomes do
     create table(:biomes) do
       add :name, :string
       add :resource, :string
+      add :image, :string
 
       timestamps()
     end

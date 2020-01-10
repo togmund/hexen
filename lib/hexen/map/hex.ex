@@ -24,6 +24,7 @@ defmodule Hexen.Map.Hex do
     hex
     |> cast(attrs, [:name, :structure, :resource])
     |> validate_required([:name, :structure, :resource])
+    |> foreign_key_constraint([:biome_id, :region_id, :band_id])
     |> unique_constraint(:name)
   end
 end

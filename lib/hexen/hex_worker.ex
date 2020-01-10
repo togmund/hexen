@@ -17,10 +17,11 @@ defmodule Hexen.HexWorker do
       |> Map.get(:id)
       |> tile_data()
       |> update_state(state)
-      |> IO.inspect()
 
-    broadcast_map_render()
+    # |> IO.inspect()
+
     # if updated_state != state do
+    broadcast_map_render(updated_state, :ok)
     broadcast_hex_state(updated_state, :ok)
     broadcast_card_request(updated_state, :ok)
     # end
@@ -104,7 +105,7 @@ defmodule Hexen.HexWorker do
     cond do
       length(drawn_cards) < 3 ->
         # Some kind of front end shuffle turn
-        IO.puts("Not Enough Cards, time to re-shuffle!")
+        # IO.puts("Not Enough Cards, time to re-shuffle!")
         # Mark all deckcards as undrawn
         Hexen.Inventory.shuffle_discard_into_deck(deck_id)
 
@@ -175,6 +176,16 @@ defmodule Hexen.HexWorker do
     Process.send_after(self(), :hex_fetch, 10_000)
   end
 
+  defp broadcast_map_render(updated_state, response) do
+    map = Hexen.Map.get_full_board()
+
+    HexenWeb.Endpoint.broadcast(
+      "hex:#{updated_state[:id]}",
+      "render_map",
+      %{response: response, hex_tiles: map}
+    )
+  end
+
   defp broadcast_hex_state(updated_state, response) do
     HexenWeb.Endpoint.broadcast(
       "hex:#{updated_state[:id]}",
@@ -198,19 +209,6 @@ defmodule Hexen.HexWorker do
       "hex:#{updated_state[:id]}",
       "new_hand",
       Map.merge(%{response: response}, new_hand)
-    )
-  end
-
-  defp broadcast_map_render() do
-    map = Hexen.Map.list_hexes()
-    # IO.puts("############################################")
-    # IO.inspect(map)
-    # IO.puts("############################################")
-
-    HexenWeb.Endpoint.broadcast(
-      "hex:*",
-      "render_map",
-      %{hex_tiles: map}
     )
   end
 

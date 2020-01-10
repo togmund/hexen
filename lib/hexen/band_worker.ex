@@ -18,11 +18,11 @@ defmodule Hexen.BandWorker do
       |> update_state(state)
 
     if updated_state != state do
-      IO.puts("""
-      Band Data for ID:#{updated_state[:id]}
-      Name:#{updated_state[:name]}
-      Sigil:#{updated_state[:sigil]}
-      """)
+      # IO.puts("""
+      # Band Data for ID:#{updated_state[:id]}
+      # Name:#{updated_state[:name]}
+      # Sigil:#{updated_state[:sigil]}
+      # """)
     end
 
     schedule_band_fetch()

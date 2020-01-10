@@ -3,8 +3,9 @@ defmodule HexenWeb.HexChannel do
 
   alias Hexen.HexWorker
 
-  def join("hex:" <> _room, _payload, socket) do
+  def join("hex:" <> room, _payload, socket) do
     # if authorized?(payload) do
+    IO.inspect(room)
     {:ok, socket}
     # else
     #   {:error, %{reason: "unauthorized"}}
@@ -24,7 +25,18 @@ defmodule HexenWeb.HexChannel do
   #   {:noreply, socket}
   # end
 
+  def handle_in("render_map", msg, socket) do
+    msg
+    |> IO.inspect()
+
+    push(socket, "render_map", msg)
+    {:noreply, socket}
+  end
+
   def handle_in("hex_state", msg, socket) do
+    msg
+    |> IO.inspect()
+
     push(socket, "hex_state", msg)
     {:noreply, socket}
   end
@@ -47,11 +59,6 @@ defmodule HexenWeb.HexChannel do
 
   def handle_in("clear_selection", msg, socket) do
     push(socket, "clear_selection", msg)
-    {:noreply, socket}
-  end
-
-  def handle_in("render_map", msg, socket) do
-    push(socket, "render_map", msg)
     {:noreply, socket}
   end
 

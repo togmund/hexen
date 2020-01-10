@@ -2,10 +2,10 @@ defmodule Hexen.DatabaseSeeder do
   @moduledoc """
   Script for populating the database. You can run it as:
 
-      mix ecto.drop
-      mix ecto.create
-      mix ecto.migrate
-      mix run priv/repo/seeds.exs
+  mix ecto.drop
+  mix ecto.create
+  mix ecto.migrate
+  mix run priv/repo/seeds.exs
 
   Inside the script, you can read and write to any of your
   repositories directly:
@@ -54,30 +54,6 @@ defmodule Hexen.DatabaseSeeder do
 
   Repo.delete_all(User)
   Repo.delete_all(Band)
-
-  # Hex seeds
-  rows = 10
-  long_col = 10
-  top = %{q: 0, r: 0, s: 0}
-
-  Enum.each(0..rows, fn x ->
-    Enum.each(0..long_col, fn y ->
-      Repo.insert!(%Hex{
-        structure: "Castle",
-        q: top[:q] + x,
-        r: top[:r] - y,
-        s: top[:s] + y
-      })
-    end)
-
-    if rem(x, 2) == 0 do
-      Map.update(top, :s, top[:s], &(&1 + 1))
-      # top[:s] = top[:s] + 1
-    else
-      Map.update(top, :r, top[:r], &(&1 + 1))
-      # top[:r] = top[:r] + 1
-    end
-  end)
 
   # Band Seeds
   Repo.insert!(%Band{
@@ -132,53 +108,98 @@ defmodule Hexen.DatabaseSeeder do
   # Biome Seeds
   Repo.insert!(%Biome{
     name: "Tundra",
-    resource: "Silver"
+    resource: "Silver",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Taiga",
-    resource: "Softwood"
+    resource: "Softwood",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Mountain",
-    resource: "Iron"
+    resource: "Iron",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Woodland",
-    resource: "Hardwood"
+    resource: "Hardwood",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Grassland",
-    resource: "Wheat"
+    resource: "Wheat",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Chaparral",
-    resource: "Gold"
+    resource: "Gold",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Savanna",
-    resource: "Leather"
+    resource: "Leather",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Fen",
-    resource: "Fur"
+    resource: "Fur",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Desert",
-    resource: "Glass"
+    resource: "Glass",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
 
   Repo.insert!(%Biome{
     name: "Tropic",
-    resource: "Fruit"
+    resource: "Fruit",
+    image:
+      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
   })
+
+  # Hex seeds
+  rows = 10
+  long_col = 10
+  top = %{q: 0, r: 0, s: 0}
+
+  Enum.each(0..rows, fn x ->
+    Enum.each(0..long_col, fn y ->
+      Repo.insert!(%Hex{
+        biome_id: Enum.random(1..10),
+        region_id: Enum.random(1..3),
+        q: top[:q] + x,
+        r: top[:r] - y,
+        s: top[:s] + y
+      })
+    end)
+
+    if rem(x, 2) == 0 do
+      Map.update(top, :s, top[:s], &(&1 + 1))
+      # top[:s] = top[:s] + 1
+    else
+      Map.update(top, :r, top[:r], &(&1 + 1))
+      # top[:r] = top[:r] + 1
+    end
+  end)
 
   # Hex_User Seeds
   Repo.insert!(%HexUser{
