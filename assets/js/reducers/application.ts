@@ -5,6 +5,7 @@
 export default function reducer(state: any, action: any) {
   switch (action.type) {
     case SET_BOARD:
+      console.log(action);
       return {
         ...state,
         hex_tiles: action.hex_tiles

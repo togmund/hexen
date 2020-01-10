@@ -94,7 +94,7 @@ defmodule Hexen.HexWorker do
     cond do
       length(drawn_cards) < 3 ->
         Hexen.Inventory.shuffle_discard_into_deck(deck_id)
-        new_hand = nil
+        nil
 
       length(drawn_cards) == 3 ->
         drawn_cards
