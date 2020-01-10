@@ -293,20 +293,6 @@ defmodule Hexen.Map do
   end
 
   @doc """
-  Move a player to the target hex.
-
-  """
-  # def move_player(user_id, target_hex_id) do
-  #   query = Repo
-  # end
-
-  # def create_hex(attrs \\ %{}) do
-  #   %Hex{}
-  #   |> Hex.changeset(attrs)
-  #   |> Repo.insert()
-  # end
-
-  @doc """
   Returns the list of hex_users.
 
   ## Examples
