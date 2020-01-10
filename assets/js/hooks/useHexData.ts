@@ -21,7 +21,7 @@ export default function useHexData() {
   // };
 
   useEffect(() => {
-    init(socket, 1);
+    return init(socket, 1);
   }, []);
 
   const init = (socket, hexID) => {
@@ -42,7 +42,7 @@ export default function useHexData() {
     // Render the map on the render_map broadcast
     channel.on('render_map', msg => {
       console.log(msg);
-      dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
+      // dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
     });
 
     // // Update the hex on the hex_state broadcast
