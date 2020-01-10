@@ -475,5 +475,6 @@ defmodule Hexen.Map do
         where: hu.user_id == ^id and is_nil(hu.departed),
         select: hu.hex_id
     )
+    |> List.first()
   end
 end

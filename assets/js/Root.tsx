@@ -12,7 +12,7 @@ const Root: React.FC = () => (
     <Sidebar />
     <div>
       <Map />
-      <Hand />
+      {/* <Hand /> */}
     </div>
   </>
 );

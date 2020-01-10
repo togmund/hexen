@@ -16,7 +16,7 @@ defmodule HexenWeb.Router do
   scope "/api", HexenWeb do
     pipe_through :api
 
-    resources "/map", UserController, only: [:show]
+    resources "/map", MapController, only: [:show]
   end
 
   scope "/", HexenWeb do

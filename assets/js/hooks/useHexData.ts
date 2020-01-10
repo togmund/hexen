@@ -18,24 +18,28 @@ export default function useHexData() {
   });
 
   useEffect(() => {
-    getUserAndTile();
-
-    init(socket, state.tile.id);
+    return getInitialBoardFromUser(state.player);
+    // Promise.all([getInitialBoardFromUser(state.player)]).then(
+    //   init(socket, state.tile.id)
+    // );
   }, []);
 
-  const getUserAndTile = id => {
+  const getInitialBoardFromUser = (id: any) => {
     fetch(`api/map/${id}`)
-      .then(res => {
-        console.log(res);
-        return res.json;
+      .then(response => {
+        console.log(response);
+        response.json;
       })
-      .then(data => {
-        console.log(data);
+      .then(response => {
+        console.log(response);
         // dispatch({ type: SET_INITIAL, action: data });
       });
   };
 
-  const init = (socket, hexID) => {
+  const init = (
+    socket: { channel: (arg0: string, arg1: {}) => any },
+    hexID: any
+  ) => {
     // Establish the Channel
     const room = hexID;
     const channel = socket.channel('hex:' + room, {});
