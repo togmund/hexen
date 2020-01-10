@@ -13,12 +13,12 @@ import { value } from '../components/Hand';
 export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
     hex_tiles: [],
-    tile: {},
+    tile: { id: 1 },
     hand: []
   });
 
   useEffect(() => {
-    return init(socket, 1);
+    return init(socket, state.tile.id);
   }, []);
 
   const init = (socket, hexID) => {
@@ -56,7 +56,7 @@ export default function useHexData() {
       channel
         .push('selected_card', {
           deck_card_id: value,
-          room_name: `hex:${room}`,
+          room_name: `hex:${state.tile.id}`,
           user_id: 1, // TO DO
           target_hex_id: 3 // TO DO
         })
