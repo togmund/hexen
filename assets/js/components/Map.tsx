@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HexGrid, Layout, Hexagon, Text } from 'react-hexgrid';
+import { HexGrid, Layout, Hexagon, Text, Pattern } from 'react-hexgrid';
 import socket from '../socket';
 import BandChannel from '../band_channel';
 import '../../css/Map.css';
@@ -14,15 +14,26 @@ const Map = (props: any) => {
         <Layout
           size={{ x: 8, y: 8 }}
           flat={true}
-          spacing="1.005"
+          spacing={1.005}
           origin={{ x: -25, y: -15 }}
         >
           {state.hex_tiles.map((hex: any) => (
-            <Hexagon key={hex.id} q={hex.q} r={hex.r} s={hex.s}>
+            <Hexagon
+              key={hex.id}
+              q={hex.q}
+              r={hex.r}
+              s={hex.s}
+              // fill="img-desert"
+            >
               <Text>{hex.id}</Text>
             </Hexagon>
           ))}
         </Layout>
+        <Pattern
+          id="img-desert"
+          link="https://s.put.re/DbxeC7th.png"
+          size={{ x: 8, y: 8 }}
+        />
       </HexGrid>
     </div>
   );
