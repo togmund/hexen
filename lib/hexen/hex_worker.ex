@@ -73,8 +73,6 @@ defmodule Hexen.HexWorker do
   end
 
   def gather(_modifier, user_id, _target_hex_id) do
-    # Add to current_deck's deck_card
-
     # Adds an existing Crafting card to your deck based on resource
     # Modifier indicates quality of added card?
 
@@ -87,14 +85,15 @@ defmodule Hexen.HexWorker do
 
     # List possible cards to craft
     # Take one of them
-    card = Hexen.Inventory.get_card_ids_by_suit_list_and_resource(["Craft"])
+    card_id =
+      Hexen.Inventory.get_card_ids_by_suit_list_and_resource(["Craft"], resource)
+      |> Enum.shuffle()
+      |> List.first()
 
-    Hexen.Inventory.get_deck!(user_id)
-    |> Hexen.Inventory.update_deck(%{cardback: 'xxx', name: 'xxx', user_id: user_id})
-
+    # Add to current_deck's deck_card
     deck_id = Hexen.Inventory.get_users_deck_id(user_id)
 
-    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card["id"]})
+    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
   end
 
   def explore(_modifier, _target_hex_id) do
