@@ -73,23 +73,21 @@ defmodule Hexen.HexWorker do
   end
 
   def gather(_modifier, user_id, _target_hex_id) do
-    # Gathers the active resource
+    # Add to current_deck's deck_card
+
     # Adds an existing Crafting card to your deck based on resource
     # Modifier indicates quality of added card?
 
-    # TO DO: Implement modifier
+    # Gathers the active resource
+    # Get Current hex
+    # Get Current resource
     resource =
       Hexen.Map.get_active_hex_id_for_user(user_id)
       |> Hexen.Map.get_resource_by_hex_id()
 
-    card =
-      Hexen.Inventory.create_card(%{
-        description: 'xxx',
-        image: 'xxx',
-        modifier: 2,
-        name: 'xxx',
-        suit: resource
-      })
+    # List possible cards to craft
+    # Take one of them
+    card = Hexen.Inventory.get_card_ids_by_suit_list_and_resource(["Craft"])
 
     Hexen.Inventory.get_deck!(user_id)
     |> Hexen.Inventory.update_deck(%{cardback: 'xxx', name: 'xxx', user_id: user_id})

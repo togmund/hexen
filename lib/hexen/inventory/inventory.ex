@@ -356,4 +356,13 @@ defmodule Hexen.Inventory do
     from(dc in DeckCard, where: dc.deck_id == ^deck_id, update: [set: [drawn: false]])
     |> Repo.update_all([])
   end
+
+  def get_card_ids_by_suit_list(suits) do
+    from(c in Card, where: c.suit in ^suits, select: c.id) |> Repo.all()
+  end
+
+  def get_card_ids_by_suit_list_and_resource(suits, resource) do
+    from(c in Card, where: c.suit in ^suits, select: c.id and c.resource == ^resource)
+    |> Repo.all()
+  end
 end
