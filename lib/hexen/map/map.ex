@@ -439,6 +439,40 @@ defmodule Hexen.Map do
   end
 
   @doc """
+  Returns the list of hex_users.
+
+  ## Examples
+
+      iex> list_hex_users()
+      [%HexUser{}, ...]
+
+  """
+
+  @doc """
+  Returns the list of hexes.
+
+  ## Examples
+
+      iex> list_hexes()
+      [%Hex{}, ...]
+
+  """
+  def list_hex_ids do
+    Repo.all(
+      from h in Hex,
+        select: h.id
+    )
+  end
+
+  def list_hex_user_ids_by_hex(hex_id) do
+    Repo.all(
+      from hu in HexUser,
+        where: hu.hex_id == ^hex_id,
+        select: hu.id
+    )
+  end
+
+  @doc """
   """
   def get_full_board do
     Repo.all(
@@ -485,5 +519,14 @@ defmodule Hexen.Map do
           image: b.image
         }
     )
+  end
+
+  def get_active_hex_id_for_user(id) do
+    Repo.all(
+      from hu in HexUser,
+        where: hu.user_id == ^id and is_nil(hu.departed),
+        select: hu.hex_id
+    )
+    |> List.first()
   end
 end

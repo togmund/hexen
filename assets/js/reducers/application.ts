@@ -4,6 +4,13 @@
 // Returns an updated state based on the modification
 export default function reducer(state: any, action: any) {
   switch (action.type) {
+    case SET_INITIAL:
+      console.log(action);
+      return {
+        ...state,
+        hex_tiles: action.action.hex_tiles,
+        tile: action.action.tile
+      };
     case SET_BOARD:
       console.log(action);
       return {
@@ -48,6 +55,7 @@ export default function reducer(state: any, action: any) {
       );
   }
 }
+export const SET_INITIAL = 'SET_INITIAL';
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
 export const SET_HAND = 'SET_HAND';
