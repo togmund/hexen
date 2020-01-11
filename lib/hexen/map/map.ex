@@ -423,15 +423,6 @@ defmodule Hexen.Map do
     )
   end
 
-  def get_hex_user_by_user(userID) do
-    query =
-      from hu in HexUser,
-        where: hu.user_id == ^userID and is_nil(hu.departed),
-        select: hu
-
-    Repo.one(query)
-  end
-
   def update_player_departure(%HexUser{} = hex_user, departure_time) do
     hex_user
     |> Ecto.Changeset.change(%{departed: departure_time})
@@ -528,5 +519,14 @@ defmodule Hexen.Map do
         select: hu.hex_id
     )
     |> List.first()
+  end
+
+  def get_resource_by_hex_id(hex_id) do
+    query =
+      from h in Hex,
+        where: h.id == ^hex_id,
+        select: h.resource
+
+    Repo.one(query)
   end
 end
