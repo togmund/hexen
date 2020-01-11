@@ -1,8 +1,19 @@
 nav.sidebar {
   display: flex;
   flex-direction: column;
+  background-color:#675f53;
+  padding: 16px;
+}
+
+nav.hex-info {
+  display: flex;
+  flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-evenly;
-  background-color:#675f53;
+  background-color:#dfebdc;
   color:#675f53;
+}
+
+nav.deck {
+  background-color:#dfebdc;
 }

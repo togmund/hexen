@@ -1,7 +1,7 @@
 import * as React from 'react';
-import '../../css/Card.css';
 import HandCard from './HandCard';
 import { Tiles } from '@rebass/layout';
+import '../../css/Hand.css';
 
 const Hand = (props: { state: any }) => {
   const { state } = props;
@@ -12,7 +12,7 @@ const Hand = (props: { state: any }) => {
   };
 
   return (
-    <Tiles width={[96, null, 128]} className="card-container">
+    <Tiles columns={[2, null, 3]} className="card-container">
       {state.hand ? (
         state.hand.map(card => (
           <HandCard

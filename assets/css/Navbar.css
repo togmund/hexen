@@ -1,9 +1,22 @@
 nav.navbar {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
+  align-items: center;
   background-color:#675f53;
   color:#675f53;
+  padding: 16px;
+}
+nav.navbar.game-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
 
+nav span{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  background-color:#dfebdc;
 }

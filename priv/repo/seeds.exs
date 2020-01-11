@@ -222,7 +222,7 @@ defmodule Hexen.DatabaseSeeder do
     name: "Sword",
     suit: "Combat",
     description: "Deals three physical damage",
-    image: "http://pixelartmaker.com/art/2b2ed076ce0f346.png",
+    image: "https://i.ibb.co/xspKdvw/c4oui-Ug-8x.png",
     modifier: 3
   })
 
@@ -230,39 +230,39 @@ defmodule Hexen.DatabaseSeeder do
     name: "Long Haul Boots",
     suit: "Move",
     description: "Travel two hexes instead of one.",
-    image: "http://pixelartmaker.com/art/920bb2ea34df485.png",
+    image: "https://i.ibb.co/DrgyDXG/ex3-Qkkr-8x.png",
     modifier: 2
   })
 
   Repo.insert!(%Card{
-    name: "Pickaxe",
+    name: "Axe",
     suit: "Gather",
-    description: "Triple haul on ore resources.",
-    image: "http://pixelartmaker.com/art/16c8f43e143cb6d.png",
+    description: "Triple haul on wood resources.",
+    image: "https://i.ibb.co/cTYqfyf/RV5-GWF8-8x.png",
     modifier: 3
   })
 
   Repo.insert!(%Card{
-    name: "Spyglass",
+    name: "Map",
     suit: "Explore",
-    description: "See resources in one layer of fog of war.",
-    image: "https://image.flaticon.com/icons/svg/486/486425.svg",
+    description: "See nearby quest markers.",
+    image: "https://i.ibb.co/ngC8G2d/Lde-Txc2-8x.png",
     modifier: 1
   })
 
   Repo.insert!(%Card{
-    name: "Cart",
-    suit: "Interact",
-    description: "Bundle two cards for a trade.",
-    image: "https://i.redd.it/79iyl3f4zhf31.png",
+    name: "Strange Brew",
+    suit: "Craft",
+    description: "Concoct an elixir.",
+    image: "https://i.ibb.co/cQMbv3Q/4g7-ITMF-8x.png",
     modifier: 2
   })
 
   Repo.insert!(%Card{
-    name: "Anvil",
-    suit: "Craft",
-    description: "Extra bonus on crafted weapons.",
-    image: "http://pixelartmaker.com/art/9cf72f5b79c4946.png",
+    name: "Pie",
+    suit: "Interact",
+    description: "Share a pie with a friend.",
+    image: "https://i.ibb.co/JB5HjBd/Gga5-WIi-8x.png",
     modifier: 3
   })
 

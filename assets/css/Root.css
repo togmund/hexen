@@ -1,16 +1,3 @@
-/* @font-face {
-  font-family: 'Alagard';
-  src: local('Alagard'), url('../fonts/alagard-2.ttf') format('truetype');
-} */
-
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-  /* font-family: 'Alagard'; */
-  background-color: #548297;
-}
-
-
 :root {
   --groovy-giraffe: #f2a612;
   --aquella: #5db8d8;
@@ -24,23 +11,35 @@ body {
   --morel: #675f53;
 }
 
+@font-face {
+  font-family: 'Alagard';
+  src: local('Alagard'), url('../fonts/alagard-2.ttf') format('truetype');
+}
+
+body {
+  margin: 0px;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Alagard';
+  background-color: #548297;
+  overflow: hidden;
+}
+
 .root-area {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
 }
 
 .play-area {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
+  height: 100vh;
 }
 
 .board-area {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
 }

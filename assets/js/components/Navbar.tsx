@@ -11,19 +11,15 @@ const Navbar = () => {
 
   return (
     <nav className={'navbar'}>
-      <img
-        src="https://s.put.re/cH2D7Qq6.png"
-        alt="deck-icon"
-        height="40"
-        width="30"
-        className={'deck-icon'}
-      ></img>
-      <p className={'cards-remaining'}>{CARDS_IN_DECK}</p>
-      <p className={'attack-cards-remaining'}>{ATTACK_CARDS}</p>
-      <p className={'gather-cards-remaining'}>{GATHER_CARDS}</p>
-      <p className={'move-cards-remaining'}>{MOVE_CARDS}</p>
-      <p className={'turn-timer'}>{TIMER}</p>
-      <p className={'num-players'}>{PLAYERS}</p>
+      <img src={require('../../images/hexagon-new.png').default}></img>
+      <span className={'game-info'}>
+        <span>{CARDS_IN_DECK}</span>
+        <span>{ATTACK_CARDS}</span>
+        <span>{GATHER_CARDS}</span>
+        <span>{MOVE_CARDS}</span>
+        <span>{TIMER}</span>
+        <span>{PLAYERS}</span>
+      </span>
     </nav>
   );
 };

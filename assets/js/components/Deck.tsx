@@ -1,26 +1,17 @@
 import * as React from 'react';
+import '../../css/Deck.css';
 
-const Deck = ({ children }: { children: any }) => {
-  const image = '...';
-
-  // Display the remaining cards in the deck
-  function showCards() {
-    // TO DO
-  }
-
-  // Display how many cards remain in the deck
-  function showCount() {
-    // TO DO
-  }
+const Deck = (props: { state: any }) => {
+  const { state } = props;
 
   return (
     <img
       className="deck"
-      src={image}
+      src={state.image}
       alt="deck-image"
-      onClick={showCards}
-      onMouseOver={showCount}
-    ></img>
+      onClick={state.showCards}
+      onMouseOver={state.showCount}
+    />
   );
 };
 
