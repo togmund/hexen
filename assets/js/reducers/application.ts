@@ -8,10 +8,11 @@ export default function reducer(state: any, action: any) {
       console.log(action);
       return {
         ...state,
-        hex_tiles: action.hex_tiles,
-        tile: action.tile
+        hex_tiles: action.action.hex_tiles,
+        tile: action.action.tile
       };
     case SET_BOARD:
+      console.log(action);
       return {
         ...state,
         hex_tiles: action.hex_tiles
