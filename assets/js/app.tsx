@@ -1,10 +1,8 @@
 import 'phoenix_html';
-import HexChannel from './hex_channel';
-import socket from './socket';
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Root from './Root';
+// import 'assets/css/App.css';
 
 // This code starts up the React app when it runs in a browser. It sets up the routing
 // configuration and injects the app into a DOM element.

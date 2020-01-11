@@ -11,14 +11,16 @@ const Root: React.FC = () => {
   const { state } = useHexData();
 
   return (
-    <>
+    <div className="">
       <Navbar />
-      <Sidebar />
-      <div>
-        <Map state={state} />
-        <Hand state={state} />
+      <div className="play-area">
+        <Sidebar state={state} />
+        <div className="board-area">
+          <Map state={state} />
+          <Hand state={state} />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,16 +1,6 @@
 section {
-  height: 100%;
-  width: 200px;
-  position: fixed;
+  width: 25%;
   z-index: 1;
-  text-align: center;
-  top: 3.1em;
-  left: 0;
-  overflow-x: hidden;
-  background-color: #966F33;
-  background-image: url("https://www.transparenttextures.com/patterns/dark-wood.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-  color: white;
-  display: none;
-  /* For map building purposes */
+  background-color: #43322f;
+  color: #dfebdc;
 }
