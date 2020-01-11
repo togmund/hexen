@@ -56,13 +56,16 @@ defmodule Hexen.HexWorker do
   end
 
   def combat(_modifier, _user_id, _target_hex_id, _target_user_id) do
-    # Duel
-
-    # Transfer card to winner of duel
+    # Challenges a local player to a duel
+    # Winner wins an Explore card
+    # Modifier indicates quality of added card?
   end
 
   def move(_modifier, user_id, target_hex_id) do
-    # TO DO: Implement modifier
+    # Moves to a tile
+    # Adds an Interact, Explore or Move card to your deck
+    # Modifier indicates quality of added card?
+
     Hexen.Map.get_active_hex_id_for_user(user_id)
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
@@ -70,6 +73,10 @@ defmodule Hexen.HexWorker do
   end
 
   def gather(_modifier, user_id, _target_hex_id) do
+    # Gathers the active resource
+    # Adds an existing Crafting card to your deck based on resource
+    # Modifier indicates quality of added card?
+
     # TO DO: Implement modifier
     resource =
       Hexen.Map.get_active_hex_id_for_user(user_id)
@@ -94,16 +101,22 @@ defmodule Hexen.HexWorker do
 
   def explore(_modifier, _target_hex_id) do
     # TO DO
+    # Highlights a Tile with a Quest
+    # Quests, on completion, add new recipies to be crafted
     IO.puts("You selected an exploration card!")
   end
 
   def interact(_modifier, _target_hex_id) do
     # TO DO
+    # Adds an explore card to your deck
+    # Or does something else complex
     IO.puts("You selected an interaction card!")
   end
 
   def craft(_modifier, _target_hex_id) do
     # TO DO
+    # Choose to create one of X cards based on resource
+    # Adds that card to your deck
     IO.puts("You selected a crafting card!")
   end
 
