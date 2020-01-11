@@ -10,6 +10,7 @@ import '../css/Root.css';
 
 const Root: React.FC = () => {
   const { state } = useHexData();
+
   return (
     <div className="root-area">
       <Navbar />

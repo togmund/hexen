@@ -5,7 +5,6 @@
 export default function reducer(state: any, action: any) {
   switch (action.type) {
     case SET_INITIAL:
-      console.log(action);
       return {
         ...state,
         hex_tiles: action.action.hex_tiles,
@@ -21,16 +20,16 @@ export default function reducer(state: any, action: any) {
       return {
         ...state,
         tile: {
-          id: action.id,
-          name: action.name,
-          q: action.q,
-          r: action.r,
-          s: action.s,
-          structure: action.structure,
-          region_name: action.name,
-          biome_name: action.name,
-          resource: action.resource,
-          image: action.image
+          id: action.tile.id,
+          name: action.tile.name,
+          q: action.tile.q,
+          r: action.tile.r,
+          s: action.tile.s,
+          structure: action.tile.structure,
+          region_name: action.tile.name,
+          biome_name: action.tile.name,
+          resource: action.tile.resource,
+          image: action.tile.image
         }
       };
     case SET_HAND:
