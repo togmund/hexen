@@ -17,7 +17,7 @@ const Map = (props: { state: any }) => {
       <HexGrid width={'95vw'} height={'75vh'} viewBox={'-60 -200 125 200'}>
         <Layout
           size={{ x: 10, y: 10 }}
-          flat={false}
+          flat={true}
           spacing={1.005}
           origin={{ x: -100, y: -150 }}
         >
