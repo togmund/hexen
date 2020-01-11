@@ -4,16 +4,14 @@
 // Returns an updated state based on the modification
 export default function reducer(state: any, action: any) {
   switch (action.type) {
-    case SET_BOARD:
+    case SET_INITIAL:
       console.log(action);
       return {
         ...state,
-        player: action.player.id,
         hex_tiles: action.hex_tiles,
         tile: action.tile
       };
     case SET_BOARD:
-      console.log(action);
       return {
         ...state,
         hex_tiles: action.hex_tiles

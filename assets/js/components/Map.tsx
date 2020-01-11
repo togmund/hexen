@@ -3,10 +3,9 @@ import { HexGrid, Layout, Hexagon, Text } from 'react-hexgrid';
 import socket from '../socket';
 import BandChannel from '../band_channel';
 import '../../css/Map.css';
-import useHexData from '../hooks/useHexData';
 
-const Map = () => {
-  const { state } = useHexData();
+const Map = (props: { state: any }) => {
+  const { state } = props;
 
   return (
     <div className={'hex-map'}>

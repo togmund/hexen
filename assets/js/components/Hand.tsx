@@ -2,10 +2,9 @@ import * as React from 'react';
 import '../../css/Card.css';
 import HandCard from './HandCard';
 import { Tiles } from '@rebass/layout';
-import useHexData from '../hooks/useHexData';
 
-const Hand = () => {
-  const { state } = useHexData();
+const Hand = (props: { state: any }) => {
+  const { state } = props;
 
   const onChange = (id: number | null) => {
     value = id;

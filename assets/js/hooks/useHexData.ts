@@ -13,26 +13,22 @@ export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
     player: 1,
     hex_tiles: [],
-    tile: {},
+    tile: { id: 1 },
     hand: []
   });
 
   useEffect(() => {
-    return getInitialBoardFromUser(state.player);
-    // Promise.all([getInitialBoardFromUser(state.player)]).then(
-    //   init(socket, state.tile.id)
-    // );
+    getInitialBoardFromUser(state.player);
+    return init(socket, state.tile.id);
   }, []);
 
   const getInitialBoardFromUser = (id: any) => {
     fetch(`api/map/${id}`)
       .then(response => {
-        console.log(response);
-        response.json;
+        return response.json();
       })
       .then(response => {
-        console.log(response);
-        // dispatch({ type: SET_INITIAL, action: data });
+        dispatch({ type: SET_INITIAL, action: response.data });
       });
   };
 

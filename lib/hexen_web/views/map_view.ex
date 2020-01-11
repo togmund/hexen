@@ -1,12 +1,16 @@
 defmodule HexenWeb.MapView do
   use HexenWeb, :view
+  alias HexenWeb.MapView
 
   def render("show.json", %{initial_state: initial_state}) do
-    initial_state
-    |> render_one(__MODULE__, "initial_state.json")
+    %{
+      data: render_one(initial_state, MapView, "initial_state.json", as: :initial_state)
+    }
   end
 
   def render("initial_state.json", %{initial_state: initial_state}) do
-    %{data: initial_state}
+    initial_state
+    |> Jason.encode!()
+    |> Jason.decode!()
   end
 end
