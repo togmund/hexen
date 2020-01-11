@@ -175,32 +175,25 @@ defmodule Hexen.DatabaseSeeder do
   # Hex seeds
   rows = 10
   long_col = 10
-  top = %{q: 0, r: 0, s: 0}
-  IO.puts("reset")
 
   # Quirk of react-hexgrid package: r == z and s == y if we follow https://www.redblobgames.com/grids/hexagons/
   Enum.each(0..rows, fn x ->
+    top =
+      if rem(x, 2) == 0 do
+        %{q: x, r: -trunc(x / 2), s: -trunc(x / 2)}
+      else
+        %{q: x, r: -trunc(Float.ceil(x / 2, 0)), s: -trunc(Float.floor(x / 2, 0))}
+      end
+
     Enum.each(0..long_col, fn y ->
       Repo.insert!(%Hex{
         biome_id: Enum.random(1..11),
         region_id: Enum.random(1..3),
-        q: top[:q] + x,
+        q: top[:q],
         r: top[:r] + y,
         s: top[:s] - y
       })
     end)
-
-    if rem(x, 2) == 0 do
-      top = %{top | s: top[:s] - 1}
-      # top = Map.update(top, :s, top[:s], &(&1 - 1))
-      IO.puts("###############################")
-      IO.inspect(top)
-    else
-      top = %{top | r: top[:r] - 1}
-      # top = Map.update(top, :r, top[:r], &(&1 - 1))
-      IO.puts("###############################")
-      IO.inspect(top)
-    end
   end)
 
   # Hex_User Seeds
