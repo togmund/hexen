@@ -8,10 +8,9 @@ defmodule Hexen.Repo.Migrations.CreateCards do
       add :suit, :string
       add :modifier, :integer
       add :image, :string
+      add :material, :string
 
       timestamps()
     end
-
-    create unique_index(:cards, [:name])
   end
 end

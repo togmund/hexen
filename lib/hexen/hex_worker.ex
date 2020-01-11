@@ -40,7 +40,7 @@ defmodule Hexen.HexWorker do
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
+  def perform_action(_room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
     action = get_action(deck_card_id)
     suit = action[:suit]
     modifier = action[:modifier]
@@ -55,55 +55,65 @@ defmodule Hexen.HexWorker do
     end
   end
 
-  def combat(modifier, user_id, target_hex_id, target_user_id) do
-    # Duel
-
-    # Transfer card to winner of duel
+  def combat(_modifier, _user_id, _target_hex_id, _target_user_id) do
+    # Challenges a local player to a duel
+    # Winner wins an Explore card
+    # Modifier indicates quality of added card?
   end
 
-  def move(modifier, user_id, target_hex_id) do
-    # TO DO: Implement modifier
+  def move(_modifier, user_id, target_hex_id) do
+    # Moves to a tile
+    # Adds an Interact, Explore or Move card to your deck
+    # Modifier indicates quality of added card?
+
     Hexen.Map.get_active_hex_id_for_user(user_id)
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
   end
 
-  def gather(modifier, user_id, target_hex_id) do
-    # TO DO: Implement modifier
+  def gather(_modifier, user_id, _target_hex_id) do
+    # Adds an existing Crafting card to your deck based on resource
+    # Modifier indicates quality of added card?
+
+    # Gathers the active resource
+    # Get Current hex
+    # Get Current resource
     resource =
       Hexen.Map.get_active_hex_id_for_user(user_id)
       |> Hexen.Map.get_resource_by_hex_id()
 
-    card =
-      Hexen.Inventory.create_card(%{
-        description: 'xxx',
-        image: 'xxx',
-        modifier: 2,
-        name: 'xxx',
-        suit: resource
-      })
+    # List possible cards to craft
+    # Take one of them
+    card_id =
+      Hexen.Inventory.get_card_ids_by_suit_list_and_resource(["Craft"], resource)
+      |> Enum.shuffle()
+      |> List.first()
 
-    Hexen.Inventory.get_deck!(user_id)
-    |> Hexen.Inventory.update_deck(%{cardback: 'xxx', name: 'xxx', user_id: user_id})
-
+    # Add to current_deck's deck_card
     deck_id = Hexen.Inventory.get_users_deck_id(user_id)
 
-    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card["id"]})
+    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
   end
 
-  def explore(modifier, target_hex_id) do
+  def explore(_modifier, _target_hex_id) do
     # TO DO
+    # Highlights a Tile with a Quest
+    # Quests, on completion, add new recipies to be crafted
     IO.puts("You selected an exploration card!")
   end
 
-  def interact(modifier, target_hex_id) do
+  def interact(_modifier, _target_hex_id) do
     # TO DO
+    # Adds an explore card to your deck
+    # Or does something else complex
     IO.puts("You selected an interaction card!")
   end
 
-  def craft(modifier, target_hex_id) do
+  def craft(_modifier, _target_hex_id) do
     # TO DO
+    # Choose to create one of X cards based on resource
+    # Adds that card to your deck
     IO.puts("You selected a crafting card!")
   end
 
