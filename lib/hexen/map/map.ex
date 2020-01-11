@@ -529,4 +529,13 @@ defmodule Hexen.Map do
     )
     |> List.first()
   end
+
+  def get_resource_by_hex_id(hex_id) do
+    query =
+      from h in Hex,
+        where: h.id = ^hex_id,
+        select: h.resource
+
+    Repo.one(query)
+  end
 end

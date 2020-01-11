@@ -46,18 +46,17 @@ defmodule Hexen.HexWorker do
     modifier = action[:modifier]
 
     case suit do
-      "Combat" -> combat(modifier, target_hex_id)
+      "Combat" -> combat(modifier, user_id, target_hex_id)
       "Move" -> move(modifier, user_id, target_hex_id)
-      "Gather" -> gather(modifier, target_hex_id)
+      "Gather" -> gather(modifier, user_id, target_hex_id)
       "Explore" -> explore(modifier, target_hex_id)
       "Interact" -> interact(modifier, target_hex_id)
       "Craft" -> craft(modifier, target_hex_id)
     end
   end
 
-  def combat(modifier, target_hex_id) do
-    # TO DO
-    IO.puts("You selected a combat card!")
+  def combat(modifier, user_id, target_hex_id, target_user_id) do
+    # TO DO: Implement modifier
   end
 
   def move(modifier, user_id, target_hex_id) do
@@ -72,9 +71,9 @@ defmodule Hexen.HexWorker do
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
   end
 
-  def gather(modifier, target_hex_id) do
+  def gather(modifier, user_id, target_hex_id) do
     # TO DO
-    IO.puts("You selected a gather card!")
+    Hexen.Map.
   end
 
   def explore(modifier, target_hex_id) do
