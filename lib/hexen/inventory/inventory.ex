@@ -362,7 +362,7 @@ defmodule Hexen.Inventory do
   end
 
   def get_card_ids_by_suit_list_and_resource(suits, resource) do
-    from(c in Card, where: c.suit in ^suits, select: c.id and c.resource == ^resource)
+    from(c in Card, where: c.suit in ^suits and c.resource == ^resource, select: c.id)
     |> Repo.all()
   end
 end
