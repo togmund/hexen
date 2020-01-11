@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { HexGrid, Layout, Hexagon, Text, Pattern } from 'react-hexgrid';
+import {
+  HexGrid,
+  Layout,
+  Hexagon,
+  Text,
+  Pattern,
+  HexUtils
+} from 'react-hexgrid';
 import '../../css/Map.css';
 
 const Map = (props: { state: any }) => {
@@ -7,28 +14,34 @@ const Map = (props: { state: any }) => {
 
   return (
     <div className={'hex-map'}>
-      <HexGrid width={'95vw'} height={'65vh'} viewBox={'-60 -200 125 200'}>
+      <HexGrid width={'95vw'} height={'75vh'} viewBox={'-60 -200 125 200'}>
         <Layout
-          size={{ x: 8, y: 8 }}
+          size={{ x: 10, y: 10 }}
           flat={false}
           spacing={1.005}
-          origin={{ x: -50, y: -50 }}
+          origin={{ x: -100, y: -150 }}
         >
           {state.hex_tiles ? (
             state.hex_tiles.map((hex: any) => (
-              <Hexagon key={hex.id} q={hex.q} r={hex.r} s={hex.s}>
-                <Text>{hex.id}</Text>
+              <Hexagon
+                key={hex.id}
+                q={hex.q}
+                r={hex.r}
+                s={hex.s}
+                fill={HexUtils.getID(hex)}
+              >
+                {/* <Text>{hex.id}</Text> */}
+                <Pattern
+                  id={HexUtils.getID(hex)}
+                  link={hex.image}
+                  size={{ x: 7, y: 7 }}
+                />
               </Hexagon>
             ))
           ) : (
             <div></div>
           )}
         </Layout>
-        <Pattern
-          id="img-desert"
-          link="https://s.put.re/DbxeC7th.png"
-          size={{ x: 8, y: 8 }}
-        />
       </HexGrid>
     </div>
   );

@@ -4,12 +4,13 @@
 g.hexagon {
   fill: #2d8231;
   color:#675f53;
+  opacity: 60%;
 }
 
 g.hexagon:hover {
   fill:
   #43322f;
-  opacity: 5%;
+  opacity: 100%;
 }
 
 svg g text {

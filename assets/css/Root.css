@@ -21,14 +21,16 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: 'Alagard';
-  overflow: hidden;
   background-color: #dfebdc;
+
+  overflow: hidden;
 }
 
 .root-area {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+
 }
 
 .play-area {
