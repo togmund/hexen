@@ -10,7 +10,7 @@ const Navbar = () => {
   const PLAYERS = 4;
 
   return (
-    <div className={'navbar'}>
+    <nav className={'navbar'}>
       <img
         src="https://s.put.re/cH2D7Qq6.png"
         alt="deck-icon"
@@ -24,7 +24,7 @@ const Navbar = () => {
       <p className={'move-cards-remaining'}>{MOVE_CARDS}</p>
       <p className={'turn-timer'}>{TIMER}</p>
       <p className={'num-players'}>{PLAYERS}</p>
-    </div>
+    </nav>
   );
 };
 

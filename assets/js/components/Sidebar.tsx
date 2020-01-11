@@ -4,7 +4,7 @@ import '../../css/Sidebar.css';
 const Sidebar = (props: { state: any }) => {
   const { state } = props;
   return (
-    <section>
+    <nav className={'sidebar'}>
       <h3>{state.tile.name}</h3>
       <img
         src={state.tile.image}
@@ -19,7 +19,7 @@ const Sidebar = (props: { state: any }) => {
         <li>{state.tile.controlled_by}</li>
         <li>{state.tile.structure}</li>
       </ul>
-    </section>
+    </nav>
   );
 };
 

@@ -1,23 +1,9 @@
-.navbar {
-  height: 50px;
-  background-color: #000000;
-  background-image: url("https://www.transparenttextures.com/patterns/dark-denim-3.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+nav.navbar {
   display: flex;
-  justify-content: space-between;
-}
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  background-color:#675f53;
+  color:#675f53;
 
-.navbar > p {
-  color: white;
-}
-
-.deck-icon {
-  position: relative;
-  top: 0.25em;
-  left: 1em;
-}
-
-.cards-remaining {
-  position: relative;
-  right: 17em;
 }

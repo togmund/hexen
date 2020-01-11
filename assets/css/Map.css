@@ -23,12 +23,9 @@ main {
   width: 100%;
 }
 
-
 g.hexagon {
   fill: #8ac742;
   color:#43322f;
-
-  /* background-image: url("../images/water.png") */
 }
 
 svg g text {
