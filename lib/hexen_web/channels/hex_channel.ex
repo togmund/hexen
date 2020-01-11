@@ -15,7 +15,8 @@ defmodule HexenWeb.HexChannel do
       msg["room_name"],
       msg["deck_card_id"],
       msg["user_id"],
-      msg["target_hex_id"]
+      msg["target_hex_id"],
+      msg["target_user_id"]
     )
 
     {:noreply, socket}

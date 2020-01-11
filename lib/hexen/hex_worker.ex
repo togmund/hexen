@@ -40,7 +40,7 @@ defmodule Hexen.HexWorker do
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
+  def perform_action(_room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
     action = get_action(deck_card_id)
     suit = action[:suit]
     modifier = action[:modifier]
@@ -55,13 +55,13 @@ defmodule Hexen.HexWorker do
     end
   end
 
-  def combat(modifier, user_id, target_hex_id, target_user_id) do
+  def combat(_modifier, _user_id, _target_hex_id, _target_user_id) do
     # Duel
 
     # Transfer card to winner of duel
   end
 
-  def move(modifier, user_id, target_hex_id) do
+  def move(_modifier, user_id, target_hex_id) do
     # TO DO: Implement modifier
     Hexen.Map.get_active_hex_id_for_user(user_id)
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
@@ -69,7 +69,7 @@ defmodule Hexen.HexWorker do
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
   end
 
-  def gather(modifier, user_id, target_hex_id) do
+  def gather(_modifier, user_id, _target_hex_id) do
     # TO DO: Implement modifier
     resource =
       Hexen.Map.get_active_hex_id_for_user(user_id)
@@ -92,17 +92,17 @@ defmodule Hexen.HexWorker do
     Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card["id"]})
   end
 
-  def explore(modifier, target_hex_id) do
+  def explore(_modifier, _target_hex_id) do
     # TO DO
     IO.puts("You selected an exploration card!")
   end
 
-  def interact(modifier, target_hex_id) do
+  def interact(_modifier, _target_hex_id) do
     # TO DO
     IO.puts("You selected an interaction card!")
   end
 
-  def craft(modifier, target_hex_id) do
+  def craft(_modifier, _target_hex_id) do
     # TO DO
     IO.puts("You selected a crafting card!")
   end

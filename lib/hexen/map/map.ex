@@ -407,21 +407,7 @@ defmodule Hexen.Map do
   end
 
   @doc """
-  Returns the list of hex_users.
-
-  ## Examples
-
-      iex> list_hex_users()
-      [%HexUser{}, ...]
-
   """
-  def list_hex_user_ids_by_hex(hex_id) do
-    Repo.all(
-      from hu in HexUser,
-        where: hu.hex_id == ^hex_id,
-        select: hu.id
-    )
-  end
 
   def update_player_departure(%HexUser{} = hex_user, departure_time) do
     hex_user
@@ -430,31 +416,7 @@ defmodule Hexen.Map do
   end
 
   @doc """
-  Returns the list of hex_users.
-
-  ## Examples
-
-      iex> list_hex_users()
-      [%HexUser{}, ...]
-
   """
-
-  @doc """
-  Returns the list of hexes.
-
-  ## Examples
-
-      iex> list_hexes()
-      [%Hex{}, ...]
-
-  """
-  def list_hex_ids do
-    Repo.all(
-      from h in Hex,
-        select: h.id
-    )
-  end
-
   def list_hex_user_ids_by_hex(hex_id) do
     Repo.all(
       from hu in HexUser,
@@ -512,6 +474,8 @@ defmodule Hexen.Map do
     )
   end
 
+  @doc """
+  """
   def get_active_hex_id_for_user(id) do
     Repo.all(
       from hu in HexUser,
@@ -521,6 +485,8 @@ defmodule Hexen.Map do
     |> List.first()
   end
 
+  @doc """
+  """
   def get_resource_by_hex_id(hex_id) do
     query =
       from h in Hex,
