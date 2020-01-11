@@ -3,9 +3,8 @@ import { HexGrid, Layout, Hexagon, Text } from 'react-hexgrid';
 import socket from '../socket';
 import BandChannel from '../band_channel';
 import '../../css/Map.css';
-import useHexData from '../hooks/useHexData';
 
-const Map = (props: any) => {
+const Map = (props: { state: any }) => {
   const { state } = props;
 
   return (
@@ -17,11 +16,15 @@ const Map = (props: any) => {
           spacing="1.005"
           origin={{ x: -25, y: -15 }}
         >
-          {state.hex_tiles.map((hex: any) => (
-            <Hexagon key={hex.id} q={hex.q} r={hex.r} s={hex.s}>
-              <Text>{hex.id}</Text>
-            </Hexagon>
-          ))}
+          {state.hex_tiles ? (
+            state.hex_tiles.map((hex: any) => (
+              <Hexagon key={hex.id} q={hex.q} r={hex.r} s={hex.s}>
+                <Text>{hex.id}</Text>
+              </Hexagon>
+            ))
+          ) : (
+            <div></div>
+          )}
         </Layout>
       </HexGrid>
     </div>
