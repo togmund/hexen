@@ -72,8 +72,26 @@ defmodule Hexen.HexWorker do
   end
 
   def gather(modifier, user_id, target_hex_id) do
-    # TO DO
-    Hexen.Map.
+    # TO DO: Implement modifier
+    resource =
+      Hexen.Map.get_active_hex_id_for_user(user_id)
+      |> Hexen.Map.get_resource_by_hex_id()
+
+    card =
+      Hexen.Inventory.create_card(%{
+        description: 'xxx',
+        image: 'xxx',
+        modifier: 2,
+        name: 'xxx',
+        suit: resource
+      })
+
+    Hexen.Inventory.get_deck!(user_id)
+    |> Hexen.Inventory.update_deck(%{cardback: 'xxx', name: 'xxx', user_id: user_id})
+
+    deck_id = Hexen.Inventory.get_users_deck_id(user_id)
+
+    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card["id"]})
   end
 
   def explore(modifier, target_hex_id) do
@@ -83,7 +101,7 @@ defmodule Hexen.HexWorker do
 
   def interact(modifier, target_hex_id) do
     # TO DO
-    IO.puts("You selected a interaction card!")
+    IO.puts("You selected an interaction card!")
   end
 
   def craft(modifier, target_hex_id) do
