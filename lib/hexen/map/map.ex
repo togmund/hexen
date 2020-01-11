@@ -423,15 +423,6 @@ defmodule Hexen.Map do
     )
   end
 
-  def get_hex_user_by_user(userID) do
-    query =
-      from hu in HexUser,
-        where: hu.user_id == ^userID and is_nil(hu.departed),
-        select: hu
-
-    Repo.one(query)
-  end
-
   def update_player_departure(%HexUser{} = hex_user, departure_time) do
     hex_user
     |> Ecto.Changeset.change(%{departed: departure_time})

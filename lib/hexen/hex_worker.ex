@@ -65,7 +65,7 @@ defmodule Hexen.HexWorker do
     # IO.puts("#############################################################")
 
     # TO DO: Implement modifier
-    Hexen.Map.get_hex_user_by_user(user_id)
+    Hexen.Map.get_active_hex_id_for_user(user_id)
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
