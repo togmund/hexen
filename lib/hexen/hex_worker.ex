@@ -40,13 +40,13 @@ defmodule Hexen.HexWorker do
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, deck_card_id, user_id, target_hex_id) do
+  def perform_action(room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
     action = get_action(deck_card_id)
     suit = action[:suit]
     modifier = action[:modifier]
 
     case suit do
-      "Combat" -> combat(modifier, user_id, target_hex_id)
+      "Combat" -> combat(modifier, user_id, target_hex_id, target_user_id)
       "Move" -> move(modifier, user_id, target_hex_id)
       "Gather" -> gather(modifier, user_id, target_hex_id)
       "Explore" -> explore(modifier, target_hex_id)
@@ -56,7 +56,9 @@ defmodule Hexen.HexWorker do
   end
 
   def combat(modifier, user_id, target_hex_id, target_user_id) do
-    # TO DO: Implement modifier
+    # Duel
+
+    # Transfer card to winner of duel
   end
 
   def move(modifier, user_id, target_hex_id) do
