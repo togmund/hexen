@@ -9,7 +9,6 @@ import useHexData from './hooks/useHexData';
 
 const Root: React.FC = () => {
   const { state } = useHexData();
-
   return (
     <div className="">
       <Navbar />
