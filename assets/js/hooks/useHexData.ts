@@ -59,7 +59,7 @@ export default function useHexData() {
 
     // Update the hex on the hex_state broadcast
     channel.on('SET_HEX', (msg: any) => {
-      dispatch({ type: SET_HEX, tile: msg.tile[1] });
+      dispatch({ type: SET_HEX, tile: msg.tile[0] });
     });
 
     // Update the hand on the new_hand broadcast
@@ -74,7 +74,8 @@ export default function useHexData() {
           deck_card_id: value,
           room_name: `hex:${state.tile.id}`,
           user_id: 1, // TO DO
-          target_hex_id: 3 // TO DO
+          target_hex_id: 3, // TO DO
+          target_user_id: 2 // TO DO
         })
         .receive('ok', (resp: any) => {
           console.log('Card selected successfully', resp);
