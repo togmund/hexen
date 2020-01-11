@@ -1,0 +1,47 @@
+:root {
+  --groovy-giraffe: #f2a612;
+  --aquella: #5db8d8;
+  --jasmine-green: #8ac742;
+  --gorgeous-green: #2d8231;
+  --fresh-cinnamon: #9f5411;
+  --frozen-grass: #dfebdc;
+  --benikeshinezumi-purple: #43322f;
+  --blue-heaven: #548297;
+  --spa-dream: #148cb4;
+  --morel: #675f53;
+}
+
+@font-face {
+  font-family: 'Alagard';
+  src: local('Alagard'), url('../fonts/alagard-2.ttf') format('truetype');
+}
+
+body {
+  margin: 0px;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Alagard';
+  background-color: #dfebdc;
+
+  overflow: hidden;
+}
+
+.root-area {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+}
+
+.play-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 100vh;
+}
+
+.board-area {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}

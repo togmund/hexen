@@ -1,28 +1,30 @@
 import * as React from 'react';
+import Deck from './Deck';
 import '../../css/Sidebar.css';
-import BandChannel from '../band_channel';
-import socket from '../socket';
 
-const Sidebar = () => (
-  <section>
-    <h3>Hex Title</h3>
-    <img
-      src="https://s.put.re/DPdo2W3p.png"
-      alt="hex-img"
-      height="130"
-      width="150"
-    ></img>
-    <p>Hex details</p>
-    <p>Bands present on this hex:</p>
-    <p
-      onClick={(event: any) => {
-        console.log(event);
-        BandChannel.init(socket);
-      }}
-    >
-      The Bloods
-    </p>
-  </section>
-);
+const Sidebar = (props: { state: any }) => {
+  const { state } = props;
+  return (
+    <nav className={'sidebar'}>
+      <div className={'hex-info'}>
+        <h3>{state.tile.name}</h3>
+        <img
+          src={state.tile.image}
+          alt={state.tile.biome_name}
+          height="48px"
+          width="32px"
+        ></img>
+        <ul>
+          <li>{state.tile.region_name}</li>
+          <li>{state.tile.biome_name}</li>
+          <li>{state.tile.resource}</li>
+          <li>{state.tile.controlled_by}</li>
+          <li>{state.tile.structure}</li>
+        </ul>
+      </div>
+      <Deck state={state} />
+    </nav>
+  );
+};
 
 export default Sidebar;

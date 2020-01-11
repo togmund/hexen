@@ -62,10 +62,6 @@ defmodule Hexen.HexWorker do
   end
 
   def move(modifier, user_id, target_hex_id) do
-    # IO.puts("#############################################################")
-    # IO.puts("#############################################################")
-    # IO.puts("#############################################################")
-
     # TO DO: Implement modifier
     Hexen.Map.get_active_hex_id_for_user(user_id)
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))

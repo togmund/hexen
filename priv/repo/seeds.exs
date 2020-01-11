@@ -109,71 +109,67 @@ defmodule Hexen.DatabaseSeeder do
   Repo.insert!(%Biome{
     name: "Tundra",
     resource: "Silver",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/dpzvWCz/3-Uea-Ql-G-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Taiga",
     resource: "Softwood",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/HPsh60G/Aoi-PSd3-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Mountain",
     resource: "Iron",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/hCfR3PX/f-To-APQO-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Woodland",
     resource: "Hardwood",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/wshB6VQ/r62-Bm2-C-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Grassland",
     resource: "Wheat",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/0XgZnRF/XVg-MJOo-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Chaparral",
     resource: "Gold",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/nMMjpDQ/3-MO1o-RG-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Savanna",
     resource: "Leather",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/WyhspZp/D8i-Cn-HY-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Fen",
     resource: "Fur",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/WPVhCcP/x-V10w-KX-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Desert",
     resource: "Glass",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/CPFHCkC/Kiyuvfz-19x.png"
   })
 
   Repo.insert!(%Biome{
     name: "Tropic",
     resource: "Fruit",
-    image:
-      "https://github.com/togmund/hexen/blob/263f0f5b671eb7108309c8847eca44c60620ae29/assets/images/hex-images/Bog.png"
+    image: "https://i.ibb.co/TY95Mf2/AWYVX3-C-19x.png"
+  })
+
+  Repo.insert!(%Biome{
+    name: "Ocean",
+    resource: "Fish",
+    image: "https://i.ibb.co/3dBpWpH/i8tmo-PI-19x.png"
   })
 
   # Hex seeds
@@ -191,7 +187,7 @@ defmodule Hexen.DatabaseSeeder do
 
     Enum.each(0..long_col, fn y ->
       Repo.insert!(%Hex{
-        biome_id: Enum.random(1..10),
+        biome_id: Enum.random(1..11),
         region_id: Enum.random(1..3),
         q: top[:q],
         r: top[:r] + y,
@@ -221,7 +217,7 @@ defmodule Hexen.DatabaseSeeder do
     name: "Sword",
     suit: "Combat",
     description: "Deals three physical damage",
-    image: "http://pixelartmaker.com/art/2b2ed076ce0f346.png",
+    image: "https://i.ibb.co/xspKdvw/c4oui-Ug-8x.png",
     modifier: 3
   })
 
@@ -229,39 +225,39 @@ defmodule Hexen.DatabaseSeeder do
     name: "Long Haul Boots",
     suit: "Move",
     description: "Travel two hexes instead of one.",
-    image: "http://pixelartmaker.com/art/920bb2ea34df485.png",
+    image: "https://i.ibb.co/DrgyDXG/ex3-Qkkr-8x.png",
     modifier: 2
   })
 
   Repo.insert!(%Card{
-    name: "Pickaxe",
+    name: "Axe",
     suit: "Gather",
-    description: "Triple haul on ore resources.",
-    image: "http://pixelartmaker.com/art/16c8f43e143cb6d.png",
+    description: "Triple haul on wood resources.",
+    image: "https://i.ibb.co/cTYqfyf/RV5-GWF8-8x.png",
     modifier: 3
   })
 
   Repo.insert!(%Card{
-    name: "Spyglass",
+    name: "Map",
     suit: "Explore",
-    description: "See resources in one layer of fog of war.",
-    image: "https://image.flaticon.com/icons/svg/486/486425.svg",
+    description: "See nearby quest markers.",
+    image: "https://i.ibb.co/ngC8G2d/Lde-Txc2-8x.png",
     modifier: 1
   })
 
   Repo.insert!(%Card{
-    name: "Cart",
-    suit: "Interact",
-    description: "Bundle two cards for a trade.",
-    image: "https://i.redd.it/79iyl3f4zhf31.png",
+    name: "Strange Brew",
+    suit: "Craft",
+    description: "Concoct an elixir.",
+    image: "https://i.ibb.co/cQMbv3Q/4g7-ITMF-8x.png",
     modifier: 2
   })
 
   Repo.insert!(%Card{
-    name: "Anvil",
-    suit: "Craft",
-    description: "Extra bonus on crafted weapons.",
-    image: "http://pixelartmaker.com/art/9cf72f5b79c4946.png",
+    name: "Pie",
+    suit: "Interact",
+    description: "Share a pie with a friend.",
+    image: "https://i.ibb.co/JB5HjBd/Gga5-WIi-8x.png",
     modifier: 3
   })
 

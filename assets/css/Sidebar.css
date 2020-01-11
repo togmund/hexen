@@ -1,16 +1,19 @@
-section {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  text-align: center;
-  top: 3.1em;
-  left: 0;
-  overflow-x: hidden;
-  background-color: #966F33;
-  background-image: url("https://www.transparenttextures.com/patterns/dark-wood.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-  color: white;
-  display: none;
-  /* For map building purposes */
+nav.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color:#675f53;
+  padding: 16px;
+}
+
+nav.hex-info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  background-color:#dfebdc;
+  color:#675f53;
+}
+
+nav.deck {
+  background-color:#dfebdc;
 }
