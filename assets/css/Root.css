@@ -21,8 +21,8 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: 'Alagard';
-  background-color: #548297;
   overflow: hidden;
+  background-color: #dfebdc;
 }
 
 .root-area {
