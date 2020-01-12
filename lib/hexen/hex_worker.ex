@@ -76,8 +76,19 @@ defmodule Hexen.HexWorker do
     end
   end
 
-  def combat(_modifier, _user_id, _target_hex_id, _target_user_id) do
+  def combat(_modifier, user_id, _target_hex_id, target_user_id) do
     # Challenges a local player to a duel
+
+    if Enum.random(1..3) == 3 do
+      new_card = Hexen.Inventory.create_random_explore_card()
+      user_deck_id = List.first(Hexen.Inventory.get_users_deck_id_as_list(user_id))
+
+      Hexen.Inventory.create_deck_card(%{
+        deck_id: user_deck_id,
+        card_id: Map.take(new_card, [:id])
+      })
+    end
+
     # Winner wins an Explore card
     # Modifier indicates quality of added card?
   end
@@ -141,11 +152,19 @@ defmodule Hexen.HexWorker do
     |> IO.inspect()
   end
 
-  def interact(_modifier, _target_hex_id) do
+  def interact(_modifier, user_id, _target_hex_id) do
     # TO DO
     # Adds an explore card to your deck
     # Or does something else complex
-    IO.puts("You selected an interaction card!")
+    if Enum.random(1..3) == 3 do
+      new_card = Hexen.Inventory.create_random_explore_card()
+      user_deck_id = List.first(Hexen.Inventory.get_users_deck_id_as_list(user_id))
+
+      Hexen.Inventory.create_deck_card(%{
+        deck_id: user_deck_id,
+        card_id: Map.take(new_card, [:id])
+      })
+    end
   end
 
   def craft(_modifier, user_id, _target_hex_id) do

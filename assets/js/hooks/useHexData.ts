@@ -67,6 +67,11 @@ export default function useHexData() {
       });
   };
 
+  const getState = useCallback(() => {
+    console.log('STASTE', state);
+    return state;
+  }, [state]);
+
   const init = (
     socket: { channel: (arg0: string, arg1: {}) => any },
     hexID: any,
