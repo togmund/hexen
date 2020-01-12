@@ -13,7 +13,7 @@ const Root: React.FC = () => {
 
   return (
     <div className="root-area">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="play-area">
         <Sidebar state={state} />
         <div className="board-area">

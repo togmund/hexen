@@ -11,17 +11,17 @@ const Sidebar = (props: { state: any }) => {
         <img
           src={state.tile.image}
           alt={state.tile.biome_name}
-          height="48px"
-          width="32px"
+          height="90px"
+          width="90px"
         ></img>
-        <ul>
-          <li>{state.tile.region_name}</li>
-          <li>{state.tile.biome_name}</li>
-          <li>{state.tile.resource}</li>
-          <li>{state.tile.controlled_by}</li>
-          <li>{state.tile.structure}</li>
-        </ul>
+        <p>{state.tile.region_name}</p>
+        <p>{state.tile.biome_name}</p>
+        <p>{state.tile.resource}</p>
+        <p>{state.tile.controlled_by}</p>
+        <p>{state.tile.structure}</p>
       </div>
+      {/* Turn timer */}
+      <p>30</p>
       <Deck state={state} />
     </nav>
   );
