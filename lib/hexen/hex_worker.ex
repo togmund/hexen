@@ -51,7 +51,7 @@ defmodule Hexen.HexWorker do
       "Gather" -> gather(modifier, user_id, target_hex_id)
       "Explore" -> explore(modifier, target_hex_id)
       "Interact" -> interact(modifier, target_hex_id)
-      "Craft" -> craft(modifier, target_hex_id)
+      "Craft" -> craft(modifier, user_id, target_hex_id)
     end
   end
 
@@ -110,11 +110,18 @@ defmodule Hexen.HexWorker do
     IO.puts("You selected an interaction card!")
   end
 
-  def craft(_modifier, _target_hex_id) do
-    # TO DO
-    # Choose to create one of X cards based on resource
-    # Adds that card to your deck
-    IO.puts("You selected a crafting card!")
+  def craft(_modifier, user_id, _target_hex_id) do
+    # List possible cards to craft
+    # Take one of them
+    card_id =
+      Hexen.Inventory.get_card_ids_by_suit_list(["Gather", "Combat", "Move"])
+      |> Enum.shuffle()
+      |> List.first()
+
+    # Add to current_deck's deck_card
+    deck_id = Hexen.Inventory.get_users_deck_id(user_id)
+
+    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
   end
 
   def draw_cards(deck_id) do
