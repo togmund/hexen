@@ -2,8 +2,8 @@ import * as React from 'react';
 import Deck from './Deck';
 import '../../css/Sidebar.css';
 
-const Sidebar = (props: { state: any }) => {
-  const { state } = props;
+const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
+  const { state, targetHex, targetUser } = props;
   return (
     <nav className={'sidebar'}>
       <div className={'hex-info'}>
@@ -11,6 +11,7 @@ const Sidebar = (props: { state: any }) => {
         <img
           src={state.tile.image}
           alt={state.tile.biome_name}
+          onClick={() => targetHex(state.tile.id)}
           height="60px"
           width="60px"
         ></img>

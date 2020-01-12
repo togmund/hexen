@@ -15,9 +15,9 @@ const Root: React.FC = () => {
     <div className="root-area">
       {/* <Navbar /> */}
       <div className="play-area">
-        <Sidebar state={state} />
+        <Sidebar state={state} targetHex={targetHex} targetUser={targetUser} />
         <div className="board-area">
-          <Map state={state} />
+          <Map state={state} targetHex={targetHex} />
           <Hand state={state} selectCard={selectCard} />
         </div>
       </div>

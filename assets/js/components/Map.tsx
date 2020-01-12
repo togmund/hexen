@@ -9,8 +9,8 @@ import {
 } from 'react-hexgrid';
 import '../../css/Map.css';
 
-const Map = (props: { state: any }) => {
-  const { state } = props;
+const Map = (props: { state: any; targetHex: any }) => {
+  const { state, targetHex } = props;
 
   const checkInFog = (hexID: number, hexCoords: number[]) => {
     const neighbourCoords = [];
@@ -30,8 +30,8 @@ const Map = (props: { state: any }) => {
     <div className={'hex-map'}>
       <HexGrid width={'88vw'} height={'70vh'} viewBox={'-60 -200 125 200'}>
         <Layout
-          size={{ x: 10, y: 10 }}
-          flat={true}
+          size={{ x: 30, y: 30 }}
+          flat={false}
           spacing={1.005}
           origin={{ x: -100, y: -150 }}
         >
@@ -44,12 +44,13 @@ const Map = (props: { state: any }) => {
                 s={hex.s}
                 fill={HexUtils.getID(hex)}
                 className={checkInFog(hex.id, [5, 2, -7]) ? 'in-fog' : ''}
+                onClick={() => targetHex(hex.id)}
               >
                 <Text>{hex.id}</Text>
                 <Pattern
                   id={HexUtils.getID(hex)}
                   link={hex.image}
-                  size={{ x: 7, y: 7 }}
+                  size={{ x: 30, y: 30 }}
                 />
               </Hexagon>
             ))

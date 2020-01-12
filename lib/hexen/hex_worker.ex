@@ -41,7 +41,6 @@ defmodule Hexen.HexWorker do
       _ ->
         deck_card_id
         |> Hexen.Inventory.get_card_id_by_deck_card()
-        |> IO.inspect()
         |> List.first()
         |> Hexen.Inventory.get_card!()
         |> Map.take([:suit, :modifier])
@@ -146,6 +145,7 @@ defmodule Hexen.HexWorker do
           |> List.first()
 
         Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+        |> IO.inspect()
 
       length(consumable_cards) == 2 ->
         card_id =
@@ -154,11 +154,13 @@ defmodule Hexen.HexWorker do
           |> List.first()
 
         Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+        |> IO.inspect()
 
         consumable_cards
         |> Enum.shuffle()
         |> Enum.slice(0..1)
         |> Hexen.Inventory.delete_deck_cards()
+        |> IO.inspect()
 
       length(consumable_cards) > 2 ->
         card_id =
@@ -167,11 +169,13 @@ defmodule Hexen.HexWorker do
           |> List.first()
 
         Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+        |> IO.inspect()
 
         consumable_cards
         |> Enum.shuffle()
         |> Enum.slice(0..2)
         |> Hexen.Inventory.delete_deck_cards()
+        |> IO.inspect()
     end
   end
 

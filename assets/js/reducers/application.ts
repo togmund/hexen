@@ -32,17 +32,17 @@ export default function reducer(state: any, action: any) {
         }
       };
     case SET_HAND:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         hand: action.hand
       };
     case DECK_CARD_SELECTED:
+      console.log(action);
       return {
         ...state,
         selected_card: action.deck_card
       };
-
     case HEX_SELECTED:
       return {
         ...state,
