@@ -290,7 +290,7 @@ defmodule Hexen.DatabaseSeeder do
   # Deck
   Repo.insert!(%Deck{
     name: "Warrior",
-    cardback: "https://opengameart.org/sites/default/files/card%20back%20orange.png",
+    cardback: "https://i.ibb.co/Y0jRtdK/DMsxml-Y-15x.png",
     user_id: 1
   })
 
@@ -308,30 +308,26 @@ defmodule Hexen.DatabaseSeeder do
   })
 
   # Decks
-
-  [1..Enum.random(25..35)]
-  |> Enum.each(fn _x ->
+  Enum.each(1..35, fn _x ->
     Repo.insert!(%DeckCard{
       deck_id: 1,
-      card_id: Enum.random(1..16),
+      card_id: Enum.random(2..16),
       drawn: false
     })
   end)
 
-  [1..Enum.random(25..35)]
-  |> Enum.each(fn _x ->
+  Enum.each(1..35, fn _x ->
     Repo.insert!(%DeckCard{
       deck_id: 2,
-      card_id: Enum.random(1..16),
+      card_id: Enum.random(2..16),
       drawn: false
     })
   end)
 
-  [1..Enum.random(25..35)]
-  |> Enum.each(fn _x ->
+  Enum.each(1..35, fn _x ->
     Repo.insert!(%DeckCard{
       deck_id: 3,
-      card_id: Enum.random(1..16),
+      card_id: Enum.random(2..16),
       drawn: false
     })
   end)

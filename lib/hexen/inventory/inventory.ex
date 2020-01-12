@@ -294,7 +294,7 @@ defmodule Hexen.Inventory do
   ################################################################
   ######################## Custom queries ########################
   ################################################################
-  def get_users_deck_id(user_id) do
+  def get_users_deck_id_as_list(user_id) do
     Repo.all(
       from d in Deck,
         where: d.user_id == ^user_id,
@@ -380,6 +380,6 @@ defmodule Hexen.Inventory do
     from(dc in DeckCard,
       where: dc.id in ^deck_card_ids
     )
-    |> Repo.delete()
+    |> Repo.delete_all()
   end
 end

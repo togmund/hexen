@@ -37,6 +37,13 @@ export default function reducer(state: any, action: any) {
         ...state,
         hand: action.hand
       };
+    case ACTION_RESOLVED:
+      return {
+        ...state,
+        selected_card: null,
+        target_hex: null,
+        target_user: null
+      };
     // case SET_BAND: {
     //   return {
     //     ...state,
@@ -57,4 +64,5 @@ export const SET_INITIAL = 'SET_INITIAL';
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
 export const SET_HAND = 'SET_HAND';
+export const ACTION_RESOLVED = 'ACTION_RESOLVED';
 // export const SET_BAND = 'SET_BAND';

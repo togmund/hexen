@@ -20,7 +20,6 @@ const Map = (props: { state: any }) => {
     });
     // console.log('Neighbour coords', neighbourCoords);
     if (hexID === state.tile.id || hexCoords === [5, 2, -7]) {
-      console.log(hexCoords);
       return false;
     }
 

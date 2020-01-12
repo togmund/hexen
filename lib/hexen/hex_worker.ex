@@ -36,11 +36,12 @@ defmodule Hexen.HexWorker do
 
     case deck_card_id do
       nil ->
-        %{suit: "Rest", modifier: 0}
+        nil
 
       _ ->
         deck_card_id
         |> Hexen.Inventory.get_card_id_by_deck_card()
+        |> IO.inspect()
         |> List.first()
         |> Hexen.Inventory.get_card!()
         |> Map.take([:suit, :modifier])
@@ -53,19 +54,27 @@ defmodule Hexen.HexWorker do
     modifier = action[:modifier]
 
     case suit do
-      "Rest" -> rest(user_id)
-      "Combat" -> combat(modifier, user_id, target_hex_id, target_user_id)
-      "Move" -> move(modifier, user_id, target_hex_id)
-      "Gather" -> gather(modifier, user_id, target_hex_id)
-      "Explore" -> explore(modifier, target_hex_id)
-      "Interact" -> interact(modifier, target_hex_id)
-      "Craft" -> craft(modifier, user_id, target_hex_id)
-    end
-  end
+      "Combat" ->
+        combat(modifier, user_id, target_hex_id, target_user_id)
 
-  def rest(user_id) do
-    # Rest
-    user_id
+      "Move" ->
+        move(modifier, user_id, target_hex_id)
+
+      "Gather" ->
+        gather(modifier, user_id, target_hex_id)
+
+      "Explore" ->
+        explore(modifier, target_hex_id)
+
+      "Interact" ->
+        interact(modifier, target_hex_id)
+
+      "Craft" ->
+        craft(modifier, user_id, target_hex_id)
+
+      _ ->
+        nil
+    end
   end
 
   def combat(_modifier, _user_id, _target_hex_id, _target_user_id) do
@@ -99,7 +108,7 @@ defmodule Hexen.HexWorker do
       |> List.first()
 
     # Add to current_deck's deck_card
-    deck_id = Hexen.Inventory.get_users_deck_id(user_id)
+    deck_id = Hexen.Inventory.get_users_deck_id_as_list(user_id) |> List.first()
 
     Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
   end
@@ -120,7 +129,7 @@ defmodule Hexen.HexWorker do
 
   def craft(_modifier, user_id, _target_hex_id) do
     # Compile List of possible cards to consume
-    deck_id = Hexen.Inventory.get_users_deck_id(user_id)
+    deck_id = Hexen.Inventory.get_users_deck_id_as_list(user_id) |> List.first()
     consumable_cards = Hexen.Inventory.get_deck_card_ids_by_suit(deck_id, "Craft")
 
     cond do
@@ -176,8 +185,21 @@ defmodule Hexen.HexWorker do
     cond do
       length(drawn_cards) < 3 ->
         Hexen.Inventory.shuffle_discard_into_deck(deck_id)
-        Hexen.Inventory.get_card!(0);
-        |> Map.take([:description, :id, :image, :name, :modifier, :suit]
+
+        [
+          %{
+            deck_card_id: nil,
+            card_details:
+              Map.take(Hexen.Inventory.get_card!(1), [
+                :description,
+                :id,
+                :image,
+                :name,
+                :modifier,
+                :suit
+              ])
+          }
+        ]
 
       length(drawn_cards) == 3 ->
         drawn_cards
@@ -185,16 +207,16 @@ defmodule Hexen.HexWorker do
           Hexen.Inventory.update_drawn_status(Hexen.Inventory.get_deck_card!(hand_card_id), true)
         end)
 
-          drawn_cards
-          |> Enum.map(fn deck_card_id ->
-            %{
-              deck_card_id: deck_card_id,
-              card_details:
-                Hexen.Inventory.card_details_from_deck_card_id(deck_card_id)
-                |> List.first()
-                |> Map.take([:description, :id, :image, :name, :modifier, :suit])
-            }
-          end)
+        drawn_cards
+        |> Enum.map(fn deck_card_id ->
+          %{
+            deck_card_id: deck_card_id,
+            card_details:
+              Hexen.Inventory.card_details_from_deck_card_id(deck_card_id)
+              |> List.first()
+              |> Map.take([:description, :id, :image, :name, :modifier, :suit])
+          }
+        end)
     end
   end
 
@@ -205,7 +227,7 @@ defmodule Hexen.HexWorker do
       id
       |> Hexen.Map.list_hex_user_ids_by_hex()
       |> Enum.map(fn user_id ->
-        deck = List.first(Hexen.Inventory.get_users_deck_id(user_id))
+        deck = List.first(Hexen.Inventory.get_users_deck_id_as_list(user_id))
 
         %{
           player: user_id,

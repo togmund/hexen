@@ -5,7 +5,8 @@ import reducer, {
   SET_INITIAL,
   SET_BOARD,
   SET_HEX,
-  SET_HAND
+  SET_HAND,
+  ACTION_RESOLVED
   // SET_BAND
 } from '../reducers/application';
 
@@ -16,7 +17,22 @@ export default function useHexData() {
     player: 1,
     hex_tiles: [],
     tile: { id: 60 },
-    hand: []
+    hand: [
+      {
+        deck_card_id: null,
+        card_details: {
+          description: 'Take a moment, catch your breath.',
+          id: 1,
+          image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
+          modifier: null,
+          name: 'Rest',
+          suit: 'Rest'
+        }
+      }
+    ],
+    selected_card: null,
+    target_hex: null,
+    target_user: null
   });
 
   useEffect(() => {
@@ -71,14 +87,15 @@ export default function useHexData() {
     channel.on('GET_CARD', (msg: {}) => {
       channel
         .push('selected_card', {
-          deck_card_id: value,
+          deck_card_id: state.selected_card,
           room_name: `hex:${state.tile.id}`,
-          user_id: 1, // TO DO
-          target_hex_id: 3, // TO DO
-          target_user_id: 2 // TO DO
+          user_id: state.player, // TO DO
+          target_hex_id: state.target_hex, // TO DO
+          target_user_id: state.target_user // TO DO
         })
         .receive('ok', (resp: any) => {
           console.log('Card selected successfully', resp);
+          dispatch({ type: ACTION_RESOLVED });
         })
         .receive('error', (resp: any) => {
           console.log('Card not', resp);
