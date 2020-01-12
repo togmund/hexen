@@ -365,4 +365,21 @@ defmodule Hexen.Inventory do
     from(c in Card, where: c.suit in ^suits and c.resource == ^resource, select: c.id)
     |> Repo.all()
   end
+
+  def get_deck_card_ids_by_suit(deck_id, suit) do
+    from(dc in DeckCard,
+      join: c in Card,
+      on: c.id == dc.card_id,
+      where: dc.deck_id == ^deck_id and c.suit == ^suit,
+      select: dc.id
+    )
+    |> Repo.all()
+  end
+
+  def delete_deck_cards(deck_card_ids) do
+    from(dc in DeckCard,
+      where: dc.id in ^deck_card_ids
+    )
+    |> Repo.delete()
+  end
 end
