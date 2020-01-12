@@ -63,7 +63,7 @@ defmodule Hexen.HexWorker do
         gather(modifier, user_id, target_hex_id)
 
       "Explore" ->
-        explore(modifier, target_hex_id)
+        explore(modifier, user_id, deck_card_id)
 
       "Interact" ->
         interact(modifier, target_hex_id)
@@ -112,11 +112,33 @@ defmodule Hexen.HexWorker do
     Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
   end
 
-  def explore(_modifier, _target_hex_id) do
+  def explore(_modifier, user_id, deck_card_id) do
     # TO DO
     # Highlights a Tile with a Quest
-    # Quests, on completion, add new recipies to be crafted
-    IO.puts("You selected an exploration card!")
+    new_quest =
+      user_id
+      # Get list of u_q.quest_ids by user_id
+      |> IO.inspect()
+      # Get list of quests not in the above list
+      |> IO.inspect()
+      # Shuffle Them
+      |> IO.inspect()
+      # Take the first one
+      |> IO.inspect()
+
+    new_quest
+    # Add it to the user's quests
+    |> IO.inspect()
+
+    deck_card_id
+    # Remove the explore card from the user's deck
+    |> IO.inspect()
+
+    new_quest
+    # Update the hex_worker state with hexes with quests
+    |> IO.inspect()
+    # Broadcast the new state
+    |> IO.inspect()
   end
 
   def interact(_modifier, _target_hex_id) do
