@@ -37,8 +37,9 @@ const Map = (props: { state: any }) => {
 
   const getHexClasses = (hexID: number, hexCoords: number[]) => {
     const hexClasses = classNames({
-      'in-fog': highlightHexes(hexID, hexCoords),
-      reachable: highlightHexes(hexID, hexCoords, false)
+      'in-fog': highlightHexes(hexID, hexCoords)
+      // nearby: highlightHexes(hexID, hexCoords, false)
+      // nearby: true
     });
 
     return hexClasses;
