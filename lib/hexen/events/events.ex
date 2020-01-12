@@ -489,4 +489,8 @@ defmodule Hexen.Events do
   def get_existing_quest_list_by_user(id) do
     from(uq in UserQuest, where: uq.user_id == ^id, select: uq.quest_id) |> Repo.all()
   end
+
+  def get_novel_quests(quest_ids) do
+    from(q in Quest, where: q.id not in ^quest_ids) |> Repo.all()
+  end
 end

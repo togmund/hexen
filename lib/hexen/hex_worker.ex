@@ -120,15 +120,15 @@ defmodule Hexen.HexWorker do
       # Get list of u_q.quest_ids by user_id
       |> Hexen.Events.get_existing_quest_list_by_user()
       # Get list of quests not in the above list
-      |> IO.inspect()
+      |> Hexen.Events.get_novel_quests()
       # Shuffle Them
-      |> IO.inspect()
+      |> Enum.shuffle()
       # Take the first one
-      |> IO.inspect()
+      |> List.first()
 
     new_quest
     # Add it to the user's quests
-    |> IO.inspect()
+    |> Hexen.Events.create_user_quest()
 
     deck_card_id
     # Remove the explore card from the user's deck
