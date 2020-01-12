@@ -10,8 +10,8 @@ import {
 } from 'react-hexgrid';
 import '../../css/Map.css';
 
-const Map = (props: { state: any }) => {
-  const { state } = props;
+const Map = (props: { state: any; targetHex: any }) => {
+  const { state, targetHex } = props;
 
   const highlightHexes = (
     hexID: number,
@@ -47,10 +47,10 @@ const Map = (props: { state: any }) => {
 
   return (
     <div className={'hex-map'}>
-      <HexGrid width={'95vw'} height={'75vh'} viewBox={'-60 -200 125 200'}>
+      <HexGrid width={'88vw'} height={'70vh'} viewBox={'-60 -200 125 200'}>
         <Layout
-          size={{ x: 10, y: 10 }}
-          flat={true}
+          size={{ x: 30, y: 30 }}
+          flat={false}
           spacing={1.005}
           origin={{ x: -100, y: -150 }}
         >
@@ -68,7 +68,7 @@ const Map = (props: { state: any }) => {
                 <Pattern
                   id={HexUtils.getID(hex)}
                   link={hex.image}
-                  size={{ x: 7, y: 7 }}
+                  size={{ x: 30, y: 30 }}
                 />
               </Hexagon>
             ))

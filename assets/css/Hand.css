@@ -4,4 +4,6 @@
   flex-wrap: nowrap;
   justify-content: center;
   padding: 16px;
+  z-index: 2;
+  display: none;
 }
