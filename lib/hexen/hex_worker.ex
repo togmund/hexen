@@ -118,7 +118,7 @@ defmodule Hexen.HexWorker do
     new_quest =
       user_id
       # Get list of u_q.quest_ids by user_id
-      |> IO.inspect()
+      |> Hexen.Events.get_existing_quest_list_by_user()
       # Get list of quests not in the above list
       |> IO.inspect()
       # Shuffle Them

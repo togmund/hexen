@@ -88,7 +88,7 @@ export default function useHexData() {
     channel.on('GET_CARD', (msg: {}) => {
       channel
         .push('selected_card', {
-          deck_card_id: state.selected_card,
+          deck_card_id: stateObject.state.selected_card,
           room_name: `hex:${state.tile.id}`,
           user_id: state.player,
           target_hex_id: state.target_hex,
