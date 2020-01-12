@@ -6,11 +6,12 @@ import reducer, {
   SET_BOARD,
   SET_HEX,
   SET_HAND,
-  ACTION_RESOLVED
+  ACTION_RESOLVED,
+  DECK_CARD_SELECTED,
+  HEX_SELECTED,
+  USER_SELECTED
   // SET_BAND
 } from '../reducers/application';
-
-import { value } from '../components/Hand';
 
 export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
@@ -31,7 +32,7 @@ export default function useHexData() {
       }
     ],
     selected_card: null,
-    target_hex: null,
+    target_hex: 60,
     target_user: null
   });
 
@@ -46,7 +47,7 @@ export default function useHexData() {
         return response.json();
       })
       .then(response => {
-        dispatch({ type: SET_INITIAL, action: response.data });
+        dispatch({ type: SET_INITIAL, data: response.data });
       });
   };
 
@@ -89,9 +90,9 @@ export default function useHexData() {
         .push('selected_card', {
           deck_card_id: state.selected_card,
           room_name: `hex:${state.tile.id}`,
-          user_id: state.player, // TO DO
-          target_hex_id: state.target_hex, // TO DO
-          target_user_id: state.target_user // TO DO
+          user_id: state.player,
+          target_hex_id: state.target_hex,
+          target_user_id: state.target_user
         })
         .receive('ok', (resp: any) => {
           console.log('Card selected successfully', resp);
@@ -108,7 +109,21 @@ export default function useHexData() {
   };
 
   const stateObject = {
-    state: state
+    state: state,
+
+    selectCard: function selectCard(selected_card: any) {
+      console.log(selected_card);
+      dispatch({ type: DECK_CARD_SELECTED, deck_card: selected_card });
+    },
+
+    targetHex: function targetHex(selected_hex: any) {
+      dispatch({ type: HEX_SELECTED, target_hex: selected_hex });
+    },
+
+    targetUser: function targetUser(selected_user: any) {
+      dispatch({ type: USER_SELECTED, target_user: selected_user });
+    }
   };
+
   return stateObject;
 }

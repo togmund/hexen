@@ -9,7 +9,7 @@ import useHexData from './hooks/useHexData';
 import '../css/Root.css';
 
 const Root: React.FC = () => {
-  const { state } = useHexData();
+  const { state, selectCard, targetHex, targetUser } = useHexData();
 
   return (
     <div className="root-area">
@@ -18,7 +18,7 @@ const Root: React.FC = () => {
         <Sidebar state={state} />
         <div className="board-area">
           <Map state={state} />
-          <Hand state={state} />
+          <Hand state={state} selectCard={selectCard} />
         </div>
       </div>
     </div>

@@ -7,8 +7,8 @@ export default function reducer(state: any, action: any) {
     case SET_INITIAL:
       return {
         ...state,
-        hex_tiles: action.action.hex_tiles,
-        tile: action.action.tile
+        hex_tiles: action.data.hex_tiles,
+        tile: action.data.tile
       };
     case SET_BOARD:
       return {
@@ -37,11 +37,28 @@ export default function reducer(state: any, action: any) {
         ...state,
         hand: action.hand
       };
+    case DECK_CARD_SELECTED:
+      return {
+        ...state,
+        selected_card: action.deck_card
+      };
+
+    case HEX_SELECTED:
+      return {
+        ...state,
+        target_hex: action.target_hex
+      };
+
+    case USER_SELECTED:
+      return {
+        ...state,
+        target_user: action.target_user
+      };
     case ACTION_RESOLVED:
       return {
         ...state,
         selected_card: null,
-        target_hex: null,
+        target_hex: state.tile.id,
         target_user: null
       };
     // case SET_BAND: {
@@ -64,5 +81,9 @@ export const SET_INITIAL = 'SET_INITIAL';
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
 export const SET_HAND = 'SET_HAND';
+
+export const DECK_CARD_SELECTED = 'DECK_CARD_SELECTED';
+export const HEX_SELECTED = 'HEX_SELECTED';
+export const USER_SELECTED = 'USER_SELECTED';
 export const ACTION_RESOLVED = 'ACTION_RESOLVED';
 // export const SET_BAND = 'SET_BAND';

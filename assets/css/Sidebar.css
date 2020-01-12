@@ -1,21 +1,18 @@
 nav.sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #675f53;
-  padding: 20px;
-  width: 15%;
+  justify-content: space-between;
+  background-color: #7c2454;
+  padding: 16px;
+  width: 168px;
   text-align: center;
+  z-index: 2;
 }
 
-nav.hex-info {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
-  background-color: #dfebdc;
-  color: #675f53;
-}
-
-nav.deck-image {
-  background-color: #dfebdc;
+nav .hex-info {
+  background-color: #fcf4ec;
+  color: #7c2454;
+  font-size: xx-large;
+  font-weight: bolder;
+  width: 136px;
 }
