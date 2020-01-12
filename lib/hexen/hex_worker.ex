@@ -112,6 +112,7 @@ defmodule Hexen.HexWorker do
 
   def craft(_modifier, user_id, _target_hex_id) do
     # List possible cards to craft
+    # TODO: Recipies to filter this list by those craftable by user and craftable by way of the resource/craft cards in this user's deck
     # Take one of them
     card_id =
       Hexen.Inventory.get_card_ids_by_suit_list(["Gather", "Combat", "Move"])
@@ -120,8 +121,10 @@ defmodule Hexen.HexWorker do
 
     # Add to current_deck's deck_card
     deck_id = Hexen.Inventory.get_users_deck_id(user_id)
-
     Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+
+    # Delete the consumed cards from the player's deck
+    Hexen.Inventory.delete_deck_cards(["list", "of", "consumed", "card", "ids"])
   end
 
   def draw_cards(deck_id) do
