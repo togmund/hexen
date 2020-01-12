@@ -5,8 +5,8 @@ defmodule HexenWeb.MapController do
 
   def show(conn, %{"id" => id}) do
     initial_state = %{
-      hex_tiles: Hexen.Map.get_full_board(),
-      tile: %{id: Hexen.Map.get_active_hex_id_for_user(id)}
+      hex_tiles: Map.get_full_board(),
+      tile: %{id: Map.get_active_hex_id_for_user(id)}
     }
 
     render(conn, "show.json", initial_state: initial_state)

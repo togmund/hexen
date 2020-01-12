@@ -40,7 +40,7 @@ defmodule Hexen.HexWorker do
     |> Map.take([:suit, :modifier])
   end
 
-  def perform_action(room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
+  def perform_action(_room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
     action = get_action(deck_card_id)
     suit = action[:suit]
     modifier = action[:modifier]
@@ -51,60 +51,111 @@ defmodule Hexen.HexWorker do
       "Gather" -> gather(modifier, user_id, target_hex_id)
       "Explore" -> explore(modifier, target_hex_id)
       "Interact" -> interact(modifier, target_hex_id)
-      "Craft" -> craft(modifier, target_hex_id)
+      "Craft" -> craft(modifier, user_id, target_hex_id)
     end
   end
 
-  def combat(modifier, user_id, target_hex_id, target_user_id) do
-    # Duel
-
-    # Transfer card to winner of duel
+  def combat(_modifier, _user_id, _target_hex_id, _target_user_id) do
+    # Challenges a local player to a duel
+    # Winner wins an Explore card
+    # Modifier indicates quality of added card?
   end
 
-  def move(modifier, user_id, target_hex_id) do
-    # TO DO: Implement modifier
+  def move(_modifier, user_id, target_hex_id) do
+    # Moves to a tile
+    # Adds an Interact, Explore or Move card to your deck
+    # Modifier indicates quality of added card?
+
     Hexen.Map.get_active_hex_id_for_user(user_id)
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
   end
 
-  def gather(modifier, user_id, target_hex_id) do
-    # TO DO: Implement modifier
+  def gather(_modifier, user_id, _target_hex_id) do
+    # Adds an existing Crafting card to your deck based on resource
+    # Modifier indicates quality of added card?
+
+    # Gathers the active resource
+    # Get Current hex
+    # Get Current resource
     resource =
       Hexen.Map.get_active_hex_id_for_user(user_id)
       |> Hexen.Map.get_resource_by_hex_id()
 
-    card =
-      Hexen.Inventory.create_card(%{
-        description: 'xxx',
-        image: 'xxx',
-        modifier: 2,
-        name: 'xxx',
-        suit: resource
-      })
+    # List possible cards to craft
+    # Take one of them
+    card_id =
+      Hexen.Inventory.get_card_ids_by_suit_list_and_resource(["Craft"], resource)
+      |> Enum.shuffle()
+      |> List.first()
 
-    Hexen.Inventory.get_deck!(user_id)
-    |> Hexen.Inventory.update_deck(%{cardback: 'xxx', name: 'xxx', user_id: user_id})
-
+    # Add to current_deck's deck_card
     deck_id = Hexen.Inventory.get_users_deck_id(user_id)
 
-    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card["id"]})
+    Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
   end
 
-  def explore(modifier, target_hex_id) do
+  def explore(_modifier, _target_hex_id) do
     # TO DO
+    # Highlights a Tile with a Quest
+    # Quests, on completion, add new recipies to be crafted
     IO.puts("You selected an exploration card!")
   end
 
-  def interact(modifier, target_hex_id) do
+  def interact(_modifier, _target_hex_id) do
     # TO DO
+    # Adds an explore card to your deck
+    # Or does something else complex
     IO.puts("You selected an interaction card!")
   end
 
-  def craft(modifier, target_hex_id) do
-    # TO DO
-    IO.puts("You selected a crafting card!")
+  def craft(_modifier, user_id, _target_hex_id) do
+    # Compile List of possible cards to consume
+    deck_id = Hexen.Inventory.get_users_deck_id(user_id)
+    consumable_cards = Hexen.Inventory.get_deck_card_ids_by_suit(deck_id, "Craft")
+
+    cond do
+      # List possible cards to craft
+      # Take one of them
+      # Add to current_deck's deck_card
+      # Delete the consumed cards from the player's deck
+
+      # TODO: Recipies to filter this list by those craftable by user and craftable by way of the resource/craft cards in this user's deck
+      length(consumable_cards) < 2 ->
+        card_id =
+          Hexen.Inventory.get_card_ids_by_suit_list(["Gather"])
+          |> Enum.shuffle()
+          |> List.first()
+
+        Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+
+      length(consumable_cards) == 2 ->
+        card_id =
+          Hexen.Inventory.get_card_ids_by_suit_list(["Gather", "Move"])
+          |> Enum.shuffle()
+          |> List.first()
+
+        Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+
+        consumable_cards
+        |> Enum.shuffle()
+        |> Enum.slice(0..1)
+        |> Hexen.Inventory.delete_deck_cards()
+
+      length(consumable_cards) > 2 ->
+        card_id =
+          Hexen.Inventory.get_card_ids_by_suit_list(["Gather", "Move", "Combat"])
+          |> Enum.shuffle()
+          |> List.first()
+
+        Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+
+        consumable_cards
+        |> Enum.shuffle()
+        |> Enum.slice(0..2)
+        |> Hexen.Inventory.delete_deck_cards()
+    end
   end
 
   def draw_cards(deck_id) do

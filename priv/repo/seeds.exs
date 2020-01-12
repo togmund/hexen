@@ -248,20 +248,36 @@ defmodule Hexen.DatabaseSeeder do
   })
 
   Repo.insert!(%Card{
-    name: "Strange Brew",
-    suit: "Craft",
-    description: "Concoct an elixir.",
-    image: "https://i.ibb.co/cQMbv3Q/4g7-ITMF-8x.png",
-    modifier: 2
-  })
-
-  Repo.insert!(%Card{
     name: "Pie",
     suit: "Interact",
     description: "Share a pie with a friend.",
     image: "https://i.ibb.co/JB5HjBd/Gga5-WIi-8x.png",
     modifier: 3
   })
+
+  [
+    "Silver",
+    "Softwood",
+    "Iron",
+    "Hardwood",
+    "Wheat",
+    "Gold",
+    "Leather",
+    "Fur",
+    "Glass",
+    "Fruit",
+    "Fish"
+  ]
+  |> Enum.each(fn mat ->
+    Repo.insert!(%Card{
+      name: "Strange Brew",
+      suit: "Craft",
+      description: "Concoct an elixir.",
+      image: "https://i.ibb.co/cQMbv3Q/4g7-ITMF-8x.png",
+      modifier: 2,
+      material: mat
+    })
+  end)
 
   # Deck
   Repo.insert!(%Deck{
