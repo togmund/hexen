@@ -1,14 +1,14 @@
 :root {
-  --groovy-giraffe: #f2a612;
-  --aquella: #5db8d8;
-  --jasmine-green: #8ac742;
-  --gorgeous-green: #2d8231;
-  --fresh-cinnamon: #9f5411;
-  --frozen-grass: #dfebdc;
-  --benikeshinezumi-purple: #43322f;
-  --blue-heaven: #548297;
-  --spa-dream: #148cb4;
-  --morel: #675f53;
+  --bitcoin: #fcb810;
+  --whole-nine-yards: #04b538;
+  --weathered-stone: #c4c4c4;
+  --purple-rhapsody: #8474ac;
+  --ambrosia-ivory: #fcf4ec;
+  --pico-eggplant: #7c2454;
+  --flat-earth: #ac5434;
+  --quill-tip: #2b345b;
+  --fantasy-console-sky: #2cacfc;
+  --mango: #ffa828;
 }
 
 @font-face {
@@ -21,8 +21,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: 'Alagard';
-  background-color: #dfebdc;
-
+  background-color: #fcf4ec;
   overflow: hidden;
 }
 
@@ -30,7 +29,6 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-
 }
 
 .play-area {

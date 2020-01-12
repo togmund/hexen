@@ -294,7 +294,7 @@ defmodule Hexen.Inventory do
   ################################################################
   ######################## Custom queries ########################
   ################################################################
-  def get_users_deck_id(user_id) do
+  def get_users_deck_id_as_list(user_id) do
     Repo.all(
       from d in Deck,
         where: d.user_id == ^user_id,
@@ -307,7 +307,7 @@ defmodule Hexen.Inventory do
 
   Raises `Ecto.NoResultsError` if the Card does not exist.
   """
-  def get_card_id_by_deck_card!(deck_card_id) do
+  def get_card_id_by_deck_card(deck_card_id) do
     Repo.all(
       from dc in DeckCard,
         where: dc.id == ^deck_card_id,
@@ -380,6 +380,6 @@ defmodule Hexen.Inventory do
     from(dc in DeckCard,
       where: dc.id in ^deck_card_ids
     )
-    |> Repo.delete()
+    |> Repo.delete_all()
   end
 end

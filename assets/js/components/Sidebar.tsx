@@ -2,8 +2,8 @@ import * as React from 'react';
 import Deck from './Deck';
 import '../../css/Sidebar.css';
 
-const Sidebar = (props: { state: any }) => {
-  const { state } = props;
+const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
+  const { state, targetHex, targetUser } = props;
   return (
     <nav className={'sidebar'}>
       <div className={'hex-info'}>
@@ -11,8 +11,9 @@ const Sidebar = (props: { state: any }) => {
         <img
           src={state.tile.image}
           alt={state.tile.biome_name}
-          height="90px"
-          width="90px"
+          onClick={() => targetHex(state.tile.id)}
+          height="60px"
+          width="60px"
         ></img>
         <p>{state.tile.region_name}</p>
         <p>{state.tile.biome_name}</p>
@@ -21,7 +22,7 @@ const Sidebar = (props: { state: any }) => {
         <p>{state.tile.structure}</p>
       </div>
       {/* Turn timer */}
-      <p>30</p>
+      {/* <p>30</p> */}
       <Deck state={state} />
     </nav>
   );

@@ -4,7 +4,7 @@ import { Tiles } from '@rebass/layout';
 import '../../css/Hand.css';
 
 const Hand = (props: { state: any }) => {
-  const { state } = props;
+  const { state, selectCard } = props;
 
   const onChange = (id: number | null) => {
     value = id;
@@ -23,7 +23,7 @@ const Hand = (props: { state: any }) => {
             description={card.card_details.description}
             modifier={card.card_details.modifier}
             selected={card.deck_card_id === value}
-            selectCard={() => onChange(card.deck_card_id)}
+            selectCard={() => selectCard(card.deck_card_id)}
           />
         ))
       ) : (

@@ -2,8 +2,8 @@ nav.navbar {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color:#675f53;
-  color:#675f53;
+  background-color:#2B345B;
+  color:#2B345B;
   padding: 16px;
 }
 nav.navbar.game-info {
@@ -18,5 +18,5 @@ nav span{
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-evenly;
-  background-color:#dfebdc;
+  background-color:#fcf4ec;
 }

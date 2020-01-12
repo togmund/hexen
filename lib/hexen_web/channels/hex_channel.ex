@@ -11,13 +11,16 @@ defmodule HexenWeb.HexChannel do
   end
 
   def handle_in("selected_card", msg, socket) do
-    HexWorker.perform_action(
-      msg["room_name"],
-      msg["deck_card_id"],
-      msg["user_id"],
-      msg["target_hex_id"],
-      msg["target_user_id"]
-    )
+    msg
+    |> IO.inspect()
+
+    # HexWorker.perform_action(
+    #   msg["room_name"],
+    #   msg["deck_card_id"],
+    #   msg["user_id"],
+    #   msg["target_hex_id"],
+    #   msg["target_user_id"]
+    # )
 
     {:noreply, socket}
   end

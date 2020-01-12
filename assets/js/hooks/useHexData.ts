@@ -5,18 +5,35 @@ import reducer, {
   SET_INITIAL,
   SET_BOARD,
   SET_HEX,
-  SET_HAND
+  SET_HAND,
+  ACTION_RESOLVED,
+  DECK_CARD_SELECTED,
+  HEX_SELECTED,
+  USER_SELECTED
   // SET_BAND
 } from '../reducers/application';
-
-import { value } from '../components/Hand';
 
 export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
     player: 1,
     hex_tiles: [],
     tile: { id: 60 },
-    hand: []
+    hand: [
+      {
+        deck_card_id: null,
+        card_details: {
+          description: 'Take a moment, catch your breath.',
+          id: 1,
+          image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
+          modifier: null,
+          name: 'Rest',
+          suit: 'Rest'
+        }
+      }
+    ],
+    selected_card: null,
+    target_hex: 60,
+    target_user: null
   });
 
   useEffect(() => {
@@ -30,7 +47,7 @@ export default function useHexData() {
         return response.json();
       })
       .then(response => {
-        dispatch({ type: SET_INITIAL, action: response.data });
+        dispatch({ type: SET_INITIAL, data: response.data });
       });
   };
 
@@ -71,14 +88,15 @@ export default function useHexData() {
     channel.on('GET_CARD', (msg: {}) => {
       channel
         .push('selected_card', {
-          deck_card_id: value,
+          deck_card_id: state.selected_card,
           room_name: `hex:${state.tile.id}`,
-          user_id: 1, // TO DO
-          target_hex_id: 3, // TO DO
-          target_user_id: 2 // TO DO
+          user_id: state.player,
+          target_hex_id: state.target_hex,
+          target_user_id: state.target_user
         })
         .receive('ok', (resp: any) => {
           console.log('Card selected successfully', resp);
+          dispatch({ type: ACTION_RESOLVED });
         })
         .receive('error', (resp: any) => {
           console.log('Card not', resp);
@@ -91,7 +109,24 @@ export default function useHexData() {
   };
 
   const stateObject = {
-    state: state
+    state: state,
+
+    selectCard: function selectCard(selected_card) {
+      console.log(`Selected Card: ${selected_card}`);
+      dispatch({ type: DECK_CARD_SELECTED, deck_card: selected_card });
+      console.log(state);
+    },
+
+    targetHex: function targetHex(selected_hex) {
+      console.log(`Selected Hex: ${selected_hex}`);
+      dispatch({ type: HEX_SELECTED, target_hex: selected_hex });
+    },
+
+    targetUser: function targetUser(selected_user) {
+      console.log(`Selected user: ${selected_user}`);
+      dispatch({ type: USER_SELECTED, target_user: selected_user });
+    }
   };
+
   return stateObject;
 }
