@@ -66,7 +66,7 @@ defmodule Hexen.HexWorker do
         explore(modifier, user_id, deck_card_id)
 
       "Interact" ->
-        interact(modifier, target_hex_id)
+        interact(modifier, user_id, target_hex_id, target_user_id)
 
       "Craft" ->
         craft(modifier, user_id, target_hex_id)
@@ -152,7 +152,7 @@ defmodule Hexen.HexWorker do
     |> IO.inspect()
   end
 
-  def interact(_modifier, user_id, _target_hex_id) do
+  def interact(_modifier, user_id, _target_hex_id, target_user_id) do
     # TO DO
     # Adds an explore card to your deck
     # Or does something else complex

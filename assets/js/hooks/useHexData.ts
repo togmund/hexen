@@ -33,29 +33,13 @@ export default function useHexData() {
     ],
     selected_card: null,
     target_hex: 60,
-    target_user: null
+    target_user: null,
+    channel: null
   });
 
-  const getState = useCallback(() => {
-    console.log(stateObject.state);
+  const getState = () => {
     return state;
-  }, [state]);
-
-  // const useEffectSafe = (callback, deps) => {
-  //   const callbackRef = useRef(callback);
-  //   useEffect(() => {
-  //     callbackRef.current = callback;
-  //   });
-  //   useEffect(() => {
-  //     callbackRef.current!();
-  //   }, deps);
-  // };
-  useEffect(() => {
-    getInitialBoardFromUser(state.player);
-    init(socket, state.tile.id, getState);
-  }, [state.tile.id]);
-
-  // useEffect(() => {}, [state]);
+  };
 
   const getInitialBoardFromUser = (id: any) => {
     fetch(`api/map/${id}`)
@@ -67,20 +51,15 @@ export default function useHexData() {
       });
   };
 
-  const getState = useCallback(() => {
-    console.log('STASTE', state);
-    return state;
-  }, [state]);
+  const channel = socket.channel('hex:' + state.tile.id, {});
 
-  const init = (
-    socket: { channel: (arg0: string, arg1: {}) => any },
-    hexID: any,
-    getState
-  ) => {
-    // Establish the Channel
-    const room = hexID;
-    const channel = socket.channel('hex:' + room, {});
+  // Join the Channel
+  useEffect(() => {
+    getInitialBoardFromUser(state.player);
+    init();
+  }, [state.tile.id]);
 
+  const init = () => {
     // Join the Channel
     channel
       .join()
@@ -91,43 +70,65 @@ export default function useHexData() {
         console.log('Unable to join', resp);
       });
 
-    // Render the map on the render_map broadcast
-    channel.on('SET_BOARD', (msg: any) => {
-      dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
-    });
-
-    // Update the hex on the hex_state broadcast
-    channel.on('SET_HEX', (msg: any) => {
-      dispatch({ type: SET_HEX, tile: msg.tile[0] });
-    });
-
-    // Update the hand on the new_hand broadcast
-    channel.on('SET_HAND', (msg: any) => {
-      dispatch({ type: SET_HAND, hand: msg.players[0].hand });
-    });
-
-    // Broadcast the selected card on the select_card broadcast
-    channel.on('GET_CARD', (msg: {}) => {
-      channel
-        .push('selected_card', {
-          deck_card_id: getState().selected_card,
-          room_name: `hex:${getState().tile.id}`,
-          user_id: getState().player,
-          target_hex_id: getState().target_hex,
-          target_user_id: getState().target_user
-        })
-        .receive('ok', (resp: any) => {
-          console.log('Card selected successfully', resp);
-          dispatch({ type: ACTION_RESOLVED });
-        })
-        .receive('error', (resp: any) => {
-          console.log('Card not', resp);
-        });
-    });
-
     return () => {
       channel.leave();
     };
+  };
+
+  // Render the map on the render_map broadcast
+  useEffect(() => {
+    channel.on('SET_BOARD', (msg: any) => {
+      dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
+    });
+    return () => {
+      channel.off('SET_BOARD');
+    };
+  }, []);
+
+  // Update the hex on the hex_state broadcast
+  useEffect(() => {
+    channel.on('SET_HEX', (msg: any) => {
+      dispatch({ type: SET_HEX, tile: msg.tile[0] });
+    });
+    return () => {
+      channel.off('SET_HEX');
+    };
+  }, []);
+
+  // Update the hand on the new_hand broadcast
+  useEffect(() => {
+    channel.on('SET_HAND', (msg: any) => {
+      dispatch({ type: SET_HAND, hand: msg.players[0].hand });
+    });
+    return () => {
+      socket.off('SET_HAND');
+    };
+  }, []);
+
+  // Broadcast the selected card on the select_card broadcast
+  useEffect(() => {
+    channel.on('GET_CARD', (msg: {}) => {
+      console.log('get card', getState());
+      respondWithCard();
+    });
+    return () => {
+      channel.off('GET_CARD');
+    };
+  }, []);
+
+  const respondWithCard = () => {
+    channel
+      .push('selected_card', {
+        deck_card_id: getState().selected_card,
+        room_name: `hex:${getState().tile.id}`,
+        user_id: getState().player,
+        target_hex_id: getState().target_hex,
+        target_user_id: getState().target_user
+      })
+      .receive('ok', (resp: any) => {
+        console.log('Card selected successfully', resp);
+        dispatch({ type: ACTION_RESOLVED });
+      });
   };
 
   const stateObject = {
