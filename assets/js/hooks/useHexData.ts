@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useCallback, useRef } from 'react';
 import socket from '../socket';
 
 import reducer, {
@@ -36,10 +36,26 @@ export default function useHexData() {
     target_user: null
   });
 
+  const getState = useCallback(() => {
+    console.log(stateObject.state);
+    return state;
+  }, [state]);
+
+  // const useEffectSafe = (callback, deps) => {
+  //   const callbackRef = useRef(callback);
+  //   useEffect(() => {
+  //     callbackRef.current = callback;
+  //   });
+  //   useEffect(() => {
+  //     callbackRef.current!();
+  //   }, deps);
+  // };
   useEffect(() => {
     getInitialBoardFromUser(state.player);
-    return init(socket, state.tile.id);
-  }, []);
+    init(socket, state.tile.id, getState);
+  }, [state.tile.id]);
+
+  // useEffect(() => {}, [state]);
 
   const getInitialBoardFromUser = (id: any) => {
     fetch(`api/map/${id}`)
@@ -53,7 +69,8 @@ export default function useHexData() {
 
   const init = (
     socket: { channel: (arg0: string, arg1: {}) => any },
-    hexID: any
+    hexID: any,
+    getState
   ) => {
     // Establish the Channel
     const room = hexID;
@@ -88,11 +105,11 @@ export default function useHexData() {
     channel.on('GET_CARD', (msg: {}) => {
       channel
         .push('selected_card', {
-          deck_card_id: stateObject.state.selected_card,
-          room_name: `hex:${state.tile.id}`,
-          user_id: state.player,
-          target_hex_id: state.target_hex,
-          target_user_id: state.target_user
+          deck_card_id: getState().selected_card,
+          room_name: `hex:${getState().tile.id}`,
+          user_id: getState().player,
+          target_hex_id: getState().target_hex,
+          target_user_id: getState().target_user
         })
         .receive('ok', (resp: any) => {
           console.log('Card selected successfully', resp);
