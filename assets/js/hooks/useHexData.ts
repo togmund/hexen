@@ -15,7 +15,7 @@ export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
     player: 1,
     hex_tiles: [],
-    tile: { id: 1 },
+    tile: { id: 60 },
     hand: []
   });
 

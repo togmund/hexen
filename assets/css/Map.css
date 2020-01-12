@@ -1,19 +1,24 @@
 .hex-map {
   background-color: #548297;
 }
+
 g.hexagon {
   fill: #2d8231;
-  color:#675f53;
+  color: #675f53;
   opacity: 60%;
 }
 
 g.hexagon:hover {
   fill:
-  #43322f;
+    #43322f;
   opacity: 100%;
 }
 
 svg g text {
   font-size: 0.1em;
   fill: #dfebdc;
+}
+
+g.in-fog {
+  opacity: 15%;
 }

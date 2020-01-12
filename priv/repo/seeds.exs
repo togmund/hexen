@@ -187,6 +187,8 @@ defmodule Hexen.DatabaseSeeder do
 
     Enum.each(0..long_col, fn y ->
       Repo.insert!(%Hex{
+        structure: "Castle",
+        resource: "Gold",
         biome_id: Enum.random(1..11),
         region_id: Enum.random(1..3),
         q: top[:q],
@@ -198,7 +200,7 @@ defmodule Hexen.DatabaseSeeder do
 
   # Hex_User Seeds
   Repo.insert!(%HexUser{
-    hex_id: 1,
+    hex_id: 60,
     user_id: 1
   })
 

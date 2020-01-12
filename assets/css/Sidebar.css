@@ -1,8 +1,10 @@
 nav.sidebar {
   display: flex;
   flex-direction: column;
-  background-color:#675f53;
-  padding: 16px;
+  background-color: #675f53;
+  padding: 20px;
+  width: 15%;
+  text-align: center;
 }
 
 nav.hex-info {
@@ -10,10 +12,10 @@ nav.hex-info {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-evenly;
-  background-color:#dfebdc;
-  color:#675f53;
+  background-color: #dfebdc;
+  color: #675f53;
 }
 
-nav.deck {
-  background-color:#dfebdc;
+nav.deck-image {
+  background-color: #dfebdc;
 }
