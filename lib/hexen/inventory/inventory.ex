@@ -307,7 +307,7 @@ defmodule Hexen.Inventory do
 
   Raises `Ecto.NoResultsError` if the Card does not exist.
   """
-  def get_card_id_by_deck_card!(deck_card_id) do
+  def get_card_id_by_deck_card(deck_card_id) do
     Repo.all(
       from dc in DeckCard,
         where: dc.id == ^deck_card_id,

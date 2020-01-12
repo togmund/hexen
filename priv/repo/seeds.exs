@@ -215,6 +215,14 @@ defmodule Hexen.DatabaseSeeder do
   })
 
   # Card
+
+  Repo.insert!(%Card{
+    name: "Rest",
+    suit: "Rest",
+    description: "Take a moment, catch your breath.",
+    image: "https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png"
+  })
+
   Repo.insert!(%Card{
     name: "Sword",
     suit: "Combat",
@@ -299,72 +307,34 @@ defmodule Hexen.DatabaseSeeder do
     user_id: 3
   })
 
-  # Deck
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 1,
-    drawn: false
-  })
+  # Decks
 
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 1,
-    drawn: false
-  })
+  [1..Enum.random(25..35)]
+  |> Enum.each(fn _x ->
+    Repo.insert!(%DeckCard{
+      deck_id: 1,
+      card_id: Enum.random(1..16),
+      drawn: false
+    })
+  end)
 
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 2,
-    drawn: false
-  })
+  [1..Enum.random(25..35)]
+  |> Enum.each(fn _x ->
+    Repo.insert!(%DeckCard{
+      deck_id: 2,
+      card_id: Enum.random(1..16),
+      drawn: false
+    })
+  end)
 
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 2,
-    drawn: false
-  })
-
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 3,
-    drawn: false
-  })
-
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 4,
-    drawn: false
-  })
-
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 5,
-    drawn: false
-  })
-
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 6,
-    drawn: false
-  })
-
-  Repo.insert!(%DeckCard{
-    deck_id: 1,
-    card_id: 6,
-    drawn: false
-  })
-
-  Repo.insert!(%DeckCard{
-    deck_id: 2,
-    card_id: 2,
-    drawn: false
-  })
-
-  Repo.insert!(%DeckCard{
-    deck_id: 3,
-    card_id: 3,
-    drawn: false
-  })
+  [1..Enum.random(25..35)]
+  |> Enum.each(fn _x ->
+    Repo.insert!(%DeckCard{
+      deck_id: 3,
+      card_id: Enum.random(1..16),
+      drawn: false
+    })
+  end)
 
   # Quest Seeds
   Repo.insert!(%Quest{

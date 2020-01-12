@@ -10,7 +10,7 @@ defmodule Hexen.HexWorker do
   end
 
   def init(state) do
-    schedule_hex_fetch()
+    Kernel.send(self(), :hex_fetch)
     {:ok, state}
   end
 
@@ -33,11 +33,18 @@ defmodule Hexen.HexWorker do
 
   def get_action(deck_card_id) do
     # DeckCard ID for the card selected
-    deck_card_id
-    |> Hexen.Inventory.get_card_id_by_deck_card!()
-    |> List.first()
-    |> Hexen.Inventory.get_card!()
-    |> Map.take([:suit, :modifier])
+
+    case deck_card_id do
+      nil ->
+        %{suit: "Rest", modifier: 0}
+
+      _ ->
+        deck_card_id
+        |> Hexen.Inventory.get_card_id_by_deck_card()
+        |> List.first()
+        |> Hexen.Inventory.get_card!()
+        |> Map.take([:suit, :modifier])
+    end
   end
 
   def perform_action(_room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
@@ -46,6 +53,7 @@ defmodule Hexen.HexWorker do
     modifier = action[:modifier]
 
     case suit do
+      "Rest" -> rest(user_id)
       "Combat" -> combat(modifier, user_id, target_hex_id, target_user_id)
       "Move" -> move(modifier, user_id, target_hex_id)
       "Gather" -> gather(modifier, user_id, target_hex_id)
@@ -53,6 +61,11 @@ defmodule Hexen.HexWorker do
       "Interact" -> interact(modifier, target_hex_id)
       "Craft" -> craft(modifier, user_id, target_hex_id)
     end
+  end
+
+  def rest(user_id) do
+    # Rest
+    user_id
   end
 
   def combat(_modifier, _user_id, _target_hex_id, _target_user_id) do
@@ -65,26 +78,21 @@ defmodule Hexen.HexWorker do
     # Moves to a tile
     # Adds an Interact, Explore or Move card to your deck
     # Modifier indicates quality of added card?
+    active_hex = Hexen.Map.get_active_hex_id_for_user(user_id)
 
-    Hexen.Map.get_active_hex_id_for_user(user_id)
+    active_hex
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
   end
 
   def gather(_modifier, user_id, _target_hex_id) do
-    # Adds an existing Crafting card to your deck based on resource
-    # Modifier indicates quality of added card?
-
     # Gathers the active resource
-    # Get Current hex
-    # Get Current resource
     resource =
       Hexen.Map.get_active_hex_id_for_user(user_id)
       |> Hexen.Map.get_resource_by_hex_id()
 
-    # List possible cards to craft
-    # Take one of them
+    # Take one of the possible cards to craft
     card_id =
       Hexen.Inventory.get_card_ids_by_suit_list_and_resource(["Craft"], resource)
       |> Enum.shuffle()
@@ -168,7 +176,8 @@ defmodule Hexen.HexWorker do
     cond do
       length(drawn_cards) < 3 ->
         Hexen.Inventory.shuffle_discard_into_deck(deck_id)
-        nil
+        Hexen.Inventory.get_card!(0);
+        |> Map.take([:description, :id, :image, :name, :modifier, :suit]
 
       length(drawn_cards) == 3 ->
         drawn_cards
@@ -176,7 +185,6 @@ defmodule Hexen.HexWorker do
           Hexen.Inventory.update_drawn_status(Hexen.Inventory.get_deck_card!(hand_card_id), true)
         end)
 
-        new_hand =
           drawn_cards
           |> Enum.map(fn deck_card_id ->
             %{
@@ -187,8 +195,6 @@ defmodule Hexen.HexWorker do
                 |> Map.take([:description, :id, :image, :name, :modifier, :suit])
             }
           end)
-
-        new_hand
     end
   end
 
