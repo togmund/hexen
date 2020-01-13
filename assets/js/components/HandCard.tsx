@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classNames from 'classnames';
 import { Box, Card, Image, Heading, Text } from 'rebass';
 import '../../css/HandCard.css';
 
@@ -11,9 +12,11 @@ const HandCard = ({
   selected,
   selectCard
 }) => {
+  const handClass: any = classNames('hand-card', suit);
+
   return (
     <Box
-      className="hand-card"
+      className={handClass}
       onClick={selectCard}
       sx={{
         p: 1,
@@ -22,13 +25,12 @@ const HandCard = ({
       }}
     >
       <Card>
-        <Text>{name}</Text>
-
+        <Text className={'card-title'}>{name}</Text>
         <Image src={image} />
-        <Box>
-          <Text>{suit}</Text>
-          <Text>{description}</Text>
-          <Text>{modifier}</Text>
+        <Box className={'card-info'}>
+          <Text className={'card-suit'}>{suit}</Text>
+          <Text className={'card-modifier'}>{modifier}</Text>
+          <Text className={'card-description'}>{description}</Text>
         </Box>
       </Card>
     </Box>
