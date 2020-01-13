@@ -17,7 +17,7 @@ const Map = (props: { state: any; targetHex: any }) => {
     hexID: number,
     hexCoords: number[],
     highlightCurrent: boolean = true
-  ) => {
+  ): boolean => {
     const neighbourCoords = [];
     const neighbours = HexUtils.neighbours(state.tile);
     neighbours.forEach((hex: any) => {
@@ -35,9 +35,9 @@ const Map = (props: { state: any; targetHex: any }) => {
     return true;
   };
 
-  const getHexClasses = (hexID: number, hexCoords: number[]) => {
+  const getHexClasses = ({ id, q, r, s }) => {
     const hexClasses = classNames({
-      'in-fog': highlightHexes(hexID, hexCoords)
+      'in-fog': highlightHexes(id, [q, r, s])
       // nearby: highlightHexes(hexID, hexCoords, false)
       // nearby: true
     });
@@ -49,7 +49,7 @@ const Map = (props: { state: any; targetHex: any }) => {
     <div className={'hex-map'}>
       <HexGrid width={'88vw'} height={'70vh'} viewBox={'-60 -200 125 200'}>
         <Layout
-          size={{ x: 30, y: 30 }}
+          size={{ x: 8, y: 8 }}
           flat={false}
           spacing={1.005}
           origin={{ x: -100, y: -150 }}
@@ -62,13 +62,13 @@ const Map = (props: { state: any; targetHex: any }) => {
                 r={hex.r}
                 s={hex.s}
                 fill={HexUtils.getID(hex)}
-                className={getHexClasses}
+                className={getHexClasses(hex)}
               >
                 <Text>{hex.id}</Text>
                 <Pattern
                   id={HexUtils.getID(hex)}
                   link={hex.image}
-                  size={{ x: 30, y: 30 }}
+                  size={{ x: 8, y: 8 }}
                 />
               </Hexagon>
             ))
