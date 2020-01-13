@@ -7,6 +7,10 @@ defmodule Hexen.Events do
   alias Hexen.Repo
 
   alias Hexen.Events.Quest
+  alias Hexen.Events.CardQuest
+  alias Hexen.Events.BandQuest
+  alias Hexen.Events.UserQuest
+  alias Hexen.Events.HexQuest
 
   @doc """
   Returns the list of quests.
@@ -102,8 +106,6 @@ defmodule Hexen.Events do
     Quest.changeset(quest, %{})
   end
 
-  alias Hexen.Events.UserQuest
-
   @doc """
   Returns the list of user_quests.
 
@@ -197,8 +199,6 @@ defmodule Hexen.Events do
   def change_user_quest(%UserQuest{} = user_quest) do
     UserQuest.changeset(user_quest, %{})
   end
-
-  alias Hexen.Events.CardQuest
 
   @doc """
   Returns the list of card_quests.
@@ -294,8 +294,6 @@ defmodule Hexen.Events do
     CardQuest.changeset(card_quest, %{})
   end
 
-  alias Hexen.Events.BandQuest
-
   @doc """
   Returns the list of band_quests.
 
@@ -389,8 +387,6 @@ defmodule Hexen.Events do
   def change_band_quest(%BandQuest{} = band_quest) do
     BandQuest.changeset(band_quest, %{})
   end
-
-  alias Hexen.Events.HexQuest
 
   @doc """
   Returns the list of hex_quests.
@@ -489,4 +485,12 @@ defmodule Hexen.Events do
   ################################################################
   ######################## Custom queries ########################
   ################################################################
+
+  def get_existing_quest_list_by_user(id) do
+    from(uq in UserQuest, where: uq.user_id == ^id, select: uq.quest_id) |> Repo.all()
+  end
+
+  def get_novel_quests(quest_ids) do
+    from(q in Quest, where: q.id not in ^quest_ids) |> Repo.all()
+  end
 end
