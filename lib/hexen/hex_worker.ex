@@ -21,10 +21,10 @@ defmodule Hexen.HexWorker do
       |> retrieve_state()
       |> update_state(state)
 
+    broadcast(updated_state, :ok, "GET_CARD")
     broadcast(updated_state, :ok, "SET_BOARD")
     broadcast(updated_state, :ok, "SET_HEX")
     broadcast(updated_state, :ok, "SET_HAND")
-    broadcast(updated_state, :ok, "GET_CARD")
 
     schedule_hex_fetch()
 
@@ -39,44 +39,53 @@ defmodule Hexen.HexWorker do
         nil
 
       _ ->
-        deck_card_id
-        |> Hexen.Inventory.get_card_id_by_deck_card()
-        |> List.first()
-        |> Hexen.Inventory.get_card!()
-        |> Map.take([:suit, :modifier])
+        card_id =
+          deck_card_id
+          |> Hexen.Inventory.get_card_id_by_deck_card()
+          |> List.first()
+
+        case card_id do
+          nil ->
+            nil
+
+          _ ->
+            card_id
+            |> Hexen.Inventory.get_card!()
+            |> Map.take([:suit, :modifier])
+        end
     end
   end
 
-  def perform_action(_room_name, deck_card_id, user_id, target_hex_id, target_user_id) do
+  def perform_action(_room_name, deck_card_id, user_id, target_hex_id, target_user_id, tile_id) do
     action = get_action(deck_card_id)
     suit = action[:suit]
     modifier = action[:modifier]
 
     case suit do
       "Combat" ->
-        combat(modifier, user_id, target_hex_id, target_user_id)
+        combat(modifier, user_id, target_hex_id, target_user_id, tile_id)
 
       "Move" ->
-        move(modifier, user_id, target_hex_id)
+        move(modifier, user_id, target_hex_id, tile_id)
 
       "Gather" ->
-        gather(modifier, user_id, target_hex_id)
+        gather(modifier, user_id, target_hex_id, tile_id)
 
       "Explore" ->
-        explore(modifier, user_id, deck_card_id)
+        explore(modifier, user_id, deck_card_id, tile_id)
 
       "Interact" ->
-        interact(modifier, user_id, target_hex_id, target_user_id)
+        interact(modifier, user_id, target_hex_id, target_user_id, tile_id)
 
       "Craft" ->
-        craft(modifier, user_id, target_hex_id)
+        craft(modifier, user_id, target_hex_id, tile_id)
 
       _ ->
         nil
     end
   end
 
-  def combat(_modifier, user_id, _target_hex_id, target_user_id) do
+  def combat(_modifier, user_id, _target_hex_id, _target_user_id, tile_id) do
     # Challenges a local player to a duel
 
     if Enum.random(1..3) == 3 do
@@ -87,25 +96,36 @@ defmodule Hexen.HexWorker do
         deck_id: user_deck_id,
         card_id: Map.take(new_card, [:id])
       })
+
+      tile_id
+      |> retrieve_state()
+      |> update_state(%{id: tile_id})
     end
 
     # Winner wins an Explore card
     # Modifier indicates quality of added card?
   end
 
-  def move(_modifier, user_id, target_hex_id) do
+  def move(_modifier, user_id, target_hex_id, tile_id) do
     # Moves to a tile
     # Adds an Interact, Explore or Move card to your deck
     # Modifier indicates quality of added card?
-    active_hex = Hexen.Map.get_active_hex_id_for_user(user_id)
 
-    active_hex
+    user_id
+    |> Hexen.Map.get_hex_user_id_by_user()
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
+    |> IO.inspect()
 
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id})
+
+    tile_id
+    |> retrieve_state()
+    |> update_state(%{id: tile_id})
+
+    # For Move actions we need to dispatch a new tile for the user to register to, remove them from the existing channel and subscribe them to that one.
   end
 
-  def gather(_modifier, user_id, _target_hex_id) do
+  def gather(_modifier, user_id, _target_hex_id, tile_id) do
     # Gathers the active resource
     resource =
       Hexen.Map.get_active_hex_id_for_user(user_id)
@@ -121,9 +141,13 @@ defmodule Hexen.HexWorker do
     deck_id = Hexen.Inventory.get_users_deck_id_as_list(user_id) |> List.first()
 
     Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
+
+    tile_id
+    |> retrieve_state()
+    |> update_state(%{id: tile_id})
   end
 
-  def explore(_modifier, user_id, deck_card_id) do
+  def explore(_modifier, user_id, deck_card_id, tile_id) do
     # TO DO
     # Highlights a Tile with a Quest
     new_quest =
@@ -150,9 +174,13 @@ defmodule Hexen.HexWorker do
     |> IO.inspect()
     # Broadcast the new state
     |> IO.inspect()
+
+    tile_id
+    |> retrieve_state()
+    |> update_state(%{id: tile_id})
   end
 
-  def interact(_modifier, user_id, _target_hex_id, target_user_id) do
+  def interact(_modifier, user_id, _target_hex_id, target_user_id, tile_id) do
     # TO DO
     # Adds an explore card to your deck
     # Or does something else complex
@@ -165,9 +193,13 @@ defmodule Hexen.HexWorker do
         card_id: Map.take(new_card, [:id])
       })
     end
+
+    tile_id
+    |> retrieve_state()
+    |> update_state(%{id: tile_id})
   end
 
-  def craft(_modifier, user_id, _target_hex_id) do
+  def craft(_modifier, user_id, _target_hex_id, tile_id) do
     # Compile List of possible cards to consume
     deck_id = Hexen.Inventory.get_users_deck_id_as_list(user_id) |> List.first()
     consumable_cards = Hexen.Inventory.get_deck_card_ids_by_suit(deck_id, "Craft")
@@ -186,7 +218,10 @@ defmodule Hexen.HexWorker do
           |> List.first()
 
         Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
-        |> IO.inspect()
+
+        tile_id
+        |> retrieve_state()
+        |> update_state(%{id: tile_id})
 
       length(consumable_cards) == 2 ->
         card_id =
@@ -195,13 +230,15 @@ defmodule Hexen.HexWorker do
           |> List.first()
 
         Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
-        |> IO.inspect()
 
         consumable_cards
         |> Enum.shuffle()
         |> Enum.slice(0..1)
         |> Hexen.Inventory.delete_deck_cards()
-        |> IO.inspect()
+
+        tile_id
+        |> retrieve_state()
+        |> update_state(%{id: tile_id})
 
       length(consumable_cards) > 2 ->
         card_id =
@@ -210,13 +247,15 @@ defmodule Hexen.HexWorker do
           |> List.first()
 
         Hexen.Inventory.create_deck_card(%{deck_id: deck_id, card_id: card_id})
-        |> IO.inspect()
 
         consumable_cards
         |> Enum.shuffle()
         |> Enum.slice(0..2)
         |> Hexen.Inventory.delete_deck_cards()
-        |> IO.inspect()
+
+        tile_id
+        |> retrieve_state()
+        |> update_state(%{id: tile_id})
     end
   end
 

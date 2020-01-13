@@ -495,4 +495,14 @@ defmodule Hexen.Map do
 
     Repo.one(query)
   end
+
+  @doc """
+  """
+  def get_hex_user_id_by_user(user_id) do
+    query =
+      from hu in HexUser,
+        where: hu.user_id == ^user_id
+
+    Repo.one(query)
+  end
 end
