@@ -12,7 +12,7 @@ const HandCard = ({
   selected,
   selectCard
 }) => {
-  const handClass: any = classNames('hand-card', suit);
+  const handClass: any = classNames('hand-card', suit, 'pxl-border');
 
   return (
     <Box

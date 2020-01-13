@@ -9,6 +9,10 @@
   padding: 32px;
 }
 
+.hand-card.Rest {
+  background-color: #a248f7;
+}
+
 .hand-card.Combat {
   background-color: red;
 }
@@ -23,4 +27,12 @@
 
 .hand-card.Craft {
   background-color: lightblue;
+}
+
+.hand-card.Interact {
+  background-color: lightcoral;
+}
+
+.hand-card.Explore {
+  background-color: #11d92c;
 }
