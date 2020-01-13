@@ -4,6 +4,35 @@
   height: 232px;
   width: 136px;
 }
+
 .hand-card img {
   padding: 32px;
+}
+
+.hand-card.Rest {
+  background-color: #a248f7;
+}
+
+.hand-card.Combat {
+  background-color: red;
+}
+
+.hand-card.Move {
+  background-color: burlywood;
+}
+
+.hand-card.Gather {
+  background-color: palegreen;
+}
+
+.hand-card.Craft {
+  background-color: lightblue;
+}
+
+.hand-card.Interact {
+  background-color: lightcoral;
+}
+
+.hand-card.Explore {
+  background-color: #11d92c;
 }
