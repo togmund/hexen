@@ -38,7 +38,7 @@ export default function useHexData() {
   });
 
   const getState = () => {
-    return state;
+    return stateObject;
   };
 
   const getInitialBoardFromUser = (id: any) => {
@@ -56,10 +56,10 @@ export default function useHexData() {
   // Join the Channel
   useEffect(() => {
     getInitialBoardFromUser(state.player);
-    init();
+    init(channel);
   }, [state.tile.id]);
 
-  const init = () => {
+  const init = channel => {
     // Join the Channel
     channel
       .join()
@@ -108,22 +108,23 @@ export default function useHexData() {
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
     channel.on('GET_CARD', (msg: {}) => {
-      console.log('get card', getState());
-      respondWithCard();
+      console.log('get card', state);
+      respondWithCard(channel, state);
     });
     return () => {
       channel.off('GET_CARD');
     };
-  }, []);
+  }, [state]);
 
-  const respondWithCard = () => {
+  const respondWithCard = (channel, state) => {
+    console.log('respond with card', state);
     channel
       .push('selected_card', {
-        deck_card_id: getState().selected_card,
-        room_name: `hex:${getState().tile.id}`,
-        user_id: getState().player,
-        target_hex_id: getState().target_hex,
-        target_user_id: getState().target_user
+        deck_card_id: state.selected_card,
+        room_name: `hex:${state.tile.id}`,
+        user_id: state.player,
+        target_hex_id: state.target_hex,
+        target_user_id: state.target_user
       })
       .receive('ok', (resp: any) => {
         console.log('Card selected successfully', resp);
