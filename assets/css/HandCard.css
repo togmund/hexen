@@ -3,6 +3,11 @@
   padding: 16px;
   height: 232px;
   width: 136px;
+  transition: transform 0.4s;
+}
+
+.hand-card:hover {
+  transform: translate(0px, -30px)
 }
 
 .hand-card img {
