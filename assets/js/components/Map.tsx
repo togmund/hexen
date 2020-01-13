@@ -8,6 +8,7 @@ import {
   Pattern,
   HexUtils
 } from 'react-hexgrid';
+import * as _ from 'lodash';
 import '../../css/Map.css';
 
 const Map = (props: { state: any; targetHex: any }) => {
@@ -20,15 +21,21 @@ const Map = (props: { state: any; targetHex: any }) => {
   ): boolean => {
     const neighbourCoords = [];
     const neighbours = HexUtils.neighbours(state.tile);
+
     neighbours.forEach((hex: any) => {
       neighbourCoords.push([hex.q, hex.r, hex.s]);
     });
-    // console.log('Neighbour coords', neighbourCoords);
-    if (
-      (highlightCurrent && hexID === state.tile.id) ||
-      hexCoords === [5, 2, -7]
-    ) {
-      console.log(hexCoords);
+
+    let isCurrent = highlightCurrent && hexID === state.tile.id;
+    let isNeighbour = false;
+
+    neighbourCoords.forEach(arr => {
+      if (_.isEqual(arr, hexCoords)) {
+        isNeighbour = true;
+      }
+    });
+
+    if (isCurrent || isNeighbour) {
       return false;
     }
 
@@ -37,9 +44,8 @@ const Map = (props: { state: any; targetHex: any }) => {
 
   const getHexClasses = ({ id, q, r, s }) => {
     const hexClasses = classNames({
-      'in-fog': highlightHexes(id, [q, r, s])
-      // nearby: highlightHexes(hexID, hexCoords, false)
-      // nearby: true
+      'in-fog': highlightHexes(id, [q, r, s]),
+      nearby: highlightHexes(id, [q, r, s], false)
     });
 
     return hexClasses;
