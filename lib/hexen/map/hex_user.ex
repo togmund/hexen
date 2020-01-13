@@ -6,7 +6,7 @@ defmodule Hexen.Map.HexUser do
   import Ecto.Changeset
 
   schema "hex_users" do
-    field :departed, :naive_datetime
+    field :departed, :naive_datetime, default: nil
 
     belongs_to :hex, Hexen.Map.Hex
     belongs_to :user, Hexen.People.User
@@ -18,6 +18,5 @@ defmodule Hexen.Map.HexUser do
   def changeset(hex_user, attrs) do
     hex_user
     |> cast(attrs, [:departed])
-    |> validate_required([:departed])
   end
 end

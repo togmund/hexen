@@ -176,6 +176,20 @@ defmodule Hexen.DatabaseSeeder do
   rows = 10
   long_col = 10
 
+  resources = [
+    "Silver",
+    "Softwood",
+    "Iron",
+    "Hardwood",
+    "Wheat",
+    "Gold",
+    "Leather",
+    "Fur",
+    "Glass",
+    "Fruit",
+    "Fish"
+  ]
+
   # Quirk of react-hexgrid package: r == z and s == y if we follow https://www.redblobgames.com/grids/hexagons/
   Enum.each(0..rows, fn x ->
     top =
@@ -188,7 +202,7 @@ defmodule Hexen.DatabaseSeeder do
     Enum.each(0..long_col, fn y ->
       Repo.insert!(%Hex{
         structure: "Castle",
-        resource: "Gold",
+        resource: Enum.random(resources),
         biome_id: Enum.random(1..11),
         region_id: Enum.random(1..3),
         q: top[:q],
@@ -263,19 +277,7 @@ defmodule Hexen.DatabaseSeeder do
     modifier: 3
   })
 
-  [
-    "Silver",
-    "Softwood",
-    "Iron",
-    "Hardwood",
-    "Wheat",
-    "Gold",
-    "Leather",
-    "Fur",
-    "Glass",
-    "Fruit",
-    "Fish"
-  ]
+  resources
   |> Enum.each(fn mat ->
     Repo.insert!(%Card{
       name: "Strange Brew",

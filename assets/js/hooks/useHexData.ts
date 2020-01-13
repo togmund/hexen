@@ -118,6 +118,7 @@ export default function useHexData() {
       .push('selected_card', {
         deck_card_id: state.selected_card,
         room_name: `hex:${state.tile.id}`,
+        tile_id: state.tile.id,
         user_id: state.player,
         target_hex_id: state.target_hex,
         target_user_id: state.target_user

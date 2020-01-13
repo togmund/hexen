@@ -335,8 +335,11 @@ defmodule Hexen.Map do
   """
   def create_hex_user(attrs \\ %{}) do
     %HexUser{}
+    |> IO.inspect()
     |> HexUser.changeset(attrs)
+    |> IO.inspect()
     |> Repo.insert()
+    |> IO.inspect()
   end
 
   @doc """
@@ -492,6 +495,16 @@ defmodule Hexen.Map do
       from h in Hex,
         where: h.id == ^hex_id,
         select: h.resource
+
+    Repo.one(query)
+  end
+
+  @doc """
+  """
+  def get_hex_user_id_by_user(user_id) do
+    query =
+      from hu in HexUser,
+        where: hu.user_id == ^user_id
 
     Repo.one(query)
   end
