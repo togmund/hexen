@@ -10,6 +10,12 @@ export default function reducer(state: any, action: any) {
         hex_tiles: action.data.hex_tiles,
         tile: action.data.tile
       };
+    case SET_CHANNEL:
+      console.log(action);
+      return {
+        ...state,
+        channel: action.channel
+      };
     case SET_BOARD:
       return {
         ...state,
@@ -78,6 +84,7 @@ export default function reducer(state: any, action: any) {
   }
 }
 export const SET_INITIAL = 'SET_INITIAL';
+export const SET_CHANNEL = 'SET_CHANNEL';
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
 export const SET_HAND = 'SET_HAND';

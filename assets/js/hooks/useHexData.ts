@@ -3,6 +3,7 @@ import socket from '../socket';
 
 import reducer, {
   SET_INITIAL,
+  SET_CHANNEL,
   SET_BOARD,
   SET_HEX,
   SET_HAND,
@@ -51,74 +52,75 @@ export default function useHexData() {
       });
   };
 
-  const channel = socket.channel('hex:' + state.tile.id, {});
-
   // Join the Channel
   useEffect(() => {
     getInitialBoardFromUser(state.player);
-    init(channel);
+    init(socket, state.tile.id);
+    return state.channel.leave();
   }, [state.tile.id]);
 
-  const init = channel => {
+  const init = (socket, tile_id) => {
+    const channel = socket.channel('hex:' + tile_id, {});
     // Join the Channel
     channel
       .join()
       .receive('ok', (resp: any) => {
         console.log('Joined successfully', resp);
+        dispatch({ type: SET_CHANNEL, channel: channel });
       })
       .receive('error', (resp: any) => {
         console.log('Unable to join', resp);
       });
 
     return () => {
-      channel.leave();
+      state.channel.leave();
     };
   };
 
   // Render the map on the render_map broadcast
   useEffect(() => {
-    channel.on('SET_BOARD', (msg: any) => {
+    state.channel.on('SET_BOARD', (msg: any) => {
       dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
     });
     return () => {
-      channel.off('SET_BOARD');
+      state.channel.off('SET_BOARD');
     };
-  }, []);
+  }, [state.channel]);
 
   // Update the hex on the hex_state broadcast
   useEffect(() => {
-    channel.on('SET_HEX', (msg: any) => {
+    state.channel.on('SET_HEX', (msg: any) => {
       dispatch({ type: SET_HEX, tile: msg.tile[0] });
     });
     return () => {
-      channel.off('SET_HEX');
+      state.channel.off('SET_HEX');
     };
-  }, []);
+  }, [state.channel]);
 
   // Update the hand on the new_hand broadcast
   useEffect(() => {
-    channel.on('SET_HAND', (msg: any) => {
+    state.channel.on('SET_HAND', (msg: any) => {
       dispatch({ type: SET_HAND, hand: msg.players[0].hand });
     });
     return () => {
-      socket.off('SET_HAND');
+      state.channel.off('SET_HAND');
     };
-  }, []);
+  }, [state.channel]);
 
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
-    channel.on('GET_CARD', (msg: {}) => {
+    state.channel.on('GET_CARD', (msg: {}) => {
       console.log('get card', state);
-      respondWithCard(channel, state);
+      respondWithCard(state);
     });
     return () => {
-      channel.off('GET_CARD');
+      state.channel.off('GET_CARD');
     };
-  }, [state]);
+  }, [state.channel]);
 
-  const respondWithCard = (channel, state) => {
+  const respondWithCard = state => {
     console.log('respond with card', state);
-    channel
+    state.channel
       .push('selected_card', {
         deck_card_id: state.selected_card,
         room_name: `hex:${state.tile.id}`,
