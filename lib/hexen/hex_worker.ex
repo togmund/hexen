@@ -66,7 +66,7 @@ defmodule Hexen.HexWorker do
         explore(modifier, target_hex_id)
 
       "Interact" ->
-        interact(modifier, target_hex_id)
+        interact(modifier, user_id, target_hex_id)
 
       "Craft" ->
         craft(modifier, user_id, target_hex_id)
