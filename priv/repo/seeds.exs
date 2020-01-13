@@ -109,72 +109,72 @@ defmodule Hexen.DatabaseSeeder do
   Repo.insert!(%Biome{
     name: "Tundra",
     resource: "Silver",
-    image: "https://i.ibb.co/dpzvWCz/3-Uea-Ql-G-19x.png"
+    image: "https://i.ibb.co/F7kbcFh/snow-resize.png"
   })
 
   Repo.insert!(%Biome{
     name: "Taiga",
     resource: "Softwood",
-    image: "https://i.ibb.co/HPsh60G/Aoi-PSd3-19x.png"
+    image: "https://i.ibb.co/WWFQDhJ/purple-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Mountain",
     resource: "Iron",
-    image: "https://i.ibb.co/hCfR3PX/f-To-APQO-19x.png"
+    image: "https://i.ibb.co/P4tK7xx/mountain-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Woodland",
     resource: "Hardwood",
-    image: "https://i.ibb.co/wshB6VQ/r62-Bm2-C-19x.png"
+    image: "https://i.ibb.co/t8NgLbQ/grassland-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Grassland",
     resource: "Wheat",
-    image: "https://i.ibb.co/0XgZnRF/XVg-MJOo-19x.png"
+    image: "https://i.ibb.co/VmYLRTB/grass-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Chaparral",
     resource: "Gold",
-    image: "https://i.ibb.co/nMMjpDQ/3-MO1o-RG-19x.png"
+    image: "https://i.ibb.co/h1j86hg/hex1-rotated.png"
   })
 
   Repo.insert!(%Biome{
     name: "Savanna",
     resource: "Leather",
-    image: "https://i.ibb.co/WyhspZp/D8i-Cn-HY-19x.png"
+    image: "https://i.ibb.co/MVW4XfV/orange-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Fen",
     resource: "Fur",
-    image: "https://i.ibb.co/WPVhCcP/x-V10w-KX-19x.png"
+    image: "https://i.ibb.co/S34xwsx/swamp-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Desert",
     resource: "Glass",
-    image: "https://i.ibb.co/CPFHCkC/Kiyuvfz-19x.png"
+    image: "https://i.ibb.co/RHsVg4m/dunes-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Tropic",
     resource: "Fruit",
-    image: "https://i.ibb.co/TY95Mf2/AWYVX3-C-19x.png"
+    image: "https://i.ibb.co/842VhsT/river-rotate.png"
   })
 
   Repo.insert!(%Biome{
     name: "Ocean",
     resource: "Fish",
-    image: "https://i.ibb.co/3dBpWpH/i8tmo-PI-19x.png"
+    image: "https://i.ibb.co/tzRxjH5/ocean-rotate.png"
   })
 
   # Hex seeds
-  rows = 10
-  long_col = 10
+  rows = 23
+  long_col = 12
 
   resources = [
     "Silver",

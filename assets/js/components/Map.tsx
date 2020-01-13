@@ -53,11 +53,11 @@ const Map = (props: { state: any; targetHex: any }) => {
 
   return (
     <div className={'hex-map'}>
-      <HexGrid width={'100vw'} height={'100vh'} viewBox={'-60 -200 125 200'}>
+      <HexGrid width={'100vw'} height={'100vh'} viewBox={'20 -160 125 200'}>
         <Layout
-          size={{ x: 8, y: 8 }}
-          flat={false}
-          spacing={1.005}
+          size={{ x: 10, y: 10 }}
+          flat={true}
+          spacing={1.085}
           origin={{ x: -100, y: -150 }}
         >
           {state.hex_tiles ? (
@@ -70,11 +70,11 @@ const Map = (props: { state: any; targetHex: any }) => {
                 fill={HexUtils.getID(hex)}
                 className={getHexClasses(hex)}
               >
-                <Text>{hex.id}</Text>
+                {/* <Text>{hex.id}</Text> */}
                 <Pattern
                   id={HexUtils.getID(hex)}
                   link={hex.image}
-                  size={{ x: 8, y: 8 }}
+                  size={{ x: 10, y: 10 }}
                 />
               </Hexagon>
             ))
