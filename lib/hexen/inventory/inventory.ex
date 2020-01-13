@@ -382,4 +382,26 @@ defmodule Hexen.Inventory do
     )
     |> Repo.delete_all()
   end
+
+  def create_random_explore_card() do
+    explore_names = ['Map', 'Rumors']
+    explore_descriptions = ['See nearby quest markers.', 'See nearby resources.']
+
+    value = Enum.random([1, 2])
+    name = Enum.at(explore_names, value)
+    description = Enum.at(explore_descriptions, value)
+    suit = 'Explore'
+    modifier = Enum.random([1, 2, 3])
+    image = ''
+
+    %Card{}
+    |> Card.changeset(%{
+      name: name,
+      description: description,
+      suit: suit,
+      modifier: modifier,
+      image: image
+    })
+    |> Repo.insert()
+  end
 end
