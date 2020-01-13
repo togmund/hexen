@@ -16,7 +16,7 @@ defmodule Hexen.Inventory.DeckCard do
   @doc false
   def changeset(deck_card, attrs) do
     deck_card
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:card_id, :deck_id])
+    |> validate_required([:card_id, :deck_id])
   end
 end

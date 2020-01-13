@@ -335,11 +335,8 @@ defmodule Hexen.Map do
   """
   def create_hex_user(attrs \\ %{}) do
     %HexUser{}
-    |> IO.inspect()
     |> HexUser.changeset(attrs)
-    |> IO.inspect()
     |> Repo.insert()
-    |> IO.inspect()
   end
 
   @doc """
