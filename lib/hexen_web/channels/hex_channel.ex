@@ -14,13 +14,13 @@ defmodule HexenWeb.HexChannel do
     msg
     |> IO.inspect()
 
-    # HexWorker.perform_action(
-    #   msg["room_name"],
-    #   msg["deck_card_id"],
-    #   msg["user_id"],
-    #   msg["target_hex_id"],
-    #   msg["target_user_id"]
-    # )
+    HexWorker.perform_action(
+      msg["room_name"],
+      msg["deck_card_id"],
+      msg["user_id"],
+      msg["target_hex_id"],
+      msg["target_user_id"]
+    )
 
     {:noreply, socket}
   end

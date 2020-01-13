@@ -7,7 +7,6 @@ import reducer, {
   SET_BOARD,
   SET_HEX,
   SET_HAND,
-  ACTION_RESOLVED,
   DECK_CARD_SELECTED,
   HEX_SELECTED,
   USER_SELECTED
@@ -18,7 +17,7 @@ export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
     player: 1,
     hex_tiles: [],
-    tile: { id: 60 },
+    tile: { id: 50 },
     hand: [
       {
         deck_card_id: null,
@@ -35,7 +34,7 @@ export default function useHexData() {
     selected_card: null,
     target_hex: 60,
     target_user: null,
-    channel: null
+    channel: socket.channel('hex:' + 60, {})
   });
 
   const getState = () => {
@@ -56,7 +55,6 @@ export default function useHexData() {
   useEffect(() => {
     getInitialBoardFromUser(state.player);
     init(socket, state.tile.id);
-    return state.channel.leave();
   }, [state.tile.id]);
 
   const init = (socket, tile_id) => {
@@ -71,10 +69,6 @@ export default function useHexData() {
       .receive('error', (resp: any) => {
         console.log('Unable to join', resp);
       });
-
-    return () => {
-      state.channel.leave();
-    };
   };
 
   // Render the map on the render_map broadcast
@@ -85,7 +79,7 @@ export default function useHexData() {
     return () => {
       state.channel.off('SET_BOARD');
     };
-  }, [state.channel]);
+  }, [state]);
 
   // Update the hex on the hex_state broadcast
   useEffect(() => {
@@ -95,7 +89,7 @@ export default function useHexData() {
     return () => {
       state.channel.off('SET_HEX');
     };
-  }, [state.channel]);
+  }, [state]);
 
   // Update the hand on the new_hand broadcast
   useEffect(() => {
@@ -105,7 +99,7 @@ export default function useHexData() {
     return () => {
       state.channel.off('SET_HAND');
     };
-  }, [state.channel]);
+  }, [state]);
 
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
@@ -116,7 +110,7 @@ export default function useHexData() {
     return () => {
       state.channel.off('GET_CARD');
     };
-  }, [state.channel]);
+  }, [state]);
 
   const respondWithCard = state => {
     console.log('respond with card', state);
@@ -130,7 +124,6 @@ export default function useHexData() {
       })
       .receive('ok', (resp: any) => {
         console.log('Card selected successfully', resp);
-        dispatch({ type: ACTION_RESOLVED });
       });
   };
 
