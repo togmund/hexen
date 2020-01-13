@@ -238,10 +238,12 @@ defmodule Hexen.Inventory do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_deck_card(attrs \\ %{}) do
+  def create_deck_card!(attrs \\ %{}) do
     %DeckCard{}
     |> DeckCard.changeset(attrs)
-    |> Repo.insert()
+    |> IO.inspect()
+    |> Repo.insert!()
+    |> IO.inspect()
   end
 
   @doc """
@@ -387,21 +389,23 @@ defmodule Hexen.Inventory do
     explore_names = ['Map', 'Rumors']
     explore_descriptions = ['See nearby quest markers.', 'See nearby resources.']
 
-    value = Enum.random([1, 2])
-    name = Enum.at(explore_names, value)
-    description = Enum.at(explore_descriptions, value)
-    suit = 'Explore'
-    modifier = Enum.random([1, 2, 3])
-    image = ''
-
     %Card{}
     |> Card.changeset(%{
-      name: name,
-      description: description,
-      suit: suit,
-      modifier: modifier,
-      image: image
+      name: explore_names |> Enum.random(),
+      description: explore_descriptions |> Enum.random(),
+      suit: 'Explore',
+      modifier: [1..3] |> Enum.random(),
+      image: "https://i.ibb.co/ngC8G2d/Lde-Txc2-8x.png"
     })
     |> Repo.insert()
+  end
+
+  def list_all_cards_in_deck(deck_id) do
+    from(dc in DeckCard,
+      join: c in Card,
+      on: c.id == dc.card_id,
+      where: dc.deck_id == ^deck_id
+    )
+    |> Repo.all()
   end
 end
