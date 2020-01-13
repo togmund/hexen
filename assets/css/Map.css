@@ -17,7 +17,7 @@ svg g text {
 }
 
 g.in-fog {
-  opacity: 10%;
+  opacity: 20%;
 }
 
 g.nearby {}
