@@ -139,7 +139,7 @@ defmodule Hexen.DatabaseSeeder do
   Repo.insert!(%Biome{
     name: "Chaparral",
     resource: "Gold",
-    image: "https://i.ibb.co/nMMjpDQ/3-MO1o-RG-19x.png"
+    image: "https://i.ibb.co/ZdZq0Ht/hex1-rotated.png"
   })
 
   Repo.insert!(%Biome{
