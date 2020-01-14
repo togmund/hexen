@@ -21,7 +21,7 @@ defmodule Hexen.HexWorker do
       |> update_state(state)
 
     broadcast(updated_state, :ok, "GET_CARD")
-    broadcast(updated_state, :ok, "SET_BOARD")
+    # broadcast(updated_state, :ok, "SET_BOARD")
 
     broadcast(updated_state, :ok, "SET_HEX")
     broadcast(updated_state, :ok, "SET_HAND")

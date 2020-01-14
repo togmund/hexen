@@ -173,8 +173,8 @@ defmodule Hexen.DatabaseSeeder do
   })
 
   # Hex seeds
-  rows = 23
-  long_col = 12
+  rows = 25
+  long_col = 25
 
   resources = [
     "Silver",
@@ -214,7 +214,7 @@ defmodule Hexen.DatabaseSeeder do
 
   # Hex_User Seeds
   Repo.insert!(%HexUser{
-    hex_id: 60,
+    hex_id: 291,
     user_id: 1
   })
 
