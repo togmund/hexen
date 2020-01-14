@@ -342,26 +342,67 @@ defmodule Hexen.DatabaseSeeder do
   end)
 
   # Quest Seeds
-  Repo.insert!(%Quest{
-    name: "Visit",
-    description: "",
-    requirement: 4,
-    card_id: 1
-  })
+  names = [
+    "belong",
+    "Sunday",
+    "desert",
+    "arrest",
+    "tiptoe",
+    "favour",
+    "salmon",
+    "remark",
+    "castle",
+    "accept",
+    "blonde",
+    "leader",
+    "pierce",
+    "shadow",
+    "switch",
+    "grudge",
+    "sister",
+    "design",
+    "strong",
+    "safety",
+    "doctor",
+    "market",
+    "couple",
+    "script",
+    "stable",
+    "decide",
+    "sermon",
+    "assume",
+    "camera",
+    "winter",
+    "return",
+    "border",
+    "twitch",
+    "nature",
+    "candle",
+    "jockey",
+    "sodium",
+    "circle",
+    "cheque",
+    "reform",
+    "battle",
+    "driver",
+    "notice",
+    "sample",
+    "marble",
+    "visual",
+    "effect",
+    "desire",
+    "deport"
+  ]
 
-  Repo.insert!(%Quest{
-    name: "Visit",
-    description: "",
-    requirement: 5,
-    card_id: 2
-  })
-
-  Repo.insert!(%Quest{
-    name: "Visit",
-    description: "",
-    requirement: 6,
-    card_id: 3
-  })
+  1..700
+  |> Enum.each(fn _num ->
+    Repo.insert!(%Quest{
+      name: Enum.random(names),
+      description: "",
+      requirement: 100,
+      card_id: 2
+    })
+  end)
 
   # User_Quest Seeds
   Repo.insert!(%UserQuest{
@@ -383,23 +424,14 @@ defmodule Hexen.DatabaseSeeder do
   })
 
   # Hex_Quest Seeds
-  Repo.insert!(%HexQuest{
-    progress: 1,
-    hex_id: 1,
-    quest_id: 1
-  })
-
-  Repo.insert!(%HexQuest{
-    progress: 2,
-    hex_id: 2,
-    quest_id: 2
-  })
-
-  Repo.insert!(%HexQuest{
-    progress: 3,
-    hex_id: 3,
-    quest_id: 3
-  })
+  1..250
+  |> Enum.each(fn num ->
+    Repo.insert!(%HexQuest{
+      progress: 1,
+      hex_id: num,
+      quest_id: Enum.random(1..700)
+    })
+  end)
 
   # Card_Quest Seeds
   Repo.insert!(%CardQuest{
