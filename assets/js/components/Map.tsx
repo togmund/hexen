@@ -69,6 +69,7 @@ const Map = (props: { state: any; targetHex: any }) => {
                 s={hex.s}
                 fill={HexUtils.getID(hex)}
                 className={getHexClasses(hex)}
+                onClick={() => targetHex(hex.id)}
               >
                 {/* <Text>{hex.id}</Text> */}
                 <Pattern

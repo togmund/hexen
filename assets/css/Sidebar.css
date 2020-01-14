@@ -18,6 +18,8 @@ nav .hex-info {
   font-size: xx-large;
   font-weight: bolder;
   width: 136px;
+  position: relative;
+  bottom: 3.5em;
 }
 
 nav .hex-details {
@@ -27,4 +29,9 @@ nav .hex-details {
   font-weight: bolder;
   width: 120px;
   margin: auto;
+}
+
+.hex-info>img {
+  height: 120px;
+  width: 120px;
 }

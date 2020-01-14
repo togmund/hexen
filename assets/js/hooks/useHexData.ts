@@ -7,17 +7,18 @@ import reducer, {
   SET_BOARD,
   SET_HEX,
   SET_HAND,
+  SET_QUESTS,
   DECK_CARD_SELECTED,
   HEX_SELECTED,
   USER_SELECTED
   // SET_BAND
 } from '../reducers/application';
 
-export default function useHexData() {
+export default function useHexData(player) {
   const [state, dispatch] = useReducer(reducer, {
-    player: 1,
+    player: player.id,
     hex_tiles: [],
-    tile: { id: 50 },
+    tile: { id: player.hex_id },
     hand: [
       {
         deck_card_id: null,
@@ -32,9 +33,10 @@ export default function useHexData() {
       }
     ],
     selected_card: null,
-    target_hex: 60,
+    target_hex: null,
     target_user: null,
-    channel: socket.channel('hex:' + 60, {})
+    channel: socket.channel(`hex:${player.hex_id}`, {}),
+    quest_hexes: []
   });
 
   const getState = () => {
@@ -74,7 +76,6 @@ export default function useHexData() {
   // Render the map on the render_map broadcast
   useEffect(() => {
     state.channel.on('SET_BOARD', (msg: any) => {
-      console.log(msg);
       dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
     });
     return () => {
@@ -112,6 +113,21 @@ export default function useHexData() {
     };
   }, [state]);
 
+  useEffect(() => {
+    state.channel.on('SET_QUESTS', (msg: any) => {
+      console.log('Quests:', msg.players);
+      if (msg.players[state.player]) {
+        dispatch({
+          type: SET_QUESTS,
+          quests: msg.players[state.player].active_quest_hexes
+        });
+      }
+    });
+    return () => {
+      state.channel.off('SET_QUESTS');
+    };
+  }, [state]);
+
   const respondWithCard = state => {
     state.channel
       .push('selected_card', {
@@ -130,8 +146,11 @@ export default function useHexData() {
   const stateObject = {
     state: state,
 
-    selectCard: function selectCard(selected_card) {
-      dispatch({ type: DECK_CARD_SELECTED, deck_card: selected_card });
+    selectCard: function selectCard(selected_card, target_hex) {
+      dispatch({
+        type: DECK_CARD_SELECTED,
+        deck_card: selected_card
+      });
     },
 
     targetHex: function targetHex(selected_hex) {

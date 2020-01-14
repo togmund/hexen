@@ -23,9 +23,9 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
         <div className={hexDetails}>
           <p>{state.tile.region_name}</p>
           <p>{state.tile.biome_name}</p>
-          <p>{state.tile.resource}</p>
+          <p>Resource: {state.tile.resource}</p>
           <p>{state.tile.controlled_by}</p>
-          <p>{state.tile.structure}</p>
+          <p>Structure: {state.tile.structure}</p>
         </div>
         <div className={'players-on-hex'}>
           <ul>
