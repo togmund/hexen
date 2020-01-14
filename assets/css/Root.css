@@ -6,12 +6,20 @@
   --ambrosia-ivory: #fcf4ec;
   --pico-eggplant: #7c2454;
   --flat-earth: #ac5434;
-  --quill-tip: #2b345b;
+  --text: #2b345b;
   --fantasy-console-sky: #2cacfc;
   --mango: #ffa828;
-  --inner: cornflowerblue;
+  --inner: #fcf4ec;
   --border: black;
-  --accent: white;
+  --accent: #fcf4ec;
+
+  --rest: #a248f7;
+  --combat: red;
+  --move: burlywood;
+  --gather: palegreen;
+  --craft: lightblue;
+  --interact:lightcoral;
+  --explore: #11d92c;
 }
 
 @font-face {

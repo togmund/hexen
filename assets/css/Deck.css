@@ -2,5 +2,8 @@
 nav .deck-image {
   height: 232px;
   width: 136px;
-  padding-bottom: 32px;
+  padding: -10px;
+  overflow: hidden;
+  margin-bottom: 10%;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, .25);
 }

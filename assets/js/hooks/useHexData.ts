@@ -104,7 +104,6 @@ export default function useHexData() {
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
     state.channel.on('GET_CARD', (msg: {}) => {
-      console.log('get card', state);
       respondWithCard(state);
     });
     return () => {
@@ -113,7 +112,6 @@ export default function useHexData() {
   }, [state]);
 
   const respondWithCard = state => {
-    console.log('respond with card', state);
     state.channel
       .push('selected_card', {
         deck_card_id: state.selected_card,
@@ -132,18 +130,14 @@ export default function useHexData() {
     state: state,
 
     selectCard: function selectCard(selected_card) {
-      console.log(`Selected Card: ${selected_card}`);
       dispatch({ type: DECK_CARD_SELECTED, deck_card: selected_card });
-      console.log(state);
     },
 
     targetHex: function targetHex(selected_hex) {
-      console.log(`Selected Hex: ${selected_hex}`);
       dispatch({ type: HEX_SELECTED, target_hex: selected_hex });
     },
 
     targetUser: function targetUser(selected_user) {
-      console.log(`Selected user: ${selected_user}`);
       dispatch({ type: USER_SELECTED, target_user: selected_user });
     }
   };

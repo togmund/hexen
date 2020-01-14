@@ -5,7 +5,7 @@ defmodule Hexen.HexWorker do
   use GenServer
 
   def start_link(args) do
-    # IO.inspect(args)
+    IO.inspect(args)
     GenServer.start_link(__MODULE__, args, name: via_tuple(args[:name]))
   end
 
@@ -91,23 +91,15 @@ defmodule Hexen.HexWorker do
     # if Enum.random(1..3) == 3 do
     new_card =
       Hexen.Inventory.get_card_ids_by_suit_list(["Explore"])
-      |> IO.inspect()
       |> Enum.shuffle()
       |> List.first()
-      |> IO.inspect()
 
     deck_id =
       Hexen.Inventory.get_users_deck_id_as_list(user_id)
-      |> IO.inspect()
       |> List.first()
-      |> IO.inspect()
 
     %{deck_id: deck_id, card_id: new_card}
-    |> IO.inspect()
     |> Hexen.Inventory.create_deck_card!()
-    |> IO.inspect()
-
-    deck_id |> Hexen.Inventory.get_deck_card_ids_by_suit("Explore") |> IO.inspect()
 
     tile_id
     |> retrieve_state()
@@ -117,8 +109,6 @@ defmodule Hexen.HexWorker do
   end
 
   def move(_modifier, user_id, target_hex_id, tile_id) do
-    IO.puts("###########################################")
-
     user_id
     |> Hexen.Map.get_hex_user_id_by_user()
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
@@ -202,8 +192,6 @@ defmodule Hexen.HexWorker do
 
     %{deck_id: deck_id, card_id: new_card}
     |> Hexen.Inventory.create_deck_card!()
-
-    deck_id |> Hexen.Inventory.get_deck_card_ids_by_suit("Explore") |> IO.inspect()
 
     tile_id
     |> retrieve_state()

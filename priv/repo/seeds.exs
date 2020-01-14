@@ -312,7 +312,7 @@ defmodule Hexen.DatabaseSeeder do
 
   Repo.insert!(%Deck{
     name: "Farmer",
-    cardback:Enum.random(cardbacks),
+    cardback: Enum.random(cardbacks),
     user_id: 3
   })
 

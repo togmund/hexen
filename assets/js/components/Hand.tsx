@@ -8,7 +8,6 @@ const Hand = (props: { state: any }) => {
 
   const onChange = (id: number | null) => {
     value = id;
-    console.log(value);
   };
 
   return (

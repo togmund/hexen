@@ -4,6 +4,7 @@
   height: 232px;
   width: 136px;
   transition: transform 0.4s;
+  color: var(black);
 }
 
 .hand-card:hover {
@@ -14,30 +15,441 @@
   padding: 32px;
 }
 
+.hand-card .card-title {
+  font-size: x-large;
+  font-weight: bolder;
+}
+
 .hand-card.Rest {
-  background-color: #a248f7;
+  background-color: var(--rest);
+  background: var(--rest);
+  box-shadow:
+    /* Inner Background Color -- Same as inner */
+    0 -6px 0 -2px var(--rest),
+    0 6px 0 -2px var(--rest),
+    0 -12px 0 -4px var(--rest),
+    0 12px 0 -4px var(--rest),
+    0 -18px 0 -8px var(--rest),
+    0 18px 0 -8px var(--rest),
+    0 -24px 0 -12px var(--rest),
+    0 24px 0 -12px var(--rest),
+
+    /* Inner Border */
+    -2px 0 0 0 var(--border),
+    2px 0 0 0 var(--border),
+    0 -4px 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    0 -10px 0 -2px var(--border),
+    0 10px 0 -2px var(--border),
+    0 -14px 0 -4px var(--border),
+    0 14px 0 -4px var(--border),
+    0 -20px 0 -8px var(--border),
+    0 20px 0 -8px var(--border),
+    0 -26px 0 -12px var(--border),
+    0 26px 0 -12px var(--border),
+
+    /* Middle Border -- Accent */
+    -4px 0 0 0 var(--accent),
+    4px 0 0 0 var(--accent),
+    0 -2px 0 2px var(--accent),
+    0 2px 0 2px var(--accent),
+    0 -8px 0 0px var(--accent),
+    0 8px 0 0px var(--accent),
+    0 -12px 0 -2px var(--accent),
+    0 12px 0 -2px var(--accent),
+    0 -16px 0 -4px var(--accent),
+    0 16px 0 -4px var(--accent),
+    0 -22px 0 -8px var(--accent),
+    0 22px 0 -8px var(--accent),
+    0 -28px 0 -12px var(--accent),
+    0 28px 0 -12px var(--accent),
+
+    /* Outer Border */
+    -6px 0 0 0 var(--border),
+    6px 0 0 0 var(--border),
+    0 0 0 4px var(--border),
+    0 -6px 0 2px var(--border),
+    0 6px 0 2px var(--border),
+    0 -10px 0 0 var(--border),
+    0 10px 0 0 var(--border),
+    0 -14px 0 -2px var(--border),
+    0 14px 0 -2px var(--border),
+    0 -18px 0 -4px var(--border),
+    0 18px 0 -4px var(--border),
+    0 -24px 0 -8px var(--border),
+    0 24px 0 -8px var(--border),
+    0 -30px 0 -12px var(--border),
+    0 30px 0 -12px var(--border);
 }
 
 .hand-card.Combat {
-  background-color: red;
+  background-color: var(--combat);
+  background: var(--combat);
+  box-shadow:
+    /* Inner Background Color -- Same as inner */
+    0 -6px 0 -2px var(--combat),
+    0 6px 0 -2px var(--combat),
+    0 -12px 0 -4px var(--combat),
+    0 12px 0 -4px var(--combat),
+    0 -18px 0 -8px var(--combat),
+    0 18px 0 -8px var(--combat),
+    0 -24px 0 -12px var(--combat),
+    0 24px 0 -12px var(--combat),
+
+    /* Inner Border */
+    -2px 0 0 0 var(--border),
+    2px 0 0 0 var(--border),
+    0 -4px 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    0 -10px 0 -2px var(--border),
+    0 10px 0 -2px var(--border),
+    0 -14px 0 -4px var(--border),
+    0 14px 0 -4px var(--border),
+    0 -20px 0 -8px var(--border),
+    0 20px 0 -8px var(--border),
+    0 -26px 0 -12px var(--border),
+    0 26px 0 -12px var(--border),
+
+    /* Middle Border -- Accent */
+    -4px 0 0 0 var(--accent),
+    4px 0 0 0 var(--accent),
+    0 -2px 0 2px var(--accent),
+    0 2px 0 2px var(--accent),
+    0 -8px 0 0px var(--accent),
+    0 8px 0 0px var(--accent),
+    0 -12px 0 -2px var(--accent),
+    0 12px 0 -2px var(--accent),
+    0 -16px 0 -4px var(--accent),
+    0 16px 0 -4px var(--accent),
+    0 -22px 0 -8px var(--accent),
+    0 22px 0 -8px var(--accent),
+    0 -28px 0 -12px var(--accent),
+    0 28px 0 -12px var(--accent),
+
+    /* Outer Border */
+    -6px 0 0 0 var(--border),
+    6px 0 0 0 var(--border),
+    0 0 0 4px var(--border),
+    0 -6px 0 2px var(--border),
+    0 6px 0 2px var(--border),
+    0 -10px 0 0 var(--border),
+    0 10px 0 0 var(--border),
+    0 -14px 0 -2px var(--border),
+    0 14px 0 -2px var(--border),
+    0 -18px 0 -4px var(--border),
+    0 18px 0 -4px var(--border),
+    0 -24px 0 -8px var(--border),
+    0 24px 0 -8px var(--border),
+    0 -30px 0 -12px var(--border),
+    0 30px 0 -12px var(--border);
 }
 
 .hand-card.Move {
-  background-color: burlywood;
+  background-color: var(--move);
+  background: var(--move);
+  box-shadow:
+    /* Inner Background Color -- Same as inner */
+    0 -6px 0 -2px var(--move),
+    0 6px 0 -2px var(--move),
+    0 -12px 0 -4px var(--move),
+    0 12px 0 -4px var(--move),
+    0 -18px 0 -8px var(--move),
+    0 18px 0 -8px var(--move),
+    0 -24px 0 -12px var(--move),
+    0 24px 0 -12px var(--move),
+
+    /* Inner Border */
+    -2px 0 0 0 var(--border),
+    2px 0 0 0 var(--border),
+    0 -4px 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    0 -10px 0 -2px var(--border),
+    0 10px 0 -2px var(--border),
+    0 -14px 0 -4px var(--border),
+    0 14px 0 -4px var(--border),
+    0 -20px 0 -8px var(--border),
+    0 20px 0 -8px var(--border),
+    0 -26px 0 -12px var(--border),
+    0 26px 0 -12px var(--border),
+
+    /* Middle Border -- Accent */
+    -4px 0 0 0 var(--accent),
+    4px 0 0 0 var(--accent),
+    0 -2px 0 2px var(--accent),
+    0 2px 0 2px var(--accent),
+    0 -8px 0 0px var(--accent),
+    0 8px 0 0px var(--accent),
+    0 -12px 0 -2px var(--accent),
+    0 12px 0 -2px var(--accent),
+    0 -16px 0 -4px var(--accent),
+    0 16px 0 -4px var(--accent),
+    0 -22px 0 -8px var(--accent),
+    0 22px 0 -8px var(--accent),
+    0 -28px 0 -12px var(--accent),
+    0 28px 0 -12px var(--accent),
+
+    /* Outer Border */
+    -6px 0 0 0 var(--border),
+    6px 0 0 0 var(--border),
+    0 0 0 4px var(--border),
+    0 -6px 0 2px var(--border),
+    0 6px 0 2px var(--border),
+    0 -10px 0 0 var(--border),
+    0 10px 0 0 var(--border),
+    0 -14px 0 -2px var(--border),
+    0 14px 0 -2px var(--border),
+    0 -18px 0 -4px var(--border),
+    0 18px 0 -4px var(--border),
+    0 -24px 0 -8px var(--border),
+    0 24px 0 -8px var(--border),
+    0 -30px 0 -12px var(--border),
+    0 30px 0 -12px var(--border);
 }
 
 .hand-card.Gather {
-  background-color: palegreen;
+  background-color: var(--gather);
+  background: var(--gather);
+  box-shadow:
+    /* Inner Background Color -- Same as inner */
+    0 -6px 0 -2px var(--gather),
+    0 6px 0 -2px var(--gather),
+    0 -12px 0 -4px var(--gather),
+    0 12px 0 -4px var(--gather),
+    0 -18px 0 -8px var(--gather),
+    0 18px 0 -8px var(--gather),
+    0 -24px 0 -12px var(--gather),
+    0 24px 0 -12px var(--gather),
+
+    /* Inner Border */
+    -2px 0 0 0 var(--border),
+    2px 0 0 0 var(--border),
+    0 -4px 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    0 -10px 0 -2px var(--border),
+    0 10px 0 -2px var(--border),
+    0 -14px 0 -4px var(--border),
+    0 14px 0 -4px var(--border),
+    0 -20px 0 -8px var(--border),
+    0 20px 0 -8px var(--border),
+    0 -26px 0 -12px var(--border),
+    0 26px 0 -12px var(--border),
+
+    /* Middle Border -- Accent */
+    -4px 0 0 0 var(--accent),
+    4px 0 0 0 var(--accent),
+    0 -2px 0 2px var(--accent),
+    0 2px 0 2px var(--accent),
+    0 -8px 0 0px var(--accent),
+    0 8px 0 0px var(--accent),
+    0 -12px 0 -2px var(--accent),
+    0 12px 0 -2px var(--accent),
+    0 -16px 0 -4px var(--accent),
+    0 16px 0 -4px var(--accent),
+    0 -22px 0 -8px var(--accent),
+    0 22px 0 -8px var(--accent),
+    0 -28px 0 -12px var(--accent),
+    0 28px 0 -12px var(--accent),
+
+    /* Outer Border */
+    -6px 0 0 0 var(--border),
+    6px 0 0 0 var(--border),
+    0 0 0 4px var(--border),
+    0 -6px 0 2px var(--border),
+    0 6px 0 2px var(--border),
+    0 -10px 0 0 var(--border),
+    0 10px 0 0 var(--border),
+    0 -14px 0 -2px var(--border),
+    0 14px 0 -2px var(--border),
+    0 -18px 0 -4px var(--border),
+    0 18px 0 -4px var(--border),
+    0 -24px 0 -8px var(--border),
+    0 24px 0 -8px var(--border),
+    0 -30px 0 -12px var(--border),
+    0 30px 0 -12px var(--border);
 }
 
 .hand-card.Craft {
-  background-color: lightblue;
+  background-color: var(--craft);
+  background: var(--craft);
+  box-shadow:
+    /* Inner Background Color -- Same as inner */
+    0 -6px 0 -2px var(--craft),
+    0 6px 0 -2px var(--craft),
+    0 -12px 0 -4px var(--craft),
+    0 12px 0 -4px var(--craft),
+    0 -18px 0 -8px var(--craft),
+    0 18px 0 -8px var(--craft),
+    0 -24px 0 -12px var(--craft),
+    0 24px 0 -12px var(--craft),
+
+    /* Inner Border */
+    -2px 0 0 0 var(--border),
+    2px 0 0 0 var(--border),
+    0 -4px 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    0 -10px 0 -2px var(--border),
+    0 10px 0 -2px var(--border),
+    0 -14px 0 -4px var(--border),
+    0 14px 0 -4px var(--border),
+    0 -20px 0 -8px var(--border),
+    0 20px 0 -8px var(--border),
+    0 -26px 0 -12px var(--border),
+    0 26px 0 -12px var(--border),
+
+    /* Middle Border -- Accent */
+    -4px 0 0 0 var(--accent),
+    4px 0 0 0 var(--accent),
+    0 -2px 0 2px var(--accent),
+    0 2px 0 2px var(--accent),
+    0 -8px 0 0px var(--accent),
+    0 8px 0 0px var(--accent),
+    0 -12px 0 -2px var(--accent),
+    0 12px 0 -2px var(--accent),
+    0 -16px 0 -4px var(--accent),
+    0 16px 0 -4px var(--accent),
+    0 -22px 0 -8px var(--accent),
+    0 22px 0 -8px var(--accent),
+    0 -28px 0 -12px var(--accent),
+    0 28px 0 -12px var(--accent),
+
+    /* Outer Border */
+    -6px 0 0 0 var(--border),
+    6px 0 0 0 var(--border),
+    0 0 0 4px var(--border),
+    0 -6px 0 2px var(--border),
+    0 6px 0 2px var(--border),
+    0 -10px 0 0 var(--border),
+    0 10px 0 0 var(--border),
+    0 -14px 0 -2px var(--border),
+    0 14px 0 -2px var(--border),
+    0 -18px 0 -4px var(--border),
+    0 18px 0 -4px var(--border),
+    0 -24px 0 -8px var(--border),
+    0 24px 0 -8px var(--border),
+    0 -30px 0 -12px var(--border),
+    0 30px 0 -12px var(--border);
 }
 
 .hand-card.Interact {
-  background-color: lightcoral;
+  background-color: var(--interact);
+  background: var(--interact);
+  box-shadow:
+    /* Inner Background Color -- Same as inner */
+    0 -6px 0 -2px var(--interact),
+    0 6px 0 -2px var(--interact),
+    0 -12px 0 -4px var(--interact),
+    0 12px 0 -4px var(--interact),
+    0 -18px 0 -8px var(--interact),
+    0 18px 0 -8px var(--interact),
+    0 -24px 0 -12px var(--interact),
+    0 24px 0 -12px var(--interact),
+
+    /* Inner Border */
+    -2px 0 0 0 var(--border),
+    2px 0 0 0 var(--border),
+    0 -4px 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    0 -10px 0 -2px var(--border),
+    0 10px 0 -2px var(--border),
+    0 -14px 0 -4px var(--border),
+    0 14px 0 -4px var(--border),
+    0 -20px 0 -8px var(--border),
+    0 20px 0 -8px var(--border),
+    0 -26px 0 -12px var(--border),
+    0 26px 0 -12px var(--border),
+
+    /* Middle Border -- Accent */
+    -4px 0 0 0 var(--accent),
+    4px 0 0 0 var(--accent),
+    0 -2px 0 2px var(--accent),
+    0 2px 0 2px var(--accent),
+    0 -8px 0 0px var(--accent),
+    0 8px 0 0px var(--accent),
+    0 -12px 0 -2px var(--accent),
+    0 12px 0 -2px var(--accent),
+    0 -16px 0 -4px var(--accent),
+    0 16px 0 -4px var(--accent),
+    0 -22px 0 -8px var(--accent),
+    0 22px 0 -8px var(--accent),
+    0 -28px 0 -12px var(--accent),
+    0 28px 0 -12px var(--accent),
+
+    /* Outer Border */
+    -6px 0 0 0 var(--border),
+    6px 0 0 0 var(--border),
+    0 0 0 4px var(--border),
+    0 -6px 0 2px var(--border),
+    0 6px 0 2px var(--border),
+    0 -10px 0 0 var(--border),
+    0 10px 0 0 var(--border),
+    0 -14px 0 -2px var(--border),
+    0 14px 0 -2px var(--border),
+    0 -18px 0 -4px var(--border),
+    0 18px 0 -4px var(--border),
+    0 -24px 0 -8px var(--border),
+    0 24px 0 -8px var(--border),
+    0 -30px 0 -12px var(--border),
+    0 30px 0 -12px var(--border);
 }
 
 .hand-card.Explore {
-  background-color: #11d92c;
+  background-color: var(--explore);
+  background: var(--explore);
+  box-shadow:
+    /* Inner Background Color -- Same as inner */
+    0 -6px 0 -2px var(--explore),
+    0 6px 0 -2px var(--explore),
+    0 -12px 0 -4px var(--explore),
+    0 12px 0 -4px var(--explore),
+    0 -18px 0 -8px var(--explore),
+    0 18px 0 -8px var(--explore),
+    0 -24px 0 -12px var(--explore),
+    0 24px 0 -12px var(--explore),
+
+    /* Inner Border */
+    -2px 0 0 0 var(--border),
+    2px 0 0 0 var(--border),
+    0 -4px 0 0 var(--border),
+    0 4px 0 0 var(--border),
+    0 -10px 0 -2px var(--border),
+    0 10px 0 -2px var(--border),
+    0 -14px 0 -4px var(--border),
+    0 14px 0 -4px var(--border),
+    0 -20px 0 -8px var(--border),
+    0 20px 0 -8px var(--border),
+    0 -26px 0 -12px var(--border),
+    0 26px 0 -12px var(--border),
+
+    /* Middle Border -- Accent */
+    -4px 0 0 0 var(--accent),
+    4px 0 0 0 var(--accent),
+    0 -2px 0 2px var(--accent),
+    0 2px 0 2px var(--accent),
+    0 -8px 0 0px var(--accent),
+    0 8px 0 0px var(--accent),
+    0 -12px 0 -2px var(--accent),
+    0 12px 0 -2px var(--accent),
+    0 -16px 0 -4px var(--accent),
+    0 16px 0 -4px var(--accent),
+    0 -22px 0 -8px var(--accent),
+    0 22px 0 -8px var(--accent),
+    0 -28px 0 -12px var(--accent),
+    0 28px 0 -12px var(--accent),
+
+    /* Outer Border */
+    -6px 0 0 0 var(--border),
+    6px 0 0 0 var(--border),
+    0 0 0 4px var(--border),
+    0 -6px 0 2px var(--border),
+    0 6px 0 2px var(--border),
+    0 -10px 0 0 var(--border),
+    0 10px 0 0 var(--border),
+    0 -14px 0 -2px var(--border),
+    0 14px 0 -2px var(--border),
+    0 -18px 0 -4px var(--border),
+    0 18px 0 -4px var(--border),
+    0 -24px 0 -8px var(--border),
+    0 24px 0 -8px var(--border),
+    0 -30px 0 -12px var(--border),
+    0 30px 0 -12px var(--border);
 }
