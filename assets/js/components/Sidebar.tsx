@@ -12,7 +12,7 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
     <nav className={'sidebar'}>
       <h1>Hexen</h1>
       <div className={hexInfo}>
-        <h3>{state.tile.name}</h3>
+        <p className={'hex-title'}>{state.tile.name}</p>
         <img
           src={state.tile.image}
           alt={state.tile.biome_name}
@@ -21,11 +21,19 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           width="60px"
         ></img>
         <div className={hexDetails}>
-          <p>{state.tile.region_name}</p>
-          <p>{state.tile.biome_name}</p>
-          <p>Resource: {state.tile.resource}</p>
-          <p>{state.tile.controlled_by}</p>
-          <p>Structure: {state.tile.structure}</p>
+          <p>
+            Region:<br></br> {state.tile.region_name}
+          </p>
+          <p>
+            Biome:<br></br> {state.tile.biome_name}
+          </p>
+          <p>
+            Resource:<br></br> {state.tile.resource}
+          </p>
+          {/* <p>{state.tile.controlled_by}</p> */}
+          <p>
+            Structure:<br></br> {state.tile.structure}
+          </p>
         </div>
       </div>
       {/* Turn timer */}
