@@ -241,9 +241,7 @@ defmodule Hexen.Inventory do
   def create_deck_card!(attrs \\ %{}) do
     %DeckCard{}
     |> DeckCard.changeset(attrs)
-    |> IO.inspect()
     |> Repo.insert!()
-    |> IO.inspect()
   end
 
   @doc """

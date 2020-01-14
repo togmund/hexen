@@ -7,6 +7,9 @@ nav.sidebar {
   width: 168px;
   text-align: center;
   z-index: 2;
+  font-size: xx-large;
+  font-weight: bolder;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, .25);
 }
 
 nav .hex-info {
@@ -15,4 +18,13 @@ nav .hex-info {
   font-size: xx-large;
   font-weight: bolder;
   width: 136px;
+}
+
+nav .hex-details {
+  background-color: #fcf4ec;
+  color: #7c2454;
+  font-size: large;
+  font-weight: bolder;
+  width: 120px;
+  margin: auto;
 }

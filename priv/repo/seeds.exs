@@ -289,23 +289,30 @@ defmodule Hexen.DatabaseSeeder do
     })
   end)
 
+  cardbacks = [
+    "https://i.ibb.co/27hKNkK/u78w-C4o-4x.png",
+    "https://i.ibb.co/NL9fXjP/64-Ko-DTn-4x.png",
+    "https://i.ibb.co/j3ZPDBp/rp-Bl-OXG-4x.png",
+    "https://i.ibb.co/0qNLgrn/7qzjt-PS-4x.png",
+    "https://i.ibb.co/HPscynX/Kz-SOs-VR-4x.png"
+  ]
+
   # Deck
   Repo.insert!(%Deck{
     name: "Warrior",
-    cardback: "https://i.ibb.co/Y0jRtdK/DMsxml-Y-15x.png",
+    cardback: Enum.random(cardbacks),
     user_id: 1
   })
 
   Repo.insert!(%Deck{
     name: "Hustler",
-    cardback: "http://www.jimknapp.com/Cards/Non-Bicycle_files/image002.jpg",
+    cardback: Enum.random(cardbacks),
     user_id: 2
   })
 
   Repo.insert!(%Deck{
     name: "Farmer",
-    cardback:
-      "https://ksr-ugc.imgix.net/assets/003/133/506/167773c063e187216c54c756957a36bd_original.jpg?ixlib=rb-2.1.0&w=680&fit=max&v=1421106062&auto=format&gif-q=50&q=92&s=4039ac3a0fe3ff112908b9b978e33d56",
+    cardback: Enum.random(cardbacks),
     user_id: 3
   })
 

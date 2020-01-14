@@ -11,7 +11,6 @@ export default function reducer(state: any, action: any) {
         tile: action.data.tile
       };
     case SET_CHANNEL:
-      console.log(action);
       return {
         ...state,
         channel: action.channel
@@ -38,7 +37,6 @@ export default function reducer(state: any, action: any) {
         }
       };
     case SET_HAND:
-      // console.log(action);
       return {
         ...state,
         hand: action.hand,
@@ -47,7 +45,6 @@ export default function reducer(state: any, action: any) {
         target_user: null
       };
     case DECK_CARD_SELECTED:
-      console.log(action);
       return {
         ...state,
         selected_card: action.deck_card

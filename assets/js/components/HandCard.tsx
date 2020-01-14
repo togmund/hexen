@@ -15,15 +15,7 @@ const HandCard = ({
   const handClass: any = classNames('hand-card', suit, 'pxl-border');
 
   return (
-    <Box
-      className={handClass}
-      onClick={selectCard}
-      sx={{
-        p: 1,
-        borderRadius: 10,
-        boxShadow: '0 0 16px rgba(0, 0, 0, .25)'
-      }}
-    >
+    <Box className={handClass} onClick={selectCard}>
       <Card>
         <Text className={'card-title'}>{name}</Text>
         <Image src={image} />
