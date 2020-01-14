@@ -190,6 +190,26 @@ defmodule Hexen.DatabaseSeeder do
     "Fish"
   ]
 
+  hex_names = [
+    "Croydon",
+    "Aston",
+    "Ironhaven",
+    "Barnemouth",
+    "Barcombe",
+    "Azmarin",
+    "Moressley",
+    "Arkala",
+    "Mournstead",
+    "Fallholt",
+    "Lullin",
+    "Skargness",
+    "Grimsby",
+    "Tarrin",
+    "Ayrith",
+    "Alverton",
+    "Red Water"
+  ]
+
   # Quirk of react-hexgrid package: r == z and s == y if we follow https://www.redblobgames.com/grids/hexagons/
   Enum.each(0..rows, fn x ->
     top =
@@ -201,6 +221,7 @@ defmodule Hexen.DatabaseSeeder do
 
     Enum.each(0..long_col, fn y ->
       Repo.insert!(%Hex{
+        name: Enum.random(hex_names),
         structure: "Castle",
         resource: Enum.random(resources),
         biome_id: Enum.random(1..11),

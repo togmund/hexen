@@ -13,7 +13,7 @@ defmodule Hexen.Repo.Migrations.CreateHexes do
       timestamps()
     end
 
-    create(unique_index(:hexes, [:name]))
+    create(index(:hexes, [:name]))
     create(index(:hexes, [:region_id]))
     create(index(:hexes, [:biome_id]))
     create(index(:hexes, [:band_id]))
