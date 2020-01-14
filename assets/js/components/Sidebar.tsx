@@ -27,9 +27,14 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           <p>{state.tile.controlled_by}</p>
           <p>{state.tile.structure}</p>
         </div>
+        <div className={'players-on-hex'}>
+          <ul>
+            {state.tile.players.map((player: any) => {
+              <li>{player.name}</li>;
+            })}
+          </ul>
+        </div>
       </div>
-      {/* Turn timer */}
-      {/* <p>30</p> */}
       <Deck state={state} />
     </nav>
   );
