@@ -16,7 +16,7 @@ defmodule Hexen.Events.UserQuest do
   @doc false
   def changeset(user_quest, attrs) do
     user_quest
-    |> cast(attrs, [:progress])
-    |> validate_required([:progress])
+    |> cast(attrs, [:user_id, :quest_id, :progress])
+    |> validate_required([:user_id, :quest_id, :progress])
   end
 end

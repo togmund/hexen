@@ -5,7 +5,6 @@ defmodule Hexen.HexWorker do
   use GenServer
 
   def start_link(args) do
-    IO.inspect(args)
     GenServer.start_link(__MODULE__, args, name: via_tuple(args[:name]))
   end
 
@@ -151,28 +150,19 @@ defmodule Hexen.HexWorker do
     # Highlights a Tile with a Quest
     new_quest =
       user_id
-      # Get list of u_q.quest_ids by user_id
       |> Hexen.Events.get_existing_quest_list_by_user()
-      # Get list of quests not in the above list
       |> Hexen.Events.get_novel_quests()
-      # Shuffle Them
       |> Enum.shuffle()
-      # Take the first one
       |> List.first()
+      |> Map.get(:id)
 
-    new_quest
-    # Add it to the user's quests
+    %{quest_id: new_quest, user_id: user_id, progress: 0}
+    |> IO.inspect(label: "Quest Map")
     |> Hexen.Events.create_user_quest()
+    |> IO.inspect(label: "Result Of Creation")
 
-    deck_card_id
-    # Remove the explore card from the user's deck
-    |> IO.inspect()
-
-    new_quest
-    # Update the hex_worker state with hexes with quests
-    |> IO.inspect()
-    # Broadcast the new state
-    |> IO.inspect()
+    [deck_card_id]
+    |> Hexen.Inventory.delete_deck_cards()
 
     tile_id
     |> retrieve_state()
@@ -314,12 +304,20 @@ defmodule Hexen.HexWorker do
       |> Enum.map(fn user_id ->
         deck = List.first(Hexen.Inventory.get_users_deck_id_as_list(user_id))
 
+        active_quest_hexes =
+          user_id
+          |> Hexen.Events.get_hexes_with_active_quests_for_user()
+          |> IO.inspect(label: "Quest Hexes for #{user_id}")
+
         %{
           player: user_id,
           deck: deck,
-          hand: draw_cards(deck)
+          hand: draw_cards(deck),
+          active_quest_hexes: active_quest_hexes
         }
       end)
+
+    # Add hexes with active quests here ^
 
     full_map = Hexen.Map.get_full_board()
 
