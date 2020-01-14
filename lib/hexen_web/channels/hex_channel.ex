@@ -28,7 +28,7 @@ defmodule HexenWeb.HexChannel do
     {:noreply, socket}
   end
 
-  # "SET_BOARD", "SET_HEX", "SET_HAND", "GET_CARD" All handled generically
+  # "SET_BOARD", "SET_HEX", "SET_HAND", "GET_CARD", "SET_QUESTS" All handled generically
   def handle_in(push_message, msg, socket) do
     push(socket, push_message, msg)
     {:noreply, socket}

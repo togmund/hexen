@@ -22,8 +22,10 @@ defmodule Hexen.HexWorker do
 
     broadcast(updated_state, :ok, "GET_CARD")
     broadcast(updated_state, :ok, "SET_BOARD")
+
     broadcast(updated_state, :ok, "SET_HEX")
     broadcast(updated_state, :ok, "SET_HAND")
+    broadcast(updated_state, :ok, "SET_QUESTS")
 
     schedule_hex_fetch()
 
