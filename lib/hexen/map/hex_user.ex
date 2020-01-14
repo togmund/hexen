@@ -17,6 +17,6 @@ defmodule Hexen.Map.HexUser do
   @doc false
   def changeset(hex_user, attrs) do
     hex_user
-    |> cast(attrs, [:departed])
+    |> cast(attrs, [:hex_id, :user_id, :departed])
   end
 end
