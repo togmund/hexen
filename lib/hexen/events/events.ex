@@ -505,4 +505,18 @@ defmodule Hexen.Events do
     )
     |> Repo.all()
   end
+
+  def get_quest_details_buy_user_quest(id) do
+    from(uq in UserQuest,
+      join: q in Quest,
+      on: uq.quest_id == q.id,
+      join: hq in HexQuest,
+      on: q.id == hq.quest_id,
+      where: uq.user_id == ^id,
+      select: [q.id, q.name, q.requirement, hq.hex_id, uq.user_id, uq.progress]
+    )
+    |> Repo.all()
+  end
 end
+
+# SELECT quests.id, quests.name, quests.requirement, hex_quests.hex_id, user_quests.user_id, user_quests.progress FROM quests JOIN hex_quests on quests.id = hex_quests.quest_id JOIN user_quests on quests.id = user_quests.quest_id;

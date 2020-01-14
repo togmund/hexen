@@ -22,8 +22,10 @@ defmodule Hexen.HexWorker do
 
     broadcast(updated_state, :ok, "GET_CARD")
     broadcast(updated_state, :ok, "SET_BOARD")
+
     broadcast(updated_state, :ok, "SET_HEX")
     broadcast(updated_state, :ok, "SET_HAND")
+    broadcast(updated_state, :ok, "SET_QUESTS")
 
     schedule_hex_fetch()
 
@@ -158,6 +160,7 @@ defmodule Hexen.HexWorker do
 
     %{quest_id: new_quest, user_id: user_id, progress: 0}
     |> Hexen.Events.create_user_quest()
+    |> IO.inspect()
 
     [deck_card_id]
     |> Hexen.Inventory.delete_deck_cards()
@@ -306,6 +309,10 @@ defmodule Hexen.HexWorker do
         active_quest_hexes =
           user_id
           |> Hexen.Events.get_hexes_with_active_quests_for_user()
+
+        if user_id == 1 do
+          IO.inspect(active_quest_hexes)
+        end
 
         %{
           player: user_id,

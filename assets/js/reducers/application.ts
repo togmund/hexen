@@ -44,6 +44,13 @@ export default function reducer(state: any, action: any) {
         target_hex: state.tile.id,
         target_user: null
       };
+
+    case SET_QUESTS:
+      console.log('SET_QUESTS:', action.quests);
+      return {
+        ...state,
+        quest_hexes: action.quests
+      };
     case DECK_CARD_SELECTED:
       return {
         ...state,
@@ -81,6 +88,7 @@ export const SET_CHANNEL = 'SET_CHANNEL';
 export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
 export const SET_HAND = 'SET_HAND';
+export const SET_QUESTS = 'SET_QUESTS';
 
 export const DECK_CARD_SELECTED = 'DECK_CARD_SELECTED';
 export const HEX_SELECTED = 'HEX_SELECTED';
