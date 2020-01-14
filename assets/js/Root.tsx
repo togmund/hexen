@@ -8,7 +8,18 @@ import useHexData from './hooks/useHexData';
 import '../css/Root.css';
 
 const Root: React.FC = () => {
-  const { state, selectCard, targetHex, targetUser } = useHexData();
+  // const getInitialBoardFromUser = (id: any) => {
+  //   fetch(`api/map/${id}`)
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(response => {
+  //       dispatch({ type: SET_INITIAL, data: response.data });
+  //     });
+  // };
+
+  const playerInfo = { id: 1, hex_id: 60 };
+  const { state, selectCard, targetHex, targetUser } = useHexData(playerInfo);
 
   return (
     <div className="root-area">

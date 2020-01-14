@@ -41,7 +41,7 @@ export default function reducer(state: any, action: any) {
         ...state,
         hand: action.hand,
         selected_card: null,
-        target_hex: state.tile.id,
+        target_hex: null,
         target_user: null
       };
 

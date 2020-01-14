@@ -14,11 +14,11 @@ import reducer, {
   // SET_BAND
 } from '../reducers/application';
 
-export default function useHexData() {
+export default function useHexData(player) {
   const [state, dispatch] = useReducer(reducer, {
-    player: 1,
+    player: player.id,
     hex_tiles: [],
-    tile: { id: 50 },
+    tile: { id: player.hex_id },
     hand: [
       {
         deck_card_id: null,
@@ -33,9 +33,9 @@ export default function useHexData() {
       }
     ],
     selected_card: null,
-    target_hex: 60,
+    target_hex: null,
     target_user: null,
-    channel: socket.channel('hex:' + 60, {}),
+    channel: socket.channel(`hex:${player.hex_id}`, {}),
     quest_hexes: []
   });
 
