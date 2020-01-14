@@ -216,4 +216,13 @@ defmodule Hexen.People do
         select: b.id
     )
   end
+
+  def get_avatar_by_user(id) do
+    from(u in User,
+      where: u.id == ^id,
+      select: u.avatar
+    )
+    |> Repo.all()
+    |> List.first()
+  end
 end
