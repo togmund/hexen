@@ -8,7 +8,7 @@ import useHexData from './hooks/useHexData';
 import '../css/Root.css';
 
 const Root: React.FC = () => {
-  const { state, selectCard, targetHex, targetUser } = useHexData(2);
+  const { state, selectCard, targetHex, targetUser } = useHexData();
 
   return (
     <div className="root-area">

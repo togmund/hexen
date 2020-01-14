@@ -13,42 +13,11 @@ import reducer, {
   // SET_BAND
 } from '../reducers/application';
 
-// const getBoardFromUser = (id: any) => {
-//   fetch(`api/map/${id}`)
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(response => {
-//       console.log(response.data.hex_tiles);
-//       return response.data.hex_tiles;
-//     });
-// };
-// const getTileFromUser = (id: any) => {
-//   fetch(`api/map/${id}`)
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(response => {
-//       console.log(response.data.tile);
-//       return response.data.tile;
-//     });
-// };
-// const getTileIdFromUser = (id: any) => {
-//   fetch(`api/map/${id}`)
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(response => {
-//       console.log(response.data.tile.id);
-//       return response.data.tile.id;
-//     });
-// };
-
-export default function useHexData(id) {
+export default function useHexData() {
   const [state, dispatch] = useReducer(reducer, {
-    player: id,
+    player: 1,
     hex_tiles: [],
-    tile: { id: 2 },
+    tile: { id: 50 },
     hand: [
       {
         deck_card_id: null,
@@ -63,9 +32,9 @@ export default function useHexData(id) {
       }
     ],
     selected_card: null,
-    target_hex: null,
+    target_hex: 60,
     target_user: null,
-    channel: socket.channel(`hex:${2}`, {})
+    channel: socket.channel('hex:' + 60, {})
   });
 
   const getState = () => {
