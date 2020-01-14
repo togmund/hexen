@@ -74,6 +74,7 @@ export default function useHexData() {
   // Render the map on the render_map broadcast
   useEffect(() => {
     state.channel.on('SET_BOARD', (msg: any) => {
+      console.log(msg);
       dispatch({ type: SET_BOARD, hex_tiles: msg.hex_tiles });
     });
     return () => {
@@ -94,7 +95,7 @@ export default function useHexData() {
   // Update the hand on the new_hand broadcast
   useEffect(() => {
     state.channel.on('SET_HAND', (msg: any) => {
-      dispatch({ type: SET_HAND, hand: msg.players[0].hand });
+      dispatch({ type: SET_HAND, hand: msg.players[state.player].hand });
     });
     return () => {
       state.channel.off('SET_HAND');

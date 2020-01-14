@@ -157,9 +157,7 @@ defmodule Hexen.HexWorker do
       |> Map.get(:id)
 
     %{quest_id: new_quest, user_id: user_id, progress: 0}
-    |> IO.inspect(label: "Quest Map")
     |> Hexen.Events.create_user_quest()
-    |> IO.inspect(label: "Result Of Creation")
 
     [deck_card_id]
     |> Hexen.Inventory.delete_deck_cards()
@@ -297,6 +295,7 @@ defmodule Hexen.HexWorker do
 
   defp retrieve_state(id) do
     tile_info = Hexen.Map.get_single_tile(id)
+    full_map = Hexen.Map.get_full_board()
 
     player_info =
       id
@@ -307,31 +306,22 @@ defmodule Hexen.HexWorker do
         active_quest_hexes =
           user_id
           |> Hexen.Events.get_hexes_with_active_quests_for_user()
-          |> IO.inspect(label: "Quest Hexes for #{user_id}")
 
         %{
           player: user_id,
+          avatar: Hexen.People.get_avatar_by_user(user_id),
           deck: deck,
           hand: draw_cards(deck),
           active_quest_hexes: active_quest_hexes
         }
       end)
-
-    # Add hexes with active quests here ^
-
-    full_map = Hexen.Map.get_full_board()
-
-    # band_info =
-    #   raw_hex
-    #   |> Map.get(:band_id)
-    #   |> Hexen.People.get_band!()
-    #   |> Map.take([:id, :name, :sigil])
+      |> Enum.map(fn player -> {player[:player], player} end)
+      |> Map.new()
 
     %{
       hex_tiles: full_map,
       tile: tile_info,
       players: player_info
-      # band: band_info
     }
   end
 
