@@ -246,7 +246,7 @@ defmodule Hexen.DatabaseSeeder do
   })
 
   Repo.insert!(%Card{
-    name: "Long Haul Boots",
+    name: "Boots",
     suit: "Move",
     description: "Travel two hexes instead of one.",
     image: "https://i.ibb.co/DrgyDXG/ex3-Qkkr-8x.png",
@@ -280,7 +280,7 @@ defmodule Hexen.DatabaseSeeder do
   resources
   |> Enum.each(fn mat ->
     Repo.insert!(%Card{
-      name: "Strange Brew",
+      name: "Elixir",
       suit: "Craft",
       description: "Concoct an elixir.",
       image: "https://i.ibb.co/cQMbv3Q/4g7-ITMF-8x.png",

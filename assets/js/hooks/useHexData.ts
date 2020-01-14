@@ -146,8 +146,11 @@ export default function useHexData() {
   const stateObject = {
     state: state,
 
-    selectCard: function selectCard(selected_card) {
-      dispatch({ type: DECK_CARD_SELECTED, deck_card: selected_card });
+    selectCard: function selectCard(selected_card, target_hex) {
+      dispatch({
+        type: DECK_CARD_SELECTED,
+        deck_card: selected_card
+      });
     },
 
     targetHex: function targetHex(selected_hex) {
