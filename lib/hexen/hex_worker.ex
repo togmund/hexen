@@ -117,12 +117,13 @@ defmodule Hexen.HexWorker do
   end
 
   def move(_modifier, user_id, target_hex_id, tile_id) do
+    IO.puts("###########################################")
+
     user_id
     |> Hexen.Map.get_hex_user_id_by_user()
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
 
     # TODO: For Move actions we need to dispatch a new tile for the user to register to, remove them from the existing channel and subscribe them to that one.
-    # Also, this query is broken, it doesn't actually create this row for some reason:
     Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id, departed: nil})
 
     tile_id
@@ -147,9 +148,12 @@ defmodule Hexen.HexWorker do
 
     Hexen.Inventory.create_deck_card!(%{deck_id: deck_id, card_id: card_id})
 
+    # state =
     tile_id
     |> retrieve_state()
     |> update_state(%{id: tile_id})
+
+    # broadcast(state, :ok, "DISCONNECT")
   end
 
   def explore(_modifier, user_id, deck_card_id, tile_id) do
