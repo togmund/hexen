@@ -493,4 +493,16 @@ defmodule Hexen.Events do
   def get_novel_quests(quest_ids) do
     from(q in Quest, where: q.id not in ^quest_ids) |> Repo.all()
   end
+
+  def get_hexes_with_active_quests_for_user(id) do
+    from(uq in UserQuest,
+      join: q in Quest,
+      on: uq.quest_id == q.id,
+      join: hq in HexQuest,
+      on: q.id == hq.quest_id,
+      where: uq.user_id == ^id and uq.progress < q.requirement,
+      select: hq.hex_id
+    )
+    |> Repo.all()
+  end
 end

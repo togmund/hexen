@@ -428,25 +428,25 @@ defmodule Hexen.Map do
   @doc """
   """
   def get_full_board do
-    Repo.all(
-      from h in Hex,
-        join: r in Region,
-        on: r.id == h.region_id,
-        join: b in Biome,
-        on: b.id == h.biome_id,
-        select: %{
-          id: h.id,
-          name: h.name,
-          q: h.q,
-          r: h.r,
-          s: h.s,
-          structure: h.structure,
-          region_name: r.name,
-          biome_name: b.name,
-          resource: h.resource,
-          image: b.image
-        }
+    from(h in Hex,
+      join: r in Region,
+      on: r.id == h.region_id,
+      join: b in Biome,
+      on: b.id == h.biome_id,
+      select: %{
+        id: h.id,
+        name: h.name,
+        q: h.q,
+        r: h.r,
+        s: h.s,
+        structure: h.structure,
+        region_name: r.name,
+        biome_name: b.name,
+        resource: h.resource,
+        image: b.image
+      }
     )
+    |> Repo.all()
   end
 
   @doc """
