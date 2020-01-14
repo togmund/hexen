@@ -3,12 +3,18 @@
   padding: 16px;
   height: 232px;
   width: 136px;
-  transition: transform 0.4s;
   color: var(black);
+  display: flex;
 }
 
-.hand-card:hover {
-  transform: translate(0px, -30px)
+.hand-card:hover:not(.selected) {
+  transform: translate(0px, -30px);
+  transition: transform 0.4s;
+}
+
+.hand-card.selected {
+  position: relative;
+  bottom: 30px;
 }
 
 .hand-card img {

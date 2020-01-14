@@ -6,10 +6,6 @@ import '../../css/Hand.css';
 const Hand = (props: { state: any }) => {
   const { state, selectCard } = props;
 
-  const onChange = (id: number | null) => {
-    value = id;
-  };
-
   return (
     <Tiles columns={[2, null, 3]} className="card-container">
       {state.hand ? (
@@ -21,7 +17,7 @@ const Hand = (props: { state: any }) => {
             name={card.card_details.name}
             description={card.card_details.description}
             modifier={card.card_details.modifier}
-            selected={card.deck_card_id === value}
+            selected={card.deck_card_id === state.selected_card}
             selectCard={() => selectCard(card.deck_card_id)}
           />
         ))
@@ -31,5 +27,5 @@ const Hand = (props: { state: any }) => {
     </Tiles>
   );
 };
-export let value: number | null = null;
+
 export default Hand;

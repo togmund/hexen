@@ -12,16 +12,18 @@ const HandCard = ({
   selected,
   selectCard
 }) => {
-  const handClass: any = classNames('hand-card', suit, 'pxl-border');
+  const cardClass: any = classNames('hand-card', suit, 'pxl-border', {
+    selected: selected
+  });
 
   return (
-    <Box className={handClass} onClick={selectCard}>
+    <Box className={cardClass} onClick={selectCard}>
       <Card>
         <Text className={'card-title'}>{name}</Text>
         <Image src={image} />
         <Box className={'card-info'}>
           <Text className={'card-suit'}>{suit}</Text>
-          <Text className={'card-modifier'}>{modifier}</Text>
+          <Text className={'card-modifier'}>x{modifier}</Text>
           <Text className={'card-description'}>{description}</Text>
         </Box>
       </Card>
