@@ -23,7 +23,10 @@ const HandCard = ({
         <Image src={image} />
         <Box className={'card-info'}>
           <Text className={'card-suit'}>{suit}</Text>
-          <Text className={'card-modifier'}>x{modifier}</Text>
+          <Text className={'card-modifier'}>
+            {modifier ? 'x' : ''}
+            {modifier}
+          </Text>
           <Text className={'card-description'}>{description}</Text>
         </Box>
       </Card>

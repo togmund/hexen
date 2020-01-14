@@ -26,6 +26,12 @@
   font-weight: bolder;
 }
 
+.card-info>.card-modifier {
+  position: relative;
+  left: 80%;
+  bottom: 1em;
+}
+
 .hand-card.Rest {
   background-color: var(--rest);
   background: var(--rest);
