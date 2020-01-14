@@ -17,7 +17,10 @@ const Hand = (props: { state: any }) => {
             name={card.card_details.name}
             description={card.card_details.description}
             modifier={card.card_details.modifier}
-            selected={card.deck_card_id === state.selected_card}
+            selected={
+              card.deck_card_id === state.selected_card &&
+              card.card_details.suit !== 'Rest'
+            }
             selectCard={() => selectCard(card.deck_card_id)}
           />
         ))

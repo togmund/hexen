@@ -18,7 +18,7 @@
   --move: burlywood;
   --gather: palegreen;
   --craft: lightblue;
-  --interact:lightcoral;
+  --interact: lightcoral;
   --explore: #11d92c;
 }
 
@@ -53,8 +53,8 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  overflow-x: scroll;
-  overflow-y: scroll;
+  overflow-x: scroll hidden;
+  overflow-y: scroll hidden;
 }
 
 .pxl-border {
