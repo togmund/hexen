@@ -25,7 +25,7 @@ nav .hex-info {
 nav .hex-details {
   background-color: #fcf4ec;
   color: #7c2454;
-  font-size: large;
+  font-size: 0.5em;
   font-weight: bolder;
   width: 120px;
   margin: auto;
@@ -34,4 +34,11 @@ nav .hex-details {
 .hex-info>img {
   height: 120px;
   width: 120px;
+}
+
+.hex-info>.hex-title {
+  margin: 15px;
+  font-size: 0.6em;
+  font-weight: bolder;
+  hyphens: auto;
 }

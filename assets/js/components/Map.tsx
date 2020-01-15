@@ -45,7 +45,8 @@ const Map = (props: { state: any; targetHex: any }) => {
   const getHexClasses = ({ id, q, r, s }) => {
     const hexClasses = classNames({
       'in-fog': highlightHexes(id, [q, r, s]),
-      nearby: highlightHexes(id, [q, r, s], false)
+      nearby: highlightHexes(id, [q, r, s], false),
+      quest: state.quest_hexes.includes(id)
     });
 
     return hexClasses;
@@ -67,22 +68,115 @@ const Map = (props: { state: any; targetHex: any }) => {
                 q={hex.q}
                 r={hex.r}
                 s={hex.s}
-                fill={HexUtils.getID(hex)}
+                fill={hex.image}
                 className={getHexClasses(hex)}
                 onClick={() => targetHex(hex.id)}
               >
-                {/* <Text>{hex.id}</Text> */}
-                <Pattern
-                  id={HexUtils.getID(hex)}
-                  link={hex.image}
-                  size={{ x: 10, y: 10 }}
-                />
+                <Text>{hex.id}</Text>
               </Hexagon>
             ))
           ) : (
             <div></div>
           )}
         </Layout>
+        <Layout
+          size={{ x: 10, y: 10 }}
+          flat={true}
+          spacing={1.085}
+          origin={{ x: -100, y: -150 }}
+        >
+          {state.hex_tiles ? (
+            state.hex_tiles.map((hex: any) => (
+              <Hexagon
+                key={hex.id}
+                q={hex.q}
+                r={hex.r}
+                s={hex.s}
+                fill={
+                  state.quest_hexes.includes(hex.id)
+                    ? 'quest'
+                    : state.tile.id === hex.id
+                    ? 'player'
+                    : 'none'
+                }
+                onClick={() => targetHex(hex.id)}
+              >
+                {/* <Text>{hex.id}</Text> */}
+              </Hexagon>
+            ))
+          ) : (
+            <div></div>
+          )}
+        </Layout>
+        {/* Biome Images */}
+        <Pattern
+          id={'https://i.ibb.co/F7kbcFh/snow-resize.png'}
+          link={'https://i.ibb.co/F7kbcFh/snow-resize.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/P4tK7xx/mountain-rotate.png'}
+          link={'https://i.ibb.co/P4tK7xx/mountain-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/t8NgLbQ/grassland-rotate.png'}
+          link={'https://i.ibb.co/t8NgLbQ/grassland-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/WWFQDhJ/purple-rotate.png'}
+          link={'https://i.ibb.co/WWFQDhJ/purple-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/VmYLRTB/grass-rotate.png'}
+          link={'https://i.ibb.co/VmYLRTB/grass-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/h1j86hg/hex1-rotated.png'}
+          link={'https://i.ibb.co/h1j86hg/hex1-rotated.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/MVW4XfV/orange-rotate.png'}
+          link={'https://i.ibb.co/MVW4XfV/orange-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/S34xwsx/swamp-rotate.png'}
+          link={'https://i.ibb.co/S34xwsx/swamp-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/RHsVg4m/dunes-rotate.png'}
+          link={'https://i.ibb.co/RHsVg4m/dunes-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/842VhsT/river-rotate.png'}
+          link={'https://i.ibb.co/842VhsT/river-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/tzRxjH5/ocean-rotate.png'}
+          link={'https://i.ibb.co/tzRxjH5/ocean-rotate.png'}
+          size={{ x: 10, y: 10 }}
+        />
+
+        {/* On-hex-Sprites */}
+        <Pattern
+          id={'quest'}
+          link={'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern
+          id={'player'}
+          link={'https://i.ibb.co/DrgyDXG/ex3-Qkkr-8x.png'}
+          size={{ x: 10, y: 10 }}
+        />
+        <Pattern id={'none'} />
       </HexGrid>
     </div>
   );

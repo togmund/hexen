@@ -5,6 +5,7 @@ import reducer, {
   SET_INITIAL,
   SET_CHANNEL,
   SET_BOARD,
+  NEW_HEX,
   SET_HEX,
   SET_HAND,
   SET_QUESTS,
@@ -60,13 +61,13 @@ export default function useHexData(player) {
   }, [state.tile.id]);
 
   const init = (socket, tile_id) => {
-    const channel = socket.channel('hex:' + tile_id, {});
+    const new_channel = socket.channel(`hex:${tile_id}`, {});
     // Join the Channel
-    channel
+    new_channel
       .join()
       .receive('ok', (resp: any) => {
         console.log('Joined successfully', resp);
-        dispatch({ type: SET_CHANNEL, channel: channel });
+        dispatch({ type: SET_CHANNEL, channel: new_channel });
       })
       .receive('error', (resp: any) => {
         console.log('Unable to join', resp);
@@ -130,18 +131,18 @@ export default function useHexData(player) {
   }, [state]);
 
   const respondWithCard = state => {
-    state.channel
-      .push('selected_card', {
-        deck_card_id: state.selected_card,
-        room_name: `hex:${state.tile.id}`,
-        tile_id: state.tile.id,
-        user_id: state.player,
-        target_hex_id: state.target_hex,
-        target_user_id: state.target_user
-      })
-      .receive('ok', (resp: any) => {
-        console.log('Card selected successfully', resp);
-      });
+    state.channel.push('selected_card', {
+      deck_card_id: state.selected_card,
+      room_name: `hex:${state.tile.id}`,
+      tile_id: state.tile.id,
+      user_id: state.player,
+      target_hex_id: state.target_hex,
+      target_user_id: state.target_user
+    });
+
+    if (state.selected_card && state.target_hex) {
+      dispatch({ type: NEW_HEX, tile: state.target_hex });
+    }
   };
 
   const stateObject = {
