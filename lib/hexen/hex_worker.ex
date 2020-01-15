@@ -322,26 +322,16 @@ defmodule Hexen.HexWorker do
           active_quest_hexes: active_quest_hexes
         }
       end)
+
+    user_object =
+      player_info
       |> Enum.map(fn player -> {player[:player], player} end)
       |> Map.new()
 
-    # player_list =
-    #   player_info
-    #   |> Enum.map(fn player -> %{elem(player, 0) => elem(player, 1)["name"]} end)
-
-    if map_size(player_info) > 0 do
-      IO.inspect(player_info, label: "Player info")
-    end
-
-    # if length(player_list) > 0 do
-    #   IO.inspect(player_list, label: "Player list")
-    # end
-
     %{
       hex_tiles: full_map,
-      # , players: player_list},
-      tile: {tile_info},
-      players: player_info
+      tile: Map.merge(tile_info, %{hex_players: player_info}),
+      players: user_object
     }
   end
 
