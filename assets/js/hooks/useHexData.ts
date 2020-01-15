@@ -82,7 +82,7 @@ export default function useHexData(player) {
     return () => {
       state.channel.off('SET_BOARD');
     };
-  }, [state]);
+  });
 
   // Update the hex on the hex_state broadcast
   useEffect(() => {
@@ -92,7 +92,7 @@ export default function useHexData(player) {
     return () => {
       state.channel.off('SET_HEX');
     };
-  }, [state]);
+  });
 
   // Update the hand on the new_hand broadcast
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function useHexData(player) {
     return () => {
       state.channel.off('SET_HAND');
     };
-  }, [state]);
+  });
 
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
@@ -131,7 +131,7 @@ export default function useHexData(player) {
     return () => {
       state.channel.off('SET_QUESTS');
     };
-  }, [state]);
+  });
 
   const respondWithCard = state => {
     state.channel.push('selected_card', {
