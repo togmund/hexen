@@ -420,7 +420,7 @@ defmodule Hexen.Map do
   def list_hex_user_ids_by_hex(hex_id) do
     Repo.all(
       from hu in HexUser,
-        where: hu.hex_id == ^hex_id,
+        where: hu.hex_id == ^hex_id and not is_nil(hu.departed),
         select: hu.id
     )
   end

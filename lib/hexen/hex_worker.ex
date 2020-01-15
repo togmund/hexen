@@ -309,9 +309,14 @@ defmodule Hexen.HexWorker do
           user_id
           |> Hexen.Events.get_hexes_with_active_quests_for_user()
 
+        user =
+          user_id
+          |> Hexen.People.get_user!()
+
         %{
           player: user_id,
-          avatar: Hexen.People.get_avatar_by_user(user_id),
+          name: user.name,
+          avatar: user.avatar,
           deck: deck,
           hand: draw_cards(deck),
           active_quest_hexes: active_quest_hexes
@@ -320,9 +325,22 @@ defmodule Hexen.HexWorker do
       |> Enum.map(fn player -> {player[:player], player} end)
       |> Map.new()
 
+    # player_list =
+    #   player_info
+    #   |> Enum.map(fn player -> %{elem(player, 0) => elem(player, 1)["name"]} end)
+
+    if map_size(player_info) > 0 do
+      IO.inspect(player_info, label: "Player info")
+    end
+
+    # if length(player_list) > 0 do
+    #   IO.inspect(player_list, label: "Player list")
+    # end
+
     %{
       hex_tiles: full_map,
-      tile: tile_info,
+      # , players: player_list},
+      tile: {tile_info},
       players: player_info
     }
   end
