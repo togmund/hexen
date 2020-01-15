@@ -518,47 +518,26 @@ defmodule Hexen.DatabaseSeeder do
   ]
 
   # Deck
-  Repo.insert!(%Deck{
-    name: "Warrior",
-    cardback: Enum.random(cardbacks),
-    user_id: 1
-  })
-
-  Repo.insert!(%Deck{
-    name: "Hustler",
-    cardback: Enum.random(cardbacks),
-    user_id: 2
-  })
-
-  Repo.insert!(%Deck{
-    name: "Farmer",
-    cardback: Enum.random(cardbacks),
-    user_id: 3
-  })
+  1..length(user_names)
+  |> Enum.each(fn user ->
+    Repo.insert!(%Deck{
+      name: "Warrior",
+      cardback: Enum.random(cardbacks),
+      user_id: user
+    })
+  end)
 
   # Decks
-  Enum.each(1..35, fn _x ->
-    Repo.insert!(%DeckCard{
-      deck_id: 1,
-      card_id: Enum.random(2..16),
-      drawn: false
-    })
-  end)
 
-  Enum.each(1..35, fn _x ->
-    Repo.insert!(%DeckCard{
-      deck_id: 2,
-      card_id: Enum.random(2..16),
-      drawn: false
-    })
-  end)
-
-  Enum.each(1..35, fn _x ->
-    Repo.insert!(%DeckCard{
-      deck_id: 3,
-      card_id: Enum.random(2..16),
-      drawn: false
-    })
+  1..length(user_names)
+  |> Enum.each(fn user ->
+    Enum.each(1..15, fn _x ->
+      Repo.insert!(%DeckCard{
+        deck_id: user,
+        card_id: Enum.random(2..16),
+        drawn: false
+      })
+    end)
   end)
 
   # Quest Seeds
