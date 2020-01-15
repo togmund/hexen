@@ -24,9 +24,9 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           <p>
             Region:<br></br> {state.tile.region_name}
           </p>
-          <p>
+          {/* <p>
             Biome:<br></br> {state.tile.biome_name}
-          </p>
+          </p> */}
           <p>
             Resource:<br></br> {state.tile.resource}
           </p>
