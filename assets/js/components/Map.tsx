@@ -159,8 +159,8 @@ const Map = (props: { state: any; targetHex: any }) => {
         {/* On-hex-Sprites */}
         <Pattern
           id={'quest'}
-          link={'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png'}
-          size={{ x: 10, y: 10 }}
+          link={'https://i.ibb.co/Qf7xwNg/YQJVBgl-20x.png'}
+          size={{ x: 10, y: 7 }}
         />
         <Pattern
           id={'https://i.ibb.co/BLVmD9d/p-CFxi-UE-21x.png'}
