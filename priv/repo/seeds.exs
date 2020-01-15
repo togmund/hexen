@@ -373,6 +373,11 @@ defmodule Hexen.DatabaseSeeder do
     image: "https://i.ibb.co/tzRxjH5/ocean-rotate.png"
   })
 
+  latitude_1 = [1, 1, 1, 1, 2, 2, 3, 3, 4, 11, 11]
+  latitude_2 = [2, 4, 4, 4, 4, 5, 5, 5, 5, 10, 3, 6, 11]
+  latitude_3 = [4, 10, 10, 10, 8, 8, 11, 11]
+  latitude_4 = [5, 6, 6, 7, 7, 8, 8, 9, 9, 11]
+
   # Hex seeds
   rows = 25
   long_col = 25
@@ -425,7 +430,7 @@ defmodule Hexen.DatabaseSeeder do
         name: Enum.random(hex_names),
         structure: "Castle",
         resource: Enum.random(resources),
-        biome_id: Enum.random(1..11),
+        biome_id: Enum.random(latitude_2),
         region_id: Enum.random(1..3),
         q: top[:q],
         r: top[:r] + y,

@@ -15,7 +15,6 @@ const HandCard = ({
   const cardClass: any = classNames('hand-card', suit, 'pxl-border', {
     selected: selected
   });
-
   return (
     <Box className={cardClass} onClick={selectCard}>
       <Card>
