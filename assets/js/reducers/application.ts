@@ -36,6 +36,13 @@ export default function reducer(state: any, action: any) {
           image: action.tile.image
         }
       };
+    case NEW_HEX:
+      return {
+        ...state,
+        tile: {
+          id: action.id
+        }
+      };
     case SET_HAND:
       return {
         ...state,
@@ -89,6 +96,7 @@ export const SET_BOARD = 'SET_BOARD';
 export const SET_HEX = 'SET_HEX';
 export const SET_HAND = 'SET_HAND';
 export const SET_QUESTS = 'SET_QUESTS';
+export const NEW_HEX = 'NEW_HEX';
 
 export const DECK_CARD_SELECTED = 'DECK_CARD_SELECTED';
 export const HEX_SELECTED = 'HEX_SELECTED';

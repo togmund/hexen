@@ -21,7 +21,7 @@ defmodule Hexen.HexWorker do
       |> update_state(state)
 
     broadcast(updated_state, :ok, "GET_CARD")
-    # broadcast(updated_state, :ok, "SET_BOARD")
+    broadcast(updated_state, :ok, "SET_BOARD")
 
     broadcast(updated_state, :ok, "SET_HEX")
     broadcast(updated_state, :ok, "SET_HAND")
@@ -109,17 +109,16 @@ defmodule Hexen.HexWorker do
     # end
   end
 
-  def move(_modifier, user_id, target_hex_id, tile_id) do
-    user_id
-    |> Hexen.Map.get_hex_user_id_by_user()
+  def move(_modifier, user_id, target_hex_id, _tile_id) do
+    hex_user =
+      user_id
+      |> Hexen.Map.get_hex_user_id_by_user()
+
+    %{hex_id: target_hex_id, user_id: user_id, departed: nil}
+    |> Hexen.Map.create_hex_user()
+
+    hex_user
     |> Hexen.Map.update_player_departure(NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second))
-
-    # TODO: For Move actions we need to dispatch a new tile for the user to register to, remove them from the existing channel and subscribe them to that one.
-    Hexen.Map.create_hex_user(%{hex_id: target_hex_id, user_id: user_id, departed: nil})
-
-    tile_id
-    |> retrieve_state()
-    |> update_state(%{id: tile_id})
   end
 
   def gather(_modifier, user_id, _target_hex_id, tile_id) do
@@ -303,7 +302,14 @@ defmodule Hexen.HexWorker do
       id
       |> Hexen.Map.list_hex_user_ids_by_hex()
       |> Enum.map(fn user_id ->
-        deck = List.first(Hexen.Inventory.get_users_deck_id_as_list(user_id))
+        deck =
+          user_id
+          |> Hexen.Inventory.get_users_deck_id_as_list()
+          |> List.first()
+
+        new_hand =
+          deck
+          |> draw_cards()
 
         active_quest_hexes =
           user_id
@@ -313,7 +319,7 @@ defmodule Hexen.HexWorker do
           player: user_id,
           avatar: Hexen.People.get_avatar_by_user(user_id),
           deck: deck,
-          hand: draw_cards(deck),
+          hand: new_hand,
           active_quest_hexes: active_quest_hexes
         }
       end)
@@ -340,6 +346,14 @@ defmodule Hexen.HexWorker do
       "hex:#{updated_state[:id]}",
       message,
       Map.merge(updated_state, %{response: response})
+    )
+  end
+
+  defp broadcast_new_hex(new_hex, current_hex, response, message) do
+    HexenWeb.Endpoint.broadcast(
+      "hex:#{current_hex}",
+      message,
+      Map.merge(new_hex, %{response: response})
     )
   end
 
