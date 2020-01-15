@@ -295,7 +295,6 @@ defmodule Hexen.HexWorker do
   end
 
   defp retrieve_state(id) do
-    tile_info = Hexen.Map.get_single_tile(id)
     full_map = Hexen.Map.get_full_board()
 
     player_info =
@@ -315,21 +314,36 @@ defmodule Hexen.HexWorker do
           user_id
           |> Hexen.Events.get_hexes_with_active_quests_for_user()
 
+        user =
+          user_id
+          |> Hexen.People.get_user!()
+
         %{
           player: user_id,
-          avatar: Hexen.People.get_avatar_by_user(user_id),
+          name: user.name,
+          avatar: user.avatar,
           deck: deck,
           hand: new_hand,
           active_quest_hexes: active_quest_hexes
         }
       end)
+
+    tile_info =
+      id
+      |> Hexen.Map.get_single_tile()
+      |> List.first()
+      |> Map.merge(%{hex_players: player_info})
+
+    user_object =
+      player_info
       |> Enum.map(fn player -> {player[:player], player} end)
       |> Map.new()
 
     %{
       hex_tiles: full_map,
       tile: tile_info,
-      players: player_info
+      # tile: Map.merge(tile_info, %{hex_players: player_info}),
+      players: user_object
     }
   end
 
@@ -346,14 +360,6 @@ defmodule Hexen.HexWorker do
       "hex:#{updated_state[:id]}",
       message,
       Map.merge(updated_state, %{response: response})
-    )
-  end
-
-  defp broadcast_new_hex(new_hex, current_hex, response, message) do
-    HexenWeb.Endpoint.broadcast(
-      "hex:#{current_hex}",
-      message,
-      Map.merge(new_hex, %{response: response})
     )
   end
 
