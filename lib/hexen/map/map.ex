@@ -501,7 +501,7 @@ defmodule Hexen.Map do
   def get_hex_user_id_by_user(user_id) do
     query =
       from hu in HexUser,
-        where: hu.user_id == ^user_id
+        where: hu.user_id == ^user_id and is_nil(hu.departed)
 
     Repo.one(query)
   end

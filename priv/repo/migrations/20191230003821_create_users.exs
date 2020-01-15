@@ -11,8 +11,8 @@ defmodule Hexen.Repo.Migrations.CreateUsers do
       timestamps()
     end
 
-    create unique_index(:users, [:name])
-    create unique_index(:users, [:email])
+    # create unique_index(:users, [:name])
+    # create unique_index(:users, [:email])
     create index(:users, [:band_id])
   end
 end
