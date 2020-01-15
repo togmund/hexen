@@ -54,7 +54,7 @@ const Map = (props: { state: any; targetHex: any }) => {
 
   return (
     <div className={'hex-map'}>
-      <HexGrid width={'150vw'} height={'200vh'} viewBox={'20 -10 350 450'}>
+      <HexGrid width={'150vw'} height={'300vh'} viewBox={'100 -10 250 350'}>
         <Layout
           size={{ x: 10, y: 10 }}
           flat={true}
@@ -73,7 +73,7 @@ const Map = (props: { state: any; targetHex: any }) => {
                   className={getHexClasses(hex)}
                   onClick={() => targetHex(hex.id)}
                 >
-                  <Text>{`${hex.q} ${hex.r} ${hex.s}`}</Text>
+                  {/* <Text>{`${hex.q} ${hex.r} ${hex.s}`}</Text> */}
                 </Hexagon>
                 <Hexagon
                   key={hex.id + 10000}
@@ -85,6 +85,8 @@ const Map = (props: { state: any; targetHex: any }) => {
                       ? state.player.avatar
                       : state.quest_hexes.includes(hex.id)
                       ? 'quest'
+                      : hex.id % 16 === 0
+                      ? 'https://i.ibb.co/YjQKfWM/KPh-MIj-F-21x.png'
                       : hex.structure
                       ? hex.structure
                       : 'none'

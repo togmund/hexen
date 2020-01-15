@@ -97,7 +97,6 @@ export default function useHexData(player) {
   // Update the hand on the new_hand broadcast
   useEffect(() => {
     state.channel.on('SET_HAND', (msg: any) => {
-      console.log('new_state', msg.players[state.player.id].hand);
       dispatch({
         type: SET_HAND,
         hand: msg.players[state.player.id].hand,
