@@ -99,20 +99,6 @@ const Map = (props: { state: any; targetHex: any }) => {
             <div></div>
           )}
         </Layout>
-        {/* <Layout
-          size={{ x: 10, y: 10 }}
-          flat={true}
-          spacing={1.085}
-          origin={{ x: -100, y: -150 }}
-        >
-          {state.hex_tiles ? (
-            state.hex_tiles.map((hex: any) => (
-
-            ))
-          ) : (
-            <div></div>
-          )}
-        </Layout> */}
         {/* Biome Images */}
         <Pattern
           id={'https://i.ibb.co/F7kbcFh/snow-resize.png'}
