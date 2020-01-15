@@ -18,7 +18,7 @@ const Root: React.FC = () => {
   //     });
   // };
 
-  const playerInfo = { id: 1, hex_id: 60 };
+  const playerInfo = { id: 1, hex_id: 291 };
   const { state, selectCard, targetHex, targetUser } = useHexData(playerInfo);
 
   return (
