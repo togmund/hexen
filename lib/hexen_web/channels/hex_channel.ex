@@ -6,7 +6,8 @@ defmodule HexenWeb.HexChannel do
 
   alias Hexen.HexWorker
 
-  def join("hex:" <> _room, _payload, socket) do
+  def join("hex:" <> room, _payload, socket) do
+    IO.inspect(room, label: "Our room")
     {:ok, socket}
   end
 
