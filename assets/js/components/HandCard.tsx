@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { Box, Card, Image, Heading, Text } from 'rebass';
+import { Box, Card, Image, Text } from 'rebass';
 import '../../css/HandCard.css';
 
 const HandCard = ({

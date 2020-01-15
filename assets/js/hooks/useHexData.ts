@@ -17,7 +17,7 @@ import reducer, {
 
 export default function useHexData(player) {
   const [state, dispatch] = useReducer(reducer, {
-    player: player.id,
+    player: { id: player.id },
     hex_tiles: [],
     tile: { id: player.hex_id },
     hand: [
@@ -56,7 +56,7 @@ export default function useHexData(player) {
 
   // Join the Channel
   useEffect(() => {
-    getInitialBoardFromUser(state.player);
+    getInitialBoardFromUser(state.player.id);
     init(socket, state.tile.id);
   }, [state.tile.id]);
 
@@ -97,8 +97,12 @@ export default function useHexData(player) {
   // Update the hand on the new_hand broadcast
   useEffect(() => {
     state.channel.on('SET_HAND', (msg: any) => {
-      console.log('RAW MSG:', msg);
-      dispatch({ type: SET_HAND, hand: msg.players[state.player].hand });
+      console.log('new_state', msg);
+      dispatch({
+        type: SET_HAND,
+        hand: msg.players[state.player.id].hand,
+        player: msg.players[state.player.id]
+      });
     });
     return () => {
       state.channel.off('SET_HAND');
@@ -117,10 +121,10 @@ export default function useHexData(player) {
 
   useEffect(() => {
     state.channel.on('SET_QUESTS', (msg: any) => {
-      if (msg.players[state.player]) {
+      if (msg.players[state.player.id]) {
         dispatch({
           type: SET_QUESTS,
-          quests: msg.players[state.player].active_quest_hexes
+          quests: msg.players[state.player.id].active_quest_hexes
         });
       }
     });
@@ -134,7 +138,7 @@ export default function useHexData(player) {
       deck_card_id: state.selected_card,
       room_name: `hex:${state.tile.id}`,
       tile_id: state.tile.id,
-      user_id: state.player,
+      user_id: state.player.id,
       target_hex_id: state.target_hex,
       target_user_id: state.target_user
     });

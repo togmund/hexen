@@ -54,12 +54,12 @@ const Map = (props: { state: any; targetHex: any }) => {
 
   return (
     <div className={'hex-map'}>
-      <HexGrid width={'100vw'} height={'100vh'} viewBox={'20 -160 125 200'}>
+      <HexGrid width={'150vw'} height={'200vh'} viewBox={'20 -10 350 450'}>
         <Layout
           size={{ x: 10, y: 10 }}
           flat={true}
           spacing={1.085}
-          origin={{ x: -100, y: -150 }}
+          origin={{ x: 0, y: 0 }}
         >
           {state.hex_tiles ? (
             state.hex_tiles.map((hex: any) => (
@@ -73,18 +73,20 @@ const Map = (props: { state: any; targetHex: any }) => {
                   className={getHexClasses(hex)}
                   onClick={() => targetHex(hex.id)}
                 >
-                  <Text>{hex.id}</Text>
+                  <Text>{`${hex.q} ${hex.r} ${hex.s}`}</Text>
                 </Hexagon>
                 <Hexagon
-                  key={hex.id + 1000}
+                  key={hex.id + 10000}
                   q={hex.q}
                   r={hex.r}
                   s={hex.s}
                   fill={
-                    state.quest_hexes.includes(hex.id)
+                    state.tile.id === hex.id
+                      ? state.player.avatar
+                      : state.quest_hexes.includes(hex.id)
                       ? 'quest'
-                      : state.tile.id === hex.id
-                      ? 'player'
+                      : hex.structure
+                      ? hex.structure
                       : 'none'
                   }
                   onClick={() => targetHex(hex.id)}
@@ -97,20 +99,6 @@ const Map = (props: { state: any; targetHex: any }) => {
             <div></div>
           )}
         </Layout>
-        {/* <Layout
-          size={{ x: 10, y: 10 }}
-          flat={true}
-          spacing={1.085}
-          origin={{ x: -100, y: -150 }}
-        >
-          {state.hex_tiles ? (
-            state.hex_tiles.map((hex: any) => (
-
-            ))
-          ) : (
-            <div></div>
-          )}
-        </Layout> */}
         {/* Biome Images */}
         <Pattern
           id={'https://i.ibb.co/F7kbcFh/snow-resize.png'}
@@ -175,8 +163,33 @@ const Map = (props: { state: any; targetHex: any }) => {
           size={{ x: 10, y: 10 }}
         />
         <Pattern
-          id={'player'}
+          id={'https://i.ibb.co/BLVmD9d/p-CFxi-UE-21x.png'}
           link={'https://i.ibb.co/BLVmD9d/p-CFxi-UE-21x.png'}
+          size={{ x: 9, y: 7 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/YjQKfWM/KPh-MIj-F-21x.png'}
+          link={'https://i.ibb.co/YjQKfWM/KPh-MIj-F-21x.png'}
+          size={{ x: 9, y: 7 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/kHRFRgf/Ro3-Id-YE-15x.png'}
+          link={'https://i.ibb.co/kHRFRgf/Ro3-Id-YE-15x.png'}
+          size={{ x: 9, y: 7 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/C91X3QR/gu-DVXhg-21x.png'}
+          link={'https://i.ibb.co/C91X3QR/gu-DVXhg-21x.png'}
+          size={{ x: 9, y: 7 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/LCfCZq3/wt-BBx7-D-15x.png'}
+          link={'https://i.ibb.co/LCfCZq3/wt-BBx7-D-15x.png'}
+          size={{ x: 9, y: 7 }}
+        />
+        <Pattern
+          id={'https://i.ibb.co/J2YWdrG/gwt-RAVi-15x.png'}
+          link={'https://i.ibb.co/J2YWdrG/gwt-RAVi-15x.png'}
           size={{ x: 9, y: 7 }}
         />
         <Pattern id={'none'} />
