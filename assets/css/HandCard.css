@@ -8,13 +8,13 @@
 }
 
 .hand-card:hover:not(.selected) {
-  transform: translate(0px, -30px);
+  transform: translate(0px, -80px);
   transition: transform 0.4s;
 }
 
 .hand-card.selected {
   position: relative;
-  bottom: 30px;
+  bottom: 80px;
 }
 
 .hand-card img {

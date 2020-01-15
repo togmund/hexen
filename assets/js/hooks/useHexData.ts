@@ -87,7 +87,7 @@ export default function useHexData(player) {
   // Update the hex on the hex_state broadcast
   useEffect(() => {
     state.channel.on('SET_HEX', (msg: any) => {
-      dispatch({ type: SET_HEX, tile: msg.tile[0] });
+      dispatch({ type: SET_HEX, tile: msg.tile });
     });
     return () => {
       state.channel.off('SET_HEX');
@@ -97,6 +97,7 @@ export default function useHexData(player) {
   // Update the hand on the new_hand broadcast
   useEffect(() => {
     state.channel.on('SET_HAND', (msg: any) => {
+      console.log('RAW MSG:', msg);
       dispatch({ type: SET_HAND, hand: msg.players[state.player].hand });
     });
     return () => {
@@ -116,7 +117,6 @@ export default function useHexData(player) {
 
   useEffect(() => {
     state.channel.on('SET_QUESTS', (msg: any) => {
-      console.log('Quests:', msg.players);
       if (msg.players[state.player]) {
         dispatch({
           type: SET_QUESTS,

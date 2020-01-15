@@ -36,8 +36,6 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           </p>
         </div>
       </div>
-      {/* Turn timer */}
-      {/* <p>30</p> */}
       <Deck state={state} />
     </nav>
   );
