@@ -49,11 +49,11 @@ export default function reducer(state: any, action: any) {
         hand: action.hand,
         selected_card: null,
         target_hex: null,
-        target_user: null
+        target_user: null,
+        player: action.player
       };
 
     case SET_QUESTS:
-      console.log('SET_QUESTS:', action.quests);
       return {
         ...state,
         quest_hexes: action.quests

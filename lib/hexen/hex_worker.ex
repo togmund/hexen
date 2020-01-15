@@ -312,7 +312,7 @@ defmodule Hexen.HexWorker do
           |> Hexen.People.get_user!()
 
         %{
-          player: user_id,
+          id: user_id,
           name: user.name,
           avatar: user.avatar,
           deck: deck,
@@ -329,7 +329,7 @@ defmodule Hexen.HexWorker do
 
     user_object =
       player_info
-      |> Enum.map(fn player -> {player[:player], player} end)
+      |> Enum.map(fn player -> {player[:id], player} end)
       |> Map.new()
 
     %{
