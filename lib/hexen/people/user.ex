@@ -24,7 +24,5 @@ defmodule Hexen.People.User do
     user
     |> cast(attrs, [:name, :email, :avatar])
     |> validate_required([:name, :email, :avatar])
-    |> unique_constraint(:name)
-    |> unique_constraint(:email)
   end
 end

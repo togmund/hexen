@@ -71,26 +71,227 @@ defmodule Hexen.DatabaseSeeder do
     sigil: "https://s.put.re/MicE3c3j.png"
   })
 
+  avatars = [
+    "https://i.ibb.co/BLVmD9d/p-CFxi-UE-21x.png",
+    "https://i.ibb.co/J2YWdrG/gwt-RAVi-15x.png",
+    "https://i.ibb.co/LCfCZq3/wt-BBx7-D-15x.png",
+    "https://i.ibb.co/C91X3QR/gu-DVXhg-21x.png",
+    "https://i.ibb.co/kHRFRgf/Ro3-Id-YE-15x.png",
+    "https://i.ibb.co/YjQKfWM/KPh-MIj-F-21x.png"
+  ]
+
+  user_names = [
+    "David",
+    "John",
+    "Paul",
+    "Mark",
+    "James",
+    "Andrew",
+    "Scott",
+    "Steven",
+    "Robert",
+    "Stephen",
+    "William",
+    "Craig",
+    "Michael",
+    "Stuart",
+    "Christopher",
+    "Alan",
+    "Colin",
+    "Brian",
+    "Kevin",
+    "Gary",
+    "Richard",
+    "Derek",
+    "Martin",
+    "Thomas",
+    "Neil",
+    "Barry",
+    "Ian",
+    "Jason",
+    "Iain",
+    "Gordon",
+    "Alexander",
+    "Graeme",
+    "Peter",
+    "Darren",
+    "Graham",
+    "George",
+    "Kenneth",
+    "Allan",
+    "Simon",
+    "Douglas",
+    "Keith",
+    "Lee",
+    "Anthony",
+    "Grant",
+    "Ross",
+    "Jonathan",
+    "Gavin",
+    "Nicholas",
+    "Joseph",
+    "Stewart",
+    "Daniel",
+    "Edward",
+    "Matthew",
+    "Donald",
+    "Fraser",
+    "Garry",
+    "Malcolm",
+    "Charles",
+    "Duncan",
+    "Alistair",
+    "Raymond",
+    "Philip",
+    "Ronald",
+    "Ewan",
+    "Ryan",
+    "Francis",
+    "Bruce",
+    "Patrick",
+    "Alastair",
+    "Bryan",
+    "Marc",
+    "Jamie",
+    "Hugh",
+    "Euan",
+    "Gerard",
+    "Sean",
+    "Wayne",
+    "Adam",
+    "Calum",
+    "Alasdair",
+    "Robin",
+    "Greig",
+    "Angus",
+    "Russell",
+    "Cameron",
+    "Roderick",
+    "Norman",
+    "Murray",
+    "Gareth",
+    "Dean",
+    "Eric",
+    "Adrian",
+    "Gregor",
+    "Samuel",
+    "Gerald",
+    "Henry",
+    "Justin",
+    "Benjamin",
+    "Shaun",
+    "Callum",
+    "Nicola",
+    "Karen",
+    "Fiona",
+    "Susan",
+    "Claire",
+    "Sharon",
+    "Angela",
+    "Gillian",
+    "Julie",
+    "Michelle",
+    "Jacqueline",
+    "Amanda",
+    "Tracy",
+    "Louise",
+    "Jennifer",
+    "Alison",
+    "Sarah",
+    "Donna",
+    "Caroline",
+    "Elaine",
+    "Lynn",
+    "Margaret",
+    "Elizabeth",
+    "Lesley",
+    "Deborah",
+    "Pauline",
+    "Lorraine",
+    "Laura",
+    "Lisa",
+    "Tracey",
+    "Carol",
+    "Linda",
+    "Lorna",
+    "Catherine",
+    "Wendy",
+    "Lynne",
+    "Yvonne",
+    "Pamela",
+    "Kirsty",
+    "Jane",
+    "Emma",
+    "Joanne",
+    "Heather",
+    "Suzanne",
+    "Anne",
+    "Diane",
+    "Helen",
+    "Victoria",
+    "Dawn",
+    "Mary",
+    "Samantha",
+    "Marie",
+    "Kerry",
+    "Ann",
+    "Hazel",
+    "Christine",
+    "Gail",
+    "Andrea",
+    "Clare",
+    "Sandra",
+    "Shona",
+    "Kathleen",
+    "Paula",
+    "Shirley",
+    "Denise",
+    "Melanie",
+    "Patricia",
+    "Audrey",
+    "Ruth",
+    "Jill",
+    "Lee",
+    "Leigh",
+    "Catriona",
+    "Rachel",
+    "Morag",
+    "Kirsten",
+    "Kirsteen",
+    "Katrina",
+    "Joanna",
+    "Lynsey",
+    "Cheryl",
+    "Debbie",
+    "Maureen",
+    "Janet",
+    "Aileen",
+    "Arlene",
+    "Zoe",
+    "Lindsay",
+    "Stephanie",
+    "Judith",
+    "Mandy",
+    "Jillian",
+    "Mhairi",
+    "Barbara",
+    "Carolyn",
+    "Gayle",
+    "Maria",
+    "Valerie",
+    "Christina"
+  ]
+
   # User Seeds
-  Repo.insert!(%User{
-    name: "Descartes",
-    avatar: "https://s.put.re/webPTZy3.png",
-    email: "des@cartes.com"
-  })
 
-  Repo.insert!(%User{
-    name: "Rose",
-    avatar: "https://s.put.re/1hke8Go7.png",
-    email: "ro@se.com",
-    band_id: 2
-  })
-
-  Repo.insert!(%User{
-    name: "Lizard",
-    avatar: "https://s.put.re/rodszvu3.png",
-    email: "liz@ard.com",
-    band_id: 2
-  })
+  user_names
+  |> Enum.each(fn name ->
+    Repo.insert!(%User{
+      name: name,
+      avatar: Enum.random(avatars),
+      email: "#{name}@email.com"
+    })
+  end)
 
   # Region Seeds
   Repo.insert!(%Region{
@@ -239,15 +440,13 @@ defmodule Hexen.DatabaseSeeder do
     user_id: 1
   })
 
-  Repo.insert!(%HexUser{
-    hex_id: 2,
-    user_id: 2
-  })
-
-  Repo.insert!(%HexUser{
-    hex_id: 3,
-    user_id: 3
-  })
+  2..length(user_names)
+  |> Enum.each(fn user ->
+    Repo.insert!(%HexUser{
+      hex_id: Enum.random(100..500),
+      user_id: user
+    })
+  end)
 
   # Card
 

@@ -518,5 +518,3 @@ defmodule Hexen.Events do
     |> Repo.all()
   end
 end
-
-# SELECT quests.id, quests.name, quests.requirement, hex_quests.hex_id, user_quests.user_id, user_quests.progress FROM quests JOIN hex_quests on quests.id = hex_quests.quest_id JOIN user_quests on quests.id = user_quests.quest_id;

@@ -53,8 +53,8 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  overflow-x: scroll hidden;
-  overflow-y: scroll hidden;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .pxl-border {

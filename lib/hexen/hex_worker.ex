@@ -92,8 +92,7 @@ defmodule Hexen.HexWorker do
     # if Enum.random(1..3) == 3 do
     new_card =
       Hexen.Inventory.get_card_ids_by_suit_list(["Explore"])
-      |> Enum.shuffle()
-      |> List.first()
+      |> Enum.random()
 
     deck_id =
       Hexen.Inventory.get_users_deck_id_as_list(user_id)
@@ -130,8 +129,7 @@ defmodule Hexen.HexWorker do
     # Take one of the possible cards to craft
     card_id =
       Hexen.Inventory.get_card_ids_by_suit_list_and_resource(["Craft"], resource)
-      |> Enum.shuffle()
-      |> List.first()
+      |> Enum.random()
 
     # Add to current_deck's deck_card
     deck_id = Hexen.Inventory.get_users_deck_id_as_list(user_id) |> List.first()
@@ -153,8 +151,7 @@ defmodule Hexen.HexWorker do
       user_id
       |> Hexen.Events.get_existing_quest_list_by_user()
       |> Hexen.Events.get_novel_quests()
-      |> Enum.shuffle()
-      |> List.first()
+      |> Enum.random()
       |> Map.get(:id)
 
     %{quest_id: new_quest, user_id: user_id, progress: 0}
@@ -172,8 +169,7 @@ defmodule Hexen.HexWorker do
     # if Enum.random(1..3) == 3 do
     new_card =
       Hexen.Inventory.get_card_ids_by_suit_list(["Explore"])
-      |> Enum.shuffle()
-      |> List.first()
+      |> Enum.random()
 
     deck_id =
       Hexen.Inventory.get_users_deck_id_as_list(user_id)
@@ -204,8 +200,7 @@ defmodule Hexen.HexWorker do
       length(consumable_cards) < 2 ->
         card_id =
           Hexen.Inventory.get_card_ids_by_suit_list(["Gather"])
-          |> Enum.shuffle()
-          |> List.first()
+          |> Enum.random()
 
         Hexen.Inventory.create_deck_card!(%{deck_id: deck_id, card_id: card_id})
 
@@ -216,8 +211,7 @@ defmodule Hexen.HexWorker do
       length(consumable_cards) == 2 ->
         card_id =
           Hexen.Inventory.get_card_ids_by_suit_list(["Gather", "Move"])
-          |> Enum.shuffle()
-          |> List.first()
+          |> Enum.random()
 
         Hexen.Inventory.create_deck_card!(%{deck_id: deck_id, card_id: card_id})
 
@@ -233,8 +227,7 @@ defmodule Hexen.HexWorker do
       length(consumable_cards) > 2 ->
         card_id =
           Hexen.Inventory.get_card_ids_by_suit_list(["Gather", "Move", "Combat"])
-          |> Enum.shuffle()
-          |> List.first()
+          |> Enum.random()
 
         Hexen.Inventory.create_deck_card!(%{deck_id: deck_id, card_id: card_id})
 

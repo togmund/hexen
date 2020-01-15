@@ -63,23 +63,41 @@ const Map = (props: { state: any; targetHex: any }) => {
         >
           {state.hex_tiles ? (
             state.hex_tiles.map((hex: any) => (
-              <Hexagon
-                key={hex.id}
-                q={hex.q}
-                r={hex.r}
-                s={hex.s}
-                fill={hex.image}
-                className={getHexClasses(hex)}
-                onClick={() => targetHex(hex.id)}
-              >
-                <Text>{hex.id}</Text>
-              </Hexagon>
+              <>
+                <Hexagon
+                  key={hex.id}
+                  q={hex.q}
+                  r={hex.r}
+                  s={hex.s}
+                  fill={hex.image}
+                  className={getHexClasses(hex)}
+                  onClick={() => targetHex(hex.id)}
+                >
+                  <Text>{hex.id}</Text>
+                </Hexagon>
+                <Hexagon
+                  key={hex.id + 1000}
+                  q={hex.q}
+                  r={hex.r}
+                  s={hex.s}
+                  fill={
+                    state.quest_hexes.includes(hex.id)
+                      ? 'quest'
+                      : state.tile.id === hex.id
+                      ? 'player'
+                      : 'none'
+                  }
+                  onClick={() => targetHex(hex.id)}
+                >
+                  {/* <Text>{hex.id}</Text> */}
+                </Hexagon>
+              </>
             ))
           ) : (
             <div></div>
           )}
         </Layout>
-        <Layout
+        {/* <Layout
           size={{ x: 10, y: 10 }}
           flat={true}
           spacing={1.085}
@@ -87,27 +105,12 @@ const Map = (props: { state: any; targetHex: any }) => {
         >
           {state.hex_tiles ? (
             state.hex_tiles.map((hex: any) => (
-              <Hexagon
-                key={hex.id}
-                q={hex.q}
-                r={hex.r}
-                s={hex.s}
-                fill={
-                  state.quest_hexes.includes(hex.id)
-                    ? 'quest'
-                    : state.tile.id === hex.id
-                    ? 'player'
-                    : 'none'
-                }
-                onClick={() => targetHex(hex.id)}
-              >
-                {/* <Text>{hex.id}</Text> */}
-              </Hexagon>
+
             ))
           ) : (
             <div></div>
           )}
-        </Layout>
+        </Layout> */}
         {/* Biome Images */}
         <Pattern
           id={'https://i.ibb.co/F7kbcFh/snow-resize.png'}
@@ -173,8 +176,8 @@ const Map = (props: { state: any; targetHex: any }) => {
         />
         <Pattern
           id={'player'}
-          link={'https://i.ibb.co/DrgyDXG/ex3-Qkkr-8x.png'}
-          size={{ x: 10, y: 10 }}
+          link={'https://i.ibb.co/BLVmD9d/p-CFxi-UE-21x.png'}
+          size={{ x: 9, y: 7 }}
         />
         <Pattern id={'none'} />
       </HexGrid>
