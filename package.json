@@ -19,6 +19,7 @@
     "react-dom": "^16.7.0",
     "react-hexgrid": "^1.0.3",
     "react-router-dom": "^4.3.1",
+    "react-transition-group": "^4.3.0",
     "rebass": "^4.0.7"
   },
   "devDependencies": {
