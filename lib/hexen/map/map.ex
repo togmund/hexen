@@ -418,11 +418,11 @@ defmodule Hexen.Map do
   @doc """
   """
   def list_hex_user_ids_by_hex(hex_id) do
-    Repo.all(
-      from hu in HexUser,
-        where: hu.hex_id == ^hex_id,
-        select: hu.id
+    from(hu in HexUser,
+      where: hu.hex_id == ^hex_id and is_nil(hu.departed),
+      select: hu.user_id
     )
+    |> Repo.all()
   end
 
   @doc """
