@@ -332,6 +332,10 @@ defmodule Hexen.HexWorker do
       |> Enum.map(fn player -> {player[:id], player} end)
       |> Map.new()
 
+    # if length(tile_info.hex_players) > 0 do
+    #   IO.inspect(tile_info)
+    # end
+
     %{
       hex_tiles: full_map,
       tile: tile_info,
