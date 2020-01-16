@@ -114,13 +114,14 @@ export default function useHexData(player) {
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
     state.channel.on('GET_CARD', (msg: {}) => {
-      dispatch({ type: CLEAR_REWARD });
+      // dispatch({ type: CLEAR_REWARD });
       respondWithCard(state);
     });
     return () => {
       state.channel.off('GET_CARD');
     };
-  }, [state.channel, state.selected_card]);
+    // }, [state.channel, state.selected_card]);
+  }, [state]);
 
   useEffect(() => {
     state.channel.on('SET_QUESTS', (msg: any) => {
