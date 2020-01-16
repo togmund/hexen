@@ -11,6 +11,15 @@ import {
 import * as _ from 'lodash';
 import '../../css/Map.css';
 
+const possibleAvatars = [
+  'https://i.ibb.co/BLVmD9d/p-CFxi-UE-21x.png',
+  'https://i.ibb.co/YjQKfWM/KPh-MIj-F-21x.png',
+  'https://i.ibb.co/kHRFRgf/Ro3-Id-YE-15x.png',
+  'https://i.ibb.co/C91X3QR/gu-DVXhg-21x.png',
+  'https://i.ibb.co/LCfCZq3/wt-BBx7-D-15x.png',
+  'https://i.ibb.co/J2YWdrG/gwt-RAVi-15x.png'
+];
+
 const Map = (props: { state: any; targetHex: any }) => {
   const { state, targetHex } = props;
 
@@ -85,9 +94,11 @@ const Map = (props: { state: any; targetHex: any }) => {
                       ? state.player.avatar
                       : state.quest_hexes.includes(hex.id)
                       ? 'quest'
-                      : hex.structure
-                      ? hex.structure
-                      : 'none'
+                      : // : hex.id % 19 === 0
+                        // ? possibleAvatars[
+                        //     Math.floor(Math.random() * possibleAvatars.length)
+                        //   ]
+                        'none'
                   }
                   onClick={() => targetHex(hex.id)}
                 >
