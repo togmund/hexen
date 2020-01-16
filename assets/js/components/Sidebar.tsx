@@ -42,7 +42,7 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           </p>
         </div>
       </div>
-      {state.tile.hex_players ? (
+      {/* {state.tile.hex_players ? (
         <div className={hexPlayers}>
           <p>
             Players:<br></br>
@@ -61,7 +61,7 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
         </div>
       ) : (
         <></>
-      )}
+      )} */}
       <Deck state={state} />
     </nav>
   );

@@ -7,7 +7,10 @@ const Hand = (props: { state: any }) => {
   const { state, clearReward } = props;
 
   return state.reward ? (
-    <div className={'flip-card pxl-border'} onClick={() => clearReward()}>
+    <div
+      className={'reward flip-card pxl-border'}
+      onClick={() => clearReward()}
+    >
       <div className={'flip-card-inner'}>
         <div className={'flip-card-front'}>
           <h1>New</h1>

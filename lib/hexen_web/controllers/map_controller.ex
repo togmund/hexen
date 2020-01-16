@@ -39,7 +39,7 @@ defmodule HexenWeb.MapController do
     initial_state = %{
       hex_tiles: full_map,
       tile: tile_info,
-      players: player_info
+      players: [player_info]
     }
 
     # initial_state = %{

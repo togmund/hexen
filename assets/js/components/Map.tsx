@@ -71,7 +71,10 @@ const Map = (props: { state: any; targetHex: any }) => {
                   s={hex.s}
                   fill={hex.image}
                   className={getHexClasses(hex)}
-                  onClick={() => targetHex(hex.id)}
+                  onClick={() => {
+                    console.log('TARGET ACQUIRED 1');
+                    targetHex(hex.id);
+                  }}
                 >
                   {/* <Text>{`${hex.q} ${hex.r} ${hex.s}`}</Text> */}
                 </Hexagon>
@@ -85,13 +88,16 @@ const Map = (props: { state: any; targetHex: any }) => {
                       ? state.player.avatar
                       : state.quest_hexes.includes(hex.id)
                       ? 'quest'
-                      : hex.players[0].avatar
-                      ? hex.players[0].avatar
-                      : hex.structure
+                      : // : hex.players[0].avatar
+                      // ? hex.players[0].avatar
+                      hex.structure
                       ? hex.structure
                       : 'none'
                   }
-                  onClick={() => targetHex(hex.id)}
+                  onClick={() => {
+                    console.log('TARGET ACQUIRED 2');
+                    targetHex(hex.id);
+                  }}
                 >
                   {/* <Text>{hex.id}</Text> */}
                 </Hexagon>
