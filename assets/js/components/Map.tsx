@@ -63,7 +63,7 @@ const Map = (props: { state: any; targetHex: any }) => {
 
   return (
     <div className={'hex-map'}>
-      <HexGrid width={'150vw'} height={'300vh'} viewBox={'100 -10 250 350'}>
+      <HexGrid width={'150vw'} height={'300vh'} viewBox={'100 30 250 350'}>
         <Layout
           size={{ x: 10, y: 10 }}
           flat={true}
