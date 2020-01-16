@@ -4,16 +4,19 @@
   height: 232px;
   width: 136px;
 
+
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
   margin-bottom: 10%;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
+/* Do an hori
+zontal flip when you move the mouse over the flip box container */
 .flip-card:hover {
   transform: rotateY(180deg);
 }
+
 
 /* Position the front and back side */
 .flip-card-front, .flip-card-back {
