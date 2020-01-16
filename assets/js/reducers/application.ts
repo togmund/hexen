@@ -61,7 +61,8 @@ export default function reducer(state: any, action: any) {
     case DECK_CARD_SELECTED:
       return {
         ...state,
-        selected_card: action.deck_card
+        selected_card: action.deck_card,
+        deck_card_suit: action.deck_card_suit
       };
     case HEX_SELECTED:
       return {

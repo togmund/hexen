@@ -10,8 +10,7 @@ import reducer, {
   SET_HAND,
   SET_QUESTS,
   DECK_CARD_SELECTED,
-  HEX_SELECTED,
-  USER_SELECTED
+  HEX_SELECTED
   // SET_BAND
 } from '../reducers/application';
 
@@ -34,6 +33,7 @@ export default function useHexData(player) {
       }
     ],
     selected_card: null,
+    deck_card_suit: null,
     target_hex: null,
     target_user: null,
     channel: socket.channel(`hex:${player.hex_id}`, {}),
@@ -142,7 +142,12 @@ export default function useHexData(player) {
       target_user_id: state.target_user
     });
 
-    if (state.selected_card && state.target_hex) {
+    if (
+      state.selected_card &&
+      state.target_hex &&
+      state.deck_card_suit === 'Move'
+    ) {
+      console.log(state);
       dispatch({ type: NEW_HEX, tile: state.target_hex });
     }
   };
@@ -150,10 +155,12 @@ export default function useHexData(player) {
   const stateObject = {
     state: state,
 
-    selectCard: function selectCard(selected_card, target_hex) {
+    selectCard: function selectCard(selected_card, suit) {
+      console.log(selected_card, suit);
       dispatch({
         type: DECK_CARD_SELECTED,
-        deck_card: selected_card
+        deck_card: selected_card,
+        deck_card_suit: suit
       });
     },
 
