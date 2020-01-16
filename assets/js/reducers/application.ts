@@ -8,7 +8,8 @@ export default function reducer(state: any, action: any) {
       return {
         ...state,
         hex_tiles: action.data.hex_tiles,
-        tile: action.data.tile
+        tile: action.data.tile,
+        player: action.data.players
       };
     case SET_CHANNEL:
       return {
