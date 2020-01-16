@@ -1,0 +1,11 @@
+.hex-player{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  text-align: center;
+}
+
+.hex-player img{
+  height: 32px;
+  width: auto;
+}

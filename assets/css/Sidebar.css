@@ -22,12 +22,14 @@ nav h1 {
 }
 
 nav .hex-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #fcf4ec;
   color: #7c2454;
   font-size: xx-large;
   font-weight: bolder;
   width: 136px;
-  position: relative;
   bottom: 3.5em;
 }
 
@@ -37,7 +39,6 @@ nav .hex-details {
   font-size: 0.5em;
   font-weight: bolder;
   width: 120px;
-  margin: auto;
 }
 
 .hex-info>img {

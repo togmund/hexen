@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Deck from './Deck';
+import HexPlayer from './HexPlayer';
 import classNames from 'classnames';
 import '../../css/Sidebar.css';
 
@@ -7,6 +8,11 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
   const { state, targetHex, targetUser } = props;
   const hexInfo: any = classNames('hex-info', 'pxl-border');
   const hexDetails: any = classNames('hex-details', 'pxl-border');
+  const hexPlayers: any = classNames(
+    'players-on-hex',
+    'hex-details',
+    'pxl-border'
+  );
 
   return (
     <nav className={'sidebar'}>
@@ -21,12 +27,12 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           width="60px"
         ></img>
         <div className={hexDetails}>
-          <p>
-            Region:<br></br> {state.tile.region_name}
-          </p>
           {/* <p>
-            Biome:<br></br> {state.tile.biome_name}
+            Region:<br></br> {state.tile.region_name}
           </p> */}
+          <p>
+            Biome:<br></br> {state.tile.biome_name}
+          </p>
           <p>
             Resource:<br></br> {state.tile.resource}
           </p>
@@ -36,6 +42,26 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           </p>
         </div>
       </div>
+      {state.tile.hex_players ? (
+        <div className={hexPlayers}>
+          <p>
+            Players:<br></br>
+          </p>
+          <ul>
+            {state.tile.hex_players.map((player: any) => {
+              return (
+                <HexPlayer
+                  key={player.id}
+                  name={player.name}
+                  avatar={[player.avatar]}
+                ></HexPlayer>
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <></>
+      )}
       <Deck state={state} />
     </nav>
   );
