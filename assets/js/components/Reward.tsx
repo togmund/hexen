@@ -1,7 +1,7 @@
 import * as React from 'react';
 import HandCard from './HandCard';
 
-import '../../css/Hand.css';
+import '../../css/Reward.css';
 
 const Hand = (props: { state: any }) => {
   const { state, clearReward } = props;

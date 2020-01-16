@@ -12,6 +12,7 @@ import reducer, {
   DECK_CARD_SELECTED,
   HEX_SELECTED,
   CLEAR_REWARD,
+  USER_SELECTED,
   REWARD
   // SET_BAND
 } from '../reducers/application';
@@ -119,7 +120,7 @@ export default function useHexData(player) {
     return () => {
       state.channel.off('GET_CARD');
     };
-  }, [state]);
+  }, [state.channel, state.selected_card]);
 
   useEffect(() => {
     state.channel.on('SET_QUESTS', (msg: any) => {
@@ -147,65 +148,26 @@ export default function useHexData(player) {
 
     if (state.selected_card && state.deck_card_suit) {
       if (state.deck_card_suit === 'Gather') {
+        console.log(state);
         dispatch({
           type: REWARD,
           reward: {
-            description: 'Elixir',
-            id: 1,
-            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
-            modifier: null,
             name: 'Elixir',
-            suit: 'Craft'
-          }
-        });
-      }
-      if (state.deck_card_suit === 'Fight') {
-        dispatch({
-          type: REWARD,
-          reward: {
-            description: 'Take a moment, catch your breath.',
-            id: 1,
-            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
-            modifier: null,
-            name: 'Rest',
-            suit: 'Explore'
-          }
-        });
-      }
-      if (state.deck_card_suit === 'Interact') {
-        dispatch({
-          type: REWARD,
-          reward: {
-            description: 'Take a moment, catch your breath.',
-            id: 1,
-            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
-            modifier: null,
-            name: 'Rest',
-            suit: 'Explore'
-          }
-        });
-      }
-
-      if (state.deck_card_suit === 'Craft') {
-        dispatch({
-          type: REWARD,
-          reward: {
-            description: 'Take a moment, catch your breath.',
-            id: 1,
-            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
-            modifier: null,
-            name: 'Rest',
-            suit: 'Explore'
+            suit: 'Craft',
+            description: 'Concoct an elixir.',
+            image: 'https://i.ibb.co/cQMbv3Q/4g7-ITMF-8x.png',
+            modifier: 2,
+            material: state.tile.resource
           }
         });
       }
     }
-
     if (
       state.selected_card &&
       state.target_hex &&
       state.deck_card_suit === 'Move'
     ) {
+      console.log('move');
       dispatch({ type: NEW_HEX, tile: state.target_hex });
     }
   };
@@ -214,7 +176,6 @@ export default function useHexData(player) {
     state: state,
 
     selectCard: function selectCard(selected_card, suit) {
-      console.log(selected_card, suit);
       dispatch({
         type: DECK_CARD_SELECTED,
         deck_card: selected_card,

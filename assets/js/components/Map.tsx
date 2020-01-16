@@ -63,7 +63,7 @@ const Map = (props: { state: any; targetHex: any }) => {
         >
           {state.hex_tiles ? (
             state.hex_tiles.map((hex: any) => (
-              <>
+              <React.Fragment key={hex.id}>
                 <Hexagon
                   key={hex.id}
                   q={hex.q}
@@ -95,7 +95,7 @@ const Map = (props: { state: any; targetHex: any }) => {
                 >
                   {/* <Text>{hex.id}</Text> */}
                 </Hexagon>
-              </>
+              </React.Fragment>
             ))
           ) : (
             <div></div>
