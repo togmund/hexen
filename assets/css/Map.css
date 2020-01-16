@@ -1,5 +1,6 @@
 .hex-map {
   background-color: #2B345B;
+  transform: translate3d(0, 0, 0);
 }
 
 g.hexagon {
