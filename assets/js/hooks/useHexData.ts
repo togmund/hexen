@@ -53,6 +53,7 @@ export default function useHexData(player) {
         return response.json();
       })
       .then(response => {
+        console.log('RESPONSE', response);
         dispatch({ type: SET_INITIAL, data: response.data });
       });
   };
