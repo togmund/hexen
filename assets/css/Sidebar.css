@@ -2,6 +2,7 @@ nav.sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 
   padding: 16px;
   width: 168px;
@@ -15,7 +16,9 @@ nav.sidebar {
 }
 
 nav h1 {
-
+  padding-top: 16px;
+  padding: 8px;
+  padding-bottom: 4px;
 }
 
 nav .hex-info {
@@ -48,3 +51,8 @@ nav .hex-details {
   font-weight: bolder;
   hyphens: auto;
 }
+
+
+
+
+

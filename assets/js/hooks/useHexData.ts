@@ -142,12 +142,15 @@ export default function useHexData(player) {
       target_user_id: state.target_user
     });
 
+    if (state.selected_card && state.deck_card_suit) {
+      // state.deck_card_suit animation
+    }
+
     if (
       state.selected_card &&
       state.target_hex &&
       state.deck_card_suit === 'Move'
     ) {
-      console.log(state);
       dispatch({ type: NEW_HEX, tile: state.target_hex });
     }
   };
