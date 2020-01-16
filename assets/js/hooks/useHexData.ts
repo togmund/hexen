@@ -11,7 +11,9 @@ import reducer, {
   SET_QUESTS,
   DECK_CARD_SELECTED,
   HEX_SELECTED,
-  USER_SELECTED
+  CLEAR_REWARD,
+  USER_SELECTED,
+  REWARD
   // SET_BAND
 } from '../reducers/application';
 
@@ -34,6 +36,7 @@ export default function useHexData(player) {
       }
     ],
     selected_card: null,
+    deck_card_suit: null,
     target_hex: null,
     target_user: null,
     channel: socket.channel(`hex:${player.hex_id}`, {}),
@@ -111,12 +114,13 @@ export default function useHexData(player) {
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
     state.channel.on('GET_CARD', (msg: {}) => {
+      dispatch({ type: CLEAR_REWARD });
       respondWithCard(state);
     });
     return () => {
       state.channel.off('GET_CARD');
     };
-  }, [state]);
+  }, [state.channel, state.selected_card]);
 
   useEffect(() => {
     state.channel.on('SET_QUESTS', (msg: any) => {
@@ -142,7 +146,28 @@ export default function useHexData(player) {
       target_user_id: state.target_user
     });
 
-    if (state.selected_card && state.target_hex) {
+    if (state.selected_card && state.deck_card_suit) {
+      if (state.deck_card_suit === 'Gather') {
+        console.log(state);
+        dispatch({
+          type: REWARD,
+          reward: {
+            name: 'Elixir',
+            suit: 'Craft',
+            description: 'Concoct an elixir.',
+            image: 'https://i.ibb.co/cQMbv3Q/4g7-ITMF-8x.png',
+            modifier: 2,
+            material: state.tile.resource
+          }
+        });
+      }
+    }
+    if (
+      state.selected_card &&
+      state.target_hex &&
+      state.deck_card_suit === 'Move'
+    ) {
+      console.log('move');
       dispatch({ type: NEW_HEX, tile: state.target_hex });
     }
   };
@@ -150,10 +175,11 @@ export default function useHexData(player) {
   const stateObject = {
     state: state,
 
-    selectCard: function selectCard(selected_card, target_hex) {
+    selectCard: function selectCard(selected_card, suit) {
       dispatch({
         type: DECK_CARD_SELECTED,
-        deck_card: selected_card
+        deck_card: selected_card,
+        deck_card_suit: suit
       });
     },
 
@@ -163,6 +189,10 @@ export default function useHexData(player) {
 
     targetUser: function targetUser(selected_user) {
       dispatch({ type: USER_SELECTED, target_user: selected_user });
+    },
+
+    clearReward: function clearReward() {
+      dispatch({ type: CLEAR_REWARD });
     }
   };
 

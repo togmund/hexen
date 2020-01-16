@@ -8,7 +8,6 @@ const Deck = (props: { state: any }) => {
   return (
     <img
       className={deckImage}
-      // src={state.image}
       src={'https://i.ibb.co/0qNLgrn/7qzjt-PS-4x.png'}
       alt={'deck-image'}
       onClick={state.showCards}

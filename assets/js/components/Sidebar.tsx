@@ -10,7 +10,7 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
 
   return (
     <nav className={'sidebar'}>
-      <h1>Hexen</h1>
+      <h1 className={'pxl-border'}>Hexen</h1>
       <div className={hexInfo}>
         <p className={'hex-title'}>{state.tile.name}</p>
         <img
