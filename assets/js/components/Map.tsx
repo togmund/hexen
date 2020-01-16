@@ -85,8 +85,8 @@ const Map = (props: { state: any; targetHex: any }) => {
                       ? state.player.avatar
                       : state.quest_hexes.includes(hex.id)
                       ? 'quest'
-                      : hex.id % 16 === 0
-                      ? 'https://i.ibb.co/YjQKfWM/KPh-MIj-F-21x.png'
+                      : hex.players[0].avatar
+                      ? hex.players[0].avatar
                       : hex.structure
                       ? hex.structure
                       : 'none'
