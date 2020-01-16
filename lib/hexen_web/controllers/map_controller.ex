@@ -6,7 +6,19 @@ defmodule HexenWeb.MapController do
   alias Hexen.People
 
   def show(conn, %{"id" => id}) do
-    full_map = Hexen.Map.get_full_board()
+    full_map =
+      Hexen.Map.get_full_board()
+      |> Enum.map(fn hex ->
+        if length(Hexen.Map.get_names_and_avatars_of_active_users_on_hex(hex.id)) > 0 do
+          Map.merge(
+            hex,
+            Hexen.Map.get_names_and_avatars_of_active_users_on_hex(hex.id) |> List.first()
+          )
+        else
+          hex
+        end
+      end)
+      |> IO.inspect()
 
     deck =
       id
