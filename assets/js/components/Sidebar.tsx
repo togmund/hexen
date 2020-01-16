@@ -34,13 +34,18 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
           <p>
             Structure:<br></br> {state.tile.structure}
           </p>
-          <div className={'players-on-hex'}>
-            <ul>
+          {state.tile.hex_players ? (
+            <div className={'players-on-hex'}>
+              <p>
+                Players:<br></br>
+              </p>
               {state.tile.hex_players.map((player: any) => {
-                <li>{player.name}</li>;
+                return <p key={player.id}>{player.name}</p>;
               })}
-            </ul>
-          </div>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <Deck state={state} />
