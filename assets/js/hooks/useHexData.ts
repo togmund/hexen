@@ -53,7 +53,6 @@ export default function useHexData(player) {
         return response.json();
       })
       .then(response => {
-        console.log('RESPONSE', response);
         dispatch({ type: SET_INITIAL, data: response.data });
       });
   };
@@ -153,7 +152,6 @@ export default function useHexData(player) {
 
       console.log('TARGET: ', state.target_hex);
       if (state.deck_card_suit === 'Gather') {
-        console.log(state);
         dispatch({
           type: REWARD,
           reward: {
