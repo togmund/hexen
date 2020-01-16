@@ -18,7 +18,6 @@ defmodule HexenWeb.MapController do
           hex
         end
       end)
-      |> IO.inspect()
 
     deck =
       id
