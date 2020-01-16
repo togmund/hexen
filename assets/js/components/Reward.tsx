@@ -22,7 +22,7 @@ const Hand = (props: { state: any }) => {
             suit={state.reward.suit}
             name={state.reward.name}
             description={state.reward.description}
-            modifier={state.reward.modifier}
+            // modifier={state.reward.modifier}
             selected={false}
             selectCard={() => clearReward()}
           />
