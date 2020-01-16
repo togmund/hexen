@@ -29,6 +29,7 @@ export default function reducer(state: any, action: any) {
           q: action.tile.q,
           r: action.tile.r,
           s: action.tile.s,
+          hex_players: action.tile.hex_players,
           structure: action.tile.structure,
           region_name: action.tile.name,
           biome_name: action.tile.name,

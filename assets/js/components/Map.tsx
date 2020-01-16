@@ -76,7 +76,7 @@ const Map = (props: { state: any; targetHex: any }) => {
                   {/* <Text>{`${hex.q} ${hex.r} ${hex.s}`}</Text> */}
                 </Hexagon>
                 <Hexagon
-                  key={hex.id + 10000}
+                  key={hex.id + 1000000}
                   q={hex.q}
                   r={hex.r}
                   s={hex.s}
