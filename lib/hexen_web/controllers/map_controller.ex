@@ -36,15 +36,10 @@ defmodule HexenWeb.MapController do
       |> List.first()
       |> Map.merge(%{hex_players: player_info})
 
-    # user_object =
-    #   player_info
-    #   |> Enum.map(fn player -> {player[:id], player} end)
-    #   |> Map.new()
-
     initial_state = %{
       hex_tiles: full_map,
-      tile: tile_info
-      # players: user_object
+      tile: tile_info,
+      players: player_info
     }
 
     # initial_state = %{
