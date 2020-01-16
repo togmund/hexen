@@ -70,6 +70,18 @@ export default function reducer(state: any, action: any) {
         target_hex: action.target_hex
       };
 
+    case CLEAR_REWARD:
+      return {
+        ...state,
+        reward: null
+      };
+
+    case REWARD:
+      return {
+        ...state,
+        reward: action.reward
+      };
+
     case USER_SELECTED:
       return {
         ...state,
@@ -100,6 +112,8 @@ export const SET_QUESTS = 'SET_QUESTS';
 export const NEW_HEX = 'NEW_HEX';
 
 export const DECK_CARD_SELECTED = 'DECK_CARD_SELECTED';
+export const CLEAR_REWARD = 'CLEAR_REWARD';
+export const REWARD = 'REWARD';
 export const HEX_SELECTED = 'HEX_SELECTED';
 export const USER_SELECTED = 'USER_SELECTED';
 // export const SET_BAND = 'SET_BAND';

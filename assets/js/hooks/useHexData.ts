@@ -10,7 +10,9 @@ import reducer, {
   SET_HAND,
   SET_QUESTS,
   DECK_CARD_SELECTED,
-  HEX_SELECTED
+  HEX_SELECTED,
+  CLEAR_REWARD,
+  REWARD
   // SET_BAND
 } from '../reducers/application';
 
@@ -111,6 +113,7 @@ export default function useHexData(player) {
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
     state.channel.on('GET_CARD', (msg: {}) => {
+      dispatch({ type: CLEAR_REWARD });
       respondWithCard(state);
     });
     return () => {
@@ -143,7 +146,59 @@ export default function useHexData(player) {
     });
 
     if (state.selected_card && state.deck_card_suit) {
-      // state.deck_card_suit animation
+      if (state.deck_card_suit === 'Gather') {
+        dispatch({
+          type: REWARD,
+          reward: {
+            description: 'Elixir',
+            id: 1,
+            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
+            modifier: null,
+            name: 'Elixir',
+            suit: 'Craft'
+          }
+        });
+      }
+      if (state.deck_card_suit === 'Fight') {
+        dispatch({
+          type: REWARD,
+          reward: {
+            description: 'Take a moment, catch your breath.',
+            id: 1,
+            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
+            modifier: null,
+            name: 'Rest',
+            suit: 'Explore'
+          }
+        });
+      }
+      if (state.deck_card_suit === 'Interact') {
+        dispatch({
+          type: REWARD,
+          reward: {
+            description: 'Take a moment, catch your breath.',
+            id: 1,
+            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
+            modifier: null,
+            name: 'Rest',
+            suit: 'Explore'
+          }
+        });
+      }
+
+      if (state.deck_card_suit === 'Craft') {
+        dispatch({
+          type: REWARD,
+          reward: {
+            description: 'Take a moment, catch your breath.',
+            id: 1,
+            image: 'https://i.ibb.co/JmRTqB0/Zk-D80aw-8x.png',
+            modifier: null,
+            name: 'Rest',
+            suit: 'Explore'
+          }
+        });
+      }
     }
 
     if (
@@ -173,6 +228,10 @@ export default function useHexData(player) {
 
     targetUser: function targetUser(selected_user) {
       dispatch({ type: USER_SELECTED, target_user: selected_user });
+    },
+
+    clearReward: function clearReward() {
+      dispatch({ type: CLEAR_REWARD });
     }
   };
 
