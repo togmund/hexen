@@ -80,7 +80,10 @@ const Map = (props: { state: any; targetHex: any }) => {
                   s={hex.s}
                   fill={hex.image}
                   className={getHexClasses(hex)}
-                  onClick={() => targetHex(hex.id)}
+                  onClick={() => {
+                    console.log('TARGET ACQUIRED 1');
+                    targetHex(hex.id);
+                  }}
                 >
                   {/* <Text>{`${hex.q} ${hex.r} ${hex.s}`}</Text> */}
                 </Hexagon>
@@ -100,7 +103,10 @@ const Map = (props: { state: any; targetHex: any }) => {
                         //   ]
                         'none'
                   }
-                  onClick={() => targetHex(hex.id)}
+                  onClick={() => {
+                    console.log('TARGET ACQUIRED 2');
+                    targetHex(hex.id);
+                  }}
                 >
                   {/* <Text>{hex.id}</Text> */}
                 </Hexagon>

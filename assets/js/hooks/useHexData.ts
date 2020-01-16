@@ -114,13 +114,14 @@ export default function useHexData(player) {
   // Broadcast the selected card on the select_card broadcast
   useEffect(() => {
     state.channel.on('GET_CARD', (msg: {}) => {
-      dispatch({ type: CLEAR_REWARD });
+      // dispatch({ type: CLEAR_REWARD });
       respondWithCard(state);
     });
     return () => {
       state.channel.off('GET_CARD');
     };
-  }, [state.channel, state.selected_card]);
+    // }, [state.channel, state.selected_card]);
+  }, [state]);
 
   useEffect(() => {
     state.channel.on('SET_QUESTS', (msg: any) => {
@@ -147,6 +148,10 @@ export default function useHexData(player) {
     });
 
     if (state.selected_card && state.deck_card_suit) {
+      console.log('SELECTED:', state.selected_card);
+      console.log('SUIT:', state.deck_card_suit);
+
+      console.log('TARGET: ', state.target_hex);
       if (state.deck_card_suit === 'Gather') {
         dispatch({
           type: REWARD,
@@ -160,13 +165,51 @@ export default function useHexData(player) {
           }
         });
       }
-    }
-    if (
-      state.selected_card &&
-      state.target_hex &&
-      state.deck_card_suit === 'Move'
-    ) {
-      dispatch({ type: NEW_HEX, tile: state.target_hex });
+
+      if (state.target_hex && state.deck_card_suit === 'Move') {
+        console.log('move');
+        dispatch({ type: NEW_HEX, tile: state.target_hex });
+      }
+
+      if (state.target_user) {
+        if (state.deck_card_suit === 'Combat') {
+          dispatch({
+            type: REWARD,
+            reward: {
+              name: 'Map',
+              suit: 'Explore',
+              description: 'See nearby quest markers.',
+              image: 'https://i.ibb.co/ngC8G2d/Lde-Txc2-8x.png',
+              modifier: 1
+            }
+          });
+        }
+        if (state.deck_card_suit === 'Interact') {
+          dispatch({
+            type: REWARD,
+            reward: {
+              name: 'Map',
+              suit: 'Explore',
+              description: 'See nearby quest markers.',
+              image: 'https://i.ibb.co/ngC8G2d/Lde-Txc2-8x.png',
+              modifier: 1
+            }
+          });
+        }
+      }
+
+      if (state.deck_card_suit === 'Craft') {
+        dispatch({
+          type: REWARD,
+          reward: {
+            name: 'Sword',
+            suit: 'Combat',
+            description: 'Deals three physical damage',
+            image: 'https://i.ibb.co/xspKdvw/c4oui-Ug-8x.png',
+            modifier: 3
+          }
+        });
+      }
     }
   };
 

@@ -9,7 +9,7 @@ export default function reducer(state: any, action: any) {
         ...state,
         hex_tiles: action.data.hex_tiles,
         tile: action.data.tile,
-        player: action.data.players
+        player: action.data.players[0]
       };
     case SET_CHANNEL:
       return {
@@ -67,6 +67,7 @@ export default function reducer(state: any, action: any) {
         deck_card_suit: action.deck_card_suit
       };
     case HEX_SELECTED:
+      console.log('action', action);
       return {
         ...state,
         target_hex: action.target_hex

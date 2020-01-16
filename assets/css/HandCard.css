@@ -2,14 +2,17 @@
   opacity: 0;
   transform: scale(0.9);
 }
+
 .alert-enter-active {
   opacity: 1;
   transform: translateX(0);
   transition: opacity 300ms, transform 300ms;
 }
+
 .alert-exit {
   opacity: 1;
 }
+
 .alert-exit-active {
   opacity: 0;
   transform: scale(0.9);
@@ -26,9 +29,7 @@
 
 }
 
-
-
-.hand-card:hover:not(.selected) {
+.hand-card:hover:not(.selected):not(.reward) {
   transform: translate(0px, -80px);
   transition: transform 0.4s;
 }
@@ -51,6 +52,11 @@
   position: relative;
   left: 80%;
   bottom: 1em;
+}
+
+.reward {
+  position: absolute;
+  bottom: 0;
 }
 
 .hand-card.Rest {
