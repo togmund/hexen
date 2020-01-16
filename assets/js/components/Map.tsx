@@ -97,11 +97,9 @@ const Map = (props: { state: any; targetHex: any }) => {
                       ? state.player.avatar
                       : state.quest_hexes.includes(hex.id)
                       ? 'quest'
-                      : // : hex.id % 19 === 0
-                        // ? possibleAvatars[
-                        //     Math.floor(Math.random() * possibleAvatars.length)
-                        //   ]
-                        'none'
+                      : hex.id % 42 === 0
+                      ? 'https://i.ibb.co/C91X3QR/gu-DVXhg-21x.png'
+                      : 'none'
                   }
                   onClick={() => {
                     console.log('TARGET ACQUIRED 2');
