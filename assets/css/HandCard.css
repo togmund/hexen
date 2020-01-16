@@ -29,7 +29,7 @@
 
 }
 
-.hand-card:hover:not(.selected):not(.reward) {
+.card-in-hand:hover:not(.selected) {
   transform: translate(0px, -80px);
   transition: transform 0.4s;
 }
@@ -56,7 +56,7 @@
 
 .reward {
   position: absolute;
-  bottom: 0;
+  top: 45.5em;
 }
 
 .hand-card.Rest {
