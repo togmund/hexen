@@ -44,11 +44,11 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
       </div>
       {state.tile.hex_players ? (
         <div className={hexPlayers}>
-          <p>
+          <h1>
             Players:<br></br>
-          </p>
-          <ul>
-            {state.tile.hex_players.map((player: any) => {
+          </h1>
+          {Array.isArray(state.tile.hex_players) ? (
+            state.tile.hex_players.map((player: any) => {
               return (
                 <HexPlayer
                   key={player.id}
@@ -56,8 +56,10 @@ const Sidebar = (props: { state: any; targetHex: any; targetUser: any }) => {
                   avatar={[player.avatar]}
                 ></HexPlayer>
               );
-            })}
-          </ul>
+            })
+          ) : (
+            <div></div>
+          )}
         </div>
       ) : (
         <></>

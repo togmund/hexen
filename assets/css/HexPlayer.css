@@ -1,8 +1,8 @@
 .hex-player{
   display: flex;
   flex-direction: row;
-  justify-content: left;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .hex-player img{

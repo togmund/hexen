@@ -449,6 +449,16 @@ defmodule Hexen.Map do
     |> Repo.all()
   end
 
+  def get_names_and_avatars_of_active_users_on_hex(id) do
+    from(hu in HexUser,
+      join: u in Hexen.People.User,
+      on: hu.user_id == u.id,
+      where: hu.hex_id == ^id and is_nil(hu.departed),
+      select: %{players: %{name: u.name, avatar: u.avatar}}
+    )
+    |> Repo.all()
+  end
+
   @doc """
   """
   def get_single_tile(id) do
