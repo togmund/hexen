@@ -1,5 +1,7 @@
 # Hexen
 
+!["Screenshot of game"](https://github.com/togmund/hexen/blob/master/docs/game.png)
+
 ## Creators
 	Ted	Dennis
 
